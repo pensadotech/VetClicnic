@@ -1,13 +1,20 @@
 import React, { Component } from 'react'
-import './App.css'
-
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 // components
 import Navbar from './components/Navbar'
 import MainMenu from './components/MainMenu'
 import LoginView from './components/LoginView'
+import Patient from './components/Patience'
+import Doctor from './components/Doctor'
+import Medicine from './components/Medicine'
+import Schedule from './components/Schedule'
+import Prescription from './components/Prescription'
+import Admin from  './components/Admin'
 
 // API bridge for express routes
 import API from './utils/API'
+// Local style
+import './App.css'
 
 class App extends Component {
   state = {
@@ -88,11 +95,21 @@ class App extends Component {
       )     
      } else {
        return(
-         <>         
-          <Navbar 
-             sessionUser={this.state.sessionUser}
-             handleLogingAction={this.handleLogingAction}/>
-          <MainMenu />
+         <>  
+           <Router> 
+            <div>
+               <Navbar 
+                 sessionUser={this.state.sessionUser}
+                 handleLogingAction={this.handleLogingAction}/>
+               <Route exact path='/' component={MainMenu} />
+               <Route path='/patients' component={Patient} />
+               <Route path='/doctors' component={Doctor} />
+               <Route path='/medicines' component={Medicine} />
+               <Route path='/schedules' component={Schedule} />
+               <Route path='/prescriptions' component={Prescription} />
+               <Route path='/admin' component={Admin} />
+             </div>
+           </Router>             
          </>
        )     
      }       

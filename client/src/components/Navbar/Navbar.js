@@ -22,6 +22,7 @@ import EventIcon from '@material-ui/icons/Event'
 import AssignmentIcon from '@material-ui/icons/Assignment'
 import SettingsIcon from '@material-ui/icons/Settings'
 
+
 const styles = {
   root: {
     flexGrow: 1,
@@ -67,40 +68,54 @@ class Navbar extends Component {
     const sideList = (
       <div className={classes.list}>
         <List>
-           <ListItem button>
-             <ListItemIcon> <HomeIcon /></ListItemIcon>
-             <ListItemText primary='Home' />
-          </ListItem>
+          <Link to='/' style={{ color: 'black', textDecoration: 'none' }}>
+            <ListItem button key='Home'>
+               <ListItemIcon> <HomeIcon /></ListItemIcon>
+               <ListItemText primary='Home' />
+             </ListItem>
+          </Link>
         </List>
         <Divider />
         <List>
-           <ListItem button>
-             <ListItemIcon> <PetsIcon /></ListItemIcon>
-             <ListItemText primary='Patients' />
-           </ListItem>
-           <ListItem button>
-             <ListItemIcon> <FaceIcon /></ListItemIcon>
-             <ListItemText primary='Doctors' />
-           </ListItem>
-           <ListItem button>
-             <ListItemIcon> <ColorizeIcon /></ListItemIcon>
-             <ListItemText primary='Medicines' />
-           </ListItem>
-           <ListItem button>
-             <ListItemIcon> <EventIcon /></ListItemIcon>
-             <ListItemText primary='Appointments' />
-           </ListItem>
-           <ListItem button>
-             <ListItemIcon> <AssignmentIcon /></ListItemIcon>
-             <ListItemText primary='Prescriptions' />
-           </ListItem>
+            <Link to='/patients' style={{ color: 'black', textDecoration: 'none' }}>
+              <ListItem button key='Patients'>
+                <ListItemIcon> <PetsIcon /></ListItemIcon>
+                <ListItemText primary='Patients' />
+              </ListItem>
+           </Link>
+           <Link to='/doctors' style={{ color: 'black', textDecoration: 'none' }}>
+              <ListItem button key='Doctors'>
+                <ListItemIcon> <FaceIcon /></ListItemIcon>
+                <ListItemText primary='Doctors' />
+              </ListItem>
+           </Link>
+           <Link to='/medicines' style={{ color: 'black', textDecoration: 'none' }}>
+              <ListItem button key='Medicines'>
+                <ListItemIcon> <ColorizeIcon /></ListItemIcon>
+                <ListItemText primary='Medicines' />
+              </ListItem>
+           </Link>
+           <Link to='/schedules' style={{ color: 'black', textDecoration: 'none' }}>
+              <ListItem button key='Appointments'>
+                <ListItemIcon> <EventIcon /></ListItemIcon>
+                <ListItemText primary='Appointments' />
+              </ListItem>
+           </Link>
+           <Link to='/prescriptions' style={{ color: 'black', textDecoration: 'none' }}>
+              <ListItem button key='Prescriptions'>
+                <ListItemIcon> <AssignmentIcon /></ListItemIcon>
+                <ListItemText primary='Prescriptions' />
+              </ListItem>
+           </Link>
         </List>
         <Divider />
         <List>
-           <ListItem button>
-             <ListItemIcon> <SettingsIcon /></ListItemIcon>
-             <ListItemText primary='Admin' />
-          </ListItem>
+           <Link to='/admin' style={{ color: 'black', textDecoration: 'none' }}>
+              <ListItem button key='Admin'>
+                <ListItemIcon> <SettingsIcon /></ListItemIcon>
+                <ListItemText primary='Admin' />
+              </ListItem>
+           </Link>
         </List>
       </div>
     )
