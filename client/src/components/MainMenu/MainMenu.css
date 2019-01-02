@@ -1,0 +1,25 @@
+.menuBlock {
+  width: 250px;
+  height: 250px;
+  margin: 10px 10px 10px 20px;
+}
+
+.doctors {
+  background-color: rgb(250, 175, 187);
+}
+
+.patients {
+  background-color: rgb(124, 184, 124);
+}
+
+.medicines {
+  background-color: rgb(243, 243, 132);
+}
+
+.prescriptions {
+  background-color: rgb(81, 81, 252);
+}
+
+.appointments {
+  background-color: orange;
+}
