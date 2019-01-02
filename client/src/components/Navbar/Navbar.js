@@ -45,7 +45,7 @@ class Navbar extends Component {
                   <MenuIcon />
                 </IconButton>
                 <Typography variant="h6" color="inherit" className={classes.grow}>
-                  React with Passport 
+                  Animal Clinic 
                 </Typography>
                 <Button color="inherit" onClick={() => this.props.handleLogingAction()}>
                    { this.renderButton() }

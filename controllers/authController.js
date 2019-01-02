@@ -1,6 +1,6 @@
 // Authentication controller
-const passport = require('passport')
 const db = require("../models")
+const passwordHash = require('password-hash')
 
 // Defining methods for the artcilesController
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
       db.User.findOne({username : user.username}) 
         .then(dbuser => {
           // Does password matches?
-          if (user !== null && user.password === dbuser.password) {
+          if (user !== null && passwordHash.verify(user.password, dbuser.password)) {
             req.login(dbuser, () => {
                return res.json(dbuser)
              })

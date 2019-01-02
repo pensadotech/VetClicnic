@@ -1,14 +1,6 @@
 # VetClicnic
 
-Vetenerian Clinci System
+Animal Clinic System
 
-## Dependedencies
+## Description
 
-npm init -y 
-npm i express mongoose body-parser
-npm i if-env
-npx create-react-app client 
- 
-npm i express-session
-npm i cookie-parser
-npm i passport passport-local
