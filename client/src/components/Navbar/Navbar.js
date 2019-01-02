@@ -39,7 +39,7 @@ const styles = {
   fullList: {
     width: 'auto'
   }
-};
+}
 
 class Navbar extends Component {
   
@@ -62,7 +62,7 @@ class Navbar extends Component {
 
   render() {
 
-    const { classes } = this.props;
+    const { classes } = this.props
     
     const sideList = (
       <div className={classes.list}>
