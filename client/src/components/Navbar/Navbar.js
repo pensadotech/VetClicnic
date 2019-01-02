@@ -28,7 +28,7 @@ class Navbar extends Component {
      if(this.props.sessionUser === '') {
        return ('Login')
      } else {
-       return ( 'Logout' )
+       return ( `${this.props.sessionUser.username} (Logout)` )
      }
   }
 
