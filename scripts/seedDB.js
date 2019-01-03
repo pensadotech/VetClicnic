@@ -11,12 +11,16 @@ let hashedPassword = passwordHash.generate('admin');
 const usersSeed = [{
     username: 'admin',
     password: hashedPassword,
+    fullname : 'admin account',
+    phone: '949-123-1234',
     email: 'admin@admin.com',
     userCreated: Date.now()
   },
   {
     username: 'apensado',
     password: hashedPassword,
+    fullname : 'Armando Pensado',
+    phone: '949-876-8755',
     email: 'armando@pensadotech.com',
     userCreated: Date.now()
   }

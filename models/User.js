@@ -20,6 +20,16 @@ let UserSchema = new Schema( {
       "Password should be longer."
     ]
   },
+  fullname : {
+    type: String,
+    trim: true,
+    required: "Full name is Required"
+  },
+  phone: {
+    type: String,
+    trim: true,
+    required: "Phone is Required"
+  },
   email: {
     type: String,
     unique: true,

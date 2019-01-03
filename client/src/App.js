@@ -12,7 +12,7 @@ import Prescription from './components/Prescription'
 import Admin from  './components/Admin'
 
 // API bridge for express routes
-import API from './utils/API'
+import APIsession from './utils/APIsession'
 // Local style
 import './App.css'
 
@@ -31,7 +31,7 @@ class App extends Component {
 
   retrevieSessionUser = () => {
      // have user loged-in
-    API.getSessionUser()
+    APIsession.getSessionUser()
     .then(r => {  
       let sessionUser = r.data
       this.setState({ sessionUser : sessionUser })   
@@ -55,7 +55,7 @@ class App extends Component {
         email: this.state.userEmail
       }   
       // SIGN-IN
-      API.signIn(user)
+      APIsession.signIn(user)
       .then( r => {
         let sessionUser = r.data
         if (sessionUser === '') {
@@ -69,7 +69,7 @@ class App extends Component {
 
     } else {
       // SIGN OUT
-      API.signOut(this.state.sessionUser)
+      APIsession.signOut(this.state.sessionUser)
         .then(r => {
           let sessionUser = ''
           this.setState({ sessionUser : sessionUser, userName: '', userPwd: '', userEmail: '',userError: '' })

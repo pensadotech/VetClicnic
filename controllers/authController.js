@@ -2,7 +2,6 @@
 const db = require("../models")
 const passwordHash = require('password-hash')
 
-// Defining methods for the artcilesController
 module.exports = {
 
   signIn : function (req,res,next) {
