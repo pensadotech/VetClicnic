@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from "react"
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
@@ -26,37 +26,40 @@ const styles = {
   },
 }
 
-function UserCard(props) {
-
-  const { classes } = props;
-
-  return (
-    <Card className={classes.card}>
-      <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
-         System user
-        </Typography>
-        <Typography variant="h5" component="h2">
-          {props.user.username}
-        </Typography>
-        <Typography className={classes.pos} color="textSecondary">
-          {props.user.fullname}
-        </Typography>
-        <Typography component="p">
-          'Phone: ' {props.user.phone}
-        </Typography>
-        <Typography component="p">
-          'Email: ' {props.user.email}
-        </Typography>
-      </CardContent>
-      <CardActions>     
-        <Button size="small" variant="contained" color={props.rightbuttonColor} disabled={props.isDisabled}
-                onClick={() => props.handleRightButtonSelection(props.user)} >{props.rightButtonLabel}</Button>
-        <Button size="small" variant="contained" color={props.leftbuttonColor} disabled={props.isDisabled}  
-                onClick={() => props.handleLeftButtonSelection(props.user)}>{props.leftButtonLabel}</Button>
-      </CardActions>
-    </Card>
-  )
+class UserCard extends Component { 
+  
+  render() {
+  
+    const { classes } = this.props
+  
+    return (
+      <Card className={classes.card}>
+        <CardContent>
+          <Typography className={classes.title} color="textSecondary" gutterBottom>
+          System user
+          </Typography>
+          <Typography variant="h5" component="h2">
+            {this.props.user.username}
+          </Typography>
+          <Typography className={classes.pos} color="textSecondary">
+            {this.props.user.fullname}
+          </Typography>
+          <Typography component="p">
+            'Phone: ' {this.props.user.phone}
+          </Typography>
+          <Typography component="p">
+            'Email: ' {this.props.user.email}
+          </Typography>
+        </CardContent>
+        <CardActions>     
+          <Button size="small" variant="contained" color={this.props.rightbuttonColor} disabled={this.props.isDisabled}
+                  onClick={() => this.props.handleRightButtonSelection(this.props.user)} >{this.props.rightButtonLabel}</Button>
+          <Button size="small" variant="contained" color={this.props.leftbuttonColor} disabled={this.props.isDisabled}  
+                  onClick={() => this.props.handleLeftButtonSelection(this.props.user)}>{this.props.leftButtonLabel}</Button>
+        </CardActions>
+      </Card>
+    )
+  } 
 }
 
 UserCard.propTypes = {

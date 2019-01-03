@@ -3,7 +3,14 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
-import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button'
+import Input from '@material-ui/core/Input'
+import InputLabel from '@material-ui/core/InputLabel'
+import InputAdornment from '@material-ui/core/InputAdornment'
+import AccountCircle from '@material-ui/icons/AccountCircle'
+import PetsIcon from '@material-ui/icons/Pets'
+
+// local style
 import './LoginView.css'
 
 const styles = theme => ({
@@ -51,9 +58,17 @@ class LoginView extends Component {
                     value={this.userName}
                     onChange={this.props.handleInputChange}
                     margin="normal"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <AccountCircle />
+                        </InputAdornment>
+                      ),
+                    }}
                   />
     
                   <TextField
+                    required
                     id="standard-password-input"
                     label="Password"
                     className={classes.textField}
@@ -63,6 +78,13 @@ class LoginView extends Component {
                     value={this.userPwd}
                     onChange={this.props.handleInputChange}
                     margin="normal"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <PetsIcon />
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                   <Button variant="contained" color="primary" className={classes.button} onClick={this.props.handleLogingAction}>
                      Login

@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import UserCard from './components/UserCard'
 import Grid from '@material-ui/core/Grid'
 import Avatar from '@material-ui/core/Avatar'
 import Card from '@material-ui/core/Card'
@@ -10,8 +9,13 @@ import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import SettingsIcon from '@material-ui/icons/Settings'
+// Components
+import UserCard from './components/UserCard'
+import UserForm from './components/UserForm'
 // API
 import APIusers from '../../utils/APIuser'
+// Local style
+import './Admin.css'
 
 const styles = {
   avatar: {
@@ -19,7 +23,7 @@ const styles = {
   },
   pageHead : {
     color:'white',
-    marginLeft: '50px'
+    margin: '7px 0px 0px 20px'
   },
   card: {
     minWidth: 275,
@@ -60,29 +64,33 @@ class Admin extends Component {
   }
 
   handleUserUpdateSelection = (tgtUser) => {
-     console.log('handleUserUpdateSelection:',tgtUser)
+     // change screen mode to user EDIT mode, and store target-user
      this.setState({screenMode: 'edit',targetUser: tgtUser})
   }
 
   handleUserDeleteSelection = (tgtUser) => {
-    console.log('handleUserDeleteSelection:',tgtUser)
+    // Change screen mode to User DELETE mode, and store target-user
     this.setState({screenMode: 'delete',targetUser: tgtUser})
   }
 
   handleSaveUser = (tgtUser) => {
+    // TODO: create AJAX call to save user data
     console.log('handleSaveUser:',tgtUser)
     this.setState({screenMode: 'list',targetUser: ''})  
   }
   
   handleDeleteUser = (tgtUser) => {
+    // TODO: create AJAX call to delete
     console.log('handleDeleteUser:',tgtUser)
     this.setState({screenMode: 'list',targetUser: ''})  
   }
 
   handleCancel = (tgtUser) => {
-    console.log('handleCancel:',tgtUser)
+    // Just reset selected user and change screen mode to list
     this.setState({screenMode: 'list',targetUser: ''})  
   }
+
+ 
 
   renderView = () => {
 
@@ -92,6 +100,14 @@ class Admin extends Component {
       return (
         <>
           <h1>Edit mode</h1>
+          <UserForm user={this.state.targetUser} 
+                    rightbuttonColor='primary'
+                    rightButtonLabel='Save'
+                    leftbuttonColor='default'
+                    leftButtonLabel='Cancel'
+                    handleRightButtonSelection={this.handleSaveUser} 
+                    handleLeftButtonSelection={this.handleCancel}
+           />
         </>
       )
     } if (this.state.screenMode === 'delete') {
@@ -104,7 +120,7 @@ class Admin extends Component {
               <UserCard user={this.state.targetUser} 
                         rightbuttonColor='secondary'
                         rightButtonLabel='Delete'
-                        leftbuttonColor='primary'
+                        leftbuttonColor='default'
                         leftButtonLabel='Cancel'
                         isDisabled={false}
                         handleRightButtonSelection={this.handleDeleteUser} 
@@ -115,12 +131,16 @@ class Admin extends Component {
     } else {
       return (
         <>
-          <div>
-            <Avatar className={classes.avatar}>
-              <SettingsIcon /> 
-            </Avatar>
-            <h1 className={classes.pageHead}>System Administration</h1>
-          </div>
+          <Grid container spacing={0}>    
+            <Grid item> 
+              <Avatar className={classes.avatar}>
+                <SettingsIcon /> 
+              </Avatar>
+            </Grid>
+            <Grid item> 
+              <h1 className={classes.pageHead}>System Administration</h1>
+            </Grid>
+          </Grid>
 
           <Grid alignContent='center' 
                 style={{margin: 'auto', minHeight: '94vh', marginLeft: '5%'}} 
