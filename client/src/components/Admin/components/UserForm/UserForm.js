@@ -48,13 +48,14 @@ class UserForm extends Component {
     return ( 
       <>
        <div className='updateContainer'>
-          <FormControl className={classes.margin}>
+         <form className={classes.container} noValidate autoComplete="off">
             <InputLabel htmlFor="user-name">Username</InputLabel>
             <Input
               id="user-name"
               name='user.username'
               value={this.props.user.username}
               onChange={this.handleInputChange}
+              disabled
               startAdornment={
                 <InputAdornment position="start">
                   <AccountCircle />
@@ -72,7 +73,7 @@ class UserForm extends Component {
                     onClick={() => this.props.handleRightButtonSelection(this.state.user)} >{this.props.rightButtonLabel}</Button>
             <Button size="small" variant="contained" color={this.props.leftbuttonColor}  
                     onClick={() => this.props.handleLeftButtonSelection(this.props.user)}>{this.props.leftButtonLabel}</Button>
-        </FormControl>
+        </form>
         </div>
       </>
     )

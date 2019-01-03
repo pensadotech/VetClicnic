@@ -99,7 +99,9 @@ class Admin extends Component {
     if (this.state.screenMode === 'edit') {
       return (
         <>
-          <h1>Edit mode</h1>
+          <h1 className={classes.pageHead}>
+               Update user information
+              </h1>
           <UserForm user={this.state.targetUser} 
                     rightbuttonColor='primary'
                     rightButtonLabel='Save'
