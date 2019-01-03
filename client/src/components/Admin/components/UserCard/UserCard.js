@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
 
 const styles = {
   card: {
@@ -24,7 +24,7 @@ const styles = {
   pos: {
     marginBottom: 12,
   },
-};
+}
 
 function UserCard(props) {
 
@@ -50,15 +50,17 @@ function UserCard(props) {
         </Typography>
       </CardContent>
       <CardActions>     
-        <Button size="small" variant="contained" color="primary" disabled  >Update</Button>
-        <Button size="small" variant="contained" color="secondary" disabled  >Remove</Button>
+        <Button size="small" variant="contained" color={props.rightbuttonColor} disabled={props.isDisabled}
+                onClick={() => props.handleRightButtonSelection(props.user)} >{props.rightButtonLabel}</Button>
+        <Button size="small" variant="contained" color={props.leftbuttonColor} disabled={props.isDisabled}  
+                onClick={() => props.handleLeftButtonSelection(props.user)}>{props.leftButtonLabel}</Button>
       </CardActions>
     </Card>
-  );
+  )
 }
 
 UserCard.propTypes = {
   classes: PropTypes.object.isRequired,
-};
+}
 
-export default withStyles(styles)(UserCard);
+export default withStyles(styles)(UserCard)
