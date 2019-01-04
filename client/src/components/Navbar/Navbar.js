@@ -21,6 +21,7 @@ import ColorizeIcon from '@material-ui/icons/Colorize'
 import EventIcon from '@material-ui/icons/Event'
 import AssignmentIcon from '@material-ui/icons/Assignment'
 import SettingsIcon from '@material-ui/icons/Settings'
+import GradientIcon from '@material-ui/icons/Gradient'
 
 
 const styles = {
@@ -105,6 +106,12 @@ class Navbar extends Component {
               <ListItem button key='Prescriptions'>
                 <ListItemIcon> <AssignmentIcon /></ListItemIcon>
                 <ListItemText primary='Prescriptions' />
+              </ListItem>
+           </Link>
+           <Link to='/calc' style={{ color: 'black', textDecoration: 'none' }}>
+              <ListItem button key='Calculator'>
+                <ListItemIcon> <GradientIcon /></ListItemIcon>
+                <ListItemText primary='Dosage Calculator' />
               </ListItem>
            </Link>
         </List>

@@ -6,6 +6,7 @@ import MainMenu from './components/MainMenu'
 import LoginView from './components/LoginView'
 import Patient from './components/Patience'
 import Doctor from './components/Doctor'
+import Calc from './components/Calc'
 import Medicine from './components/Medicine'
 import Schedule from './components/Schedule'
 import Prescription from './components/Prescription'
@@ -104,6 +105,7 @@ class App extends Component {
                <Route exact path='/' component={MainMenu} />
                <Route path='/patients' component={Patient} />
                <Route path='/doctors' component={Doctor} />
+               <Route path='/Calc' component={Calc} />
                <Route path='/medicines' component={Medicine} />
                <Route path='/schedules' component={Schedule} />
                <Route path='/prescriptions' component={Prescription} />

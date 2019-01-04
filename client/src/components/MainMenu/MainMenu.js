@@ -10,6 +10,7 @@ import FaceIcon from '@material-ui/icons/Face'
 import ColorizeIcon from '@material-ui/icons/Colorize'
 import EventIcon from '@material-ui/icons/Event'
 import AssignmentIcon from '@material-ui/icons/Assignment'
+import GradientIcon from '@material-ui/icons/Gradient'
 
 
 import './MainMenu.css'
@@ -89,7 +90,19 @@ class MainMenu extends Component {
                     </IconButton> 
                   </Link>                 
                 </div>
-            </Grid>    
+            </Grid>
+            <Grid item>
+                <div className='menuBlock calc'>
+                <Link to='/Calc' style={{ color: 'black', textDecoration: 'none' }}>
+                    <IconButton color="inherit">
+                        <GradientIcon />
+                        <Typography variant="h6" color="inherit" className={classes.grow}>
+                           Dosage Calculator
+                        </Typography>    
+                    </IconButton> 
+                  </Link>                 
+                </div>
+            </Grid>     
          </Grid>
         </div>
       </>
