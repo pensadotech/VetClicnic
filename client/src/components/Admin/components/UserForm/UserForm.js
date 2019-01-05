@@ -17,6 +17,8 @@ import MailIcon from '@material-ui/icons/MailOutline'
 import PhoneIcon from '@material-ui/icons/Phone'
 import PersonIcon from '@material-ui/icons/PermIdentity'
 
+// API
+import APIusers from '../../../../utils/APIuser'
 import PasswordHash from 'password-hash' // TODO: this is not working, why?
 
 // Local style
@@ -139,8 +141,18 @@ class UserForm extends Component {
              email: this.state.email,
              userCreated: Date.now()
           } 
-          // send information back 
-          this.props.handleRightButtonSelection(newUserData)
+          
+          // Check if user already exist 
+          APIusers.findOne(newUserData)
+            .then(res => {  
+              if(res.data !== '') {
+                this.setState({userError: 'The username already exist, please provide a new one'})  
+              } else {
+                // send information back 
+                this.props.handleRightButtonSelection(newUserData)
+              }           
+           })
+           .catch(err => console.log(err))          
        }
     } 
   }

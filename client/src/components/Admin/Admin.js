@@ -84,18 +84,41 @@ class Admin extends Component {
   handleCreateUser =(tgtUser) => {
     // TODO: AJAX call to Create a new user data
     console.log('handleCreateUser:',tgtUser)
+
+    APIusers.createUpdateUser(tgtUser)
+      .then(r => {  
+        this.loadUsers()
+      })
+      .catch(err => console.log(err))
+    
+    // Restore main view
     this.setState({screenMode: 'list',targetUser: ''})  
   }
 
   handleSaveUser = (tgtUser) => {
     // TODO: AJAX call to save user data
     console.log('handleSaveUser:',tgtUser)
+    APIusers.updateUser(tgtUser._id,tgtUser)
+      .then(r => {   
+        this.loadUsers()
+      })
+      .catch(err => console.log(err))
+    
+    // Restore main view
     this.setState({screenMode: 'list',targetUser: ''})  
   }
   
   handleDeleteUser = (tgtUser) => {
     // TODO: AJAX call to delete
     console.log('handleDeleteUser:',tgtUser)
+    
+    APIusers.deleteUser(tgtUser._id)
+      .then(r => {  
+        this.loadUsers()  
+      })
+      .catch(err => console.log(err))
+
+    // Restore main view
     this.setState({screenMode: 'list',targetUser: ''})  
   }
 

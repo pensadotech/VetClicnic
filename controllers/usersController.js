@@ -1,9 +1,18 @@
 // Require all models
 var db = require("../models")
+const passwordHash = require('password-hash')
 
 module.exports = {
   findAll: function(req,res) {
     db.User.find({})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err))
+  },
+  findOne: function(req,res) {
+     // body has the user
+    let user = req.body
+    // find record base on user name
+    db.User.findOne({ pubId: { $eq: user.username } })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err))
   },
@@ -20,14 +29,24 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
+     // body has the user
+    let user = req.body
+    // encrypt password
+    let hashedPassword = passwordHash.generate(user.password)
+    user.password = hashedPassword
+
     db.Users
-      .create(req.body)
+      .create(user)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   createUpdate: function(req,res) {
-    // body has an article
+     // body has the user
     let user = req.body
+    // encrypt password
+    let hashedPassword = passwordHash.generate(user.password)
+    user.password = hashedPassword
+
     // Create or Update
     db.User.findOne({ pubId: { $eq: user.username } })
       .then((r) => {
@@ -46,8 +65,14 @@ module.exports = {
     .catch(err => res.status(422).json(err))
   },
   update: function(req, res) {
+    // body has the user
+    let user = req.body
+    // encrypt password
+    let hashedPassword = passwordHash.generate(user.password)
+    user.password = hashedPassword
+    
     db.User
-      .findOneAndUpdate({ _id: req.params.id }, req.body)
+      .findOneAndUpdate({ _id: req.params.id }, user)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
