@@ -9,6 +9,11 @@ module.exports = {
       .catch(err => res.status(422).json(err))
   },
   findOne: function(req,res) {
+<<<<<<< HEAD
+     // body has the usera
+    let user = req.body
+=======
+>>>>>>> d1ec1e1052ac88ef343380d9c5f1af225eab0fcc
     // find record base on user name
     db.User.findOne({ username: { $eq: req.params.id } })
       .then(dbModel => res.json(dbModel))
