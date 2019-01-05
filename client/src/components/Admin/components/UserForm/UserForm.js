@@ -16,10 +16,9 @@ import PetsIcon from '@material-ui/icons/Pets'
 import MailIcon from '@material-ui/icons/MailOutline'
 import PhoneIcon from '@material-ui/icons/Phone'
 import PersonIcon from '@material-ui/icons/PermIdentity'
-
 // API
 import APIusers from '../../../../utils/APIuser'
-import PasswordHash from 'password-hash' // TODO: this is not working, why?
+
 
 // Local style
 import './UserFrom.css'
@@ -67,7 +66,8 @@ class UserForm extends Component {
     password: '',
     phone: '',
     email: '',
-    userError: ''
+    userError: '',
+    needsEcnryption : false
   }
 
   componentDidMount = () => {
@@ -100,13 +100,13 @@ class UserForm extends Component {
        } else {
            // new passowrd?
            if (this.state.password === '') {
-              // keep exiting password
-              this.setState({ password: this.props.user.password })  
+              // keep existing password, no need to ecnrypt
+              this.setState({ password: this.props.user.password, needsEcnryption : false })  
            } else {
-             // change password
-             let hashedPassword = PasswordHash.generate(this.state.password)
-             this.setState({ password: hashedPassword })  
+              // mark that password encryption is needed before storing user
+              this.setState({ needsEcnryption : true }) 
            }
+
            // translate
            let newUserData = {
               _id: this.state._id, 
@@ -115,7 +115,8 @@ class UserForm extends Component {
               password: this.state.password,
               phone: this.state.phone,
               email: this.state.email,
-              userCreated: Date.now()
+              userCreated: Date.now(),
+              needsEcnryption: this.state.needsEcnryption 
            }
            // send information back 
            this.props.handleRightButtonSelection(newUserData)
@@ -127,9 +128,8 @@ class UserForm extends Component {
         this.setState({userError: 'Please provide username, fullname, email, and password'}) 
        } else {
           
-          // hash the password
-          let hashedPassword = PasswordHash.generate(this.state.password)
-          this.setState({ password: hashedPassword }) 
+           // mark that password encryption is needed before storing user
+           this.setState({ needsEcnryption : true }) 
 
           // translate
           let newUserData = {
@@ -139,7 +139,8 @@ class UserForm extends Component {
              password: this.state.password,
              phone: this.state.phone,
              email: this.state.email,
-             userCreated: Date.now()
+             userCreated: Date.now(),
+             needsEcnryption: this.state.needsEcnryption 
           } 
           
           // Check if user already exist 
