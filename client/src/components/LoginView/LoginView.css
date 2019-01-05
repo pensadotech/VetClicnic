@@ -1,0 +1,21 @@
+.loginContainer {  
+  background-color: lightgray;
+  margin: 200px 100px 0px 100px;
+  /* Transparent background */
+  opacity: 0.9;
+}
+
+.loginTitle {
+ color: blue;
+ font-size: 60px;
+ margin-left: 30px
+}
+
+.logingImage {
+  width: 200px;
+  margin: 0px 20px 20px 25px;
+}
+
+.userError {
+  color: red;
+}

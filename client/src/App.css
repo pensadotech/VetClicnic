@@ -1,3 +1,27 @@
+.imgRnd10 {
+  /* Rounded image corners */
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.imageShadow {
+  /* Add drop shadow */
+  -webkit-box-shadow: 2px 2px 3px 2px gray;
+  -moz-box-shadow: 2px 2px 3px 2px gray;
+  box-shadow: 2px 2px 3px 2px gray;
+}
+
+.imageRotate {
+  /* Rotate Image */
+  -webkit-transform: rotate( 3deg);
+  -moz-transform: rotate( 3deg);
+  -o-transform: rotate( 3deg);
+  -ms-transform: rotate( 3deg);
+  transform: rotate( 3deg);
+}
+
+
 .App {
   text-align: center;
 }
@@ -30,3 +54,5 @@
     transform: rotate(360deg);
   }
 }
+
+

@@ -1,3 +1,6 @@
 # VetClicnic
 
-Final project 
+Animal Clinic System
+
+## Description
+

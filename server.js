@@ -1,35 +1,43 @@
 
 const express = require('express')
-const path = require('path')
 const bodyParser = require('body-parser')
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
+const routes = require("./routes");
 
-// Require all models
-var db = require("./models");
+// Start listening - use 3000 if available or next available port
+const PORT = process.env.PORT || 3001;
 
-// express middleware: static files
-app.use(express.static(path.join(__dirname, 'public')));
+//server variable
+const app = express()
+
 // express middleware: capable to handle complex json
 app.use(bodyParser.urlencoded({extended: true }))
 // express middleware: capable to handle simple json
 app.use(bodyParser.json())
 
+// Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
+// STEP 1: passport, cookie-parser, express-session
+const passport = require('passport')
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
+// STEP 2:  passport
+app.use(cookieParser());
+app.use(session({ secret: 'library' }))
+// STEP 3:  passport
+require('./controllers/config/passport')(app)
+
+// Routes
+app.use(routes);
+
 // Connect to the Mongo DB
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/nasanewsmern";
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/vetclinic"
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
 
-// Api and Html routes
-require('./routes')(app,db)
-
-//server variable
-const app = express()
-
-// Start listening - use 3000 if available or next available port
-const PORT = process.env.PORT || 3000;
+// Start listening 
 app.listen(PORT, function () {
 console.log(`Listening at http://localhost:${PORT}`)
 })
