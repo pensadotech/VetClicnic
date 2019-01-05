@@ -105,7 +105,7 @@ class App extends Component {
                <Route exact path='/' component={MainMenu} />
                <Route path='/patients' component={Patient} />
                <Route path='/doctors' component={Doctor} />
-               <Route path='/Calc' component={Calc} />
+               <Route path='/calc' component={Calc} />
                <Route path='/medicines' component={Medicine} />
                <Route path='/schedules' component={Schedule} />
                <Route path='/prescriptions' component={Prescription} />

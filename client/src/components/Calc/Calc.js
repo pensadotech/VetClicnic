@@ -4,6 +4,9 @@ import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Avatar from '@material-ui/core/Avatar'
 import GradientIcon from '@material-ui/icons/Gradient'
+import Input from "./inputs"
+import Auto from "./autocomplete"
+import APImeds from '../../utils/APImeds'
 
 const styles = {
   avatar: {
@@ -17,6 +20,23 @@ const styles = {
 
 class Calc extends Component {
    
+  state = {
+    meds: []
+  }
+
+  componentDidMount() {
+    this.loadMeds()
+  }
+
+  loadMeds = () => {
+    APImeds.getMeds()
+      .then(res => {
+        this.setState({ meds: res.data })
+        console.log(this.state)
+      })
+      .catch(err => console.log(err))
+  }
+
   render() {
 
     const { classes } = this.props
@@ -30,6 +50,8 @@ class Calc extends Component {
             </Grid>
             <Grid item> 
               <h1 className={classes.pageHead}>Dosage Calculator</h1>
+              <Input/>
+              <Auto/>
             </Grid>
           </Grid>
       </>
