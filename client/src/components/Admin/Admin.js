@@ -3,12 +3,9 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Avatar from '@material-ui/core/Avatar'
-import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
 import SettingsIcon from '@material-ui/icons/Settings'
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 // Components
 import UserCard from './components/UserCard'
 import UserForm from './components/UserForm'
@@ -17,7 +14,7 @@ import APIusers from '../../utils/APIuser'
 // Local style
 import './Admin.css'
 
-const styles = {
+const styles = theme => ({
   avatar: {
     margin: ' 10px 0px 0px 50px'
   },
@@ -40,8 +37,14 @@ const styles = {
   },
   pos: {
     marginBottom: 12,
+  },
+  fab: {
+    margin: theme.spacing.unit,
+  },
+  extendedIcon: {
+    marginRight: theme.spacing.unit,
   }
-}
+})
 
 class Admin extends Component {
    
@@ -63,6 +66,11 @@ class Admin extends Component {
      .catch(err => console.log(err))
   }
 
+  handleUserAddSelection = () => {
+     // change screen mode to user ADD mode
+     this.setState({screenMode: 'add'})
+  }
+
   handleUserUpdateSelection = (tgtUser) => {
      // change screen mode to user EDIT mode, and store target-user
      this.setState({screenMode: 'edit',targetUser: tgtUser})
@@ -72,15 +80,21 @@ class Admin extends Component {
     // Change screen mode to User DELETE mode, and store target-user
     this.setState({screenMode: 'delete',targetUser: tgtUser})
   }
+  
+  handleCreateUser =(tgtUser) => {
+    // TODO: AJAX call to Create a new user data
+    console.log('handleCreateUser:',tgtUser)
+    this.setState({screenMode: 'list',targetUser: ''})  
+  }
 
   handleSaveUser = (tgtUser) => {
-    // TODO: create AJAX call to save user data
+    // TODO: AJAX call to save user data
     console.log('handleSaveUser:',tgtUser)
     this.setState({screenMode: 'list',targetUser: ''})  
   }
   
   handleDeleteUser = (tgtUser) => {
-    // TODO: create AJAX call to delete
+    // TODO: AJAX call to delete
     console.log('handleDeleteUser:',tgtUser)
     this.setState({screenMode: 'list',targetUser: ''})  
   }
@@ -95,24 +109,44 @@ class Admin extends Component {
   renderView = () => {
 
     const { classes } = this.props
-
-    if (this.state.screenMode === 'edit') {
+    
+    if (this.state.screenMode === 'add') {
+      return (
+       <>
+          <h1 className={classes.pageHead}>
+            Create new user
+          </h1>
+              <UserForm mode={this.state.screenMode}
+                       user=''
+                       rightbuttonColor='primary'
+                       rightButtonLabel='Create'
+                       leftbuttonColor='default'
+                       leftButtonLabel='Cancel'
+                       isUserNameDisabled={false}
+                       handleRightButtonSelection={this.handleCreateUser} 
+                       handleLeftButtonSelection={this.handleCancel}
+          />  
+       </> 
+      )
+    } else if (this.state.screenMode === 'edit') {
       return (
         <>
           <h1 className={classes.pageHead}>
                Update user information
-              </h1>
-          <UserForm user={this.state.targetUser} 
+          </h1>
+          <UserForm mode={this.state.screenMode}
+                    user={this.state.targetUser} 
                     rightbuttonColor='primary'
                     rightButtonLabel='Save'
                     leftbuttonColor='default'
                     leftButtonLabel='Cancel'
+                    isUserNameDisabled={true}
                     handleRightButtonSelection={this.handleSaveUser} 
                     handleLeftButtonSelection={this.handleCancel}
            />
         </>
       )
-    } if (this.state.screenMode === 'delete') {
+    } else if (this.state.screenMode === 'delete') {
       return (
         <>
            <div>
@@ -142,6 +176,11 @@ class Admin extends Component {
             <Grid item> 
               <h1 className={classes.pageHead}>System Administration</h1>
             </Grid>
+            <Grid item>
+              <Fab color="secondary" aria-label="Add" className={classes.fab}>
+                 <AddIcon onClick={() => this.handleUserAddSelection()}/>
+              </Fab>
+            </Grid>
           </Grid>
 
           <Grid alignContent='center' 
@@ -149,7 +188,8 @@ class Admin extends Component {
                 container spacing={32}>
           {
             this.state.users.map((user,index) => (
-              <UserCard user={user} 
+              <UserCard key={index}
+                        user={user} 
                         rightbuttonColor='primary'
                         rightButtonLabel='Update'
                         leftbuttonColor='secondary'
