@@ -7,38 +7,155 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import AccountCircle from '@material-ui/icons/AccountCircle'
+import PetsIcon from '@material-ui/icons/Pets'
+import MailIcon from '@material-ui/icons/MailOutline'
+import PhoneIcon from '@material-ui/icons/Phone'
+import PersonIcon from '@material-ui/icons/PermIdentity'
+// API
+import APIusers from '../../../../utils/APIuser'
+
+
 // Local style
 import './UserFrom.css'
 
 const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 250,
+  },
   margin: {
     margin: theme.spacing.unit,
   },
+  card: {
+    minWidth: 175,
+    maxHeight: 620,
+    margin: '10px 20px 0px 20px',  
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  }
 })
 
 
 class UserForm extends Component {
   
   state ={
-    user : { 
-       _id : '',
-       username: '',
-       fullname: '',
-       password: '',
-       phone: '',
-       email: ''
-    }
+    mode: '',
+    user: '',
+    _id : '',
+    username: '',
+    fullname: '',
+    password: '',
+    phone: '',
+    email: '',
+    userError: '',
+    needsEcnryption : false
   }
 
   componentDidMount = () => {
-    this.setState({user: this.props.user })  
+
+    if(this.props.user !== '') {
+      this.setState({
+        mode: this.props.mode,
+        user: this.props.user,
+         _id: this.props.user._id, 
+         username: this.props.user.username,
+         fullname: this.props.user.fullname,
+         password: this.props.user.password,
+         phone: this.props.user.phone,
+         email: this.props.user.email
+        })  
+    }
   }
 
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value })  
+  }
+
+  handleSave = () => {
+     
+    if (this.state.mode === 'edit') {
+       // EDIT MODE: Validate
+       if (this.state.username === '' || this.state.fullname === '' || this.state.email === ''   )  {    
+          this.setState({userError: 'Please provide username, fullname, and email'}) 
+       } else {
+           // new passowrd?
+           if (this.state.password === '') {
+              // keep existing password, no need to ecnrypt
+              this.setState({ password: this.props.user.password, needsEcnryption : false })  
+           } else {
+              // mark that password encryption is needed before storing user
+              this.setState({ needsEcnryption : true }) 
+           }
+
+           // translate
+           let newUserData = {
+              _id: this.state._id, 
+              username: this.state.username,
+              fullname: this.state.fullname,
+              password: this.state.password,
+              phone: this.state.phone,
+              email: this.state.email,
+              userCreated: Date.now(),
+              needsEcnryption: this.state.needsEcnryption 
+           }
+           // send information back 
+           this.props.handleRightButtonSelection(newUserData)
+       }
+    } else {
+       // ADD MODE: Validate
+       if (this.state.username === '' || this.state.fullname === '' || 
+           this.state.email === '' || this.state.password === ''  )  {    
+        this.setState({userError: 'Please provide username, fullname, email, and password'}) 
+       } else {
+          
+           // mark that password encryption is needed before storing user
+           this.setState({ needsEcnryption : true }) 
+
+          // translate
+          let newUserData = {
+             _id: '', 
+             username: this.state.username,
+             fullname: this.state.fullname,
+             password: this.state.password,
+             phone: this.state.phone,
+             email: this.state.email,
+             userCreated: Date.now(),
+             needsEcnryption: this.state.needsEcnryption 
+          } 
+          
+          // Check if user already exist 
+          APIusers.findOne(newUserData)
+            .then(res => {  
+              if(res.data !== '') {
+                this.setState({userError: 'The username already exist, please provide a new one'})  
+              } else {
+                // send information back 
+                this.props.handleRightButtonSelection(newUserData)
+              }           
+           })
+           .catch(err => console.log(err))          
+       }
+    } 
   }
 
   render() {
@@ -47,34 +164,126 @@ class UserForm extends Component {
 
     return ( 
       <>
-       <div className='updateContainer'>
-         <form className={classes.container} noValidate autoComplete="off">
-            <InputLabel htmlFor="user-name">Username</InputLabel>
-            <Input
-              id="user-name"
-              name='user.username'
-              value={this.props.user.username}
-              onChange={this.handleInputChange}
-              disabled
-              startAdornment={
-                <InputAdornment position="start">
-                  <AccountCircle />
-                </InputAdornment>
-              }
-            />
-            <InputLabel htmlFor="user-fullname">Fullname</InputLabel>
-            <Input
-              id="user-fullname"
-              name='user.fullname'
-              value={this.props.user.fullname}
-              onChange={this.handleInputChange}
-            />
+      <Card className={classes.card}>
+         <CardContent>
+          <p className='userError'>{this.state.userError}</p>
+          <form className={classes.container} noValidate autoComplete="off">
+              <div className='formItem'>
+                 <TextField
+                    required
+                    id="user-name"
+                    label="Username :"
+                    className={classes.textField}
+                    name='username'
+                    type="string"
+                    autoComplete="current-username"
+                    value={this.state.username}
+                    onChange={this.handleInputChange}
+                    margin="normal"
+                    disabled={this.props.isUserNameDisabled}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                           <AccountCircle />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />   
+              </div>
+              <div className='formItem'> 
+                  <TextField
+                    required
+                    id="user-fullname"
+                    label="Fullname :"
+                    className={classes.textField}
+                    name='fullname'
+                    type="string"
+                    autoComplete="current-fullname"
+                    value={this.state.fullname}
+                    onChange={this.handleInputChange}
+                    margin="normal"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                           <PersonIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />                 
+              </div>
+              <div className='formItem'> 
+                  <TextField
+                    id="user-phone"
+                    label="Phone :"
+                    className={classes.textField}
+                    name='phone'
+                    type="string"
+                    autoComplete="current-phone"
+                    value={this.state.phone}
+                    onChange={this.handleInputChange}
+                    margin="normal"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                           <PhoneIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />                    
+              </div>
+              <div className='formItem'> 
+                  <TextField
+                    required
+                    id="user-email"
+                    label="Email: "
+                    className={classes.textField}
+                    name='email'
+                    type="email"
+                    autoComplete="current-email"
+                    value={this.state.email}
+                    onChange={this.handleInputChange}
+                    margin="normal"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <MailIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />                  
+              </div>
+              <div>
+                 <TextField
+                    required
+                    id="standard-password-input"
+                    label="Password"
+                    className={classes.textField}
+                    name='password'
+                    type="password"
+                    autoComplete="current-password"
+                    value={this.password}
+                    onChange={this.handleInputChange}
+                    margin="normal"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <PetsIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+              </div>                
+          </form>
+         
+        </CardContent>
+        <CardActions>
             <Button size="small" variant="contained" color={this.props.rightbuttonColor} 
-                    onClick={() => this.props.handleRightButtonSelection(this.state.user)} >{this.props.rightButtonLabel}</Button>
+                    onClick={() => this.handleSave()} >{this.props.rightButtonLabel}</Button>
             <Button size="small" variant="contained" color={this.props.leftbuttonColor}  
                     onClick={() => this.props.handleLeftButtonSelection(this.props.user)}>{this.props.leftButtonLabel}</Button>
-        </form>
-        </div>
+        </CardActions>    
+      </Card>
+
       </>
     )
   }

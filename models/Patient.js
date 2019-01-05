@@ -35,6 +35,16 @@ let PatientSchema = new Schema( {
     trim: true,
     required: "Color is Required"
   },
+  address: {
+    type: String,
+    trim: true,
+    required : "Patient Address is Required",
+  },
+  phone: {
+    type: String,
+    trim: true,
+    required : "Phone number is Required",
+  },
   chartNumber: {
     type: ObjectId,
     trim: true,

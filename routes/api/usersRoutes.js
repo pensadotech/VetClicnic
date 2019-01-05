@@ -6,6 +6,10 @@ router.route("/")
   .get(usersController.findAll)
   .post(usersController.createUpdate)
 
+// Matches with "/api/users/findone"
+router.route("/findone")
+  .get(usersController.findOne)
+
 // Matches with "/api/users/:id"
 router.route("/:id")
   .get(usersController.findById)

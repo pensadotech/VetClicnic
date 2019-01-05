@@ -6,7 +6,7 @@ const passwordHash = require('password-hash')
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/vetclinic"
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
 
-let hashedPassword = passwordHash.generate('admin');
+let hashedPassword = passwordHash.generate('admin')
 
 const usersSeed = [{
     username: 'admin',

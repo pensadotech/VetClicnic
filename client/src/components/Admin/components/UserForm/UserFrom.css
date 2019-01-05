@@ -1,4 +1,7 @@
-.updateContainer {  
-  background-color: rgb(253, 252, 252);
-  margin: 10px 100px 0px 100px;
+.formItem {  
+  margin: 5px 5px 0px 5px;
+}
+
+.userError {
+  color: red;
 }

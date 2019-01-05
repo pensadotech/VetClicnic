@@ -1,5 +1,6 @@
 // Mongo database collections
 module.exports = {
   User: require("./User"),
-  Medicine: require("./Medicine")
+  Meds: require("./Meds"),
+  Patient: require("./Patient")
 }
