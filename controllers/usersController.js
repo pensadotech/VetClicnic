@@ -32,9 +32,11 @@ module.exports = {
      // body has the user
     let user = req.body
     // encrypt password
-    let hashedPassword = passwordHash.generate(user.password)
-    user.password = hashedPassword
-
+    if (user.needsEcnryption) {
+      let hashedPassword = passwordHash.generate(user.password)
+      user.password = hashedPassword
+    }
+    // create the user
     db.Users
       .create(user)
       .then(dbModel => res.json(dbModel))
@@ -42,11 +44,12 @@ module.exports = {
   },
   createUpdate: function(req,res) {
      // body has the user
-    let user = req.body
-    // encrypt password
-    let hashedPassword = passwordHash.generate(user.password)
-    user.password = hashedPassword
-
+     let user = req.body
+     // encrypt password
+     if (user.needsEcnryption) {
+        let hashedPassword = passwordHash.generate(user.password)
+        user.password = hashedPassword
+     }
     // Create or Update
     db.User.findOne({ pubId: { $eq: user.username } })
       .then((r) => {
@@ -68,9 +71,11 @@ module.exports = {
     // body has the user
     let user = req.body
     // encrypt password
-    let hashedPassword = passwordHash.generate(user.password)
-    user.password = hashedPassword
-    
+    if (user.needsEcnryption) {
+      let hashedPassword = passwordHash.generate(user.password)
+      user.password = hashedPassword
+    }
+    // Update
     db.User
       .findOneAndUpdate({ _id: req.params.id }, user)
       .then(dbModel => res.json(dbModel))
