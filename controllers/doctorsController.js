@@ -1,66 +1,55 @@
 // Require all models
 var db = require("../models")
-const passwordHash = require('password-hash')
 
 module.exports = {
   findAll: function(req,res) {
-    db.User.find({})
+    db.Doctor.find({})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err))
   },
   findOne: function(req,res) {
      // body has the usera
-    let user = req.body
+    let doctor = req.body
     // find record base on user name
-    db.User.findOne({ pubId: { $eq: user.username } })
+    db.Doctor.findOne({ pubId: { $eq: doctor.name } })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err))
   },
   findWhere: function(req, res) {
-    db.User
+    db.Doctor
       .find(req.query)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
-    db.User
+    db.Doctor
       .findById(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-     // body has the user
-    let user = req.body
-    // encrypt password
-    if (user.needsEcnryption) {
-      let hashedPassword = passwordHash.generate(user.password)
-      user.password = hashedPassword
-    }
+     
     // create the user
-    db.Users
-      .create(user)
+    db.Doctors
+      .create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   createUpdate: function(req,res) {
      // body has the user
-     let user = req.body
-     // encrypt password
-     if (user.needsEcnryption) {
-        let hashedPassword = passwordHash.generate(user.password)
-        user.password = hashedPassword
-     }
+     let doctor = req.body
+     
     // Create or Update
-    db.User.findOne({ pubId: { $eq: user.username } })
+    db.Doctor.findOne({ pubId: { $eq: doctor.name } })
       .then((r) => {
         if (r === null) {
          // create 
-         db.User.create(user)
+         db.Doctor.create(doctor)
            .then(() => res.sendStatus(200))
            .catch(err => res.status(422).json(err))
        } else {
          // Update 
-         db.User.updateOne( { username : { $eq: user.username} } , { $set: user } )
+         db.Doctor.updateOne( { name : { $eq: doctor.name} } , { $set: doctor } )
            .then(() => res.sendStatus(200))
            .catch(err => res.status(422).json(err))
        }
@@ -69,20 +58,16 @@ module.exports = {
   },
   update: function(req, res) {
     // body has the user
-    let user = req.body
-    // encrypt password
-    if (user.needsEcnryption) {
-      let hashedPassword = passwordHash.generate(user.password)
-      user.password = hashedPassword
-    }
+    let doctor = req.body
+   
     // Update
-    db.User
-      .findOneAndUpdate({ _id: req.params.id }, user)
+    db.Doctor
+      .findOneAndUpdate({ _id: req.params.id }, doctor)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
-    db.User
+    db.Doctor
       .findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
