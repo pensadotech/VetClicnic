@@ -9,10 +9,13 @@ module.exports = {
       .catch(err => res.status(422).json(err))
   },
   findOne: function(req,res) {
+<<<<<<< HEAD
      // body has the usera
     let user = req.body
+=======
+>>>>>>> d1ec1e1052ac88ef343380d9c5f1af225eab0fcc
     // find record base on user name
-    db.User.findOne({ pubId: { $eq: user.username } })
+    db.User.findOne({ username: { $eq: req.params.id } })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err))
   },
@@ -29,38 +32,55 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-     // body has the user
-    let user = req.body
+    // body has the user
+    let newUser = req.body
+    // translate
+    let userData = {
+        username: newUser.username,
+        fullname: newUser.fullname,
+        password: newUser.password,
+        phone: newUser.phone,
+        email: newUser.email,
+        userCreated: Date.now()
+     } 
     // encrypt password
-    if (user.needsEcnryption) {
-      let hashedPassword = passwordHash.generate(user.password)
-      user.password = hashedPassword
+    if (newUser.needsEcnryption) {
+      let hashedPassword = passwordHash.generate(userData.password)
+      userData.password = hashedPassword
     }
     // create the user
-    db.Users
-      .create(user)
+    db.User.create(userData)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   createUpdate: function(req,res) {
      // body has the user
-     let user = req.body
-     // encrypt password
-     if (user.needsEcnryption) {
-        let hashedPassword = passwordHash.generate(user.password)
-        user.password = hashedPassword
-     }
+     let newUser = req.body
+    // translate
+    let userData = {
+      username: newUser.username,
+      fullname: newUser.fullname,
+      password: newUser.password,
+      phone: newUser.phone,
+      email: newUser.email,
+      userCreated: Date.now()
+    } 
+    // encrypt password
+    if (newUser.needsEcnryption) {
+      let hashedPassword = passwordHash.generate(userData.password)
+      userData.password = hashedPassword
+    }
     // Create or Update
-    db.User.findOne({ pubId: { $eq: user.username } })
+    db.User.findOne({ username: { $eq: userData.username } })
       .then((r) => {
         if (r === null) {
          // create 
-         db.User.create(user)
+         db.User.create(userData)
            .then(() => res.sendStatus(200))
            .catch(err => res.status(422).json(err))
        } else {
          // Update 
-         db.User.updateOne( { username : { $eq: user.username} } , { $set: user } )
+         db.User.updateOne( { username : { $eq: userData.username} } , { $set: userData } )
            .then(() => res.sendStatus(200))
            .catch(err => res.status(422).json(err))
        }
@@ -68,16 +88,25 @@ module.exports = {
     .catch(err => res.status(422).json(err))
   },
   update: function(req, res) {
-    // body has the user
-    let user = req.body
-    // encrypt password
-    if (user.needsEcnryption) {
-      let hashedPassword = passwordHash.generate(user.password)
-      user.password = hashedPassword
-    }
+     // body has the user
+     let newUser = req.body
+     // translate
+     let userData = {
+        username: newUser.username,
+        fullname: newUser.fullname,
+        password: newUser.password,
+        phone: newUser.phone,
+        email: newUser.email,
+        userCreated: Date.now()
+      } 
+      // encrypt password
+      if (newUser.needsEcnryption) {
+        let hashedPassword = passwordHash.generate(userData.password)
+        userData.password = hashedPassword
+      }
     // Update
     db.User
-      .findOneAndUpdate({ _id: req.params.id }, user)
+      .findOneAndUpdate({ _id: req.params.id }, userData)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

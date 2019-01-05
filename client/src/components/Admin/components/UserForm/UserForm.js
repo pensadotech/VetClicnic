@@ -1,10 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import Input from '@material-ui/core/Input'
-import InputLabel from '@material-ui/core/InputLabel'
 import InputAdornment from '@material-ui/core/InputAdornment'
-import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
@@ -18,7 +15,6 @@ import PhoneIcon from '@material-ui/icons/Phone'
 import PersonIcon from '@material-ui/icons/PermIdentity'
 // API
 import APIusers from '../../../../utils/APIuser'
-
 
 // Local style
 import './UserFrom.css'
@@ -66,12 +62,11 @@ class UserForm extends Component {
     password: '',
     phone: '',
     email: '',
-    userError: '',
-    needsEcnryption : false
+    userError: ''
   }
 
   componentDidMount = () => {
-
+     
     if(this.props.user !== '') {
       this.setState({
         mode: this.props.mode,
@@ -79,7 +74,7 @@ class UserForm extends Component {
          _id: this.props.user._id, 
          username: this.props.user.username,
          fullname: this.props.user.fullname,
-         password: this.props.user.password,
+         password: '',
          phone: this.props.user.phone,
          email: this.props.user.email
         })  
@@ -98,15 +93,15 @@ class UserForm extends Component {
        if (this.state.username === '' || this.state.fullname === '' || this.state.email === ''   )  {    
           this.setState({userError: 'Please provide username, fullname, and email'}) 
        } else {
-           // new passowrd?
-           if (this.state.password === '') {
-              // keep existing password, no need to ecnrypt
-              this.setState({ password: this.props.user.password, needsEcnryption : false })  
-           } else {
-              // mark that password encryption is needed before storing user
-              this.setState({ needsEcnryption : true }) 
-           }
+            
+           let doesItNeedEncryption = false
 
+           // new password?
+           if (this.state.password !== '') {
+              // mark that password encryption is needed before storing user
+              doesItNeedEncryption = true
+           }
+           
            // translate
            let newUserData = {
               _id: this.state._id, 
@@ -116,21 +111,25 @@ class UserForm extends Component {
               phone: this.state.phone,
               email: this.state.email,
               userCreated: Date.now(),
-              needsEcnryption: this.state.needsEcnryption 
+              needsEcnryption: doesItNeedEncryption 
            }
+           
+           // keep original password if not encryption needed
+           if(!doesItNeedEncryption) {
+             newUserData.password = this.props.user.password
+           }
+
            // send information back 
            this.props.handleRightButtonSelection(newUserData)
        }
     } else {
+        
        // ADD MODE: Validate
        if (this.state.username === '' || this.state.fullname === '' || 
            this.state.email === '' || this.state.password === ''  )  {    
         this.setState({userError: 'Please provide username, fullname, email, and password'}) 
        } else {
           
-           // mark that password encryption is needed before storing user
-           this.setState({ needsEcnryption : true }) 
-
           // translate
           let newUserData = {
              _id: '', 
@@ -140,14 +139,15 @@ class UserForm extends Component {
              phone: this.state.phone,
              email: this.state.email,
              userCreated: Date.now(),
-             needsEcnryption: this.state.needsEcnryption 
+             needsEcnryption: true 
           } 
-          
+                     
           // Check if user already exist 
-          APIusers.findOne(newUserData)
+          APIusers.findOne(this.state.username)
             .then(res => {  
-              if(res.data !== '') {
-                this.setState({userError: 'The username already exist, please provide a new one'})  
+
+              if(res.data !== null) {
+                this.setState({userError: `The username "${res.data.username}" already exist, please provide a new one`})  
               } else {
                 // send information back 
                 this.props.handleRightButtonSelection(newUserData)
