@@ -80,54 +80,47 @@ class Admin extends Component {
     // Change screen mode to User DELETE mode, and store target-user
     this.setState({ screenMode: 'delete', targetUser: tgtUser })
   }
-
-  handleCreateUser = (tgtUser) => {
-    // TODO: AJAX call to Create a new user data
-    console.log('handleCreateUser:', tgtUser)
-
+  
+  handleCreateUser =(tgtUser) => {
+    // create new user
     APIusers.createUpdateUser(tgtUser)
-      .then(r => {
+      .then(r => {       
+        // Restore main view
+        this.setState({screenMode: 'list',targetUser: ''}) 
+        // reload the data
         this.loadUsers()
       })
       .catch(err => console.log(err))
-
-    // Restore main view
-    this.setState({ screenMode: 'list', targetUser: '' })
   }
 
   handleSaveUser = (tgtUser) => {
-    // TODO: AJAX call to save user data
-    console.log('handleSaveUser:', tgtUser)
-    APIusers.updateUser(tgtUser._id, tgtUser)
-      .then(r => {
-        this.loadUsers()
+    // Save updated user data    
+    APIusers.updateUser(tgtUser._id,tgtUser)
+      .then(r => {  
+        // Restore main view
+       this.setState({screenMode: 'list',targetUser: ''})  
+       // reload the data
+      this.loadUsers()
       })
       .catch(err => console.log(err))
-
-    // Restore main view
-    this.setState({ screenMode: 'list', targetUser: '' })
   }
 
   handleDeleteUser = (tgtUser) => {
-    // TODO: AJAX call to delete
-    console.log('handleDeleteUser:', tgtUser)
-
+    // delete user    
     APIusers.deleteUser(tgtUser._id)
-      .then(r => {
-        this.loadUsers()
+      .then(r => {  
+        // Restore main view
+        this.setState({screenMode: 'list',targetUser: ''})  
+        // reload the data
+        this.loadUsers()  
       })
-      .catch(err => console.log(err))
-
-    // Restore main view
-    this.setState({ screenMode: 'list', targetUser: '' })
+      .catch(err => console.log(err)) 
   }
 
   handleCancel = (tgtUser) => {
     // Just reset selected user and change screen mode to list
     this.setState({ screenMode: 'list', targetUser: '' })
   }
-
-
 
   renderView = () => {
 
