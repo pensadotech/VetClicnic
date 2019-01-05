@@ -1,0 +1,4 @@
+Team Blue:
+SORIN - Surgical Operation Reference Interface Network
+System for veterinaries that helps computing medicine dosages and create a digital log of a surgical procedures for the patients. 
+The Clinics will benefit because it will save time calculating the patient’s medicines with proper tablet size, and provides easy access to information about surgical data for patients.
