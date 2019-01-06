@@ -7,6 +7,12 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err))
   },
+  findOne: function(req,res) {
+    // find record base on name
+    db.Patient.findOne({ patientname: { $eq: req.params.id } })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err))
+  },
   findWhere: function(req, res) {
     db.Patient
       .find(req.query)
@@ -29,7 +35,7 @@ module.exports = {
     // body has an article
     let patient = req.body
     // Create or Update
-    db.Patient.findOne({ pubId: { $eq: patient.ownername } })
+    db.Patient.findOne({ patientname: { $eq: patient.patientname } })
       .then((r) => {
         if (r === null) {
          // create 
@@ -38,7 +44,7 @@ module.exports = {
            .catch(err => res.status(422).json(err))
        } else {
          // Update 
-         db.Patient.updateOne( { name : { $eq: patient.ownername} } , { $set: patient } )
+         db.Patient.updateOne( { patientname : { $eq: patient.patientname} } , { $set: patient } )
            .then(() => res.sendStatus(200))
            .catch(err => res.status(422).json(err))
        }

@@ -12,7 +12,7 @@ router.route("/:id")
   .put(usersController.update)
   .delete(usersController.remove)
 
-  // Matches with "/api/users/findone"
+// Matches with "/api/users/findone/:id"
 router.route("/findone/:id")
    .get(usersController.findOne)
 

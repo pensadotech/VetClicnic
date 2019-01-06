@@ -71,7 +71,7 @@ class Navbar extends Component {
         <List>
           <Link to='/' style={{ color: 'black', textDecoration: 'none' }}>
             <ListItem button key='Home'>
-               <ListItemIcon> <HomeIcon /></ListItemIcon>
+               <ListItemIcon children='[]'> <HomeIcon /></ListItemIcon>
                <ListItemText primary='Home' />
              </ListItem>
           </Link>

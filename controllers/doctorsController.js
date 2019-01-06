@@ -8,10 +8,8 @@ module.exports = {
       .catch(err => res.status(422).json(err))
   },
   findOne: function(req,res) {
-     // body has the usera
-    let doctor = req.body
     // find record base on user name
-    db.Doctor.findOne({ pubId: { $eq: doctor.name } })
+    db.Doctor.findOne({ name: { $eq: req.params.id } })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err))
   },
@@ -27,9 +25,8 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  create: function(req, res) {
-     
-    // create the user
+  create: function(req, res) {   
+    // create the Doctor
     db.Doctors
       .create(req.body)
       .then(dbModel => res.json(dbModel))
@@ -37,10 +34,9 @@ module.exports = {
   },
   createUpdate: function(req,res) {
      // body has the user
-     let doctor = req.body
-     
+     let doctor = req.body   
     // Create or Update
-    db.Doctor.findOne({ pubId: { $eq: doctor.name } })
+    db.Doctor.findOne({ name: { $eq: doctor.name } })
       .then((r) => {
         if (r === null) {
          // create 
@@ -58,8 +54,7 @@ module.exports = {
   },
   update: function(req, res) {
     // body has the user
-    let doctor = req.body
-   
+    let doctor = req.body 
     // Update
     db.Doctor
       .findOneAndUpdate({ _id: req.params.id }, doctor)

@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const docController = require("../../controllers/doctorsContorller");
+const docController = require("../../controllers/doctorsController");
 
 // Matches with "/api/doctors"
 router.route("/")
@@ -11,6 +11,10 @@ router.route("/:id")
 .get(docController.findById)
 .put(docController.update)
 .delete(docController.remove)
+
+// Matches with "/api/users/doctors/:id"
+router.route("/findone/:id")
+   .get(docController.findOne)
 
 // Export the router definitions
 module.exports = router
