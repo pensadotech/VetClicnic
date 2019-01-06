@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Avatar from '@material-ui/core/Avatar'
 import PetsIcon from '@material-ui/icons/Pets'
+// API bridge for express routes
+import APIpatient from '../../utils/APIpatient'
 
 const styles = {
   avatar: {
@@ -15,7 +17,7 @@ const styles = {
   },
 }
 
-class Patience extends Component {
+class Patient extends Component {
    
   render() {
 
@@ -37,8 +39,8 @@ class Patience extends Component {
   }
 }
 
-Patience.propTypes = {
+Patient.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(Patience)
+export default withStyles(styles)(Patient)
