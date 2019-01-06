@@ -39,7 +39,8 @@ class LoginView extends Component {
       <>
       <div className='loginContainer'>
          
-        <h1 className='loginTitle'>Animal Clinic System</h1>
+        <h1 className='loginTitle'>SORIN</h1>
+        <h6 className='loginSubtitle'>Surgical Operation Reference Interface Network</h6>
 
         <Grid container spacing={0}>       
             <Grid item>
