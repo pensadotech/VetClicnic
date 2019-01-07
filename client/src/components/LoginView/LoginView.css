@@ -7,8 +7,14 @@
 
 .loginTitle {
  color: blue;
- font-size: 60px;
- margin-left: 30px
+ font-size: 50px;
+ margin: 10px 0px 0px 30px;
+}
+
+.loginSubtitle {
+  color: gray;
+  font-size: 20px;
+  margin: 0px 0px 30px 30px
 }
 
 .logingImage {
@@ -19,3 +25,4 @@
 .userError {
   color: red;
 }
+
