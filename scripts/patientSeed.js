@@ -1,3 +1,6 @@
+// Manual Patients initialization
+// Type in terminal: node scripts/patientSeed.js
+
 const mongoose = require("mongoose")
 const db = require("../models")
 
