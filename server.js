@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const routes = require('./routes');
+const setupApp = require('./setup');
 
 // Start listening - use 3000 if available or next available port
 const PORT = process.env.PORT || 3001;
@@ -41,3 +42,6 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 app.listen(PORT, function () {
   console.log(`Listening at http://localhost:${PORT}`);
 });
+
+// Initialize database
+setupApp.Initialize();

@@ -1,3 +1,6 @@
+// Manual user initialization
+// Type in terminal: node scripts/usersSeed.js
+
 const mongoose = require('mongoose');
 const db = require('../models');
 const passwordHash = require('password-hash');
