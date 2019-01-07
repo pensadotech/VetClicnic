@@ -7,8 +7,8 @@ export default {
   getPatient: function (id) {
     return axios.get('/api/patients/' + id)
   },
-  findOne: function(patientname) {
-    return axios.post('/api/patients/findone'+ patientname)
+  findOne: function(patient) {
+    return axios.post('/api/patients/findone', patient)
   },
   createUpdatePatient: function (patient) {
     return axios.post('/api/patients', patient)

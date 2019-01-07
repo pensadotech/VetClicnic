@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
+import Input from '@material-ui/core/Input'
+import InputLabel from '@material-ui/core/InputLabel'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import PetsIcon from '@material-ui/icons/Pets'
@@ -39,8 +41,7 @@ class LoginView extends Component {
       <>
       <div className='loginContainer'>
          
-        <h1 className='loginTitle'>SORIN</h1>
-        <h6 className='loginSubtitle'>Surgical Operation Reference Interface Network</h6>
+        <h1 className='loginTitle'>Animal Clinic System</h1>
 
         <Grid container spacing={0}>       
             <Grid item>

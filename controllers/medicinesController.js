@@ -71,8 +71,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
     // Create or Update
-  
-      db.Meds.findOne({ pubId: { $eq: user.username } })
+    db.Meds.findOne({ pubId: { $eq: user.username } })
       .then((r) => {
         if (r === null) {
           // create 
@@ -92,7 +91,7 @@ module.exports = {
       .findOneAndUpdate({ _id: req.params.id }, user)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-  
+  },
   remove: function (req, res) {
     db.Meds
       .findById({ _id: req.params.id })

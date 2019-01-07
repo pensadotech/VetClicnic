@@ -1,5 +1,5 @@
 // dependencies
-let mongoose = require('mongoose');
+let mongoose = require("mongoose");
 // Save a reference to the Schema constructor
 let Schema = mongoose.Schema;
 
@@ -7,7 +7,7 @@ let MedsSchema = new Schema({
   name: {
     type: String,
     trim: true,
-    required: 'Name is required'
+    required: "Name is required"
   },
   alias: {
     type: [String],
@@ -55,14 +55,14 @@ let MedsSchema = new Schema({
     doseRangeCanine: [Number],
     doseFeline: Number,
     doseRangeFeline: [Number],
-    premade: [{ concentration: Number, volume: Number }]
+    premade: [{concentration: Number, volume: Number}]
   }
 
-});
+})
 
 // This creates our model from the above schema, using mongoose's model method
-var Meds = mongoose.model('Medications', MedsSchema);
+var Meds = mongoose.model("Medications", MedsSchema)
+
 
 // Export the model
 module.exports = Meds
-;

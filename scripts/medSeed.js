@@ -1,6 +1,3 @@
-// Manual Meds initialization
-// Type in terminal: node scripts/medSeed.js
-
 const mongoose = require("mongoose")
 const db = require("../models")
 
@@ -1960,6 +1957,8 @@ const medsSeed = [{
       premade: [{ concentration: 0, volume: 0 }]
     }
 }]
+
+
 
 db.Meds
   .remove({})

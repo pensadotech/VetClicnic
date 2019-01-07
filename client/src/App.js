@@ -14,7 +14,6 @@ import Admin from  './components/Admin'
 
 // API bridge for express routes
 import APIsession from './utils/APIsession'
-
 // Local style
 import './App.css'
 
@@ -31,7 +30,7 @@ class App extends Component {
     this.retrevieSessionUser()
   }
 
-  retrevieSessionUser = () => {    
+  retrevieSessionUser = () => {
      // have user loged-in
     APIsession.getSessionUser()
     .then(r => {  

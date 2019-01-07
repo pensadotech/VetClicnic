@@ -71,7 +71,7 @@ class Navbar extends Component {
         <List>
           <Link to='/' style={{ color: 'black', textDecoration: 'none' }}>
             <ListItem button key='Home'>
-               <ListItemIcon children='[]'> <HomeIcon /></ListItemIcon>
+               <ListItemIcon> <HomeIcon /></ListItemIcon>
                <ListItemText primary='Home' />
              </ListItem>
           </Link>
@@ -132,6 +132,7 @@ class Navbar extends Component {
           <div className={classes.root}>
             <AppBar position="static">
               <Toolbar>
+
                 <IconButton onClick={() => this.toggleDrawer(true)} 
                             className={classes.menuButton} 
                             color="inherit" 
@@ -139,17 +140,10 @@ class Navbar extends Component {
                             aria-label='Menu'>
                   <MenuIcon />
                 </IconButton>
-         
-                <Typography variant="h6" color="inherit" className={classes.grow}>
-                   SORIN- Surgical Operation Reference Interface Network 
-                </Typography>
 
-                <Link to='/' style={{ color: 'black', textDecoration: 'none' }}>
-                  <Button color="inherit">
-                    <HomeIcon/>
-                  </Button>
-                </Link>
-               
+                <Typography variant="h6" color="inherit" className={classes.grow}>
+                  Animal Clinic 
+                </Typography>
                 <Button color="inherit" onClick={() => this.props.handleLogingAction()}>
                    { this.renderButton() }
                 </Button>

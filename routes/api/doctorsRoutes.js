@@ -1,20 +1,16 @@
-const router = require('express').Router();
-const docController = require('../../controllers/doctorsController');
+const router = require("express").Router();
+const docController = require("../../controllers/doctorsContorller");
 
 // Matches with "/api/doctors"
-router.route('/')
+router.route("/")
   .get(docController.findAll)
-  .post(docController.create);
+  .post(docController.create)
 
-// Matches with "/api/doctors/:id"
-router.route('/:id')
-  .get(docController.findById)
-  .put(docController.update)
-  .delete(docController.remove);
-
-// Matches with "/api/users/doctors/:id"
-router.route('/findone/:id')
-  .get(docController.findOne);
+  // Matches with "/api/doctors/:id"
+router.route("/:id")
+.get(docController.findById)
+.put(docController.update)
+.delete(docController.remove)
 
 // Export the router definitions
-module.exports = router;
+module.exports = router

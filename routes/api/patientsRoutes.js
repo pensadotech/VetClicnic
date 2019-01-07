@@ -6,14 +6,14 @@ router.route("/")
   .get(patientsController.findAll)
   .post(patientsController.createUpdate)
 
+// Matches with "/api/patients/findone"
+router.route("/findone")
+  .get(patientsController.findOne)
+
 // Matches with "/api/patients/:id"
 router.route("/:id")
   .get(patientsController.findById)
   .put(patientsController.update)
   .delete(patientsController.remove)
-
-  // Matches with "/api/patients/findone/:id"
-router.route("/findone/:id")
-.get(patientsController.findOne)
-
+ 
 module.exports = router
