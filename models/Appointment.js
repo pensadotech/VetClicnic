@@ -5,39 +5,31 @@ let Schema = mongoose.Schema;
 
 let AppointSchema = new Schema({
   Date: {
-    type: Number,
+    type: Date,
+    time: {
+      type: Number, default: (new Date()).getTime()
+    },
+    default: Date.now,
     trim: true,
     required: 'Date is required'
   },
-  fname: {
+  Title: {
     type: String,
     trim: true,
-    required: 'First name is required'
+    required: 'Title is required'
   },
-  lname: {
+  Description: {
     type: String,
     trim: true,
-    required: 'Last name is required'
+    required: 'Breif description is required'
   },
-  birth_date: {
-    type: Number,
-    trim: true,
-    required: 'Date of birth is required'
+  Doctor: {
+    type: Schema.Types.ObjectId,
+    ref: 'Doctor'
   },
-  email: {
-    type: String,
-    trim: true,
-    required: 'Email address or phone is required'
-  },
-  phone: {
-    type: Number,
-    trim: true,
-    required: 'Email address or phone is required'
-  },
-  doctor: {
-    type: String,
-    trim: true,
-    required: 'Doctor assigment is required'
+  Patient: {
+    type: Schema.Types.ObjectId,
+    ref: 'Patient'
   },
   appointCreated: {
     type: Date,

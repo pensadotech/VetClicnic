@@ -96,7 +96,7 @@ class Navbar extends Component {
                 <ListItemText primary='Medicines' />
               </ListItem>
            </Link>
-           <Link to='/schedules' style={{ color: 'black', textDecoration: 'none' }}>
+           <Link to='/appointments' style={{ color: 'black', textDecoration: 'none' }}>
               <ListItem button key='Appointments'>
                 <ListItemIcon> <EventIcon /></ListItemIcon>
                 <ListItemText primary='Appointments' />

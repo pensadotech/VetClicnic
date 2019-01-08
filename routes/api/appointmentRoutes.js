@@ -9,10 +9,11 @@ router.route('/create')
 // Matches with "/api/appointment/remove"
 router.route('/:id')
   .get(appointmentController.findById)
+  .put(appointmentController.update)
   .delete(appointmentController.remove);
 
 // Matches with "/api/appointment/findOne"
-router.route('/findone/:lname')
+router.route('/findone/:id')
   .get(appointmentController.findOne);
 
 // Export the router definitions
