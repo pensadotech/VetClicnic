@@ -11,8 +11,9 @@ router.route('/:id')
   .get(appointmentController.findById)
   .put(appointmentController.update)
   .delete(appointmentController.remove);
-// Matches with
-router.route('/findone/:lname')
+
+// Matches with "/api/appointment/findOne"
+router.route('/findone/:id')
   .get(appointmentController.findOne);
 
 // Export the router definitions
