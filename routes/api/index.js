@@ -1,17 +1,9 @@
-<<<<<<< HEAD
-const router = require('express').Router()
-const authRoutes = require('./authRoutes')
-const usersRoutes = require('./usersRoutes')
-const patientsRoutes = require('./patientsRoutes')
-const doctorsRoutes = require('./doctorsRoutes')
-=======
 const router = require('express').Router();
 const authRoutes = require('./authRoutes');
 const usersRoutes = require('./usersRoutes');
 const patientsRoutes = require('./patientsRoutes');
 const doctorsRoutes = require('./doctorsRoutes');
 const appointmentRoutes = require('./appointmentRoutes');
->>>>>>> 287a60526847f5db3198a2fcc540423eac6f9071
 
 // Matches with "/api/session"
 router.use('/session', authRoutes);
