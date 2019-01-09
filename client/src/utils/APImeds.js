@@ -2,21 +2,21 @@ import axios from "axios"
 
 export default {
   getMeds: function () {
-    return axios.get('/calc')
+    return axios.get('/api/meds')
   },
   getMed: function (id) {
-    return axios.get('/calc/' + id)
+    return axios.get('/api/meds/' + id)
   },
-  findOne: function (med) {
-    return axios.post('/calc/findone', med)
+  findOne: function(username) {
+    return axios.get('/api/meds/findone/' + username)
   },
-  createUpdateMed: function (med) {
-    return axios.post('/calc', med)
+  createUpdateUser: function (user) {
+    return axios.post('/api/meds',user)
   },
-  updateMed: function (id, med) {
-    return axios.put('/calc' + id, med)
+  updateUser: function(id,user) {
+    return axios.put('/api/meds/' + id,user)
   },
-  deleteMed: function (id) {
-    return axios.delete('/calc/' + id)
+  deleteUser: function (id) {
+    return axios.delete('/api/medds/' + id)
   }
 }
