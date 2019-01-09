@@ -1,22 +1,22 @@
 import axios from "axios"
 
 export default {
-  getUsers: function () {
+  getDoctors: function () {
     return axios.get('/api/doctors')
   },
-  getUser: function (id) {
+  getDoctor: function (id) {
     return axios.get('/api/doctors/' + id)
   },
-  findOne: function(username) {
-    return axios.get('/api/doctors/findone/' + username)
+  findOne: function(name) {
+    return axios.get('/api/doctors/findone/' + name)
   },
-  createUpdateUser: function (user) {
-    return axios.post('/api/doctors',user)
+  createUpdateDoctor: function (doctor) {
+    return axios.post('/api/doctors',doctor)
   },
-  updateUser: function(id,user) {
-    return axios.put('/api/doctors/' + id,user)
+  updateDoctor: function(id,doctor) {
+    return axios.put('/api/doctors/' + id,doctor)
   },
-  deleteUser: function (id) {
+  deleteDoctor: function (id) {
     return axios.delete('/api/doctors/' + id)
   }
 }
