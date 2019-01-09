@@ -8,12 +8,13 @@ import Patient from './components/Patient'
 import Doctor from './components/Doctor'
 import Calc from './components/Calc'
 import Medicine from './components/Medicine'
-import Schedule from './components/Schedule'
+import Appointment from './components/Appointment'
 import Prescription from './components/Prescription'
 import Admin from  './components/Admin'
 
 // API bridge for express routes
 import APIsession from './utils/APIsession'
+
 // Local style
 import './App.css'
 
@@ -30,8 +31,8 @@ class App extends Component {
     this.retrevieSessionUser()
   }
 
-  retrevieSessionUser = () => {
-     // have user loged-in
+  retrevieSessionUser = () => {    
+     // have user logged-in
     APIsession.getSessionUser()
     .then(r => {  
       let sessionUser = r.data
@@ -107,7 +108,7 @@ class App extends Component {
                <Route path='/doctors' component={Doctor} />
                <Route path='/calc' component={Calc} />
                <Route path='/medicines' component={Medicine} />
-               <Route path='/schedules' component={Schedule} />
+               <Route path='/appointments' component={Appointment} />
                <Route path='/prescriptions' component={Prescription} />
                <Route path='/admin' component={Admin} />
              </div>
