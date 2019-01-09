@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 import EventIcon from '@material-ui/icons/Event';
+import AppointCard from './components/AppointCard';
 
 const styles = {
   avatar: {
@@ -29,6 +30,7 @@ class Appointment extends Component {
           <Grid item>
             <h1 className={classes.pageHead}>Appointments</h1>
           </Grid>
+          <AppointCard />
         </Grid>
       </>
     );
