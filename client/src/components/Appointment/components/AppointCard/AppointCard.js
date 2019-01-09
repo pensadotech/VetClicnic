@@ -91,7 +91,6 @@ class AppointCard extends Component {
 
 
 
-
   
   renderView = () => {
 
