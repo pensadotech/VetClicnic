@@ -86,7 +86,7 @@ class UserForm extends Component {
   }
 
   handleSave = () => {
-     
+      
     if (this.state.mode === 'edit') {
        // EDIT MODE: Validate
        if (this.state.username === '' || this.state.fullname === '' || this.state.email === ''   )  {    
@@ -119,7 +119,7 @@ class UserForm extends Component {
            }
 
            // send information back 
-           this.props.handleRightButtonSelection(newUserData)
+           this.props.handleLeftButtonSelection(newUserData)
        }
     } else {
         
@@ -140,7 +140,7 @@ class UserForm extends Component {
              userCreated: Date.now(),
              needsEcnryption: true 
           } 
-                     
+             
           // Check if user already exist 
           APIusers.findOne(this.state.username)
             .then(res => {  
@@ -149,7 +149,7 @@ class UserForm extends Component {
                 this.setState({userError: `The username "${res.data.username}" already exist, please provide a new one`})  
               } else {
                 // send information back 
-                this.props.handleRightButtonSelection(newUserData)
+                this.props.handleLeftButtonSelection(newUserData)
               }           
            })
            .catch(err => console.log(err))          
@@ -275,18 +275,24 @@ class UserForm extends Component {
           </form>
          
         </CardContent>
-        <CardActions>
-            <Button size="small" variant="contained" color={this.props.rightbuttonColor} 
-                    onClick={() => this.handleSave()} >{this.props.rightButtonLabel}</Button>
-            <Button size="small" variant="contained" color={this.props.leftbuttonColor}  
-                    onClick={() => this.props.handleLeftButtonSelection(this.props.user)}>{this.props.leftButtonLabel}</Button>
+        <CardActions>          
+            <Button size="small" variant="contained" color={this.props.leftbuttonColor} 
+               onClick={() => this.handleSave()}>{this.props.leftButtonLabel}
+            </Button>
+            <Button size="small" variant="contained" color={this.props.rightbuttonColor}  
+               onClick={() => this.props.handleRightButtonSelection(this.props.user)}>
+               {this.props.rightButtonLabel}
+            </Button>
         </CardActions>    
       </Card>
 
       </>
-    )
-  }
-}
+
+    ) // return()
+
+  } // render()
+
+} // class UserForm
 
 UserForm.propTypes = {
   classes: PropTypes.object.isRequired,
