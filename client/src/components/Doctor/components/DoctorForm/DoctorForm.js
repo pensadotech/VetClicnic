@@ -16,7 +16,7 @@ import PersonIcon from '@material-ui/icons/PermIdentity'
 import APIdoctor from '../../../../utils/APIdoctor'
 
 // Local style
-import './UserFrom.css'
+import '../../Doctor.css'
 
 const styles = theme => ({
   container: {
