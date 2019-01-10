@@ -36,7 +36,7 @@ class UserCard extends Component {
       <Card className={classes.card}>
         <CardContent>
           <Typography className={classes.title} color="textSecondary" gutterBottom>
-          System user
+           System user
           </Typography>
           <Typography variant="h5" component="h2">
             {this.props.user.username}
@@ -45,17 +45,18 @@ class UserCard extends Component {
             {this.props.user.fullname}
           </Typography>
           <Typography component="p">
-            'Phone: ' {this.props.user.phone}
+            Phone:  {this.props.user.phone}
           </Typography>
           <Typography component="p">
-            'Email: ' {this.props.user.email}
+            Email:  {this.props.user.email}
           </Typography>
         </CardContent>
         <CardActions>     
-          <Button size="small" variant="contained" color={this.props.rightbuttonColor} disabled={this.props.isDisabled}
-                  onClick={() => this.props.handleRightButtonSelection(this.props.user)} >{this.props.rightButtonLabel}</Button>
           <Button size="small" variant="contained" color={this.props.leftbuttonColor} disabled={this.props.isDisabled}  
                   onClick={() => this.props.handleLeftButtonSelection(this.props.user)}>{this.props.leftButtonLabel}</Button>
+          <Button size="small" variant="contained" color={this.props.rightbuttonColor} disabled={this.props.isDisabled}
+                  onClick={() => this.props.handleRightButtonSelection(this.props.user)} >{this.props.rightButtonLabel}</Button>
+          
         </CardActions>
       </Card>
     )

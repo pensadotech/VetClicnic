@@ -7,16 +7,17 @@ export default {
   getMed: function (id) {
     return axios.get('/api/meds/' + id)
   },
-  findOne: function(username) {
-    return axios.get('/api/meds/findone/' + username)
+  findOne: function(medname) {
+    return axios.get('/api/meds/findone/' + medname)
   },
-  createUpdateUser: function (user) {
-    return axios.post('/api/meds',user)
+  createUpdateMed: function (med) {
+    console.log('APImeds-createUpdateMed',med)
+    return axios.post('/api/meds',med)
   },
-  updateUser: function(id,user) {
-    return axios.put('/api/meds/' + id,user)
+  updateMed: function(id,med) {
+    return axios.put('/api/meds/' + id,med)
   },
-  deleteUser: function (id) {
-    return axios.delete('/api/medds/' + id)
+  deleteMed: function (id) {
+    return axios.delete('/api/meds/' + id)
   }
 }
