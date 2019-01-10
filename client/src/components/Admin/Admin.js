@@ -82,6 +82,7 @@ class Admin extends Component {
   }
   
   handleCreateUser =(tgtUser) => {
+    console.log("cancel",tgtUser)
     // create new user
     APIusers.createUpdateUser(tgtUser)
       .then(r => {       
@@ -118,6 +119,8 @@ class Admin extends Component {
   }
 
   handleCancel = (tgtUser) => {
+    // reload the data
+    this.loadUsers()  
     // Just reset selected user and change screen mode to list
     this.setState({ screenMode: 'list', targetUser: '' })
   }
@@ -132,15 +135,16 @@ class Admin extends Component {
           <h1 className={classes.pageHead}>
             Create new user
           </h1>
-          <UserForm mode={this.state.screenMode}
+          <UserForm 
+            mode={this.state.screenMode}
             user=''
-            rightbuttonColor='primary'
-            rightButtonLabel='Create'
-            leftbuttonColor='default'
-            leftButtonLabel='Cancel'
+            leftbuttonColor='primary'
+            leftButtonLabel='Create'
+            handleLeftButtonSelection={this.handleCreateUser}
+            rightbuttonColor='default'
+            rightButtonLabel='Cancel'   
+            handleRightButtonSelection={this.handleCancel}
             isUserNameDisabled={false}
-            handleRightButtonSelection={this.handleCreateUser}
-            handleLeftButtonSelection={this.handleCancel}
           />
         </>
       )
@@ -150,15 +154,16 @@ class Admin extends Component {
           <h1 className={classes.pageHead}>
             Update user information
           </h1>
-          <UserForm mode={this.state.screenMode}
+          <UserForm 
+            mode={this.state.screenMode}
             user={this.state.targetUser}
-            rightbuttonColor='primary'
-            rightButtonLabel='Save'
-            leftbuttonColor='default'
-            leftButtonLabel='Cancel'
+            leftbuttonColor='primary'
+            leftButtonLabel='Save'
+            handleLeftButtonSelection={this.handleSaveUser}
+            rightbuttonColor='default'
+            rightButtonLabel='Cancel'
+            handleRightButtonSelection={this.handleCancel}
             isUserNameDisabled={true}
-            handleRightButtonSelection={this.handleSaveUser}
-            handleLeftButtonSelection={this.handleCancel}
           />
         </>
       )
@@ -170,13 +175,14 @@ class Admin extends Component {
               Do you want to delete this user?
               </h1>
             <UserCard user={this.state.targetUser}
-              rightbuttonColor='secondary'
-              rightButtonLabel='Delete'
-              leftbuttonColor='default'
-              leftButtonLabel='Cancel'
+              leftbuttonColor='secondary'
+              leftButtonLabel='Delete'
+              handleLeftButtonSelection={this.handleDeleteUser} 
+              rightbuttonColor='default'
+              rightButtonLabel='Cancel'
               isDisabled={false}
-              handleRightButtonSelection={this.handleDeleteUser}
-              handleLeftButtonSelection={this.handleCancel} />
+              handleRightButtonSelection={this.handleCancel} 
+            />
           </div>
         </>
       )
@@ -205,14 +211,15 @@ class Admin extends Component {
             {
               this.state.users.map((user, index) => (
                 <UserCard key={index}
-                  user={user}
-                  rightbuttonColor='primary'
-                  rightButtonLabel='Update'
-                  leftbuttonColor='secondary'
-                  leftButtonLabel='Remove'
+                  user={user} 
+                  leftbuttonColor='primary'
+                  leftButtonLabel='Update' 
+                  handleLeftButtonSelection={this.handleUserUpdateSelection}   
+                  rightbuttonColor='secondary'
+                  rightButtonLabel='Remove'
                   isDisabled={user.username === 'admin' ? true : false}
-                  handleRightButtonSelection={this.handleUserUpdateSelection}
-                  handleLeftButtonSelection={this.handleUserDeleteSelection} />
+                  handleRightButtonSelection={this.handleUserDeleteSelection}
+                />
               ))
             }
           </Grid>
