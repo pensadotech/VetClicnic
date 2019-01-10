@@ -13,7 +13,7 @@ import MailIcon from '@material-ui/icons/MailOutline'
 import PhoneIcon from '@material-ui/icons/Phone'
 import PersonIcon from '@material-ui/icons/PermIdentity'
 // API
-import APIusers from '../../../../utils/APIuser'
+import APIdoctor from '../../../../utils/APIdoctor'
 
 // Local style
 import './UserFrom.css'
@@ -56,25 +56,23 @@ class DoctorForm extends Component {
     mode: '',
     user: '',
     _id : '',
-    username: '',
-    fullname: '',
-    password: '',
+    name: '',
     phone: '',
+    mobilePhone: '',
     email: '',
     userError: ''
   }
 
   componentDidMount = () => {
      
-    if(this.props.user !== '') {
+    if(this.props.doctor !== '') {
       this.setState({
         mode: this.props.mode,
-        user: this.props.user,
-         _id: this.props.user._id, 
-         username: this.props.user.username,
-         fullname: this.props.user.fullname,
-         password: '',
+        doctor: this.props.doctor,
+         _id: this.props.doctor._id, 
+         name: this.props.doctor.name,
          phone: this.props.user.phone,
+         mobilePhone: this.props.doctor.mobilePhone,
          email: this.props.user.email
         })  
     }
@@ -89,8 +87,8 @@ class DoctorForm extends Component {
      
     if (this.state.mode === 'edit') {
        // EDIT MODE: Validate
-       if (this.state.username === '' || this.state.fullname === '' || this.state.email === ''   )  {    
-          this.setState({userError: 'Please provide username, fullname, and email'}) 
+       if (this.state.name === '' || this.state.phone === '' || this.state.email === ''   )  {    
+          this.setState({userError: 'Please provide name, number, and email'}) 
        } else {
             
            let doesItNeedEncryption = false
@@ -130,9 +128,9 @@ class DoctorForm extends Component {
        } else {
           
           // translate
-          let newUserData = {
+          let newDoctorData = {
              _id: '', 
-             username: this.state.username,
+             name: this.state.name,
              fullname: this.state.fullname,
              password: this.state.password,
              phone: this.state.phone,

@@ -36,26 +36,26 @@ class DoctorCard extends Component {
       <Card className={classes.card}>
         <CardContent>
           <Typography className={classes.title} color="textSecondary" gutterBottom>
-          System user
+          Doctor
           </Typography>
           <Typography variant="h5" component="h2">
-            {this.props.user.username}
+            {this.props.doctor.name}
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
-            {this.props.user.fullname}
+            {this.props.doctor.phone}
           </Typography>
           <Typography component="p">
-            'Phone: ' {this.props.user.phone}
+            'Phone: ' {this.props.doctor.mobilePhone}
           </Typography>
           <Typography component="p">
-            'Email: ' {this.props.user.email}
+            'Email: ' {this.props.doctor.email}
           </Typography>
         </CardContent>
         <CardActions>     
           <Button size="small" variant="contained" color={this.props.rightbuttonColor} disabled={this.props.isDisabled}
-                  onClick={() => this.props.handleRightButtonSelection(this.props.user)} >{this.props.rightButtonLabel}</Button>
+                  onClick={() => this.props.handleRightButtonSelection(this.props.doctor)} >{this.props.rightButtonLabel}</Button>
           <Button size="small" variant="contained" color={this.props.leftbuttonColor} disabled={this.props.isDisabled}  
-                  onClick={() => this.props.handleLeftButtonSelection(this.props.user)}>{this.props.leftButtonLabel}</Button>
+                  onClick={() => this.props.handleLeftButtonSelection(this.props.doctor)}>{this.props.leftButtonLabel}</Button>
         </CardActions>
       </Card>
     )
@@ -66,4 +66,4 @@ UserCard.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(UserCard)
+export default withStyles(styles)(DoctorCard)

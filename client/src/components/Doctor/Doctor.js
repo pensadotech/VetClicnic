@@ -33,25 +33,29 @@ class Doctor extends Component {
   }
 
 
-
-
-
   render() {
 
     return (
       <>
         {
-          this.state.doctors.map((doctor, index) => (
-            <h3>{doctor.name}</h3>
-          ))
+          this.state.doctors.map((doctor, index) => {
+            return (
+              <div>
+                <h3><strong>{doctor.name}</strong></h3>
+                <p>{doctor.phone}</p>
+                <p>{doctor.mobilePhone}</p>
+                <p>{doctor.email}</p>
+              </div>
+              )
+          })
         }
       </>
     )
   }
 }
 
-// Doctor.propTypes = {
-//   classes: PropTypes.object.isRequired
-// }
+Doctor.propTypes = {
+  classes: PropTypes.object.isRequired
+}
 
 export default Doctor
