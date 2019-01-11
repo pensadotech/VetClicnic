@@ -46,10 +46,6 @@ let PatientSchema = new Schema({
     trim: true,
     required: 'Phone number is Required'
   },
-  chartNumber: {
-    type: ObjectId,
-    trim: true
-  },
   userCreated: {
     type: Date,
     default: Date.now
