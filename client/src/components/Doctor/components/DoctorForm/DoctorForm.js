@@ -52,10 +52,7 @@ const styles = theme => ({
 
 class DoctorForm extends Component {
   
-  state ={
-    mode: '',
-    user: '',
-    _id : '',
+  state = {
     name: '',
     phone: '',
     mobilePhone: '',
@@ -93,61 +90,50 @@ class DoctorForm extends Component {
             
            let doesItNeedEncryption = false
 
-           // new password?
-           if (this.state.password !== '') {
-              // mark that password encryption is needed before storing user
-              doesItNeedEncryption = true
-           }
            
            // translate
-           let newUserData = {
+           let newDoctorData = {
               _id: this.state._id, 
-              username: this.state.username,
-              fullname: this.state.fullname,
-              password: this.state.password,
+              name: this.state.name,
               phone: this.state.phone,
+              mobilePhone: this.state.mobilePhone,
               email: this.state.email,
               userCreated: Date.now(),
-              needsEcnryption: doesItNeedEncryption 
-           }
+            }
            
            // keep original password if not encryption needed
-           if(!doesItNeedEncryption) {
-             newUserData.password = this.props.user.password
-           }
+
 
            // send information back 
-           this.props.handleRightButtonSelection(newUserData)
+           this.props.handleRightButtonSelection(newDoctorData)
        }
     } else {
         
        // ADD MODE: Validate
-       if (this.state.username === '' || this.state.fullname === '' || 
-           this.state.email === '' || this.state.password === ''  )  {    
+       if (this.state.name === '' || this.state.phone === '' || 
+           this.state.mobilePhone === '' || this.state.email === ''  )  {    
         this.setState({userError: 'Please provide username, fullname, email, and password'}) 
        } else {
           
-          // translate
           let newDoctorData = {
              _id: '', 
              name: this.state.name,
-             fullname: this.state.fullname,
-             password: this.state.password,
              phone: this.state.phone,
+             mobilePhone: this.state.mobilePhone,
              email: this.state.email,
              userCreated: Date.now(),
-             needsEcnryption: true 
+             needsEcnryption: false
           } 
                      
           // Check if user already exist 
-          APIusers.findOne(this.state.username)
+          APIdoctor.findOne(this.state.name)
             .then(res => {  
 
               if(res.data !== null) {
-                this.setState({userError: `The username "${res.data.username}" already exist, please provide a new one`})  
+                this.setState({userError: `The Name "${res.data.name}" already exist, please provide a new one`})  
               } else {
                 // send information back 
-                this.props.handleRightButtonSelection(newUserData)
+                this.props.handleRightButtonSelection(newDoctorData)
               }           
            })
            .catch(err => console.log(err))          
@@ -163,21 +149,21 @@ class DoctorForm extends Component {
       <>
       <Card className={classes.card}>
          <CardContent>
-          <p className='userError'>{this.state.userError}</p>
+          <p className='DoctorError'>{this.state.DoctorError}</p>
           <form className={classes.container} noValidate autoComplete="off">
               <div className='formItem'>
                  <TextField
                     required
-                    id="user-name"
-                    label="Username :"
+                    id="name"
+                    label="Name :"
                     className={classes.textField}
-                    name='username'
+                    name='name'
                     type="string"
                     autoComplete="current-username"
-                    value={this.state.username}
+                    value={this.state.name}
                     onChange={this.handleInputChange}
                     margin="normal"
-                    disabled={this.props.isUserNameDisabled}
+                    disabled={this.props.isDoctorNameDisabled}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
@@ -187,27 +173,7 @@ class DoctorForm extends Component {
                     }}
                   />   
               </div>
-              <div className='formItem'> 
-                  <TextField
-                    required
-                    id="user-fullname"
-                    label="Fullname :"
-                    className={classes.textField}
-                    name='fullname'
-                    type="string"
-                    autoComplete="current-fullname"
-                    value={this.state.fullname}
-                    onChange={this.handleInputChange}
-                    margin="normal"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                           <PersonIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />                 
-              </div>
+              
               <div className='formItem'> 
                   <TextField
                     id="user-phone"
@@ -217,6 +183,26 @@ class DoctorForm extends Component {
                     type="string"
                     autoComplete="current-phone"
                     value={this.state.phone}
+                    onChange={this.handleInputChange}
+                    margin="normal"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                           <PhoneIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />                    
+              </div>
+              <div className='formItem'> 
+                  <TextField
+                    id="user-mobilePhone"
+                    label="Phone :"
+                    className={classes.textField}
+                    name='mobilePhone'
+                    type="string"
+                    autoComplete="current-phone"
+                    value={this.state.mobilePhone}
                     onChange={this.handleInputChange}
                     margin="normal"
                     InputProps={{
@@ -248,28 +234,7 @@ class DoctorForm extends Component {
                       ),
                     }}
                   />                  
-              </div>
-              <div>
-                 <TextField
-                    required
-                    id="standard-password-input"
-                    label="Password"
-                    className={classes.textField}
-                    name='password'
-                    type="password"
-                    autoComplete="current-password"
-                    value={this.password}
-                    onChange={this.handleInputChange}
-                    margin="normal"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <PetsIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-              </div>                
+              </div>              
           </form>
          
         </CardContent>
@@ -277,7 +242,7 @@ class DoctorForm extends Component {
             <Button size="small" variant="contained" color={this.props.rightbuttonColor} 
                     onClick={() => this.handleSave()} >{this.props.rightButtonLabel}</Button>
             <Button size="small" variant="contained" color={this.props.leftbuttonColor}  
-                    onClick={() => this.props.handleLeftButtonSelection(this.props.user)}>{this.props.leftButtonLabel}</Button>
+                    onClick={() => this.props.handleLeftButtonSelection(this.props.doctor)}>{this.props.leftButtonLabel}</Button>
         </CardActions>    
       </Card>
 
@@ -290,4 +255,4 @@ UserForm.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(UserForm)
+export default withStyles(styles)(DoctorForm)
