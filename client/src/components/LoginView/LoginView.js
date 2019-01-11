@@ -38,7 +38,15 @@ const styles = theme => ({
   card: {
     minWidth: 200,
     maxHeight: 620,
-    margin: '100px 40px 0px 40px',
+    [theme.breakpoints.down('sm')]: {
+      margin: '30px 40px 0px 40px',
+    },
+    [theme.breakpoints.up('md')]: {
+      margin: '90px 40px 0px 40px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      margin: '120px 40px 0px 40px',
+    },  
     opacity: '0.8',
     display: 'flex', 
     justifyContent: 'center',
