@@ -50,8 +50,8 @@ class Calc extends Component {
             </Grid>
             <Grid item> 
               <h1 className={classes.pageHead}>Dosage Calculator</h1>
-              <Input/>
               <Auto/>
+              
             </Grid>
           </Grid>
       </>
