@@ -4,7 +4,7 @@ const calcTablet = (medication, patient) => {
     let returnedDose = []
 
     //use only dosing specific to canines
-    if (patient.species === "canine") {
+    if (patient.species === "Canine") {
         //checks if the medication has a specific dosage as opposed to a range
         if (med.doseCanine != 0) {
             //checks the mg/kg of all whole tablets - 1 tablet
@@ -106,7 +106,7 @@ const calcTablet = (medication, patient) => {
     }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //use only dosing specific to fenines
-    if (patient.species === "feline") {
+    if (patient.species === "Feline") {
         //checks if the medication has a specific dosage as opposed to a range
         if (med.doseFeline != 0) {
             //checks the mg/kg of all whole tablets - 1 tablet
@@ -209,7 +209,7 @@ const calcTablet = (medication, patient) => {
     //end specific dose calcs
     //check for medications with a specific dose
     //check for canines
-    if (patient.species === "canine") {
+    if (patient.species === "Canine") {
         if (med.doseCanine != 0) {
             // variables to hold one higher dose and one lower dose
             let mgKg = med.doseCanine;
@@ -339,7 +339,7 @@ const calcTablet = (medication, patient) => {
         }
     }
     //feline specific dosages
-    if (patient.species === "feline") {
+    if (patient.species === "Feline") {
         if (med.doseFeline != 0) {
             // variables to hold one higher dose and one lower dose
             let mgKg = med.doseFeline;

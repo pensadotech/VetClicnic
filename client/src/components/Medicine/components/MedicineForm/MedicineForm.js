@@ -87,7 +87,7 @@ class MedicineForm extends Component {
     if (this.state.mode === 'edit') {
       // EDIT MODE: Validate 
       if (this.state.name === '' || this.state.description === '' )  {    
-        this.setState({userError: 'Please provide medicine name and description'}) 
+        this.setState({userError: 'Please provide medication name and description'}) 
        } else {
 
           // translate
@@ -106,7 +106,7 @@ class MedicineForm extends Component {
     } else {
        // ADD MODE: Validate
        if (this.state.name === '' || this.state.description === '' )  {    
-        this.setState({userError: 'Please provide medicine name and description'}) 
+        this.setState({userError: 'Please provide medication name and description'}) 
        } else {
           
           // translate
@@ -122,7 +122,7 @@ class MedicineForm extends Component {
             .then(res => {  
 
               if(res.data !== null) {
-                this.setState({userError: `The medicine name "${res.data.name}" already exist, please provide a new one`})  
+                this.setState({userError: `The medication "${res.data.name}" already exist, please provide a new one`})  
               } else {
                 // send information back 
                 this.props.handleLeftButtonSelection(newMed)
@@ -148,7 +148,7 @@ class MedicineForm extends Component {
                 <TextField
                       required
                       id="med-name"
-                      label="Medicine Name :"
+                      label="Medication:"
                       className={classes.textField}
                       name='name'
                       type="string"
@@ -157,13 +157,13 @@ class MedicineForm extends Component {
                       onChange={this.handleInputChange}
                       margin="normal"
                       disabled={this.props.isNameDisabled}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <ColorizeIcon />
-                          </InputAdornment>
-                        ),
-                      }}
+                      // InputProps={{
+                      //   startAdornment: (
+                      //     <InputAdornment position="start">
+                      //       <ColorizeIcon />
+                      //     </InputAdornment>
+                      //   ),
+                      // }}
                     />   
               </div>
               <div className='formItem'>

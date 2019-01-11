@@ -35,29 +35,6 @@ suggestions.map(suggestion => ({
   label: suggestion.label,
 }));
 
-function setTypesAuto(props) {
-  if (this.state.medication.injectable.available === true) {
-    let tempObj = {label: "Injectable"}
-    availableTypes.push(tempObj)
-  }
-  if (this.state.medication.tablet.available === true) {
-    let tempObj = {label: "Tablet"}
-    availableTypes.push(tempObj)
-  }
-  if (this.state.medication.capsule.available === true) {
-    let tempObj = {label: "Capsule"}
-    availableTypes.push(tempObj)
-  }
-  if (this.state.medication.suspension.available === true) {
-    let tempObj = {label: "Suspension"}
-    availableTypes.push(tempObj)
-  }
-  availableTypes.map(suggestion => ({
-    value: suggestion.label,
-    label: suggestion.label,
-  }));
-}
-
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -224,25 +201,57 @@ const components = {
 class IntegrationReactSelect extends React.Component {
   state = {
     single: null,
-    medication: {}
+    medication: {},
+    avail: [],
+    chosen: null
   };
+
+
+  handleTypeChange = name => value => {
+    this.setState({
+      [name]: value,
+    });
+  }
 
   handleChange = name => value => {
     this.setState({
       [name]: value,
     });
-    APImeds.findOne(value.label)
+      
+    this.setState({
+      chosen: ""
+    });
+    if(value !== null) {
+      APImeds.findOne(value.label)
       .then(res => {
         this.setState({medication: res.data})
-        console.log(res.data)
+        let tempArr = []
+        if (res.data.injectable.available === true) {
+          tempArr.push({label: "Injectable"})
+        }
+        if (res.data.tablet.available === true) {
+          tempArr.push({label: "Tablet"})
+        }
+        if (res.data.capsule.available === true) {
+          tempArr.push({label: "Capsule"})
+        }
+        if (res.data.suspension.available === true) {
+          tempArr.push({label: "Suspension"})
+        }
+        tempArr.map(type => ({
+          value: type.label,
+          label: type.label,
+        }))
+        this.setState({avail: tempArr})
       })
       .catch(err => console.log(err))
-      console.log(this.state.medication)
-  };
-
-  render() {
-    const { classes, theme } = this.props;
-
+    }
+      
+    };
+    
+    render() {
+      const { classes, theme } = this.props;
+      
     const selectStyles = {
       input: base => ({
         ...base,
@@ -255,9 +264,9 @@ class IntegrationReactSelect extends React.Component {
 
     return (
       <div className={classes.root}>
-      <Grid>
 
         <NoSsr>
+      <Grid>
           <Select
             classes={classes}
             styles={selectStyles}
@@ -268,17 +277,21 @@ class IntegrationReactSelect extends React.Component {
             placeholder="Select a medication"
             isClearable
             />
+        </Grid>
+        <Grid>
           <Select
+            id="types"
             classes={classes}
             styles={selectStyles}
-            options={availableTypes}
+            value={this.state.chosen}
+            options={this.state.avail}
+            onChange={this.handleTypeChange('chosen')}
             components={components}
             placeholder="Select Type"
             isClearable
             />
-
+          </Grid>
         </NoSsr>
-            </Grid>
       </div>
     );
   }

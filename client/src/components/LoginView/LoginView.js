@@ -105,12 +105,12 @@ class LoginView extends Component {
               SORIN
           </Typography>
           <Typography className={classes.loginSubtitle}>
-              Surgical Operation Reference Interface Network
+              Surgical Operation Reference and Interface Network
           </Typography>
 
           <Grid container spacing={0}>       
               <Grid item>
-                <img className="logingImage imgRnd10 imageShadow imageRotate" src="./images/puppy.jpg" alt="Vetenary" />
+                <img className="logingImage imgRnd10 imageShadow imageRotate" src="./images/sorin.jpg" alt="Vetenary" />
               </Grid>
               <Grid item>
                 <form className={classes.container} noValidate autoComplete="off">

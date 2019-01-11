@@ -38,25 +38,28 @@ class PatientCard extends Component {
 
        <CardContent>
           <Typography className={classes.title} color="textSecondary" gutterBottom>
-          Patient Profile
+          Chart # {this.props.patient.chartNumber} {this.props.patient.ownername} 
           </Typography>
           <Typography variant="h5" component="h2">
-          'Patient: ' {this.props.patient.patientname}
+          Patient: {this.props.patient.patientname}
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
           
           </Typography>
           <Typography component="p">
-            'Breed: ' {this.props.patient.breed}
+            Species: {this.props.patient.species}
           </Typography>
           <Typography component="p">
-            'Age: ' {this.props.patient.age}
+            Breed: {this.props.patient.breed}
           </Typography>
           <Typography component="p">
-            'Weight: ' {this.props.patient.weight}
+            Age: {this.props.patient.age}
           </Typography>
           <Typography component="p">
-            'Color: ' {this.props.patient.color}
+            Weight: {this.props.patient.weight}
+          </Typography>
+          <Typography component="p">
+            Color: {this.props.patient.color}
           </Typography>
         </CardContent>
         <CardActions>     

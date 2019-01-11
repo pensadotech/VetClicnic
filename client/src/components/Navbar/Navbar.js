@@ -101,9 +101,9 @@ class Navbar extends Component {
               </ListItem>
            </Link>
            <Link to='/medicines' style={{ color: 'black', textDecoration: 'none' }}>
-              <ListItem button key='Medicines'>
+              <ListItem button key='Medications'>
                 <ListItemIcon> <ColorizeIcon /></ListItemIcon>
-                <ListItemText primary='Medicines' />
+                <ListItemText primary='Medications' />
               </ListItem>
            </Link>
            <Link to='/appointments' style={{ color: 'black', textDecoration: 'none' }}>
@@ -151,7 +151,7 @@ class Navbar extends Component {
                 </IconButton>
                 
                 <Typography color="inherit" className={classes.title}>
-                Surgical Operation Reference Interface Network (SORIN)
+                SORIN Surgical Operation Reference and Interface Network
                 </Typography>
 
                 <Link to='/' style={{ color: 'black', textDecoration: 'none' }}>
