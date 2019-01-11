@@ -35,7 +35,7 @@ class AppointCard extends Component {
       <Card className={classes.card}>
         <CardContent>
           <Typography className={classes.title} color='textSecondary' gutterBottom>
-            Word of the Day
+            {this.props.appt.title}
           </Typography>
           <Typography variant='h5' component='h2'>
             be

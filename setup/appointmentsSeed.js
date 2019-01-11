@@ -7,15 +7,15 @@ module.exports = {
 
     // Mongo documents array
     const appointSeed = [{
-        Date: Date.now(),
-        Title: 'Fido Date for Vaccines',
-        Description: 'Provide vaccines to Fido',
+        date: Date.now(),
+        title: 'Fido Date for Vaccines',
+        description: 'Provide vaccines to Fido',
         appointCreated: Date.now()
       },
       {
-        Date: Date.now(),
-        Title: 'Boby Nail trim',
-        Description: 'Trime nails for Boby',
+        date: Date.now(),
+        title: 'Boby Nail trim',
+        description: 'Trime nails for Boby',
         appointCreated: Date.now()
       }
     ]

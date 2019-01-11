@@ -6,9 +6,13 @@ import Avatar from '@material-ui/core/Avatar';
 import EventIcon from '@material-ui/icons/Event';
 import AppointCard from './components/AppointCard';
 import APIappointment from '../../utils/APIappointment';
-
+import SettingsIcon from '@material-ui/icons/Settings'
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 const styles = theme => ({
+ 
+ 
   avatar: {
     margin: ' 10px 0px 0px 50px'
   },
@@ -43,14 +47,9 @@ const styles = theme => ({
 class Appointment extends Component {
   
   state = {
-    expanded: false,
-    appointments: [],
+    aptments: [],
     screenMode: 'list',
     targetAppoint: ''
-  }
-  
-  handleExpandClick = () => {
-    this.setState(state => ({ expanded: !state.expanded }));
   };
   
   componentDidMount() {
@@ -58,9 +57,9 @@ class Appointment extends Component {
   };
 
   loadAppointData = () => {
-    APIappointment.findOne()
+    APIappointment.getApointments()
     .then(res => {
-      this.setState({ appointments: res.data })
+      this.setState({ aptments: res.data })
     })
     .catch(err => console.log(err))
   };
@@ -79,7 +78,6 @@ class Appointment extends Component {
     // Change screen mode to Appointment DELETE mode, and store target-appointment
     this.setState({ screenMode: 'delete', targetAppoint: tgtApnt })
   };
-
 
   
   renderView = () => {
@@ -120,19 +118,43 @@ class Appointment extends Component {
         return(
           
         <>
-               <Grid container spacing={0}>
-                   <Grid item>
-                   <Avatar className={classes.avatar}>
-                    <EventIcon />
-                   </Avatar>
-                 </Grid>
-                 <Grid item>
-                   <h1 className={classes.pageHead}>Appointments</h1>
-                 </Grid>
-                 <AppointCard />
-               </Grid>
-        </>
+          <Grid container spacing={0}>
+            <Grid item>
+              <Avatar className={classes.avatar}>
+                <SettingsIcon />
+              </Avatar>
+            </Grid>
+            <Grid item>
+              <h1 className={classes.pageHead}>Appointments</h1>
+            </Grid>
+            <Grid item>
+              <Fab color="secondary" aria-label="Add" className={classes.fab}>
+                <AddIcon onClick={() => this.handleUserAddSelection()} />
+              </Fab>
+            </Grid>
+          </Grid>
+
+          <Grid alignContent='center'
+            style={{ margin: 'auto', minHeight: '94vh', marginLeft: '5%' }}
+            container spacing={32}>
+            {
+              this.state.aptments.map((appt, index) => (
+                <AppointCard key={index}
+                  appt={appt} 
+                  leftbuttonColor='primary'
+                  leftButtonLabel='Update' 
+                  handleLeftButtonSelection={this.handleUserUpdateSelection}   
+                  rightbuttonColor='secondary'
+                  rightButtonLabel='Remove'
+                  isDisabled={false}
+                  handleRightButtonSelection={this.handleUserDeleteSelection}
+                />
+              ))
+            }
+          </Grid>
+
           
+        </>
     )
   }
 };
@@ -143,7 +165,7 @@ class Appointment extends Component {
         {this.renderView()}
       </>
     )
-  };
+  }
 }
 
 
