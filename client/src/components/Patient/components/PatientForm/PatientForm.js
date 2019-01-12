@@ -15,6 +15,7 @@ import PetsIcon from '@material-ui/icons/Pets'
 import APIpatient from '../../../../utils/APIpatient'
 // Local style
 import './PatientForm.css'
+import { Grid } from "@material-ui/core";
 
 const styles = theme => ({
     container: {
@@ -31,7 +32,7 @@ const styles = theme => ({
     },
     card: {
         minWidth: 175,
-        maxHeight: 620,
+         
         margin: '10px 20px 0px 20px', 
     },
     bullet: {
@@ -139,6 +140,7 @@ class PatientForm extends Component {
 
         return(
             <>
+        <Grid>  
         <Card className={classes.card}> 
           <CardContent> 
             <p className='userError'>{this.state.userError}</p>
@@ -218,6 +220,7 @@ class PatientForm extends Component {
             </Button>
           </CardActions>    
         </Card>
+        </Grid>   
       </>
 
         ) //return ()

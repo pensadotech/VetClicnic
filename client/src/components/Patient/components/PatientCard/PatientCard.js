@@ -10,7 +10,6 @@ import Typography from '@material-ui/core/Typography'
 const styles = {
   card: {
     minWidth: 275,
-    maxHeight: 220,
     margin: '10px 20px 0px 20px',  
   },
   bullet: {
@@ -63,16 +62,16 @@ class PatientCard extends Component {
             Phone: {this.props.patient.phone}
           </Typography>
         </CardContent>
-        <CardActions>     
+        <CardActions> 
           <Button size="small" variant="contained" color={this.props.rightbuttonColor} disabled={this.props.isDisabled}
                   onClick={() => this.props.handleRightButtonSelection(this.props.patient)} >{this.props.rightButtonLabel}</Button>
           <Button size="small" variant="contained" color={this.props.leftbuttonColor} disabled={this.props.isDisabled}  
                   onClick={() => this.props.handleLeftButtonSelection(this.props.patient)}>{this.props.leftButtonLabel}</Button>
         </CardActions> 
       </Card>
-    )
-  } 
-}
+    )  //return
+  }   //render
+}  // class PatientCard
 
 PatientCard.propTypes = {
   classes: PropTypes.object.isRequired,

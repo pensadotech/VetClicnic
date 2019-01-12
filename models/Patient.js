@@ -45,7 +45,7 @@ let PatientSchema = new Schema({
     type: String,
     trim: true,
     required: 'Phone number is Required'
-  },
+  },-
   userCreated: {
     type: Date,
     default: Date.now
