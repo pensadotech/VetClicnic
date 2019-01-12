@@ -62,7 +62,7 @@ class DoctorCard extends Component {
   } 
 }
 
-UserCard.propTypes = {
+DoctorCard.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 

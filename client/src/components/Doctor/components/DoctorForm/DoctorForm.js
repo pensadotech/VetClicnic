@@ -251,7 +251,7 @@ class DoctorForm extends Component {
   }
 }
 
-UserForm.propTypes = {
+DoctorForm.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
