@@ -17,48 +17,6 @@ import APIdoctors from '../../utils/APIdoctor'
 // Local style
 import './Doctor.css'
 
-
-// class Doctor extends Component {
-
-//   state = {
-//     doctors: []
-//   }
-
-//   componentDidMount() {
-//     this.loadDoctors()
-//   }
-
-//   loadDoctors = () => {
-//     APIdoctors.getDoctors()
-//       .then(res => {
-//         console.log(res.data)
-//         this.setState({ doctors: res.data })
-//       })
-//       .catch(err => console.log(err))
-//   }
-
-
-//   render() {
-
-//     return (
-//       <>
-//         {
-//           this.state.doctors.map((doctor, index) => {
-//             return (
-//               <div>
-//                 <h3><strong>{doctor.name}</strong></h3>
-//                 <p>{doctor.phone}</p>
-//                 <p>{doctor.mobilePhone}</p>
-//                 <p>{doctor.email}</p>
-//               </div>
-//             )
-//           })
-//         }
-//       </>
-//     )
-//   }
-// }
-
 const styles = theme => ({
   avatar: {
     margin: ' 10px 0px 0px 50px'
@@ -87,8 +45,10 @@ class Doctor extends Component {
   loadDoctors = () => {
     APIdoctors.getDoctors()
       .then(res => {
+
         console.log(res.data)
-        this.setState({ meds: res.data })
+
+        this.setState({ doctors: res.data })
       })
       .catch(err => console.log(err))
   }
@@ -145,14 +105,12 @@ class Doctor extends Component {
       .catch(err => console.log(err)) 
   }
   
-
   handleCancel = (tgtDoctor) => {
     // reload the data
     this.loadDoctors()
     // Just reset selected user and change screen mode to list
     this.setState({ screenMode: 'list', targetDoctor: '' })
   }
-
 
   renderView = () => {
 
@@ -245,8 +203,6 @@ class Doctor extends Component {
           <Grid>
             {
               this.state.doctors.map((doctor, index) => (
-                <div>
-                  console.log(doctor, index)
                  <DoctorCard 
                    key={index}
                    doctor={doctor}
@@ -258,7 +214,6 @@ class Doctor extends Component {
                   isDisabled={false}
                   handleRightButtonSelection={this.handleMedDeleteSelection}
                  />
-                 </div>
               ))
             }
           </Grid>
