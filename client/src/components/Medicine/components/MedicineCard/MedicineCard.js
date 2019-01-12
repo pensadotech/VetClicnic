@@ -35,9 +35,6 @@ class MedicineCard extends Component {
     return (
       <Card className={classes.card}>
       <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
-          Medicine
-        </Typography>
         <Typography variant="h5" component="h2">
           {this.props.med.name}
         </Typography>

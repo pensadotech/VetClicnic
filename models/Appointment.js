@@ -4,7 +4,7 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let AppointSchema = new Schema({
-  Date: {
+  date: {
     type: Date,
     time: {
       type: Number, default: (new Date()).getTime()
@@ -13,21 +13,21 @@ let AppointSchema = new Schema({
     trim: true,
     required: 'Date is required'
   },
-  Title: {
+  title: {
     type: String,
     trim: true,
     required: 'Title is required'
   },
-  Description: {
+  description: {
     type: String,
     trim: true,
     required: 'Breif description is required'
   },
-  Doctor: {
+  doctor: {
     type: Schema.Types.ObjectId,
     ref: 'Doctor'
   },
-  Patient: {
+  patient: {
     type: Schema.Types.ObjectId,
     ref: 'Patient'
   },

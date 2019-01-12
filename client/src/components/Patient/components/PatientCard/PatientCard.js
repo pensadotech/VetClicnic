@@ -35,7 +35,7 @@ class PatientCard extends Component {
 
        <CardContent>
           <Typography className={classes.title} color="textSecondary" gutterBottom>
-          Patient Profile
+          Chart # {this.props.patient.chartNumber} {this.props.patient.ownername} 
           </Typography>
           <Typography variant="h5" component="h2">
           Patient: {this.props.patient.patientname}
@@ -44,10 +44,10 @@ class PatientCard extends Component {
           
           </Typography>
           <Typography component="p">
-            Breed: {this.props.patient.breed}
+            Species: {this.props.patient.species}
           </Typography>
           <Typography component="p">
-            Color: {this.props.patient.color}
+            Breed: {this.props.patient.breed}
           </Typography>
           <Typography component="p">
             Age: {this.props.patient.age}
@@ -56,10 +56,7 @@ class PatientCard extends Component {
             Weight: {this.props.patient.weight}
           </Typography>
           <Typography component="p">
-            Owner Name: {this.props.patient.ownername}
-          </Typography>
-          <Typography component="p">
-            Phone: {this.props.patient.phone}
+            Color: {this.props.patient.color}
           </Typography>
         </CardContent>
         <CardActions> 

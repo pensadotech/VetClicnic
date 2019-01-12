@@ -9,8 +9,19 @@ module.exports = {
   },
   findOne: function (req, res) {
     // find record base on name
-    console.log(req.params.id)
-    db.Patient.findOne({ patientname: { $eq: req.params.id } })
+    db.Patient.findOne({ patientname: { $eq: req.params.id }} )
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  findByOwner: function (req, res) {
+    // find record base on name
+    db.Patient.findOne({ ownername: { $eq: req.params.id } })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  findByChart: function (req, res) {
+    // find record base on name
+    db.Patient.findOne({ chartNumber: { $eq: req.params.id } })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

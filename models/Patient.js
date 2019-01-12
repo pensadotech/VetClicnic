@@ -21,10 +21,22 @@ let PatientSchema = new Schema({
     trim: true,
     // required: 'Breed is Required'
   },
+  species: {
+    type: String,
+    trim: true,
+    enum: ["Canine", "Feline"],
+    required: 'Species is Required, must be "Canine" or "Feline"'
+  }, 
   age: {
     type: Number,
     trim: true,
     // required: 'Age is Required'
+  },
+  chartNumber: {
+    type: Number,
+    default: 0,
+    trim: true,
+    required: 'Age is Required'
   },
   weight: {
     type: Number,
@@ -45,7 +57,7 @@ let PatientSchema = new Schema({
     type: String,
     trim: true,
     required: 'Phone number is Required'
-  },-
+  },
   userCreated: {
     type: Date,
     default: Date.now

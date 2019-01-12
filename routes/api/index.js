@@ -14,8 +14,8 @@ router.use('/users', usersRoutes);
 router.use('/patients', patientsRoutes);
 // Matches with "/api/doctors"
 router.use('/doctors', doctorsRoutes);
-// Matches with "/api/appointment"
-router.use('/appointment', appointmentRoutes);
+// Matches with "/api/schedules"
+router.use('/schedules', appointmentRoutes);
 // Matches with "/api/meds"
 router.use('/meds', medsRoutes)
 

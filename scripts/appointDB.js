@@ -6,15 +6,15 @@ var MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/vetclinic';
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 const appointSeed = [{
-  Date: Date.now(),
-  Title: '',
-  Description: '',
+  date: Date.now(),
+  title: '',
+  description: '',
   appointCreated: Date.now()
 },
 {
-  Date: Date.now(),
-  Title: '',
-  Description: '',
+  date: Date.now(),
+  title: '',
+  description: '',
   appointCreated: Date.now()
 }
 ];
