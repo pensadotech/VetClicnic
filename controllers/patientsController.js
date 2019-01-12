@@ -9,6 +9,7 @@ module.exports = {
   },
   findOne: function (req, res) {
     // find record base on name
+    console.log(req.params.id)
     db.Patient.findOne({ patientname: { $eq: req.params.id } })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
@@ -32,6 +33,8 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   createUpdate: function (req, res) {
+    console.log('success')
+    console.log(req.body)
     // body has an article
     let patient = req.body;
     // Create or Update

@@ -19,12 +19,12 @@ let PatientSchema = new Schema({
   breed: {
     type: String,
     trim: true,
-    required: 'Breed is Required'
+    // required: 'Breed is Required'
   },
   age: {
     type: Number,
     trim: true,
-    required: 'Age is Required'
+    // required: 'Age is Required'
   },
   weight: {
     type: Number,
@@ -34,12 +34,12 @@ let PatientSchema = new Schema({
   color: {
     type: String,
     trim: true,
-    required: 'Color is Required'
+    // required: 'Color is Required'
   },
   address: {
     type: String,
     trim: true,
-    required: 'Patient Address is Required'
+    // required: 'Patient Address is Required'
   },
   phone: {
     type: String,

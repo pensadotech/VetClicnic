@@ -14,6 +14,6 @@ router.route("/:id")
 
   // Matches with "/api/patients/findone/:id"
 router.route("/findone/:id")
-.get(patientsController.findOne)
+   .get(patientsController.findOne)
 
 module.exports = router

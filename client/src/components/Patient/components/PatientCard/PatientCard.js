@@ -27,43 +27,47 @@ const styles = {
 }
 
 class PatientCard extends Component { 
-  componentDidMount() {
-    console.log("this.props:", this.props)
-  }
+   
   render() {
     const { classes } = this.props
     
     return (
-      <Card >
+      <Card className={classes.card}>
 
        <CardContent>
           <Typography className={classes.title} color="textSecondary" gutterBottom>
           Patient Profile
           </Typography>
           <Typography variant="h5" component="h2">
-          'Patient: ' {this.props.patient.patientname}
+          Patient: {this.props.patient.patientname}
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
           
           </Typography>
           <Typography component="p">
-            'Breed: ' {this.props.patient.breed}
+            Breed: {this.props.patient.breed}
           </Typography>
           <Typography component="p">
-            'Age: ' {this.props.patient.age}
+            Color: {this.props.patient.color}
           </Typography>
           <Typography component="p">
-            'Weight: ' {this.props.patient.weight}
+            Age: {this.props.patient.age}
           </Typography>
           <Typography component="p">
-            'Color: ' {this.props.patient.color}
+            Weight: {this.props.patient.weight}
+          </Typography>
+          <Typography component="p">
+            Owner Name: {this.props.patient.ownername}
+          </Typography>
+          <Typography component="p">
+            Phone: {this.props.patient.phone}
           </Typography>
         </CardContent>
         <CardActions>     
           <Button size="small" variant="contained" color={this.props.rightbuttonColor} disabled={this.props.isDisabled}
-                  onClick={() => this.props.handleRightButtonSelection(this.props.user)} >{this.props.rightButtonLabel}</Button>
+                  onClick={() => this.props.handleRightButtonSelection(this.props.patient)} >{this.props.rightButtonLabel}</Button>
           <Button size="small" variant="contained" color={this.props.leftbuttonColor} disabled={this.props.isDisabled}  
-                  onClick={() => this.props.handleLeftButtonSelection(this.props.user)}>{this.props.leftButtonLabel}</Button>
+                  onClick={() => this.props.handleLeftButtonSelection(this.props.patient)}>{this.props.leftButtonLabel}</Button>
         </CardActions> 
       </Card>
     )
