@@ -29,32 +29,30 @@ const styles = {
 class AppointCard extends Component {
   render () {
     const { classes } = this.props;
-    const bull = <span className={classes.bullet}>•</span>;
 
     return (
       <Card className={classes.card}>
         <CardContent>
           <Typography className={classes.title} color='textSecondary' gutterBottom>
-            {this.props.appt.title}
+            {this.props.appt.date}
           </Typography>
           <Typography variant='h5' component='h2'>
-            be
-            {bull}
-            nev
-            {bull}o{bull}
-            lent
+            {this.props.appt.title}
           </Typography>
           <Typography className={classes.pos} color='textSecondary'>
-            adjective
+            Patient:
           </Typography>
           <Typography component='p'>
-            well meaning and kindly.
+            {this.props.appt.description}
             <br />
-            {'"a benevolent smile"'}
+
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size='small'>Learn More</Button>
+          <Button size='small' variant='contained' color={this.props.leftbuttonColor}
+            onClick={() => this.props.handleLeftButtonSelection(this.props.appt)}>{this.props.leftButtonLabel}</Button>
+          <Button size='small' variant='contained' color={this.props.rightbuttonColor}
+            onClick={() => this.props.handleRightButtonSelection(this.props.appt)} >{this.props.rightButtonLabel}</Button>
         </CardActions>
       </Card>
     );

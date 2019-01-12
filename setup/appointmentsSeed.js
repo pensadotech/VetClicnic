@@ -1,24 +1,23 @@
 // Initialize doctors
-const db = require("../models")
+const db = require('../models');
 
 module.exports = {
 
   initialize: function () {
-
     // Mongo documents array
     const appointSeed = [{
-        date: Date.now(),
-        title: 'Fido Date for Vaccines',
-        description: 'Provide vaccines to Fido',
-        appointCreated: Date.now()
-      },
-      {
-        date: Date.now(),
-        title: 'Boby Nail trim',
-        description: 'Trime nails for Boby',
-        appointCreated: Date.now()
-      }
-    ]
+      date: new Date(2018, 11, 24),
+      title: 'Fido Date for Vaccines',
+      description: 'Provide vaccines to Fido',
+      appointCreated: new Date(2018, 11, 24)
+    },
+    {
+      date: new Date(2018, 11, 24),
+      title: 'Boby Nail trim',
+      description: 'Trime nails for Boby',
+      appointCreated: new Date(2018, 11, 24)
+    }
+    ];
     // Add to database
     db.Appointment
       .remove({})
@@ -29,7 +28,6 @@ module.exports = {
       .catch(err => {
         console.error(err);
       });
-
   }
 
-}
+};

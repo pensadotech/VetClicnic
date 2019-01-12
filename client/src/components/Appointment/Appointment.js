@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
-import EventIcon from '@material-ui/icons/Event';
-import AppointCard from './components/AppointCard';
-import APIappointment from '../../utils/APIappointment';
+// import EventIcon from '@material-ui/icons/Event';
 import SettingsIcon from '@material-ui/icons/Settings'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+// Components
+import AppointCard from './components/AppointCard';
+import AppointForm from './components/AppointForm';
+import APIappointment from '../../utils/APIappointment';
 
 const styles = theme => ({
  
@@ -79,6 +81,13 @@ class Appointment extends Component {
     this.setState({ screenMode: 'delete', targetAppoint: tgtApnt })
   };
 
+  handleCancel = (tgtAppt) => {
+    // reload the data
+    this.loadAppointData() 
+    // Just reset selected appt and change screen mode to list
+    this.setState({ screenMode: 'list', targetAppoint: '' })
+  }
+
   
   renderView = () => {
 
@@ -88,11 +97,23 @@ class Appointment extends Component {
 
         return (
           <>
-            <h1 className={classes.pageHead}>
-                Set new appointment
-            </h1>
-          </>
+          <h1 className={classes.pageHead}>
+            Set new appointment
+          </h1>
+          <AppointForm 
+            mode={this.state.screenMode}
+            appoint=''
+            leftbuttonColor='primary'
+            leftButtonLabel='Create'
+            handleLeftButtonSelection={this.handleAppointAddSelection}
+            rightbuttonColor='default'
+            rightButtonLabel='Cancel'   
+            handleRightButtonSelection={this.handleCancel}
+            isUserNameDisabled={false}
+          />
+        </>
         );
+
     } else if (this.state.screenMode === 'edit') {
 
         return (
@@ -129,7 +150,7 @@ class Appointment extends Component {
             </Grid>
             <Grid item>
               <Fab color="secondary" aria-label="Add" className={classes.fab}>
-                <AddIcon onClick={() => this.handleUserAddSelection()} />
+                <AddIcon onClick={() => this.handleAppointAddSelection()} />
               </Fab>
             </Grid>
           </Grid>
@@ -143,11 +164,11 @@ class Appointment extends Component {
                   appt={appt} 
                   leftbuttonColor='primary'
                   leftButtonLabel='Update' 
-                  handleLeftButtonSelection={this.handleUserUpdateSelection}   
+                  handleLeftButtonSelection={this.handleAppointUpdateSelection}  
                   rightbuttonColor='secondary'
-                  rightButtonLabel='Remove'
+                  rightButtonLabel='Remove' 
+                  handleRightButtonSelection={this.handleAppointDeleteSelection}
                   isDisabled={false}
-                  handleRightButtonSelection={this.handleUserDeleteSelection}
                 />
               ))
             }
