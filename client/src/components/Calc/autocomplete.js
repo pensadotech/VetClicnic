@@ -10,35 +10,95 @@ import Paper from '@material-ui/core/Paper';
 import Chip from '@material-ui/core/Chip';
 import MenuItem from '@material-ui/core/MenuItem';
 import CancelIcon from '@material-ui/icons/Cancel';
+import Button from '@material-ui/core/Button';
 import { emphasize } from '@material-ui/core/styles/colorManipulator';
 import APImeds from '../../utils/APImeds'
+import APIpatients from '../../utils/APIpatient'
 import Grid from '@material-ui/core/Grid'
+import PatientCard from '../Patient/components/PatientCard'
+import APIdoctors from '../../utils/APIdoctor'
+import calcInjectable from '../../calculations/injectCalc'
+import calcTablet from '../../calculations/tabletCalc'
+import calcCapsule from '../../calculations/capsuleCalc'
+import SigCard from './sigCard'
+
 
 let suggestions = []
 let availableTypes = []
+let patientSuggestions = []
+let ownerSuggestions = []
+let chartSuggestions = []
+let doctorSuggestions = []
 
-  APImeds.getMeds()
-    .then(res => {
-     res.data.map( med => {
-       let temp = {
-         label: med.name
-       }
-      suggestions.push(temp)
-     })
-      
+APIdoctors.getDoctors()
+  .then(res => {
+    res.data.map(doctor => {
+      let temp = {
+        label: doctor.name
+      }
+      doctorSuggestions.push(temp)
     })
-    .catch(err => console.log(err))
+  })
+
+APIpatients.getPatients()
+  .then(res => {
+    res.data.map(pet => {
+      let temp = {
+        label: pet.patientname
+      }
+      patientSuggestions.push(temp)
+      let tempOwner = {
+        label: pet.ownername
+      }
+      ownerSuggestions.push(tempOwner)
+      let tempChart = {
+        label: pet.chartNumber
+      }
+      chartSuggestions.push(tempChart)
+    })
+  })
+
+APImeds.getMeds()
+  .then(res => {
+    res.data.map(med => {
+      let temp = {
+        label: med.name
+      }
+      suggestions.push(temp)
+    })
+
+  })
+  .catch(err => console.log(err))
 
 
 suggestions.map(suggestion => ({
   value: suggestion.label,
   label: suggestion.label,
 }));
+patientSuggestions.map(patient => ({
+  value: patient.label,
+  label: patient.label,
+}));
+ownerSuggestions.map(owner => ({
+  value: owner.label,
+  label: owner.label,
+}));
+chartSuggestions.map(chart => ({
+  value: chart.label,
+  label: chart.label,
+}));
+doctorSuggestions.map(doctor => ({
+  value: doctor.label,
+  label: doctor.label,
+}));
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
     height: 250,
+  },
+  button: {
+    margin: theme.spacing.unit,
   },
   input: {
     display: 'flex',
@@ -97,9 +157,9 @@ function NoOptionsMessage(props) {
 
 function showTypes(props) {
   APImeds.findOne(this.state.single)
-  .then(res => {
-    console.log(res.data.tablet.available)
-  })
+    .then(res => {
+      console.log(res.data.tablet.available)
+    })
     .catch(err => console.log(err))
 }
 
@@ -202,12 +262,81 @@ class IntegrationReactSelect extends React.Component {
   state = {
     single: null,
     medication: {},
+    patient: {},
     avail: [],
-    chosen: null
+    chosen: "",
+    pet: "",
+    owner: "",
+    chart: 0,
+    doctor: ""
+
   };
 
+  handlePatientChange = name => value => {
+    this.setState({
+      [name]: value,
+    })
+    if (value !== null) {
+      APIpatients.findOne(value.label)
+        .then(res => {
+          this.setState({
+            patient: res.data,
+            pet: { label: res.data.patientname },
+            owner: { label: res.data.ownername },
+            chart: { label: res.data.chartNumber }
+          })
+        }).catch(err => console.log(err))
+      console.log(this.state)
+    }
+  }
+
+
+
+  handleOwnerChange = name => value => {
+    this.setState({
+      [name]: value,
+    });
+    if (value !== null) {
+      APIpatients.findByOwner(value.label)
+        .then(res => {
+          console.log(res.data)
+          this.setState({
+            patient: res.data,
+            pet: { label: res.data.patientname },
+            owner: { label: res.data.ownername },
+            chart: { label: res.data.chartNumber }
+          })
+        }).catch(err => console.log(err))
+      console.log(this.state)
+    }
+  }
+
+  handleChartChange = name => value => {
+    this.setState({
+      [name]: value,
+    });
+    if (value !== null) {
+      APIpatients.findByChart(value.label)
+        .then(res => {
+          console.log(res.data)
+          this.setState({
+            patient: res.data,
+            pet: { label: res.data.patientname },
+            owner: { label: res.data.ownername },
+            chart: { label: res.data.chartNumber }
+          })
+        }).catch(err => console.log(err))
+      console.log(this.state)
+    }
+  }
 
   handleTypeChange = name => value => {
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  handleDoctorChange = name => value => {
     this.setState({
       [name]: value,
     });
@@ -217,41 +346,59 @@ class IntegrationReactSelect extends React.Component {
     this.setState({
       [name]: value,
     });
-      
+
     this.setState({
       chosen: ""
     });
-    if(value !== null) {
+    if (value !== null) {
       APImeds.findOne(value.label)
-      .then(res => {
-        this.setState({medication: res.data})
-        let tempArr = []
-        if (res.data.injectable.available === true) {
-          tempArr.push({label: "Injectable"})
-        }
-        if (res.data.tablet.available === true) {
-          tempArr.push({label: "Tablet"})
-        }
-        if (res.data.capsule.available === true) {
-          tempArr.push({label: "Capsule"})
-        }
-        if (res.data.suspension.available === true) {
-          tempArr.push({label: "Suspension"})
-        }
-        tempArr.map(type => ({
-          value: type.label,
-          label: type.label,
-        }))
-        this.setState({avail: tempArr})
-      })
-      .catch(err => console.log(err))
+        .then(res => {
+          this.setState({ medication: res.data })
+          let tempArr = []
+          if (res.data.injectable.available === true) {
+            tempArr.push({ label: "Injectable" })
+          }
+          if (res.data.tablet.available === true) {
+            tempArr.push({ label: "Tablet" })
+          }
+          if (res.data.capsule.available === true) {
+            tempArr.push({ label: "Capsule" })
+          }
+          if (res.data.suspension.available === true) {
+            tempArr.push({ label: "Suspension" })
+          }
+          tempArr.map(type => ({
+            value: type.label,
+            label: type.label,
+          }))
+          this.setState({ avail: tempArr })
+        })
+        .catch(err => console.log(err))
     }
-      
-    };
-    
-    render() {
-      const { classes, theme } = this.props;
-      
+
+  };
+
+
+chooseCalc = (chosen, medication, patient) => {
+  if (chosen === "Injectable") {
+    console.log(calcInjectable(medication, patient))
+  }
+  if (chosen === "Suspension") {
+    console.log(calcInjectable(medication, patient))
+  }
+  if (chosen === "Tablet") {
+    console.log(calcTablet(medication, patient))
+  }
+  if (chosen === "Capsule") {
+    console.log(calcCapsule(medication, patient))
+  }
+
+}
+
+
+  render() {
+    const { classes, theme } = this.props;
+
     const selectStyles = {
       input: base => ({
         ...base,
@@ -264,34 +411,99 @@ class IntegrationReactSelect extends React.Component {
 
     return (
       <div className={classes.root}>
-
         <NoSsr>
-      <Grid>
-          <Select
-            classes={classes}
-            styles={selectStyles}
-            options={suggestions}
-            components={components}
-            value={this.state.single}
-            onChange={this.handleChange('single')}
-            placeholder="Select a medication"
-            isClearable
-            />
-        </Grid>
-        <Grid>
-          <Select
-            id="types"
-            classes={classes}
-            styles={selectStyles}
-            value={this.state.chosen}
-            options={this.state.avail}
-            onChange={this.handleTypeChange('chosen')}
-            components={components}
-            placeholder="Select Type"
-            isClearable
-            />
+          <Grid container spacing={24}>
+            <Grid item xs={4} >
+              <Select
+                id="petname"
+                classes={classes}
+                styles={selectStyles}
+                options={patientSuggestions}
+                components={components}
+                value={this.state.pet}
+                onChange={this.handlePatientChange('pet')}
+                placeholder="Patient Name"
+                isClearable
+              />
+            </Grid>
+            <Grid item xs={4} >
+              <Select
+                id="ownername"
+                classes={classes}
+                styles={selectStyles}
+                options={ownerSuggestions}
+                components={components}
+                value={this.state.owner}
+                onChange={this.handleOwnerChange('owner')}
+                placeholder="Owner Name"
+                isClearable
+              />
+            </Grid>
+            <Grid item xs={4} >
+              <Select
+                id="chartnum"
+                classes={classes}
+                styles={selectStyles}
+                options={chartSuggestions}
+                components={components}
+                value={this.state.chart}
+                onChange={this.handleChartChange('chart')}
+                placeholder="Chart #"
+                isClearable
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Select
+                id="doctors"
+                classes={classes}
+                styles={selectStyles}
+                options={doctorSuggestions}
+                components={components}
+                value={this.state.doctor}
+                onChange={this.handleDoctorChange('doctor')}
+                placeholder="Select a doctor"
+                isClearable
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <Select
+                id="meds"
+                classes={classes}
+                styles={selectStyles}
+                options={suggestions}
+                components={components}
+                value={this.state.single}
+                onChange={this.handleChange('single')}
+                placeholder="Select a medication"
+                isClearable
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <Select
+                id="types"
+                classes={classes}
+                styles={selectStyles}
+                value={this.state.chosen}
+                options={this.state.avail}
+                onChange={this.handleTypeChange('chosen')}
+                components={components}
+                placeholder="Select Type"
+                isClearable
+              />
+            </Grid>
           </Grid>
         </NoSsr>
+        <Button variant="contained" color="primary" onclick={this.chooseCalc(this.state.chosen.label, this.state.medication, this.state.patient)} className={classes.button}>
+          Calculate
+      </Button>
+      <Grid container spacing={12}>
+      <Grid item xs={6}>
+        <PatientCard patient={this.state.patient} />
+      </Grid>
+      <Grid item xs={6}>
+      <SigCard/>
+      </Grid>
+      </Grid>
       </div>
     );
   }
