@@ -8,7 +8,13 @@ export default {
     return axios.get('/api/patients/' + id)
   },
   findOne: function(patientname) {
-    return axios.post('/api/patients/findone'+ patientname)
+    return axios.get('/api/patients/findone/'+ patientname)
+  },
+  findByChart: function(chartNumber) {
+    return axios.get('/api/patients/findbychart/'+ chartNumber)
+  },
+  findByOwner: function(ownername) {
+    return axios.get('/api/patients/findbyowner/'+ ownername)
   },
   createUpdatePatient: function (patient) {
     return axios.post('/api/patients', patient)

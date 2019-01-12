@@ -7,20 +7,40 @@ var MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/vetclinic';
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 const doctorsSeed = [{
-  name: 'doctor name',
-  phone: '949-123-1234',
+  name: 'Dr. Malecek',
+  phone: '949-770-1808',
   mobilePhone: '949-123-4567',
-  email: 'doctor@doctor.com',
+  email: 'nicole.malecek@vca.com',
   doctorCreated: Date.now()
 },
 {
-  name: 'Bob Joe',
-  phone: '949-876-8755',
+  name: 'Dr. Ota',
+  phone: '949-770-1808',
   mobilePhone: '714-123-4567',
-  email: 'armando@pensadotech.com',
+  email: 'jamie.ota@vca.com',
   doctorCreated: Date.now()
-}
-];
+},
+{
+  name: 'Dr. Steenis',
+  phone: '949-770-1808',
+  mobilePhone: '714-123-4567',
+  email: 'jason.steenis@vca.com',
+  doctorCreated: Date.now()
+},
+{
+  name: 'Dr. Buehler',
+  phone: '949-770-1808',
+  mobilePhone: '714-123-4567',
+  email: 'lisa.buehler@vca.com',
+  doctorCreated: Date.now()
+},
+{
+  name: 'Dr. Yoo',
+  phone: '949-770-1808',
+  mobilePhone: '714-123-4567',
+  email: 'hee.yoo@vca.com',
+  doctorCreated: Date.now()
+}];
 
 db.Doctor
   .remove({})

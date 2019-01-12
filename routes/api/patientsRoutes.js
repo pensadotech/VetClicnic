@@ -12,6 +12,12 @@ router.route("/:id")
   .put(patientsController.update)
   .delete(patientsController.remove)
 
+router.route("/findbyowner/:id")
+  .get(patientsController.findByOwner)
+
+router.route("/findbychart/:id")
+  .get(patientsController.findByChart)
+
   // Matches with "/api/patients/findone/:id"
 router.route("/findone/:id")
 .get(patientsController.findOne)
