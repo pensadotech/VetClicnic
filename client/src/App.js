@@ -61,7 +61,7 @@ class App extends Component {
       .then( r => {
         let sessionUser = r.data
         if (sessionUser === '') {
-          this.setState({userError: 'Invalid user name and passoword'})
+          this.setState({userError: 'Invalid user name orpassoword'})
         } else {
           this.setState({ sessionUser : sessionUser, userName: '', userPwd: '', userEmail: '',userError: ''})  
         }

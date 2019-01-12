@@ -11,43 +11,26 @@ import Chip from '@material-ui/core/Chip';
 import MenuItem from '@material-ui/core/MenuItem';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { emphasize } from '@material-ui/core/styles/colorManipulator';
+import APImeds from '../../utils/APImeds'
+import Grid from '@material-ui/core/Grid'
 
-const suggestions = [
-  { label: 'Afghanistan' },
-  { label: 'Aland Islands' },
-  { label: 'Albania' },
-  { label: 'Algeria' },
-  { label: 'American Samoa' },
-  { label: 'Andorra' },
-  { label: 'Angola' },
-  { label: 'Anguilla' },
-  { label: 'Antarctica' },
-  { label: 'Antigua and Barbuda' },
-  { label: 'Argentina' },
-  { label: 'Armenia' },
-  { label: 'Aruba' },
-  { label: 'Australia' },
-  { label: 'Austria' },
-  { label: 'Azerbaijan' },
-  { label: 'Bahamas' },
-  { label: 'Bahrain' },
-  { label: 'Bangladesh' },
-  { label: 'Barbados' },
-  { label: 'Belarus' },
-  { label: 'Belgium' },
-  { label: 'Belize' },
-  { label: 'Benin' },
-  { label: 'Bermuda' },
-  { label: 'Bhutan' },
-  { label: 'Bolivia, Plurinational State of' },
-  { label: 'Bonaire, Sint Eustatius and Saba' },
-  { label: 'Bosnia and Herzegovina' },
-  { label: 'Botswana' },
-  { label: 'Bouvet Island' },
-  { label: 'Brazil' },
-  { label: 'British Indian Ocean Territory' },
-  { label: 'Brunei Darussalam' },
-].map(suggestion => ({
+let suggestions = []
+let availableTypes = []
+
+  APImeds.getMeds()
+    .then(res => {
+     res.data.map( med => {
+       let temp = {
+         label: med.name
+       }
+      suggestions.push(temp)
+     })
+      
+    })
+    .catch(err => console.log(err))
+
+
+suggestions.map(suggestion => ({
   value: suggestion.label,
   label: suggestion.label,
 }));
@@ -110,6 +93,14 @@ function NoOptionsMessage(props) {
       {props.children}
     </Typography>
   );
+}
+
+function showTypes(props) {
+  APImeds.findOne(this.state.single)
+  .then(res => {
+    console.log(res.data.tablet.available)
+  })
+    .catch(err => console.log(err))
 }
 
 function inputComponent({ inputRef, ...props }) {
@@ -210,18 +201,57 @@ const components = {
 class IntegrationReactSelect extends React.Component {
   state = {
     single: null,
-    multi: null,
+    medication: {},
+    avail: [],
+    chosen: null
   };
+
+
+  handleTypeChange = name => value => {
+    this.setState({
+      [name]: value,
+    });
+  }
 
   handleChange = name => value => {
     this.setState({
       [name]: value,
     });
-  };
-
-  render() {
-    const { classes, theme } = this.props;
-
+      
+    this.setState({
+      chosen: ""
+    });
+    if(value !== null) {
+      APImeds.findOne(value.label)
+      .then(res => {
+        this.setState({medication: res.data})
+        let tempArr = []
+        if (res.data.injectable.available === true) {
+          tempArr.push({label: "Injectable"})
+        }
+        if (res.data.tablet.available === true) {
+          tempArr.push({label: "Tablet"})
+        }
+        if (res.data.capsule.available === true) {
+          tempArr.push({label: "Capsule"})
+        }
+        if (res.data.suspension.available === true) {
+          tempArr.push({label: "Suspension"})
+        }
+        tempArr.map(type => ({
+          value: type.label,
+          label: type.label,
+        }))
+        this.setState({avail: tempArr})
+      })
+      .catch(err => console.log(err))
+    }
+      
+    };
+    
+    render() {
+      const { classes, theme } = this.props;
+      
     const selectStyles = {
       input: base => ({
         ...base,
@@ -234,7 +264,9 @@ class IntegrationReactSelect extends React.Component {
 
     return (
       <div className={classes.root}>
+
         <NoSsr>
+      <Grid>
           <Select
             classes={classes}
             styles={selectStyles}
@@ -242,26 +274,23 @@ class IntegrationReactSelect extends React.Component {
             components={components}
             value={this.state.single}
             onChange={this.handleChange('single')}
-            placeholder="Search a country (start with a)"
+            placeholder="Select a medication"
             isClearable
-          />
-          <div className={classes.divider} />
+            />
+        </Grid>
+        <Grid>
           <Select
+            id="types"
             classes={classes}
             styles={selectStyles}
-            textFieldProps={{
-              label: 'Label',
-              InputLabelProps: {
-                shrink: true,
-              },
-            }}
-            options={suggestions}
+            value={this.state.chosen}
+            options={this.state.avail}
+            onChange={this.handleTypeChange('chosen')}
             components={components}
-            value={this.state.multi}
-            onChange={this.handleChange('multi')}
-            placeholder="Select multiple countries"
-            isMulti
-          />
+            placeholder="Select Type"
+            isClearable
+            />
+          </Grid>
         </NoSsr>
       </div>
     );

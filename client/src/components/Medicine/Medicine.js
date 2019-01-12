@@ -185,7 +185,7 @@ class Medicine extends Component {
               </Avatar>
             </Grid>
             <Grid item>
-              <h1 className={classes.pageHead}>Medicines</h1>
+              <h1 className={classes.pageHead}>Medications</h1>
             </Grid>
             <Grid item>
               <Fab color="secondary" aria-label="Add" className={classes.fab}>

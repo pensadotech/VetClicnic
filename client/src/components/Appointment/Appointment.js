@@ -3,12 +3,18 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
-import EventIcon from '@material-ui/icons/Event';
+// import EventIcon from '@material-ui/icons/Event';
+import SettingsIcon from '@material-ui/icons/Settings'
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+// Components
 import AppointCard from './components/AppointCard';
+import AppointForm from './components/AppointForm';
 import APIappointment from '../../utils/APIappointment';
 
-
 const styles = theme => ({
+ 
+ 
   avatar: {
     margin: ' 10px 0px 0px 50px'
   },
@@ -43,14 +49,9 @@ const styles = theme => ({
 class Appointment extends Component {
   
   state = {
-    expanded: false,
-    appointments: [],
+    aptments: [],
     screenMode: 'list',
     targetAppoint: ''
-  }
-  
-  handleExpandClick = () => {
-    this.setState(state => ({ expanded: !state.expanded }));
   };
   
   componentDidMount() {
@@ -58,9 +59,9 @@ class Appointment extends Component {
   };
 
   loadAppointData = () => {
-    APIappointment.findOne()
+    APIappointment.getApointments()
     .then(res => {
-      this.setState({ appointments: res.data })
+      this.setState({ aptments: res.data })
     })
     .catch(err => console.log(err))
   };
@@ -80,6 +81,12 @@ class Appointment extends Component {
     this.setState({ screenMode: 'delete', targetAppoint: tgtApnt })
   };
 
+  handleCancel = (tgtAppt) => {
+    // reload the data
+    this.loadAppointData() 
+    // Just reset selected appt and change screen mode to list
+    this.setState({ screenMode: 'list', targetAppoint: '' })
+  }
 
   
   renderView = () => {
@@ -90,11 +97,23 @@ class Appointment extends Component {
 
         return (
           <>
-            <h1 className={classes.pageHead}>
-                Set new appointment
-            </h1>
-          </>
+          <h1 className={classes.pageHead}>
+            Set new appointment
+          </h1>
+          <AppointForm 
+            mode={this.state.screenMode}
+            appoint=''
+            leftbuttonColor='primary'
+            leftButtonLabel='Create'
+            handleLeftButtonSelection={this.handleAppointAddSelection}
+            rightbuttonColor='default'
+            rightButtonLabel='Cancel'   
+            handleRightButtonSelection={this.handleCancel}
+            isUserNameDisabled={false}
+          />
+        </>
         );
+
     } else if (this.state.screenMode === 'edit') {
 
         return (
@@ -120,19 +139,43 @@ class Appointment extends Component {
         return(
           
         <>
-               <Grid container spacing={0}>
-                   <Grid item>
-                   <Avatar className={classes.avatar}>
-                    <EventIcon />
-                   </Avatar>
-                 </Grid>
-                 <Grid item>
-                   <h1 className={classes.pageHead}>Appointments</h1>
-                 </Grid>
-                 <AppointCard />
-               </Grid>
-        </>
+          <Grid container spacing={0}>
+            <Grid item>
+              <Avatar className={classes.avatar}>
+                <SettingsIcon />
+              </Avatar>
+            </Grid>
+            <Grid item>
+              <h1 className={classes.pageHead}>Appointments</h1>
+            </Grid>
+            <Grid item>
+              <Fab color="secondary" aria-label="Add" className={classes.fab}>
+                <AddIcon onClick={() => this.handleAppointAddSelection()} />
+              </Fab>
+            </Grid>
+          </Grid>
+
+          <Grid alignContent='center'
+            style={{ margin: 'auto', minHeight: '94vh', marginLeft: '5%' }}
+            container spacing={32}>
+            {
+              this.state.aptments.map((appt, index) => (
+                <AppointCard key={index}
+                  appt={appt} 
+                  leftbuttonColor='primary'
+                  leftButtonLabel='Update' 
+                  handleLeftButtonSelection={this.handleAppointUpdateSelection}  
+                  rightbuttonColor='secondary'
+                  rightButtonLabel='Remove' 
+                  handleRightButtonSelection={this.handleAppointDeleteSelection}
+                  isDisabled={false}
+                />
+              ))
+            }
+          </Grid>
+
           
+        </>
     )
   }
 };
@@ -143,7 +186,7 @@ class Appointment extends Component {
         {this.renderView()}
       </>
     )
-  };
+  }
 }
 
 

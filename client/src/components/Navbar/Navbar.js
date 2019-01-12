@@ -22,14 +22,24 @@ import EventIcon from '@material-ui/icons/Event'
 import AssignmentIcon from '@material-ui/icons/Assignment'
 import SettingsIcon from '@material-ui/icons/Settings'
 import GradientIcon from '@material-ui/icons/Gradient'
+import Grid from '@material-ui/core/Grid'
 
 
-const styles = {
+const styles = theme => ({
   root: {
     flexGrow: 1,
   },
-  grow: {
+  title: {
     flexGrow: 1,
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '12px',
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: '30px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      fontSize: '28px',
+    },
   },
   menuButton: {
     marginLeft: -12,
@@ -41,7 +51,7 @@ const styles = {
   fullList: {
     width: 'auto'
   }
-}
+})
 
 class Navbar extends Component {
   
@@ -71,7 +81,7 @@ class Navbar extends Component {
         <List>
           <Link to='/' style={{ color: 'black', textDecoration: 'none' }}>
             <ListItem button key='Home'>
-               <ListItemIcon children='[]'> <HomeIcon /></ListItemIcon>
+               <ListItemIcon> <HomeIcon /></ListItemIcon>
                <ListItemText primary='Home' />
              </ListItem>
           </Link>
@@ -91,9 +101,9 @@ class Navbar extends Component {
               </ListItem>
            </Link>
            <Link to='/medicines' style={{ color: 'black', textDecoration: 'none' }}>
-              <ListItem button key='Medicines'>
+              <ListItem button key='Medications'>
                 <ListItemIcon> <ColorizeIcon /></ListItemIcon>
-                <ListItemText primary='Medicines' />
+                <ListItemText primary='Medications' />
               </ListItem>
            </Link>
            <Link to='/appointments' style={{ color: 'black', textDecoration: 'none' }}>
@@ -139,9 +149,9 @@ class Navbar extends Component {
                             aria-label='Menu'>
                   <MenuIcon />
                 </IconButton>
-         
-                <Typography variant="h6" color="inherit" className={classes.grow}>
-                   SORIN- Surgical Operation Reference Interface Network 
+                
+                <Typography color="inherit" className={classes.title}>
+                SORIN Surgical Operation Reference and Interface Network
                 </Typography>
 
                 <Link to='/' style={{ color: 'black', textDecoration: 'none' }}>
