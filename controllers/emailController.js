@@ -45,12 +45,28 @@ async function sendEmailToProvider (emailData) {
     }
   })
 
- // Email Options: The main structure for teh email
+  // General body for teh email, which includes 
+  // template information.
+  let emailBody = 
+   `
+        ${emailData.text}
+
+    Thank you
+
+    Blue Animal Clinic Administration
+    customer services: (123) 123-1234
+    Email: blueanimalclinic@gmail.com
+    Clinic hours: 
+       Monday to Friday 6:00 AM to 6 PM
+       Satiurday: 9:00 AM to 4:00 PM
+    `
+
+ // Email Options: The main structure for the email
   const mailOptions = {
     from: emailKeys.gmailKeys.user,
     to: emailData.to,
     subject: emailData.subject,
-    text: emailData.text
+    text: emailBody    
   }
   
   // send the email and wait for a response
