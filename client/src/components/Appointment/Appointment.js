@@ -103,17 +103,41 @@ class Appointment extends Component {
   };
 
   handleCreateAppt = (tgtApnt) => {
-    console.log("cancel", tgtApnt)
     // create new user
     APIappointment.createAppoint(tgtApnt)
       .then(r => {
         // Restore main view
-        this.setState({ screenMode: 'list', targetUser: '' })
+        this.setState({ screenMode: 'list', targetAppoint: '' })
         // reload the data
         this.loadAppointData()
       })
       .catch(err => console.log(err))
   };
+
+  handleSaveAppt = (tgtApnt) => {
+    console.log(tgtApnt)
+    // Save updated user data    
+    APIappointment.updateAppoint(tgtApnt._id,tgtApnt)
+      .then(r => {  
+        // Restore main view
+       this.setState({screenMode: 'list', targetAppoint: ''})  
+       // reload the data
+      this.loadAppointData()
+      })
+      .catch(err => console.log(err))
+  };
+
+  handleDeleteAppt = (tgtApnt) => {
+    // delete user    
+    APIappointment.deleteAppoint(tgtApnt._id)
+      .then(r => {  
+        // Restore main view
+        this.setState({screenMode: 'list',targetAppoint: ''})  
+        // reload the data
+        this.loadAppointData()
+      })
+      .catch(err => console.log(err)) 
+  }
 
   handleCancel = (tgtAppt) => {
     // reload the data
@@ -154,20 +178,43 @@ class Appointment extends Component {
 
         return (
           <>
-            <h1 className={classes.pageHead}>
-               Update appointment information
-            </h1>
-          </>
+          <h1 className={classes.pageHead}>
+            Update Current Appointment
+          </h1>
+          <AppointForm 
+            mode={this.state.screenMode}
+            appoint={this.state.targetAppoint}
+            patients={this.state.patients}
+            doctors={this.state.doctors}
+            leftbuttonColor='primary'
+            leftButtonLabel='Update'
+            handleLeftButtonSelection={this.handleSaveAppt}
+            rightbuttonColor='default'
+            rightButtonLabel='Cancel'   
+            handleRightButtonSelection={this.handleCancel}
+            isUserNameDisabled={false}
+          />
+        </>
         )
 
     } else if (this.state.screenMode === 'delete') {
 
       return (
-
         <>
-          <h1 className={classes.pageHead}>
-            Delete appointment
-          </h1>
+          <div>
+            <h1 className={classes.pageHead}>
+              Do you want to delete this appointment?
+              </h1>
+            <AppointCard appt={this.state.targetAppoint}
+              leftbuttonColor='secondary'
+              leftButtonLabel='Delete'
+              handleLeftButtonSelection={this.handleDeleteAppt} 
+              rightbuttonColor='default'
+              rightButtonLabel='Cancel'
+              isDisabled={false}
+              handleRightButtonSelection={this.handleCancel} 
+            />
+          </div>
         </>
       )
 

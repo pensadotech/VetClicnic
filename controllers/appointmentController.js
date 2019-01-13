@@ -22,7 +22,7 @@ module.exports = {
   },
   create: function (req, res) {
     let newAppoint = req.body;
-    console.log(newAppoint)
+    console.log(newAppoint);
     // create the appointment
     db.Appointment.create(newAppoint)
       .then(dbModel => res.json(dbModel))
@@ -31,9 +31,15 @@ module.exports = {
   update: function (req, res) {
     // body has the user
     let appointment = req.body;
+    // Translate
+    let apptData = {
+      title: appointment.title,
+      description: appointment.description,
+      appointmentCreated: Date.now()
+    };
     // Update
     db.Appointment
-      .findOneAndUpdate({ _id: req.params.id }, appointment)
+      .findOneAndUpdate({ _id: req.params.id }, apptData)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

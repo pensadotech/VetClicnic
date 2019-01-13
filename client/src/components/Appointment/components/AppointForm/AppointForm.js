@@ -79,35 +79,22 @@ class AppointForm extends Component {
   };
 
   handleSave = () => {
-      
+  
     if (this.state.mode === 'edit') {
        // EDIT MODE: Validate
        if (this.state.title === '' || this.state.description === '')  {    
           this.setState({appointmentError: 'Please provide appointment title and brief description'}) 
        } else {
-            
-        //    let doesItNeedEncryption = false
-
-           // new password?
-        //    if (this.state.password !== '') {
-        //       // mark that password encryption is needed before storing user
-        //       doesItNeedEncryption = true
-        //    }
-           
+                
            // translate
            let newApptData = {
               _id: this.state._id, 
-              title: this.state.username,
-              description: this.state.fullname,
+              title: this.state.title,
+              description: this.state.description,
               appointmentCreated: Date.now()
             //   needsEcnryption: doesItNeedEncryption 
            }
-           
-           // keep original password if not encryption needed
-        //    if(!doesItNeedEncryption) {
-        //      newUserData.password = this.props.user.password
-        //    }
-
+          
            // send information back 
            this.props.handleLeftButtonSelection(newApptData)
        }
