@@ -6,7 +6,7 @@ const calcCapsule = (medication, patient) => {
     //use only dosing specific to canines
     if (patient.species === "canine") {
         //checks if the medication has a specific dosage as opposed to a range
-        if (med.doseCanine != 0) {
+        if (med.doseCanine !== 0) {
             //checks the mg/kg of all whole capsules - 1 capsule
             for (let i = 0; i < med.capsuleSizes.length; i++)
                 if (med.capsuleSizes[i] / kg >= med.doseRangeCanine[0] && med.capsuleSizes[i] / kg <= med.doseRangeCanine[1]) {
@@ -20,7 +20,7 @@ const calcCapsule = (medication, patient) => {
             //checks the mg/kg of all 2x capsules - 2 capsules
             for (let i = 0; i < med.capsuleSizes.length; i++) {
                 //ignores duplicate sizes where 2 capsules is equal to 1 whole capsule of another size
-                if (med.capsuleSizes[i] * 2 != med.capsuleSizes[i + 1]) {
+                if (med.capsuleSizes[i] * 2 !== med.capsuleSizes[i + 1]) {
                     if (med.capsuleSizes[i] / kg * 2 >= med.doseRangeCanine[0] && med.capsuleSizes[i] / kg * 2 <= med.doseRangeCanine[1]) {
                         let goodDose = {
                             capSize: med.capsuleSizes[i],
@@ -34,11 +34,11 @@ const calcCapsule = (medication, patient) => {
             //checks the mg/kg of all 3x capsules - 3 capsules
             for (let i = 0; i < med.capsuleSizes.length; i++) {
                 //ignores "apoquel" 
-                if (medication.name != "Apoquel") {
+                if (medication.name !== "Apoquel") {
                     //ignores duplicate sizes where 3 capsules is equal to 1 whole capsule of another size
-                    if (med.capsuleSizes[i] * 3 != med.capsuleSizes[i + 2]) {
+                    if (med.capsuleSizes[i] * 3 !== med.capsuleSizes[i + 2]) {
                         //ignores duplicate sizes where 3 capsules is equal to 2 whole capsules of another size
-                        if (med.capsuleSizes[i] * 3 != med.capsuleSizes[i + 1] * 2) {
+                        if (med.capsuleSizes[i] * 3 !== med.capsuleSizes[i + 1] * 2) {
                             if (med.capsuleSizes[i] / kg * 3 >= med.doseRangeCanine[0] && med.capsuleSizes[i] / kg * 3 <= med.doseRangeCanine[1]) {
                                 let goodDose = {
                                     capSize: med.capsuleSizes[i],
@@ -58,7 +58,7 @@ const calcCapsule = (medication, patient) => {
     //use only dosing specific to fenines
     if (patient.species === "feline") {
         //checks if the medication has a specific dosage as opposed to a range
-        if (med.doseFeline != 0) {
+        if (med.doseFeline !== 0) {
             //checks the mg/kg of all whole capsules - 1 capsule
             for (let i = 0; i < med.capsuleSizes.length; i++)
                 if (med.capsuleSizes[i] / kg >= med.doseRangeFeline[0] && med.capsuleSizes[i] / kg <= med.doseRangeFeline[1]) {
@@ -72,7 +72,7 @@ const calcCapsule = (medication, patient) => {
             //checks the mg/kg of all 2x capsules - 2 capsules
             for (let i = 0; i < med.capsuleSizes.length; i++) {
                 //ignores duplicate sizes where 2 capsules is equal to 1 whole capsule of another size
-                if (med.capsuleSizes[i] * 2 != med.capsuleSizes[i + 1]) {
+                if (med.capsuleSizes[i] * 2 !== med.capsuleSizes[i + 1]) {
                     if (med.capsuleSizes[i] / kg * 2 >= med.doseRangeFeline[0] && med.capsuleSizes[i] / kg * 2 <= med.doseRangeFeline[1]) {
                         let goodDose = {
                             capSize: med.capsuleSizes[i],
@@ -86,11 +86,11 @@ const calcCapsule = (medication, patient) => {
             //checks the mg/kg of all 3x capsules - 3 capsules
             for (let i = 0; i < med.capsuleSizes.length; i++) {
                 //ignores "apoquel" 
-                if (medication.name != "Apoquel") {
+                if (medication.name !== "Apoquel") {
                     //ignores duplicate sizes where 3 capsules is equal to 1 whole capsule of another size
-                    if (med.capsuleSizes[i] * 3 != med.capsuleSizes[i + 2]) {
+                    if (med.capsuleSizes[i] * 3 !== med.capsuleSizes[i + 2]) {
                         //ignores duplicate sizes where 3 capsules is equal to 2 whole capsules of another size
-                        if (med.capsuleSizes[i] * 3 != med.capsuleSizes[i + 1] * 2) {
+                        if (med.capsuleSizes[i] * 3 !== med.capsuleSizes[i + 1] * 2) {
                             if (med.capsuleSizes[i] / kg * 3 >= med.doseRangeFeline[0] && med.capsuleSizes[i] / kg * 3 <= med.doseRangeFeline[1]) {
                                 let goodDose = {
                                     capSize: med.capsuleSizes[i],
@@ -110,7 +110,7 @@ const calcCapsule = (medication, patient) => {
     //check for medications with a specific dose
     //check for canines
     if (patient.species === "canine") {
-        if (med.doseCanine != 0) {
+        if (med.doseCanine !== 0) {
             // variables to hold one higher dose and one lower dose
             let mgKg = med.doseCanine;
             let mgKgLow, mgKgHi; //mg/kg of closest dose
@@ -120,7 +120,7 @@ const calcCapsule = (medication, patient) => {
 
             for (let i = 0; i < med.capsuleSizes.length; i++) {
                 //ignores duplicate sizes where 3 capsules is equal to 1 whole capsules of another size
-                if (med.capsuleSizes[i] * 3 != med.capsuleSizes[i + 2] || med.capsuleSizes[i] * 3 != med.capsuleSizes[i + 1]) {
+                if (med.capsuleSizes[i] * 3 !== med.capsuleSizes[i + 2] || med.capsuleSizes[i] * 3 !== med.capsuleSizes[i + 1]) {
                     //checks the mg/kg of all 3x capsules - 3 capsules -- sets variables to closest hi dose
                     if ((mgKg - med.capsuleSizes[i] / kg * 3) <= 0 && (mgKg - med.capsuleSizes[i] / kg * 3) >= hi) {
                         hi = mgKg - med.capsuleSizes[i] / kg * 3;
@@ -137,9 +137,9 @@ const calcCapsule = (medication, patient) => {
                     }
                 }
                 //ignores duplicate sizes where 2 capsules is equal to 1/2 capsule of another size
-                if (med.capsuleSizes[i] * 2 != med.capsuleSizes[i + 2] / 2) {
+                if (med.capsuleSizes[i] * 2 !== med.capsuleSizes[i + 2] / 2) {
                     //ignores duplicate sizes where 2 capsules is equal to 1 whole capsule of another size
-                    if (med.capsuleSizes[i] * 2 != med.capsuleSizes[i + 1]) {
+                    if (med.capsuleSizes[i] * 2 !== med.capsuleSizes[i + 1]) {
 
                         //checks the mg/kg of all 2x capsules - 2 capsules -- sets variables to closest hi dose
                         if ((mgKg - med.capsuleSizes[i] / kg * 2) <= 0 && (mgKg - med.capsuleSizes[i] / kg * 2) >= hi) {
@@ -189,7 +189,7 @@ const calcCapsule = (medication, patient) => {
     }
     //feline specific dosages
     if (patient.species === "feline") {
-        if (med.doseFeline != 0) {
+        if (med.doseFeline !== 0) {
             // variables to hold one higher dose and one lower dose
             let mgKg = med.doseFeline;
             let mgKgLow, mgKgHi; //mg/kg of closest dose
@@ -199,7 +199,7 @@ const calcCapsule = (medication, patient) => {
 
             for (let i = 0; i < med.capsuleSizes.length; i++) {
                 //ignores duplicate sizes where 3 capsules is equal to 1 whole capsules of another size
-                if (med.capsuleSizes[i] * 3 != med.capsuleSizes[i + 2] || med.capsuleSizes[i] * 3 != med.capsuleSizes[i + 1]) {
+                if (med.capsuleSizes[i] * 3 !== med.capsuleSizes[i + 2] || med.capsuleSizes[i] * 3 !== med.capsuleSizes[i + 1]) {
                     //checks the mg/kg of all 3x capsules - 3 capsules -- sets variables to closest hi dose
                     if ((mgKg - med.capsuleSizes[i] / kg * 3) <= 0 && (mgKg - med.capsuleSizes[i] / kg * 3) >= hi) {
                         hi = mgKg - med.capsuleSizes[i] / kg * 3;
@@ -216,11 +216,11 @@ const calcCapsule = (medication, patient) => {
                     }
                 }
                 //ignores duplicate sizes where 2 capsules is equal to 1/2 capsule of another size
-                if (med.capsuleSizes[i] * 2 != med.capsuleSizes[i + 2] / 2) {
+                if (med.capsuleSizes[i] * 2 !== med.capsuleSizes[i + 2] / 2) {
                     //ignores duplicate sizes where 2 capsules is equal to 1 whole capsule of another size
-                    if (med.capsuleSizes[i] * 2 != med.capsuleSizes[i + 1]) {
+                    if (med.capsuleSizes[i] * 2 !== med.capsuleSizes[i + 1]) {
                         //ignores duplicate sizes where 2 capsules is equal to 1 and 1/2 capsules of another size
-                        if (med.capsuleSizes[i] * 2 != med.capsuleSizes[i + 1] * 1.5) {
+                        if (med.capsuleSizes[i] * 2 !== med.capsuleSizes[i + 1] * 1.5) {
                             //checks the mg/kg of all 2x capsules - 2 capsules -- sets variables to closest hi dose
                             if ((mgKg - med.capsuleSizes[i] / kg * 2) <= 0 && (mgKg - med.capsuleSizes[i] / kg * 2) >= hi) {
                                 hi = mgKg - med.capsuleSizes[i] / kg * 2;
@@ -239,7 +239,7 @@ const calcCapsule = (medication, patient) => {
                     }
                 }
                 //ignores duplicate sizes where 1/4 capsule is equal to 1 whole capsule of another size
-                if (med.capsuleSizes[i] / 4 != med.capsuleSizes[i - 2]) {
+                if (med.capsuleSizes[i] / 4 !== med.capsuleSizes[i - 2]) {
                     //checks the mg/kg of all 1/4 capsule - sets variables to closest hi dose
                     if ((mgKg - med.capsuleSizes[i] / kg / 4) <= 0 && (mgKg - med.capsuleSizes[i] / kg / 4) >= hi) {
                         hi = mgKg - med.capsuleSizes[i] / kg / 4;
@@ -256,7 +256,7 @@ const calcCapsule = (medication, patient) => {
                     }
                 }
                 //ignores duplicate sizes where 1.5 capsule is equal to 1 whole capsule of another size
-                if (med.capsuleSizes[i] * 1.5 != med.capsuleSizes[i + 1]) {
+                if (med.capsuleSizes[i] * 1.5 !== med.capsuleSizes[i + 1]) {
                     if ((mgKg - med.capsuleSizes[i] / kg * 1.5) <= 0 && (mgKg - med.capsuleSizes[i] / kg * 1.5) >= hi) {
                         hi = mgKg - med.capsuleSizes[i] / kg * 1.5;
                         mgKgHi = med.capsuleSizes[i] / kg * 1.5;
@@ -272,7 +272,7 @@ const calcCapsule = (medication, patient) => {
                     }
                 }
                 //ignores duplicate sizes where 1/2 capsule is equal to 1 whole capsule of another size
-                if (med.capsuleSizes[i] / 2 != med.capsuleSizes[i - 1]) {
+                if (med.capsuleSizes[i] / 2 !== med.capsuleSizes[i - 1]) {
                     //checks the mg/kg of all 1/2 capsules - sets variables to closest hi dose
                     if ((mgKg - med.capsuleSizes[i] / kg / 2) <= 0 && (mgKg - med.capsuleSizes[i] / kg / 2) >= hi) {
                         hi = mgKg - med.capsuleSizes[i] / kg / 2;

@@ -11,7 +11,7 @@ const styles = {
   card: {
     minWidth: 275,
     maxHeight: 220,
-    margin: '10px 20px 0px 20px',  
+    margin: '10px 20px 0px 20px',
   },
   bullet: {
     display: 'inline-block',
@@ -26,17 +26,17 @@ const styles = {
   },
 }
 
-class DoctorCard extends Component { 
-  
+class DoctorCard extends Component {
+
   render() {
-  
+
     const { classes } = this.props
-  
+
     return (
       <Card className={classes.card}>
         <CardContent>
           <Typography className={classes.title} color="textSecondary" gutterBottom>
-          Doctor
+            Doctor
           </Typography>
           <Typography variant="h5" component="h2">
             {this.props.doctor.name}
@@ -51,15 +51,15 @@ class DoctorCard extends Component {
             'Email: ' {this.props.doctor.email}
           </Typography>
         </CardContent>
-        <CardActions>     
+        <CardActions>
+          <Button size="small" variant="contained" color={this.props.leftbuttonColor} disabled={this.props.isDisabled}
+            onClick={() => this.props.handleLeftButtonSelection(this.props.doctor)}>{this.props.leftButtonLabel}</Button>
           <Button size="small" variant="contained" color={this.props.rightbuttonColor} disabled={this.props.isDisabled}
-                  onClick={() => this.props.handleRightButtonSelection(this.props.doctor)} >{this.props.rightButtonLabel}</Button>
-          <Button size="small" variant="contained" color={this.props.leftbuttonColor} disabled={this.props.isDisabled}  
-                  onClick={() => this.props.handleLeftButtonSelection(this.props.doctor)}>{this.props.leftButtonLabel}</Button>
+            onClick={() => this.props.handleRightButtonSelection(this.props.doctor)} >{this.props.rightButtonLabel}</Button>
         </CardActions>
       </Card>
     )
-  } 
+  }
 }
 
 DoctorCard.propTypes = {

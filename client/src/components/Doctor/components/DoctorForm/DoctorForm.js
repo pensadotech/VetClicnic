@@ -16,7 +16,7 @@ import PersonIcon from '@material-ui/icons/PermIdentity'
 import APIdoctor from '../../../../utils/APIdoctor'
 
 // Local style
-import '../../Doctor.css'
+import './DoctorForm.css'
 
 const styles = theme => ({
   container: {
@@ -34,7 +34,7 @@ const styles = theme => ({
   card: {
     minWidth: 175,
     maxHeight: 620,
-    margin: '10px 20px 0px 20px',  
+    margin: '10px 20px 0px 20px',
   },
   bullet: {
     display: 'inline-block',
@@ -51,8 +51,10 @@ const styles = theme => ({
 
 
 class DoctorForm extends Component {
-  
+
   state = {
+    mode: '',
+    doctor: '',
     name: '',
     phone: '',
     mobilePhone: '',
@@ -61,190 +63,174 @@ class DoctorForm extends Component {
   }
 
   componentDidMount = () => {
-     
-    if(this.props.doctor !== '') {
+
+    if (this.props.doctor !== '') {
       this.setState({
         mode: this.props.mode,
         doctor: this.props.doctor,
-         _id: this.props.doctor._id, 
-         name: this.props.doctor.name,
-         phone: this.props.user.phone,
-         mobilePhone: this.props.doctor.mobilePhone,
-         email: this.props.user.email
-        })  
+        _id: this.props.doctor._id,
+        name: this.props.doctor.name,
+        phone: this.props.doctor.phone,
+        mobilePhone: this.props.doctor.mobilePhone,
+        email: this.props.doctor.email
+      })
     }
   }
 
   handleInputChange = event => {
     const { name, value } = event.target;
-    this.setState({ [name]: value })  
+    this.setState({ [name]: value })
   }
 
   handleSave = () => {
-     
+
     if (this.state.mode === 'edit') {
-       // EDIT MODE: Validate
-       if (this.state.name === '' || this.state.phone === '' || this.state.email === ''   )  {    
-          this.setState({userError: 'Please provide name, number, and email'}) 
-       } else {
-            
-           let doesItNeedEncryption = false
+      // EDIT MODE: Validate
+      if (this.state.name === '' || this.state.phone === '' || this.state.email === '') {
+        this.setState({ userError: 'Please provide name, number, and email' })
+      } else {
 
-           
-           // translate
-           let newDoctorData = {
-              _id: this.state._id, 
-              name: this.state.name,
-              phone: this.state.phone,
-              mobilePhone: this.state.mobilePhone,
-              email: this.state.email,
-              userCreated: Date.now(),
-            }
-           
-           // keep original password if not encryption needed
+        // translate
+        let newDoctorData = {
+          _id: this.state._id,
+          name: this.state.name,
+          phone: this.state.phone,
+          mobilePhone: this.state.mobilePhone,
+          email: this.state.email,
+          userCreated: Date.now(),
+        }
 
-
-           // send information back 
-           this.props.handleRightButtonSelection(newDoctorData)
-       }
+        // send information back 
+        this.props.handleLeftButtonSelection(newDoctorData)
+      }
     } else {
-        
-       // ADD MODE: Validate
-       if (this.state.name === '' || this.state.phone === '' || 
-           this.state.mobilePhone === '' || this.state.email === ''  )  {    
-        this.setState({userError: 'Please provide username, fullname, email, and password'}) 
-       } else {
-          
-          let newDoctorData = {
-             _id: '', 
-             name: this.state.name,
-             phone: this.state.phone,
-             mobilePhone: this.state.mobilePhone,
-             email: this.state.email,
-             userCreated: Date.now(),
-             needsEcnryption: false
-          } 
-                     
-          // Check if user already exist 
-          APIdoctor.findOne(this.state.name)
-            .then(res => {  
 
-              if(res.data !== null) {
-                this.setState({userError: `The Name "${res.data.name}" already exist, please provide a new one`})  
-              } else {
-                // send information back 
-                this.props.handleRightButtonSelection(newDoctorData)
-              }           
-           })
-           .catch(err => console.log(err))          
-       }
-    } 
+      // ADD MODE: Validate
+      if (this.state.name === '' || this.state.phone === '' || this.state.email === '') {
+        this.setState({ userError: 'Please provide name, number, and email' })
+      } else {
+        // Translation
+        let newDoctorData = {
+          name: this.state.name,
+          phone: this.state.phone,
+          mobilePhone: this.state.mobilePhone,
+          email: this.state.email,
+          userCreated: Date.now(),
+        }
+        // Send New Doctor Data
+        this.props.handleLeftButtonSelection(newDoctorData)
+      }
+    }
   }
 
   render() {
 
     const { classes } = this.props
 
-    return ( 
+    return (
       <>
-      <Card className={classes.card}>
-         <CardContent>
-          <p className='DoctorError'>{this.state.DoctorError}</p>
-          <form className={classes.container} noValidate autoComplete="off">
+        <Card className={classes.card}>
+          <CardContent>
+            <p className='DoctorError'>{this.state.DoctorError}</p>
+            <form className={classes.container} noValidate autoComplete="off">
               <div className='formItem'>
-                 <TextField
-                    required
-                    id="name"
-                    label="Name :"
-                    className={classes.textField}
-                    name='name'
-                    type="string"
-                    autoComplete="current-username"
-                    value={this.state.name}
-                    onChange={this.handleInputChange}
-                    margin="normal"
-                    disabled={this.props.isDoctorNameDisabled}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                           <AccountCircle />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />   
+                <TextField
+                  required
+                  id="name"
+                  label="Name :"
+                  className={classes.textField}
+                  name='name'
+                  type="string"
+                  autoComplete="current-username"
+                  value={this.state.name}
+                  onChange={this.handleInputChange}
+                  margin="normal"
+                  disabled={this.props.isNameDisabled}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <AccountCircle />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
               </div>
-              
-              <div className='formItem'> 
-                  <TextField
-                    id="user-phone"
-                    label="Phone :"
-                    className={classes.textField}
-                    name='phone'
-                    type="string"
-                    autoComplete="current-phone"
-                    value={this.state.phone}
-                    onChange={this.handleInputChange}
-                    margin="normal"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                           <PhoneIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />                    
+
+              <div className='formItem'>
+                <TextField
+                  id="user-phone"
+                  label="Phone :"
+                  className={classes.textField}
+                  name='phone'
+                  type="string"
+                  autoComplete="current-phone"
+                  value={this.state.phone}
+                  onChange={this.handleInputChange}
+                  margin="normal"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <PhoneIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
               </div>
-              <div className='formItem'> 
-                  <TextField
-                    id="user-mobilePhone"
-                    label="Phone :"
-                    className={classes.textField}
-                    name='mobilePhone'
-                    type="string"
-                    autoComplete="current-phone"
-                    value={this.state.mobilePhone}
-                    onChange={this.handleInputChange}
-                    margin="normal"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                           <PhoneIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />                    
+              <div className='formItem'>
+                <TextField
+                  id="user-mobilePhone"
+                  label="Phone :"
+                  className={classes.textField}
+                  name='mobilePhone'
+                  type="string"
+                  autoComplete="current-phone"
+                  value={this.state.mobilePhone}
+                  onChange={this.handleInputChange}
+                  margin="normal"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <PhoneIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
               </div>
-              <div className='formItem'> 
-                  <TextField
-                    required
-                    id="user-email"
-                    label="Email: "
-                    className={classes.textField}
-                    name='email'
-                    type="email"
-                    autoComplete="current-email"
-                    value={this.state.email}
-                    onChange={this.handleInputChange}
-                    margin="normal"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <MailIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />                  
-              </div>              
-          </form>
-         
-        </CardContent>
-        <CardActions>
-            <Button size="small" variant="contained" color={this.props.rightbuttonColor} 
-                    onClick={() => this.handleSave()} >{this.props.rightButtonLabel}</Button>
-            <Button size="small" variant="contained" color={this.props.leftbuttonColor}  
-                    onClick={() => this.props.handleLeftButtonSelection(this.props.doctor)}>{this.props.leftButtonLabel}</Button>
-        </CardActions>    
-      </Card>
+              <div className='formItem'>
+                <TextField
+                  required
+                  id="doctor-email"
+                  label="Email: "
+                  className={classes.textField}
+                  name='email'
+                  type="email"
+                  autoComplete="current-email"
+                  value={this.state.email}
+                  onChange={this.handleInputChange}
+                  margin="normal"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <MailIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </div>
+            </form>
+
+          </CardContent>
+          <CardActions>
+            <Button size="small" variant="contained" color={this.props.leftbuttonColor}
+              onClick={() => this.handleSave()}>
+              {this.props.leftButtonLabel}
+              </Button>
+            <Button size="small" variant="contained" color={this.props.rightbuttonColor}
+              onClick={() => this.props.handleRightButtonSelection(this.state.doctor)} >
+              {this.props.rightButtonLabel}
+              </Button>
+          </CardActions>
+        </Card>
 
       </>
     )

@@ -9,6 +9,8 @@ import Auto from "./autocomplete"
 import APImeds from '../../utils/APImeds'
 import APIpatient from '../../utils/APIpatient'
 import PatientCard from '../Patient/components/PatientCard'
+
+
 const styles = {
   avatar: {
     margin: ' 10px 0px 0px 50px'
@@ -35,7 +37,6 @@ class Calc extends Component {
     APImeds.getMeds()
       .then(res => {
         this.setState({ meds: res.data })
-        console.log(this.state)
       })
       .catch(err => console.log(err))
   }
@@ -61,17 +62,9 @@ class Calc extends Component {
             </Grid>
             <Grid item> 
               <h1 className={classes.pageHead}>Dosage Calculator</h1>
-            {this.state.patients.map((p, i) => {
-              return (
-                <PatientCard key={i}
-                  patient={p}
-                />
-              )
-            })}
-              <Auto/>
-              
             </Grid>
           </Grid>
+        <Auto/>
       </>
     )
   }
