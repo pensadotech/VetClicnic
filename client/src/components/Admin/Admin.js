@@ -11,6 +11,7 @@ import UserCard from './components/UserCard'
 import UserForm from './components/UserForm'
 // API
 import APIusers from '../../utils/APIuser'
+import APIemails from '../../utils/APIemails'
 // Local style
 import './Admin.css'
 
@@ -85,13 +86,26 @@ class Admin extends Component {
     console.log("cancel",tgtUser)
     // create new user
     APIusers.createUpdateUser(tgtUser)
-      .then(r => {       
+      .then(r => {  
+        // reload the data
+        this.loadUsers()     
         // Restore main view
         this.setState({screenMode: 'list',targetUser: ''}) 
-        // reload the data
-        this.loadUsers()
+
+        // send email indicating user was added to teh system
+        let email = {
+          to : 'apensado@hotmail.com;armando@pensadotech.com',
+          subject: 'Prescription/Appointment',
+          text: `Clinic appointment - new user was creatred: ${tgtUser.username}`
+        }
+
+        APIemails.sendEmail(email)
+          .then(r => {
+             console.log('Email sent: ' + r.response)
+          })
+          .catch(err => console.error(err))
       })
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
   }
 
   handleSaveUser = (tgtUser) => {
