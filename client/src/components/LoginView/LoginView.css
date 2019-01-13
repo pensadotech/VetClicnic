@@ -1,13 +1,13 @@
 .logingImage {
-  width: 200px;
-  margin: 0px 20px 20px 25px;
+  width: 150px;
+  margin: 0px 25px 20px 25px;
 }
 
-/* mefia queries .............................. */
+/* media queries .............................. */
 @media screen and (max-width: 576px) {
   .logingImage {
     width: 100px;
-    margin: 0px 10px 10px 15px;
+    margin: 0px 10px 10px 50px;
   }
 }
 
