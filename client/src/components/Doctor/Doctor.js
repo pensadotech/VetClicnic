@@ -68,16 +68,16 @@ class Doctor extends Component {
     this.setState({ screenMode: 'delete', targetDoctor: tgtDoctor })
   }
   handleCreateDoctor =(tgtDoctor) => {
-    console.log(tgtDoctor)
   //create new user
-  //   APIdoctors.createUpdateDoctor(tgtDoctor)
-  //     .then(r => {       
-  //       // Restore main view
-  //       this.setState({screenMode: 'list',targetDoctor: ''}) 
-  //       // reload the data
-  //       this.loadDoctors()
-  //     })
-  //     .catch(err => console.log(err))
+    APIdoctors.createUpdateDoctor(tgtDoctor)
+      .then(r => {       
+        // Restore main view
+        this.setState({screenMode: 'list',targetDoctor: ''}) 
+        // reload the data
+        this.loadDoctors()
+      })
+      // Shows errors in the inspector
+      .catch(err => console.log(err))
   }
 
   handleSaveDoctor = (tgtDoctor) => {

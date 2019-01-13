@@ -10,8 +10,8 @@ export default {
   findOne: function(name) {
     return axios.get('/api/doctors/findone/' + name)
   },
-  createUpdateDoctor: function (doctor) {
-    return axios.post('/api/doctors',doctor)
+  createUpdateDoctor: function (tgtDoctor) {
+    return axios.post('/api/doctors/',tgtDoctor)
   },
   updateDoctor: function(id,doctor) {
     return axios.put('/api/doctors/' + id,doctor)
