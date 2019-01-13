@@ -4,8 +4,8 @@ export default {
   getApointments: function () {
     return axios.get('/api/schedules')
   },
-  createAppoint: function () {
-    return axios.post('/api/schedules');
+  createAppoint: function (appointment) {
+    return axios.post('/api/schedules', appointment);
   },
   updateAppoint: function () {
     return axios.put('/api/schedules');

@@ -117,10 +117,9 @@ class AppointForm extends Component {
        if (this.state.title === '' || this.state.description === '')  {    
         this.setState({appointmentError: 'Please provide title and brief description'}) 
        } else {
-          
+          console.log('addbutton')
           // translate
-          let newApptData = {
-             _id: this.state._id, 
+          let newApptData = { 
              title: this.state.title,
              description: this.state.description,
              appointmentCreated: Date.now(),
@@ -128,10 +127,10 @@ class AppointForm extends Component {
           } 
              
           // Check if user already exist 
-          APIappointment.findOne(this.state.title)
+         APIappointment.getApointments(this.state.title)
             .then(res => {  
 
-              if(res.data !== null) {
+              if(res.data === null) {
                 this.setState({appointmentError: `The title "${res.data.title}" already exist, please provide a new one`})  
               } else {
                 // send information back 

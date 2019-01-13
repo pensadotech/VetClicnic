@@ -5,17 +5,26 @@ const db = require('../models');
 var MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/vetclinic';
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
+// Find an exiting doctor 
+doctor ={}
+// find an existing patient
+patience ={}
+
 const appointSeed = [{
   date: Date.now(),
   title: '',
   description: '',
-  appointCreated: Date.now()
+  appointCreated: Date.now(),
+  doctor: doctor,
+  patient: patience
 },
 {
   date: Date.now(),
   title: '',
   description: '',
-  appointCreated: Date.now()
+  appointCreated: Date.now(),
+  doctor: doctor,
+  patient: patience
 }
 ];
 

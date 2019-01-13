@@ -11,6 +11,9 @@ import AddIcon from '@material-ui/icons/Add';
 import AppointCard from './components/AppointCard';
 import AppointForm from './components/AppointForm';
 import APIappointment from '../../utils/APIappointment';
+import APIdoctor from '../../utils/APIdoctor';
+import APIpatient from '../../utils/APIpatient';
+
 
 const styles = theme => ({
  
@@ -50,12 +53,30 @@ class Appointment extends Component {
   
   state = {
     aptments: [],
+    patients: [],
+    doctors: [],
     screenMode: 'list',
     targetAppoint: ''
   };
   
   componentDidMount() {
     this.loadAppointData()
+  };
+
+  loadDoctorData = () => {
+    APIdoctor.getDoctors()
+      .then(res => {
+        this.setState({ doctors: res.data })
+      })
+      .catch(err => console.log(err))
+  };
+
+  loadPatientData = () => {
+    APIpatient.getPatients()
+      .then(res => {
+        this.setState({ patients: res.data })
+      })
+      .catch(err => console.log(err))
   };
 
   loadAppointData = () => {
@@ -81,12 +102,25 @@ class Appointment extends Component {
     this.setState({ screenMode: 'delete', targetAppoint: tgtApnt })
   };
 
+  handleCreateAppt = (tgtApnt) => {
+    console.log("cancel", tgtApnt)
+    // create new user
+    APIappointment.createAppoint(tgtApnt)
+      .then(r => {
+        // Restore main view
+        this.setState({ screenMode: 'list', targetUser: '' })
+        // reload the data
+        this.loadAppointData()
+      })
+      .catch(err => console.log(err))
+  };
+
   handleCancel = (tgtAppt) => {
     // reload the data
     this.loadAppointData() 
     // Just reset selected appt and change screen mode to list
     this.setState({ screenMode: 'list', targetAppoint: '' })
-  }
+  };
 
   
   renderView = () => {
@@ -103,9 +137,11 @@ class Appointment extends Component {
           <AppointForm 
             mode={this.state.screenMode}
             appoint=''
+            patients={this.state.patients}
+            doctors={this.state.doctors}
             leftbuttonColor='primary'
             leftButtonLabel='Create'
-            handleLeftButtonSelection={this.handleAppointAddSelection}
+            handleLeftButtonSelection={this.handleCreateAppt}
             rightbuttonColor='default'
             rightButtonLabel='Cancel'   
             handleRightButtonSelection={this.handleCancel}
