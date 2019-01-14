@@ -66,14 +66,14 @@ APImeds.getMeds()
       }
       suggestions.push(temp)
       for (let i = 0; i < med.alias.length; i++) {
-        if (med.alias[i] !== ""){
+        if (med.alias[i] !== "") {
 
           let tempAlias = {
             label: med.alias[i]
           }
           suggestions.push(tempAlias)
         }
-        }
+      }
     })
 
   })
@@ -143,7 +143,7 @@ const styles = theme => ({
   paper: {
     position: 'absolute',
     zIndex: 1,
-    margin: theme.spacing.unit*2,
+    margin: theme.spacing.unit * 2,
     left: 0,
     right: 0,
   },
@@ -365,9 +365,10 @@ class IntegrationReactSelect extends React.Component {
     });
 
     if (value !== null) {
-      
+
       APImeds.findOne(value.label)
         .then(res => {
+          console.log(res.data)
           this.setState({ medication: res.data })
           let tempArr = []
           if (res.data.injectable.available === true) {
@@ -395,32 +396,31 @@ class IntegrationReactSelect extends React.Component {
   };
 
 
-chooseCalc = (chosen, medication, patient) => {
-  if (chosen === "Injectable") {
-   let injectDose = calcInjectable(medication, patient)
-      this.setState({ injectableDose: injectDose})
+  chooseCalc = (chosen, medication, patient) => {
+    if (chosen === "Injectable") {
+      let injectDose = calcInjectable(medication, patient)
+      this.setState({ injectableDose: injectDose })
     }
     if (chosen === "Suspension") {
       let suspDose = calcInjectable(medication, patient)
-      this.setState({ suspensionDose: suspDose})
+      this.setState({ suspensionDose: suspDose })
     }
     if (chosen === "Tablet") {
       let tabDose = calcTablet(medication, patient)
       for (let i = 0; i < tabDose.length; i++) {
-        if (i === 0) {  
-          this.setState({tabletDose1: tabDose[i]})
+        if (i === 0) {
+          this.setState({ tabletDose1: tabDose[i] })
         }
-        if (i === 1) {  
-          this.setState({tabletDose2: tabDose[i]})
+        if (i === 1) {
+          this.setState({ tabletDose2: tabDose[i] })
         }
       }
-
+    }
+    if (chosen === "Capsule") {
+      let capDose = calcCapsule(medication, patient)
+      this.setState({ capsuleDose: capDose })
+    }
   }
-  if (chosen === "Capsule") {
-    let capDose = calcCapsule(medication, patient)
-    this.setState({ capsuleDose: capDose})
-  }
-}
 
 
   render() {
@@ -438,117 +438,117 @@ chooseCalc = (chosen, medication, patient) => {
 
     return (
       <div className={classes.root}>
-          <Paper>
-        <NoSsr>
-          <Grid container spacing={24}>
-            
-            <Grid item xs={4} >
-              <Select
-                id="petname"
-                classes={classes}
-                styles={selectStyles}
-                options={patientSuggestions}
-                components={components}
-                value={this.state.pet}
-                onChange={this.handlePatientChange('pet')}
-                placeholder="Patient Name"
-                isClearable
+        <Paper>
+          <NoSsr>
+            <Grid container spacing={24}>
+
+              <Grid item xs={4} >
+                <Select
+                  id="petname"
+                  classes={classes}
+                  styles={selectStyles}
+                  options={patientSuggestions}
+                  components={components}
+                  value={this.state.pet}
+                  onChange={this.handlePatientChange('pet')}
+                  placeholder="Patient Name"
+                  isClearable
                 />
-            </Grid>
-            <Grid item xs={4} >
-              <Select
-                id="ownername"
-                classes={classes}
-                styles={selectStyles}
-                options={ownerSuggestions}
-                components={components}
-                value={this.state.owner}
-                onChange={this.handleOwnerChange('owner')}
-                placeholder="Owner Name"
-                isClearable
+              </Grid>
+              <Grid item xs={4} >
+                <Select
+                  id="ownername"
+                  classes={classes}
+                  styles={selectStyles}
+                  options={ownerSuggestions}
+                  components={components}
+                  value={this.state.owner}
+                  onChange={this.handleOwnerChange('owner')}
+                  placeholder="Owner Name"
+                  isClearable
                 />
-            </Grid>
-            <Grid item xs={4} >
-              <Select
-                id="chartnum"
-                classes={classes}
-                styles={selectStyles}
-                options={chartSuggestions}
-                components={components}
-                value={this.state.chart}
-                onChange={this.handleChartChange('chart')}
-                placeholder="Chart #"
-                isClearable
+              </Grid>
+              <Grid item xs={4} >
+                <Select
+                  id="chartnum"
+                  classes={classes}
+                  styles={selectStyles}
+                  options={chartSuggestions}
+                  components={components}
+                  value={this.state.chart}
+                  onChange={this.handleChartChange('chart')}
+                  placeholder="Chart #"
+                  isClearable
                 />
-            </Grid>
-            <Grid item xs={12}>
-              <Select
-                id="doctors"
-                classes={classes}
-                styles={selectStyles}
-                options={doctorSuggestions}
-                components={components}
-                value={this.state.doctor}
-                onChange={this.handleDoctorChange('doctor')}
-                placeholder="Select a doctor"
-                isClearable
+              </Grid>
+              <Grid item xs={12}>
+                <Select
+                  id="doctors"
+                  classes={classes}
+                  styles={selectStyles}
+                  options={doctorSuggestions}
+                  components={components}
+                  value={this.state.doctor}
+                  onChange={this.handleDoctorChange('doctor')}
+                  placeholder="Select a doctor"
+                  isClearable
                 />
-            </Grid>
-            <Grid item xs={6}>
-              <Select
-                id="meds"
-                classes={classes}
-                styles={selectStyles}
-                options={suggestions}
-                components={components}
-                value={this.state.single}
-                onChange={this.handleChange('single')}
-                placeholder="Select a medication"
-                isClearable
+              </Grid>
+              <Grid item xs={6}>
+                <Select
+                  id="meds"
+                  classes={classes}
+                  styles={selectStyles}
+                  options={suggestions}
+                  components={components}
+                  value={this.state.single}
+                  onChange={this.handleChange('single')}
+                  placeholder="Select a medication"
+                  isClearable
                 />
-            </Grid>
-            <Grid item xs={6}>
-              <Select
-                id="types"
-                classes={classes}
-                styles={selectStyles}
-                value={this.state.chosen}
-                options={this.state.avail}
-                onChange={this.handleTypeChange('chosen')}
-                components={components}
-                placeholder="Select Type"
-                isClearable
+              </Grid>
+              <Grid item xs={6}>
+                <Select
+                  id="types"
+                  classes={classes}
+                  styles={selectStyles}
+                  value={this.state.chosen}
+                  options={this.state.avail}
+                  onChange={this.handleTypeChange('chosen')}
+                  components={components}
+                  placeholder="Select Type"
+                  isClearable
                 />
+              </Grid>
             </Grid>
-          </Grid>
-        </NoSsr>
-        <Button variant="contained" color="primary" onClick={() => {this.chooseCalc(this.state.chosen.label, this.state.medication, this.state.patient)}} className={classes.button}>
-      Calculate
+          </NoSsr>
+          <Button variant="contained" color="primary" onClick={() => { this.chooseCalc(this.state.chosen.label, this.state.medication, this.state.patient) }} className={classes.button}>
+            Calculate
       </Button>
-                </Paper>
-                <br/>
-      <Grid container spacing={24}>
+        </Paper>
+        <br />
+        <Grid container spacing={24}>
 
-      <Grid item xs={2}></Grid>
-      <Grid item xs={3}>
-        <PatientCard patient={this.state.patient} />
-      </Grid>
           <Grid item xs={2}></Grid>
-      <Grid item xs={4}>
-     
+          <Grid item xs={3}>
+            <PatientCard patient={this.state.patient} />
+          </Grid>
+          <Grid item xs={2}></Grid>
+          <Grid item xs={4}>
 
-          <SigCard
-          medication={this.state.medication}
-          patient={this.state.patient}
-          doctor={this.state.doctor.label}
-          tabSize={this.state.tabletDose1.tabSize}
-          numTabs={this.state.tabletDose1.numTabs}
-          mgkg={this.state.tabletDose1}
-          />
-      
-      </Grid>
+
+            <SigCard
+              medication={this.state.medication}
+              patient={this.state.patient}
+              doctor={this.state.doctor.label}
+              tabSize={this.state.tabletDose1.tabSize}
+              numTabs={this.state.tabletDose1.numTabs}
+              mgkg={this.state.tabletDose1}
+            />
+
+          </Grid>
           <Grid item xs={2}></Grid>
-      </Grid>
+        </Grid>
       </div>
     );
   }
