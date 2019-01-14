@@ -9,7 +9,7 @@ module.exports = {
   },
   findOne: function (req, res) {
     // find record base on user name
-    db.Prescription.findOne({name: { $eq: req.params.id }})
+    db.Prescription.findOne({prescriptioNumber: { $eq: req.params.id }})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err))
   },
@@ -41,7 +41,7 @@ module.exports = {
     db.Prescription.findOne({ prescriptioNumber: { $eq: prescriptionData.prescriptioNumber} })
       .then((r) => {
         if (r === null) {
-          
+
            // TODO: How to get the largest prescription number?
 
           // create
