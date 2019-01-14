@@ -11,6 +11,8 @@ const calcTablet = (medication, patient) => {
             for (let i = 0; i < med.tabletSizes.length; i++)
                 if (med.tabletSizes[i] / kg >= med.doseRangeCanine[0] && med.tabletSizes[i] / kg <= med.doseRangeCanine[1]) {
                     let goodDose = {
+                        medication: medication,
+                        patient: patient,
                         tabSize: med.tabletSizes[i],
                         numTabs: 1,
                         mgkg: (med.tabletSizes[i] / kg).toFixed(2)
@@ -23,6 +25,8 @@ const calcTablet = (medication, patient) => {
                 if (med.tabletSizes[i] / 2 !== med.tabletSizes[i - 1]) {
                     if (med.tabletSizes[i] / kg / 2 >= med.doseRangeCanine[0] && med.tabletSizes[i] / kg / 2 <= med.doseRangeCanine[1]) {
                         let goodDose = {
+                            medication: medication,
+                            patient: patient,
                             tabSize: med.tabletSizes[i],
                             numTabs: 0.5,
                             mgkg: (med.tabletSizes[i] / 2 / kg).toFixed(2)
@@ -37,6 +41,8 @@ const calcTablet = (medication, patient) => {
                 if (med.tabletSizes[i] / 4 !== med.tabletSizes[i - 2]) {
                     if (med.tabletSizes[i] / kg / 4 >= med.doseRangeCanine[0] && med.tabletSizes[i] / kg / 4 <= med.doseRangeCanine[1]) {
                         let goodDose = {
+                            medication: medication,
+                            patient: patient,
                             tabSize: med.tabletSizes[i],
                             numTabs: 0.25,
                             mgkg: (med.tabletSizes[i] / 4 / kg).toFixed(2)
@@ -55,6 +61,8 @@ const calcTablet = (medication, patient) => {
                         if (med.tabletSizes[i] * 1.5 !== med.tabletSizes[i + 2] / 2) {
                             if (med.tabletSizes[i] / kg * 1.5 >= med.doseRangeCanine[0] && med.tabletSizes[i] / kg * 1.5 <= med.doseRangeCanine[1]) {
                                 let goodDose = {
+                                    medication: medication,
+                                    patient: patient,
                                     tabSize: med.tabletSizes[i],
                                     numTabs: 1.5,
                                     mgkg: (med.tabletSizes[i] * 1.5 / kg).toFixed(2)
@@ -71,6 +79,8 @@ const calcTablet = (medication, patient) => {
                 if (med.tabletSizes[i] * 2 !== med.tabletSizes[i + 1]) {
                     if (med.tabletSizes[i] / kg * 2 >= med.doseRangeCanine[0] && med.tabletSizes[i] / kg * 2 <= med.doseRangeCanine[1]) {
                         let goodDose = {
+                            medication: medication,
+                            patient: patient,
                             tabSize: med.tabletSizes[i],
                             numTabs: 2,
                             mgkg: (med.tabletSizes[i] * 2 / kg).toFixed(2)
@@ -91,6 +101,8 @@ const calcTablet = (medication, patient) => {
                             if (med.tabletSizes[i] * 3 !== med.tabletSizes[i + 1] * 1.5) {
                                 if (med.tabletSizes[i] / kg * 3 >= med.doseRangeCanine[0] && med.tabletSizes[i] / kg * 3 <= med.doseRangeCanine[1]) {
                                     let goodDose = {
+                                        medication: medication,
+                                        patient: patient,
                                         tabSize: med.tabletSizes[i],
                                         numTabs: 3,
                                         mgkg: (med.tabletSizes[i] * 3 / kg).toFixed(2)
@@ -113,6 +125,8 @@ const calcTablet = (medication, patient) => {
             for (let i = 0; i < med.tabletSizes.length; i++)
                 if (med.tabletSizes[i] / kg >= med.doseRangeFeline[0] && med.tabletSizes[i] / kg <= med.doseRangeFeline[1]) {
                     let goodDose = {
+                        medication: medication,
+                        patient: patient,
                         tabSize: med.tabletSizes[i],
                         numTabs: 1,
                         mgkg: (med.tabletSizes[i] / kg).toFixed(2)
@@ -125,6 +139,8 @@ const calcTablet = (medication, patient) => {
                 if (med.tabletSizes[i] / 2 !== med.tabletSizes[i - 1]) {
                     if (med.tabletSizes[i] / kg / 2 >= med.doseRangeFeline[0] && med.tabletSizes[i] / kg / 2 <= med.doseRangeFeline[1]) {
                         let goodDose = {
+                            medication: medication,
+                            patient: patient,
                             tabSize: med.tabletSizes[i],
                             numTabs: 0.5,
                             mgkg: (med.tabletSizes[i] / 2 / kg).toFixed(2)
@@ -139,6 +155,8 @@ const calcTablet = (medication, patient) => {
                 if (med.tabletSizes[i] / 4 !== med.tabletSizes[i - 2]) {
                     if (med.tabletSizes[i] / kg / 4 >= med.doseRangeFeline[0] && med.tabletSizes[i] / kg / 4 <= med.doseRangeFeline[1]) {
                         let goodDose = {
+                            medication: medication,
+                            patient: patient,
                             tabSize: med.tabletSizes[i],
                             numTabs: 0.25,
                             mgkg: (med.tabletSizes[i] / 4 / kg).toFixed(2)
@@ -157,6 +175,8 @@ const calcTablet = (medication, patient) => {
                         if (med.tabletSizes[i] * 1.5 !== med.tabletSizes[i + 2] / 2) {
                             if (med.tabletSizes[i] / kg * 1.5 >= med.doseRangeFeline[0] && med.tabletSizes[i] / kg * 1.5 <= med.doseRangeFeline[1]) {
                                 let goodDose = {
+                                    medication: medication,
+                                    patient: patient,
                                     tabSize: med.tabletSizes[i],
                                     numTabs: 1.5,
                                     mgkg: (med.tabletSizes[i] * 1.5 / kg).toFixed(2)
@@ -173,6 +193,8 @@ const calcTablet = (medication, patient) => {
                 if (med.tabletSizes[i] * 2 !== med.tabletSizes[i + 1]) {
                     if (med.tabletSizes[i] / kg * 2 >= med.doseRangeFeline[0] && med.tabletSizes[i] / kg * 2 <= med.doseRangeFeline[1]) {
                         let goodDose = {
+                            medication: medication,
+                            patient: patient,
                             tabSize: med.tabletSizes[i],
                             numTabs: 2,
                             mgkg: (med.tabletSizes[i] * 2 / kg).toFixed(2)
@@ -193,6 +215,8 @@ const calcTablet = (medication, patient) => {
                             if (med.tabletSizes[i] * 3 !== med.tabletSizes[i + 1] * 1.5) {
                                 if (med.tabletSizes[i] / kg * 3 >= med.doseRangeFeline[0] && med.tabletSizes[i] / kg * 3 <= med.doseRangeFeline[1]) {
                                     let goodDose = {
+                                        medication: medication,
+                                        patient: patient,
                                         tabSize: med.tabletSizes[i],
                                         numTabs: 3,
                                         mgkg: (med.tabletSizes[i] * 3 / kg).toFixed(2)
@@ -325,12 +349,16 @@ const calcTablet = (medication, patient) => {
                 }
             }
             let goodDoseLow = {
+                medication: medication,
+                patient: patient,
                 tabSize: tabLow,
                 numTabs: numLow,
                 mgkg: mgKgLow.toFixed(2)
             }
             returnedDose.push(goodDoseLow)
             let goodDoseHi = {
+                medication: medication,
+                patient: patient,
                 tabSize: tabHi,
                 numTabs: numHi,
                 mgkg: mgKgHi.toFixed(2)
@@ -455,12 +483,16 @@ const calcTablet = (medication, patient) => {
                 }
             }
             let goodDoseLow = {
+                medication: medication,
+                patient: patient,
                 tabSize: tabLow,
                 numTabs: numLow,
                 mgkg: mgKgLow.toFixed(2)
             }
             returnedDose.push(goodDoseLow)
             let goodDoseHi = {
+                medication: medication,
+                patient: patient,
                 tabSize: tabHi,
                 numTabs: numHi,
                 mgkg: mgKgHi.toFixed(2)

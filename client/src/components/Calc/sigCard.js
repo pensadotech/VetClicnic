@@ -18,10 +18,15 @@ import SaveIcon from '@material-ui/icons/Save';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid'
 const styles = theme => ({
   card: {
     maxWidth: 400,
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
   },
   media: {
     height: 0,
@@ -46,10 +51,22 @@ const styles = theme => ({
 });
 
 class RecipeReviewCard extends React.Component {
-  state = { expanded: false };
+  state = {
+    expanded: false,
+    hours: "",
+    days: "",
+    quantity: 0,
+    notes: ""
+  };
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
+  };
+
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+    });
   };
 
   render() {
@@ -59,22 +76,40 @@ class RecipeReviewCard extends React.Component {
       <Card className={classes.card}>
         <CardHeader
           avatar={
-            <Avatar aria-label="Recipe" className={classes.avatar}>
-              R
+            <Avatar aria-label="Rx" className={classes.avatar}>
+              Rx
             </Avatar>
           }
-          action={
-            <IconButton>
-              <MoreVertIcon />
-            </IconButton>
-          }
-          title="Shrimp and Chorizo Paella"
-          subheader="September 14, 2016"
+          title={this.props.patient.patientname}
+          subheader={this.props.patient.ownername}
         />
+
         <CardContent>
+          <Grid container spacing={12}>
+            <div className="mui--text-caption">
+                {this.props.patient.phone} {this.props.patient.address}
+            </div>
+          </Grid>
           <Typography component="p">
-            This impressive paella is a perfect party dish and a fun meal to cook together with your
-            guests. Add 1 cup of frozen peas along with the mussels, if you like.
+            {this.props.doctor}
+          </Typography>
+          <Grid container spacing={12}>
+            <Grid item xs={4}>
+              <Typography component="p">
+                {this.props.medication.name}: {this.props.tabSize}mg
+          </Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography component="p">
+                Quantity: {Math.ceil(24 / this.state.hours * this.state.days * this.props.numTabs)}
+              </Typography>
+            </Grid>
+          </Grid>
+          <Typography component="p">
+            Give {this.props.numTabs} tablet(s) every {this.state.hours} hours for {this.state.days} days.
+          </Typography>
+          <Typography component="p">
+            {this.state.notes}
           </Typography>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
@@ -97,11 +132,47 @@ class RecipeReviewCard extends React.Component {
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Typography paragraph>Method:</Typography>
-            <Typography paragraph>
-              Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
-              minutes.
-            </Typography>
+            <Typography paragraph></Typography>
+            <Grid container spacing={12}>
+              <Grid item xs={6}>
+                <TextField
+                  id="outlined-name"
+                  type="number"
+                  label="Hours"
+                  className={classes.textField}
+                  value={this.state.hours}
+                  onChange={this.handleChange('hours')}
+                  margin="normal"
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  id="outlined-name"
+                  label="Days"
+                  className={classes.textField}
+                  value={this.state.days}
+                  onChange={this.handleChange('days')}
+                  margin="normal"
+                  variant="outlined"
+                  type="number"
+                />
+              </Grid>
+              
+              <TextField
+                id="outlined-multiline-flexible"
+                label="Notes"
+                multiline
+                rowsMax="4"
+                value={this.state.multiline}
+                onChange={this.handleChange('notes')}
+                className={classes.textField}
+                fullWidth
+                margin="normal"
+                variant="outlined"
+                />
+  
+            </Grid>
           </CardContent>
         </Collapse>
       </Card>
