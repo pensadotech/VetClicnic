@@ -65,6 +65,15 @@ APImeds.getMeds()
         label: med.name
       }
       suggestions.push(temp)
+      for (let i = 0; i < med.alias.length; i++) {
+        if (med.alias[i] !== ""){
+
+          let tempAlias = {
+            label: med.alias[i]
+          }
+          suggestions.push(tempAlias)
+        }
+        }
     })
 
   })
@@ -351,11 +360,12 @@ class IntegrationReactSelect extends React.Component {
     this.setState({
       [name]: value,
     });
-
     this.setState({
       chosen: ""
     });
+
     if (value !== null) {
+      
       APImeds.findOne(value.label)
         .then(res => {
           this.setState({ medication: res.data })
@@ -380,6 +390,7 @@ class IntegrationReactSelect extends React.Component {
         })
         .catch(err => console.log(err))
     }
+
 
   };
 

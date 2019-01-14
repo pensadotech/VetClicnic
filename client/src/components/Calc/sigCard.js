@@ -53,8 +53,8 @@ const styles = theme => ({
 class RecipeReviewCard extends React.Component {
   state = {
     expanded: false,
-    hours: "",
-    days: "",
+    hours: 0,
+    days: 0,
     quantity: 0,
     notes: ""
   };
@@ -68,7 +68,12 @@ class RecipeReviewCard extends React.Component {
       [name]: event.target.value,
     });
   };
-
+componentWillReceiveProps = (props) => {
+  this.setState({
+    hours: this.props.medication.hours,
+    days: this.props.medication.days,
+  })
+}
   render() {
     const { classes } = this.props;
 
@@ -87,7 +92,7 @@ class RecipeReviewCard extends React.Component {
         <CardContent>
           <Grid container spacing={12}>
             <div className="mui--text-caption">
-                {this.props.patient.phone} {this.props.patient.address}
+              {this.props.patient.phone} {this.props.patient.address}
             </div>
           </Grid>
           <Typography component="p">
@@ -105,7 +110,7 @@ class RecipeReviewCard extends React.Component {
               </Typography>
             </Grid>
           </Grid>
-          <Typography component="p">
+            <Typography component="p">
             Give {this.props.numTabs} tablet(s) every {this.state.hours} hours for {this.state.days} days.
           </Typography>
           <Typography component="p">
@@ -142,6 +147,7 @@ class RecipeReviewCard extends React.Component {
                   className={classes.textField}
                   value={this.state.hours}
                   onChange={this.handleChange('hours')}
+                  defaultValue={this.props.medication.hours}
                   margin="normal"
                   variant="outlined"
                 />
@@ -153,12 +159,13 @@ class RecipeReviewCard extends React.Component {
                   className={classes.textField}
                   value={this.state.days}
                   onChange={this.handleChange('days')}
+                  defaultValue={this.props.medication.days}
                   margin="normal"
                   variant="outlined"
                   type="number"
                 />
               </Grid>
-              
+
               <TextField
                 id="outlined-multiline-flexible"
                 label="Notes"
@@ -170,8 +177,8 @@ class RecipeReviewCard extends React.Component {
                 fullWidth
                 margin="normal"
                 variant="outlined"
-                />
-  
+              />
+
             </Grid>
           </CardContent>
         </Collapse>

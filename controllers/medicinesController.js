@@ -13,6 +13,12 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  findByAlias: function (req, res) {
+    // find record base on user name
+    db.Meds.find({alias: req.params.id })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   findWhere: function (req, res) {
     db.Meds
       .find(req.query)
