@@ -6,21 +6,24 @@ const doctorsRoutes = require('./doctorsRoutes')
 const appointmentRoutes = require('./appointmentRoutes')
 const medsRoutes= require('./medicinesRoutes')
 const emailsRoutes = require('./emailRoutes')
+const prescriptionsRoutes = require('./prescriptionsRoutes')
 
 // Matches with "/api/session"
-router.use('/session', authRoutes);
+router.use('/session', authRoutes)
 // Matches with "/api/users"
-router.use('/users', usersRoutes);
+router.use('/users', usersRoutes)
 // Matches with "/api/patients"
-router.use('/patients', patientsRoutes);
+router.use('/patients', patientsRoutes)
 // Matches with "/api/doctors"
-router.use('/doctors', doctorsRoutes);
+router.use('/doctors', doctorsRoutes)
 // Matches with "/api/schedules"
-router.use('/schedules', appointmentRoutes);
+router.use('/schedules', appointmentRoutes)
 // Matches with "/api/meds"
 router.use('/meds', medsRoutes)
 // Matches with "/api/emails"
 router.use('/emails', emailsRoutes)
+// Matches with "/api/prescriptions"
+router.use('/prescriptions', prescriptionsRoutes)
 
 // export all routes
-module.exports = router;
+module.exports = router
