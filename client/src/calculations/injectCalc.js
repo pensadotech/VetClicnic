@@ -1,7 +1,9 @@
 const calcInjectble = (medication, patient) => {
     let med = medication.injectable
     let kg = patient.weight / 2.2
-    let dose = {mL: 0,
+    let dose = {medication: medication,
+                patient: patient,
+                mL: 0,
                 low: 0,
                 hi: 0}
 

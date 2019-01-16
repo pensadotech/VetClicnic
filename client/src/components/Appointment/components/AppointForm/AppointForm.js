@@ -14,6 +14,7 @@ import APIappointment from '../../../../utils/APIappointment'
 
 // Local style
 import './AppointForm'
+import SimpleMenu from "../DoctorDropDown";
 
 const styles = theme => ({
   container: {
@@ -182,8 +183,11 @@ class AppointForm extends Component {
                     }}
                   />                 
               </div>
+
+              <div className='formItem'>
+                <SimpleMenu />
+              </div>
           </form>
-         
         </CardContent>
         <CardActions>          
             <Button size="small" variant="contained" color={this.props.leftbuttonColor} 

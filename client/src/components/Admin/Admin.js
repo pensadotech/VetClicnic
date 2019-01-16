@@ -11,6 +11,7 @@ import UserCard from './components/UserCard'
 import UserForm from './components/UserForm'
 // API
 import APIusers from '../../utils/APIuser'
+import APIemails from '../../utils/APIemails'
 // Local style
 import './Admin.css'
 
@@ -82,38 +83,96 @@ class Admin extends Component {
   }
   
   handleCreateUser =(tgtUser) => {
-    console.log("cancel",tgtUser)
     // create new user
     APIusers.createUpdateUser(tgtUser)
-      .then(r => {       
+      .then(r => {  
+        // reload the data
+        this.loadUsers()     
         // Restore main view
         this.setState({screenMode: 'list',targetUser: ''}) 
-        // reload the data
-        this.loadUsers()
+
+        // Prepare email message
+        let email = {
+          to : tgtUser.email,
+          subject: 'Blue Animal Clinic / New user account',
+          text: `
+             Blue Animal Clinic - SORIN: new user was created
+
+             Welcome! 
+
+                 Username:  ${tgtUser.username}
+                 fullname:  ${tgtUser.fullname} 
+                 Phone:     ${tgtUser.phone} 
+          `
+        }
+        // send email indicating user was added to the system
+        APIemails.sendEmail(email)
+          .then(r => {
+             console.log('Email sent: ' + r.response)
+          })
+          .catch(err => console.error(err))
       })
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
   }
 
   handleSaveUser = (tgtUser) => {
     // Save updated user data    
     APIusers.updateUser(tgtUser._id,tgtUser)
       .then(r => {  
+        // reload the data
+       this.loadUsers()
         // Restore main view
        this.setState({screenMode: 'list',targetUser: ''})  
-       // reload the data
-      this.loadUsers()
-      })
-      .catch(err => console.log(err))
+       
+       // Prepare email message
+       let email = {
+         to : tgtUser.email,
+         subject: 'Blue Animal Clinic / User Account modified',
+         text: `
+           Blue Animal Clinic - SORIN: User Account modified
+           
+               Username:  ${tgtUser.username}
+               fullname:  ${tgtUser.fullname} 
+               Phone:     ${tgtUser.phone} 
+        `
+       }
+       // send email indicating user was added to the system
+       APIemails.sendEmail(email)
+         .then(r => {
+            console.log('Email sent: ' + r.response)
+         })
+         .catch(err => console.error(err))
+       })
+       .catch(err => console.log(err))
   }
 
   handleDeleteUser = (tgtUser) => {
     // delete user    
     APIusers.deleteUser(tgtUser._id)
       .then(r => {  
+        // reload the data
+        this.loadUsers() 
         // Restore main view
         this.setState({screenMode: 'list',targetUser: ''})  
-        // reload the data
-        this.loadUsers()  
+         
+        // Prepare email message
+        let email = {
+          to : tgtUser.email,
+          subject: 'Blue Animal Clinic / User account deleted',
+          text: `
+             Blue Animal Clinic - SORIN: user was delete
+
+                 Username:  ${tgtUser.username}
+                 fullname:  ${tgtUser.fullname} 
+                 Phone:     ${tgtUser.phone} 
+          `
+        }
+        // send email indicating user was added to the system
+        APIemails.sendEmail(email)
+          .then(r => {
+             console.log('Email sent: ' + r.response)
+          })
+          .catch(err => console.error(err))
       })
       .catch(err => console.log(err)) 
   }

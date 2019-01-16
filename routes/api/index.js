@@ -5,6 +5,7 @@ const patientsRoutes = require('./patientsRoutes')
 const doctorsRoutes = require('./doctorsRoutes')
 const appointmentRoutes = require('./appointmentRoutes')
 const medsRoutes= require('./medicinesRoutes')
+const emailsRoutes = require('./emailRoutes')
 
 // Matches with "/api/session"
 router.use('/session', authRoutes);
@@ -18,6 +19,8 @@ router.use('/doctors', doctorsRoutes);
 router.use('/schedules', appointmentRoutes);
 // Matches with "/api/meds"
 router.use('/meds', medsRoutes)
+// Matches with "/api/emails"
+router.use('/emails', emailsRoutes)
 
-
+// export all routes
 module.exports = router;

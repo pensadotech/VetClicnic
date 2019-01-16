@@ -44,6 +44,8 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   createUpdate: function (req, res) {
+    console.log('success')
+    console.log(req.body)
     // body has an article
     let patient = req.body;
     // Create or Update
@@ -70,6 +72,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   remove: function (req, res) {
+    console.log(req.params.id)
     db.Patient
       .findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())

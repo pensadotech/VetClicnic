@@ -10,6 +10,9 @@ export default {
   findOne: function(medname) {
     return axios.get('/api/meds/findone/' + medname)
   },
+  findByAlias: function(alias) {
+    return axios.get('/api/meds/findbyalias/' + alias)
+  },
   createUpdateMed: function (med) {
     console.log('APImeds-createUpdateMed',med)
     return axios.post('/api/meds',med)
