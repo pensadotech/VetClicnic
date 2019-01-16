@@ -88,7 +88,8 @@ class Patient extends Component {
    
     handleDeletePatient = (tgtPat) => {
       //deletes the patient
-      APIpatient.deletePatient(tgtPat.__id)
+      console.log("Delete test:", tgtPat)
+      APIpatient.deletePatient(tgtPat._id)
       .then(r => {
         //restores the mainview
         this.setState( { screenMode: 'list', targetPatient: ''})
