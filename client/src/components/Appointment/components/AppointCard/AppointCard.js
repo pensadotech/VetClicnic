@@ -40,7 +40,7 @@ class AppointCard extends Component {
             {this.props.appt.title}
           </Typography>
           <Typography className={classes.pos} color='textSecondary'>
-            Patient: 
+            Patient:
           </Typography>
           <Typography component='p'>
             {this.props.appt.description}

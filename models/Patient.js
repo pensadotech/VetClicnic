@@ -14,49 +14,49 @@ let PatientSchema = new Schema({
   ownername: {
     type: String,
     trim: true,
-    required: 'Full name is Required'
+    //required: 'Full name is Required'
   },
   breed: {
     type: String,
     trim: true,
-    required: 'Breed is Required'
+    //required: 'Breed is Required'
   },
   species: {
     type: String,
     trim: true,
-    enum: ["Canine", "Feline"],
-    required: 'Species is Required, must be "Canine" or "Feline"'
+    // enum: ["Canine", "Feline"],
+    // required: 'Species is Required, must be "Canine" or "Feline"'
   }, 
   age: {
     type: Number,
     trim: true,
-    required: 'Age is Required'
+    // required: 'Age is Required'
   },
   chartNumber: {
     type: Number,
     default: 0,
     trim: true,
-    required: 'Age is Required'
+    //required: 'Age is Required'
   },
   weight: {
-    type: Number,
+    type: String,
     trim: true,
-    required: 'Weight is Required'
+    //required: 'Weight is Required'
   },
   color: {
     type: String,
     trim: true,
-    required: 'Color is Required'
+    // required: 'Color is Required'
   },
   address: {
     type: String,
     trim: true,
-    required: 'Patient Address is Required'
+    // required: 'Patient Address is Required'
   },
   phone: {
     type: String,
     trim: true,
-    required: 'Phone number is Required'
+    //required: 'Phone number is Required'
   },
   userCreated: {
     type: Date,

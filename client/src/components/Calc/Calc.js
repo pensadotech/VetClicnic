@@ -64,6 +64,7 @@ class Calc extends Component {
               <h1 className={classes.pageHead}>Dosage Calculator</h1>
             </Grid>
           </Grid>
+          <br/>
         <Auto/>
       </>
     )

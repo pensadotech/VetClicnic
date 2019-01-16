@@ -10,7 +10,6 @@ import Typography from '@material-ui/core/Typography'
 const styles = {
   card: {
     minWidth: 275,
-    maxHeight: 220,
     margin: '10px 20px 0px 20px',  
   },
   bullet: {
@@ -27,14 +26,12 @@ const styles = {
 }
 
 class PatientCard extends Component { 
-  componentDidMount() {
-    console.log("this.props:", this.props)
-  }
+   
   render() {
     const { classes } = this.props
     
     return (
-      <Card >
+      <Card className={classes.card}>
 
        <CardContent>
           <Typography className={classes.title} color="textSecondary" gutterBottom>
@@ -62,16 +59,16 @@ class PatientCard extends Component {
             Color: {this.props.patient.color}
           </Typography>
         </CardContent>
-        <CardActions>     
-          <Button size="small" variant="contained" color={this.props.rightbuttonColor} disabled={this.props.isDisabled}
-                  onClick={() => this.props.handleRightButtonSelection(this.props.user)} >{this.props.rightButtonLabel}</Button>
+        <CardActions> 
           <Button size="small" variant="contained" color={this.props.leftbuttonColor} disabled={this.props.isDisabled}  
-                  onClick={() => this.props.handleLeftButtonSelection(this.props.user)}>{this.props.leftButtonLabel}</Button>
+                  onClick={() => this.props.handleLeftButtonSelection(this.props.patient)}>{this.props.leftButtonLabel}</Button>
+        <Button size="small" variant="contained" color={this.props.rightbuttonColor} disabled={this.props.isDisabled}
+                  onClick={() => this.props.handleRightButtonSelection(this.props.patient)} >{this.props.rightButtonLabel}</Button>
         </CardActions> 
       </Card>
-    )
-  } 
-}
+    )  //return
+  }   //render
+}  // class PatientCard
 
 PatientCard.propTypes = {
   classes: PropTypes.object.isRequired,

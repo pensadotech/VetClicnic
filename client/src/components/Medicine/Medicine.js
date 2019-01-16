@@ -51,16 +51,16 @@ class Medicine extends Component {
   }
   
   handleMedUpdateSelection = (tgtMed) => {
-    // change screen mode to user EDIT mode, and store target-user
+    // change screen mode to user EDIT mode, and store target-med
     this.setState({ screenMode: 'edit', targetMed: tgtMed })
   }
   
   handleMedDeleteSelection = (tgtMed) => {
-    // Change screen mode to User DELETE mode, and store target-user
+    // Change screen mode to User DELETE mode, and store target-med
     this.setState({ screenMode: 'delete', targetMed: tgtMed })
   }
+
   handleCreateMed =(tgtMed) => {
-     
     // create new user
     APImeds.createUpdateMed(tgtMed)
       .then(r => {       
@@ -73,12 +73,11 @@ class Medicine extends Component {
   }
 
   handleSaveMed = (tgtMed) => {
-
     // Save updated user data    
-    APImeds.updateMed(tgtMed._id,tgtMed)
+    APImeds.updateMed(tgtMed._id, tgtMed)
       .then(r => {  
         // Restore main view
-       this.setState({screenMode: 'list',targetMed: ''})  
+       this.setState({screenMode: 'list', targetMed: ''})  
        // reload the data
       this.loadMeds()
       })
@@ -97,7 +96,6 @@ class Medicine extends Component {
       .catch(err => console.log(err)) 
   }
   
-
   handleCancel = (tgtMed) => {
     // reload the data
     this.loadMeds()
@@ -107,7 +105,6 @@ class Medicine extends Component {
 
 
   renderView = () => {
-
     const { classes } = this.props
     
     if (this.state.screenMode === 'add') {

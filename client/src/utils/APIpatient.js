@@ -16,11 +16,12 @@ export default {
   findByOwner: function(ownername) {
     return axios.get('/api/patients/findbyowner/'+ ownername)
   },
-  createUpdatePatient: function (patient) {
-    return axios.post('/api/patients', patient)
+  createUpdatePatient: function (newPatient) {
+    console.log('HITTIN API\n', newPatient)
+    return axios.post('/api/patients', newPatient)
   },
   updatePatient: function(id, patient) {
-    return axios.put('/api/patients' + id, patient)
+    return axios.put('/api/patients/' + id, patient)
   },
   deletePatient: function (id) {
     return axios.delete('/api/patients/' + id)

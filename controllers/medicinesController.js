@@ -9,7 +9,13 @@ module.exports = {
   },
   findOne: function (req, res) {
     // find record base on user name
-    db.Meds.findOne({name: { $eq: req.params.id }})
+    db.Meds.findOne().or([{alias: req.params.id}, {name: req.params.id}])
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  findByAlias: function (req, res) {
+    // find record base on user name
+    db.Meds.find({alias: { $eq: req.params.id }})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
