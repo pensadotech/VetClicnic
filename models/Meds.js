@@ -13,6 +13,14 @@ let MedsSchema = new Schema({
     type: [String],
     trim: true
   },
+  hours: {
+      type: Number,
+      trim: true,
+  },
+  days: {
+    type: Number,
+    trim: true
+  },
   description: {
     type: String,
     trim: true
@@ -31,7 +39,8 @@ let MedsSchema = new Schema({
     doseRangeCanine: [Number],
     doseFeline: Number,
     doseRangeFeline: [Number],
-    routes: [String]
+    routes: [String],
+    alert: String
   },
   tablet: {
     available: Boolean,
@@ -39,7 +48,8 @@ let MedsSchema = new Schema({
     doseCanine: Number,
     doseRangeCanine: [Number],
     doseFeline: Number,
-    doseRangeFeline: [Number]
+    doseRangeFeline: [Number],
+    alert: String
   },
   capsule: {
     available: Boolean,
@@ -47,7 +57,8 @@ let MedsSchema = new Schema({
     doseCanine: Number,
     doseRangeCanine: [Number],
     doseFeline: Number,
-    doseRangeFeline: [Number]
+    doseRangeFeline: [Number],
+    alert: String
   },
   suspension: {
     available: Boolean,
@@ -55,7 +66,8 @@ let MedsSchema = new Schema({
     doseRangeCanine: [Number],
     doseFeline: Number,
     doseRangeFeline: [Number],
-    premade: [{ concentration: Number, volume: Number }]
+    premade: [{ concentration: Number, volume: Number }],
+    alert: String
   }
 
 });

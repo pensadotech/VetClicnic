@@ -10,7 +10,7 @@ module.exports = {
   },
   findOne: function (req, res) {
     // find record base on first or last name
-    db.Appointment.findOne({ lastname: { $eq: req.params.lname } })
+    db.Appointment.findOne({ title: { $eq: req.params.title } })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -22,27 +22,24 @@ module.exports = {
   },
   create: function (req, res) {
     let newAppoint = req.body;
-    let appointData = {
-      Date: newAppoint.Date,
-      fname: newAppoint.use,
-      lname: newAppoint.fullname,
-      birth_date: newAppoint.password,
-      email: newAppoint.email,
-      phone: newAppoint.phone,
-      doctor: newAppoint.doctor,
-      appointCreated: Date.now()
-    };
+    console.log(newAppoint);
     // create the appointment
-    db.Appointment.create(appointData)
+    db.Appointment.create(newAppoint)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   update: function (req, res) {
     // body has the user
     let appointment = req.body;
+    // Translate
+    let apptData = {
+      title: appointment.title,
+      description: appointment.description,
+      appointmentCreated: Date.now()
+    };
     // Update
     db.Appointment
-      .findOneAndUpdate({ _id: req.params.id }, appointment)
+      .findOneAndUpdate({ _id: req.params.id }, apptData)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

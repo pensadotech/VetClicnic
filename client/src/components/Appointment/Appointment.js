@@ -10,7 +10,11 @@ import AddIcon from '@material-ui/icons/Add';
 // Components
 import AppointCard from './components/AppointCard';
 import AppointForm from './components/AppointForm';
+import DoctorDropDown from './components/DoctorDropDown';
 import APIappointment from '../../utils/APIappointment';
+import APIdoctor from '../../utils/APIdoctor';
+import APIpatient from '../../utils/APIpatient';
+
 
 const styles = theme => ({
  
@@ -50,12 +54,30 @@ class Appointment extends Component {
   
   state = {
     aptments: [],
+    patients: [],
+    doctors: [],
     screenMode: 'list',
     targetAppoint: ''
   };
   
   componentDidMount() {
     this.loadAppointData()
+  };
+
+  loadDoctorData = () => {
+    APIdoctor.getDoctors()
+      .then(res => {
+        this.setState({ doctors: res.data })
+      })
+      .catch(err => console.log(err))
+  };
+
+  loadPatientData = () => {
+    APIpatient.getPatients()
+      .then(res => {
+        this.setState({ patients: res.data })
+      })
+      .catch(err => console.log(err))
   };
 
   loadAppointData = () => {
@@ -81,12 +103,49 @@ class Appointment extends Component {
     this.setState({ screenMode: 'delete', targetAppoint: tgtApnt })
   };
 
+  handleCreateAppt = (tgtApnt) => {
+    // create new user
+    APIappointment.createAppoint(tgtApnt)
+      .then(r => {
+        // Restore main view
+        this.setState({ screenMode: 'list', targetAppoint: '' })
+        // reload the data
+        this.loadAppointData()
+      })
+      .catch(err => console.log(err))
+  };
+
+  handleSaveAppt = (tgtApnt) => {
+    console.log(tgtApnt)
+    // Save updated user data    
+    APIappointment.updateAppoint(tgtApnt._id,tgtApnt)
+      .then(r => {  
+        // Restore main view
+       this.setState({screenMode: 'list', targetAppoint: ''})  
+       // reload the data
+      this.loadAppointData()
+      })
+      .catch(err => console.log(err))
+  };
+
+  handleDeleteAppt = (tgtApnt) => {
+    // delete user    
+    APIappointment.deleteAppoint(tgtApnt._id)
+      .then(r => {  
+        // Restore main view
+        this.setState({screenMode: 'list',targetAppoint: ''})  
+        // reload the data
+        this.loadAppointData()
+      })
+      .catch(err => console.log(err)) 
+  }
+
   handleCancel = (tgtAppt) => {
     // reload the data
     this.loadAppointData() 
     // Just reset selected appt and change screen mode to list
     this.setState({ screenMode: 'list', targetAppoint: '' })
-  }
+  };
 
   
   renderView = () => {
@@ -103,9 +162,11 @@ class Appointment extends Component {
           <AppointForm 
             mode={this.state.screenMode}
             appoint=''
+            patients={this.state.patients}
+            doctors={this.state.doctors}
             leftbuttonColor='primary'
             leftButtonLabel='Create'
-            handleLeftButtonSelection={this.handleAppointAddSelection}
+            handleLeftButtonSelection={this.handleCreateAppt}
             rightbuttonColor='default'
             rightButtonLabel='Cancel'   
             handleRightButtonSelection={this.handleCancel}
@@ -118,20 +179,43 @@ class Appointment extends Component {
 
         return (
           <>
-            <h1 className={classes.pageHead}>
-               Update appointment information
-            </h1>
-          </>
+          <h1 className={classes.pageHead}>
+            Update Current Appointment
+          </h1>
+          <AppointForm 
+            mode={this.state.screenMode}
+            appoint={this.state.targetAppoint}
+            patients={this.state.patients}
+            doctors={this.state.doctors}
+            leftbuttonColor='primary'
+            leftButtonLabel='Update'
+            handleLeftButtonSelection={this.handleSaveAppt}
+            rightbuttonColor='default'
+            rightButtonLabel='Cancel'   
+            handleRightButtonSelection={this.handleCancel}
+            isUserNameDisabled={false}
+          />
+        </>
         )
 
     } else if (this.state.screenMode === 'delete') {
 
       return (
-
         <>
-          <h1 className={classes.pageHead}>
-            Delete appointment
-          </h1>
+          <div>
+            <h1 className={classes.pageHead}>
+              Do you want to delete this appointment?
+              </h1>
+            <AppointCard appt={this.state.targetAppoint}
+              leftbuttonColor='secondary'
+              leftButtonLabel='Delete'
+              handleLeftButtonSelection={this.handleDeleteAppt} 
+              rightbuttonColor='default'
+              rightButtonLabel='Cancel'
+              isDisabled={false}
+              handleRightButtonSelection={this.handleCancel} 
+            />
+          </div>
         </>
       )
 
