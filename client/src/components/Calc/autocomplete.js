@@ -20,8 +20,8 @@ import APIdoctors from '../../utils/APIdoctor'
 import calcInjectable from '../../calculations/injectCalc'
 import calcTablet from '../../calculations/tabletCalc'
 import calcCapsule from '../../calculations/capsuleCalc'
-import SigCard from './sigCard'
-
+import TabletSigCard from './tabletSigCard'
+import InjectSigCard from './injectSigCard'
 
 let suggestions = []
 let availableTypes = []
@@ -58,6 +58,14 @@ APIpatients.getPatients()
     })
   })
 
+function compare(a, b) {
+  if (a.label < b.label)
+    return -1;
+  if (a.label > b.label)
+    return 1;
+  return 0;
+}
+
 APImeds.getMeds()
   .then(res => {
     res.data.map(med => {
@@ -75,7 +83,7 @@ APImeds.getMeds()
         }
       }
     })
-
+    suggestions.sort(compare);
   })
   .catch(err => console.log(err))
 
@@ -422,6 +430,33 @@ class IntegrationReactSelect extends React.Component {
     }
   }
 
+  renderSig = (chosen) => {
+    if (chosen === "Tablet") {
+      return (
+        <>
+          <TabletSigCard
+            medication={this.state.medication}
+            patient={this.state.patient}
+            doctor={this.state.doctor.label}
+            tabSize={this.state.tabletDose1.tabSize}
+            numTabs={this.state.tabletDose1.numTabs}
+            mgkg={this.state.tabletDose1}
+          />
+        </>
+      )
+    } else if (chosen === "Injectable") {
+      return(
+        <>
+      <InjectSigCard
+        medication={this.state.medication}
+        patient={this.state.patient}
+        doctor={this.state.doctor.label}
+        dose={this.state.injectableDose}
+        />
+        </>
+        )
+    }
+  }
 
   render() {
     const { classes, theme } = this.props;
@@ -535,16 +570,8 @@ class IntegrationReactSelect extends React.Component {
           </Grid>
           <Grid item xs={2}></Grid>
           <Grid item xs={4}>
+            {this.renderSig(this.state.chosen.label)}
 
-
-            <SigCard
-              medication={this.state.medication}
-              patient={this.state.patient}
-              doctor={this.state.doctor.label}
-              tabSize={this.state.tabletDose1.tabSize}
-              numTabs={this.state.tabletDose1.numTabs}
-              mgkg={this.state.tabletDose1}
-            />
 
           </Grid>
           <Grid item xs={2}></Grid>
