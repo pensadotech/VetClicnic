@@ -266,8 +266,8 @@ class RecipeReviewCard extends React.Component {
       <Card className={classes.card}>
         <CardHeader
           avatar={
-            <Avatar aria-label="Inj" className={classes.avatar}>
-              Inj
+            <Avatar aria-label="Rx" className={classes.avatar}>
+              Rx
             </Avatar>
           }
           title={this.props.patient.patientname}
@@ -284,10 +284,10 @@ class RecipeReviewCard extends React.Component {
             {this.props.doctor}
           </Typography>
           <Typography component="p">
-            {this.props.medication.name}: ({this.props.medication.alias[0]}) {this.props.medication.injectable.concentration}mg/mL
+            {this.props.medication.name}: ({this.props.medication.alias[0]}) {this.props.medication.suspension.premade[0].concentration}mg/mL
           </Typography>
           <Typography component="p">
-            Give {this.props.dose.mL} mL {this.state.route}.
+            Give {this.props.dose.low} to {this.props.dose.hi} mL orally every {this.props.medication.hours} for {this.props.medication.days} days.
           </Typography>
           <Typography component="p">
             {this.state.notes}

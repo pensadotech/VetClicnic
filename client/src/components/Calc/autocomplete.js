@@ -22,6 +22,8 @@ import calcTablet from '../../calculations/tabletCalc'
 import calcCapsule from '../../calculations/capsuleCalc'
 import TabletSigCard from './tabletSigCard'
 import InjectSigCard from './injectSigCard'
+import CapsuleSigCard from './capsuleSigCard'
+import SuspensionSigCard from './suspensionSigCard'
 
 let suggestions = []
 let availableTypes = []
@@ -455,8 +457,30 @@ class IntegrationReactSelect extends React.Component {
         />
         </>
         )
-    }
+    } else if (chosen === "Capsule") {
+      return (
+        <>
+          <CapsuleSigCard
+            medication={this.state.medication}
+            patient={this.state.patient}
+            doctor={this.state.doctor.label}
+            dose={this.state.capsuleDose}
+          />
+        </>
+      )
+  } else if (chosen === "Suspension") {
+      return (
+        <>
+          <SuspensionSigCard
+            medication={this.state.medication}
+            patient={this.state.patient}
+            doctor={this.state.doctor.label}
+            dose={this.state.suspensionDose}
+          />
+        </>
+      )
   }
+}
 
   render() {
     const { classes, theme } = this.props;
