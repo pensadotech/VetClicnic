@@ -14,12 +14,12 @@ let PatientSchema = new Schema({
   ownername: {
     type: String,
     trim: true,
-    required: 'Full name is Required'
+    //required: 'Full name is Required'
   },
   breed: {
     type: String,
     trim: true,
-    // required: 'Breed is Required'
+    //required: 'Breed is Required'
   },
   species: {
     type: String,
@@ -41,7 +41,7 @@ let PatientSchema = new Schema({
   weight: {
     type: String,
     trim: true,
-    required: 'Weight is Required'
+    //required: 'Weight is Required'
   },
   color: {
     type: String,
@@ -56,7 +56,7 @@ let PatientSchema = new Schema({
   phone: {
     type: String,
     trim: true,
-    required: 'Phone number is Required'
+    //required: 'Phone number is Required'
   },
   userCreated: {
     type: Date,
