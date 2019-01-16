@@ -60,10 +60,10 @@ class PatientCard extends Component {
           </Typography>
         </CardContent>
         <CardActions> 
-          <Button size="small" variant="contained" color={this.props.rightbuttonColor} disabled={this.props.isDisabled}
-                  onClick={() => this.props.handleRightButtonSelection(this.props.patient)} >{this.props.rightButtonLabel}</Button>
           <Button size="small" variant="contained" color={this.props.leftbuttonColor} disabled={this.props.isDisabled}  
                   onClick={() => this.props.handleLeftButtonSelection(this.props.patient)}>{this.props.leftButtonLabel}</Button>
+        <Button size="small" variant="contained" color={this.props.rightbuttonColor} disabled={this.props.isDisabled}
+                  onClick={() => this.props.handleRightButtonSelection(this.props.patient)} >{this.props.rightButtonLabel}</Button>
         </CardActions> 
       </Card>
     )  //return

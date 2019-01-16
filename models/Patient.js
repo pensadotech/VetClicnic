@@ -24,8 +24,8 @@ let PatientSchema = new Schema({
   species: {
     type: String,
     trim: true,
-    enum: ["Canine", "Feline"],
-    required: 'Species is Required, must be "Canine" or "Feline"'
+    // enum: ["Canine", "Feline"],
+    // required: 'Species is Required, must be "Canine" or "Feline"'
   }, 
   age: {
     type: Number,
@@ -36,10 +36,10 @@ let PatientSchema = new Schema({
     type: Number,
     default: 0,
     trim: true,
-    required: 'Age is Required'
+    //required: 'Age is Required'
   },
   weight: {
-    type: Number,
+    type: String,
     trim: true,
     required: 'Weight is Required'
   },

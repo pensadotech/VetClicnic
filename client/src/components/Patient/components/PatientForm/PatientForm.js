@@ -95,7 +95,7 @@ class PatientForm extends Component {
                 _id: this.state._id,
                 patientname: this.state.patientname,
                 ownername: this.state.ownername,
-                weight: parseInt(this.state.weight),
+                weight: this.state.weight,
                 phone: this.state.phone,
               }
     
@@ -113,7 +113,7 @@ class PatientForm extends Component {
               let newPatient ={
                 patientname: this.state.patientname,
                 ownername: this.state.ownername,
-                weight: parseInt(this.state.weight),
+                weight: this.state.weight,
                 phone: this.state.phone
               }
               

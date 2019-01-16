@@ -62,6 +62,7 @@ class Patient extends Component {
   }
 
   handleCreatePatient = (tgtPat) => {
+    console.log(tgtPat);
     //creates new patient
     APIpatient.createUpdatePatient(tgtPat)
     .then(r => {
