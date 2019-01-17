@@ -20,6 +20,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid'
+
 const styles = theme => ({
   card: {
     maxWidth: 400,
@@ -99,9 +100,9 @@ componentWillReceiveProps = (props) => {
             {this.props.doctor}
           </Typography>
           <Grid container spacing={12}>
-            <Grid item xs={4}>
+            <Grid item xs={6}>
               <Typography component="p">
-                {this.props.medication.name}: {this.props.tabSize}mg
+                {this.props.medication.name}:({this.props.medication.alias[0]}) {this.props.tabSize}mg
           </Typography>
             </Grid>
             <Grid item xs={4}>

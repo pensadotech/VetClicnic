@@ -1,9 +1,11 @@
 // dependencies
 let mongoose = require('mongoose');
+//for the auto-increment _id
+// var autoincrement = require('mongoose-auto-increment-2');
 // Save a reference to the Schema constructor
 let Schema = mongoose.Schema;
 
-let ObjectId = Schema.ObjectId;
+
 
 let PatientSchema = new Schema({
   patientname: {
@@ -24,8 +26,8 @@ let PatientSchema = new Schema({
   species: {
     type: String,
     trim: true,
-    // enum: ["Canine", "Feline"],
-    // required: 'Species is Required, must be "Canine" or "Feline"'
+    enum: ["Canine", "Feline"],
+    //required: 'Species is Required, must be "Canine" or "Feline"'
   }, 
   age: {
     type: Number,
@@ -35,6 +37,7 @@ let PatientSchema = new Schema({
   chartNumber: {
     type: Number,
     default: 0,
+    unique: true,
     trim: true,
     //required: 'Age is Required'
   },
@@ -64,6 +67,8 @@ let PatientSchema = new Schema({
   }
 
 });
+
+// PatientSchema.plugin(autoincrement,{ field: 'chartNumber' });
 
 // This creates our model from the above schema, using mongoose's model method
 var Patient = mongoose.model('Patient', PatientSchema);

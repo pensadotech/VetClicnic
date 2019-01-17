@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import TextField from '@material-ui/core/TextField'
 
- 
 
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
@@ -20,7 +19,7 @@ import { Grid } from "@material-ui/core";
 const styles = theme => ({
     container: {
         display: 'flex',
-        flexWrap: 'wrap,'
+        flexWrap: 'wrap'
     },
     textField: {
         marginLeft: theme.spacing.unit,
@@ -32,7 +31,7 @@ const styles = theme => ({
     },
     card: {
         minWidth: 175,
-         
+        maxHeight: 620, 
         margin: '10px 20px 0px 20px', 
     },
     bullet: {
@@ -114,7 +113,8 @@ class PatientForm extends Component {
                 patientname: this.state.patientname,
                 ownername: this.state.ownername,
                 weight: this.state.weight,
-                phone: this.state.phone
+                phone: this.state.phone,
+                formNumber: this.props.patientsLength
               }
               
               // Check if user already exist 
@@ -140,7 +140,6 @@ class PatientForm extends Component {
 
         return(
             <>
-        <Grid>  
         <Card className={classes.card}> 
           <CardContent> 
             <p className='userError'>{this.state.userError}</p>
@@ -176,10 +175,36 @@ class PatientForm extends Component {
                       name='ownername'
                       type="string"
                       autoComplete="current-ownername"
-                     // value={this.state.name}
+                      value={this.state.name}
                       onChange={this.handleInputChange}
                       margin="normal"
                     />   
+              </div>
+              <div className='formItem'> 
+                  <TextField
+                    id="species"
+                    label="Species :"
+                    className={classes.textField}
+                    name='species'
+                    type="string"
+                    autoComplete="current-species"
+                    value={this.state.species}
+                    onChange={this.handleInputChange}
+                    margin="normal"
+                  />                    
+              </div>
+              <div className='formItem'> 
+                  <TextField
+                    id="breed"
+                    label="Breed :"
+                    className={classes.textField}
+                    name='breed'
+                    type="string"
+                    autoComplete="current-breed"
+                    value={this.state.breed}
+                    onChange={this.handleInputChange}
+                    margin="normal"
+                  />                    
               </div>
               <div className='formItem'> 
                   <TextField
@@ -207,7 +232,7 @@ class PatientForm extends Component {
                     margin="normal"
                   />                    
               </div>
-              
+           
             </form>
           </CardContent>
           <CardActions>
@@ -219,8 +244,7 @@ class PatientForm extends Component {
                 {this.props.rightButtonLabel}
             </Button>
           </CardActions>    
-        </Card>
-        </Grid>   
+        </Card> 
       </>
 
         ) //return ()

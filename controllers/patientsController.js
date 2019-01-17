@@ -44,13 +44,12 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   createUpdate: function (req, res) {
-    console.log('success')
-    console.log(req.body)
     // body has an article
     let patient = req.body;
     // Create or Update
     db.Patient.findOne({ patientname: { $eq: patient.patientname } })
       .then((r) => {
+        console.log(r)
         if (r === null) {
           // create
           db.Patient.create(patient)
