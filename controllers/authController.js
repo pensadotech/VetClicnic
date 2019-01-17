@@ -25,7 +25,7 @@ module.exports = {
     return res.json('');
   },
   getSessionUser: function (req, res) {
-    console.log('controller-getSessionUser');
+
     let sessionUser = '';
     if (req.user !== undefined) {
       sessionUser = req.user;
