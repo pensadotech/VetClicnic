@@ -27,6 +27,8 @@ import classNames from 'classnames';
 import CancelIcon from '@material-ui/icons/Cancel';
 import Paper from '@material-ui/core/Paper';
 import { emphasize } from '@material-ui/core/styles/colorManipulator';
+import SendIcon from '@material-ui/icons/Send';
+import Plumbs from '../../images/plumbs.jpg'
 
 const styles = theme => ({
   card: {
@@ -89,6 +91,7 @@ const styles = theme => ({
   },
   avatar: {
     backgroundColor: red[500],
+    margin: 10,
   },
   divider: {
     height: theme.spacing.unit * 5,
@@ -284,9 +287,6 @@ class RecipeReviewCard extends React.Component {
 
         <CardContent>
           <Grid container spacing={12}>
-            <div className="mui--text-caption">
-              {this.props.patient.phone} {this.props.patient.address}
-            </div>
           </Grid>
           <Typography component="p">
             {this.props.doctor}
@@ -311,6 +311,9 @@ class RecipeReviewCard extends React.Component {
           <IconButton aria-label="Share">
             <PrintIcon />
           </IconButton>
+          <a href={this.props.medication.link} target="_blank">
+            <Avatar src={Plumbs} className={classes.avatar} />
+          </a>
           <IconButton
             className={classnames(classes.expand, {
               [classes.expandOpen]: this.state.expanded,
