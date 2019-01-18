@@ -76,35 +76,35 @@ class MedicineForm extends Component {
     name: '',
     alias: [''],
     description: '',
-    controlled: '',
+    controlled: false,
 
-    injectableAvailable : '',
-    injectableConcentration : '',
-    injectableDoseCanine : '',
-    injectableDoseRangeCanine : [''],
-    injectableDoseFeline : '',
-    injectableDoseRangeFeline : [''],
+    injectableAvailable : false,
+    injectableConcentration : 0,
+    injectableDoseCanine : 0.00,
+    injectableDoseRangeCanine : [0.00],
+    injectableDoseFeline : 0.00,
+    injectableDoseRangeFeline : [0.00],
     injectableRoutes : [''],
     
-    tabletAvailable : '',
-    tabletSizes : [''],
-    tabletDoseCanine : '',
-    tabletDoseRangeCanine : [''],
-    tabletDoseFeline : '',
-    tabletDoseRangeFeline : [''],
+    tabletAvailable : false,
+    tabletSizes : [0],
+    tabletDoseCanine : 0,
+    tabletDoseRangeCanine : [0],
+    tabletDoseFeline : 0,
+    tabletDoseRangeFeline : [0],
 
-    capsuleAvailable : '',
-    capsuleSizes : [''],
-    capsuleDoseCanine : '',
-    capsuledoseRangeCanine: [''],
-    capsuledoseFeline: '',
-    capsuledoseRangeFeline: [''],
+    capsuleAvailable : false,
+    capsuleSizes : [0],
+    capsuleDoseCanine : 0,
+    capsuleDoseRangeCanine: [0],
+    capsuleDoseFeline: 0,
+    capsuleDoseRangeFeline: [0],
     
-    suspensionAvailable : '',
-    suspensionDoseCanine: '',
-    suspensionDoseRangeCanine: [''],
-    suspensionDoseFeline: '',
-    suspensionDoseRangeFeline: [''],
+    suspensionAvailable : false,
+    suspensionDoseCanine: 0,
+    suspensionDoseRangeCanine: [0],
+    suspensionDoseFeline: 0,
+    suspensionDoseRangeFeline: [0],
 
     userError: ''
   }
@@ -161,19 +161,10 @@ class MedicineForm extends Component {
   }
   
 
-  getInjectableObject = (mode) => {
-    
-    let injectableDoseRangeCanine = ['']
-    let injectableDoseRangeFeline = ['']
+  getInjectableObject = () => {
 
-    if (mode === 'edit') {
-      injectableDoseRangeCanine = this.state.injectableDoseRangeCanine
-      injectableDoseRangeFeline = this.state.injectableDoseRangeFeline
-    }
-    else {
-      injectableDoseRangeCanine = this.translateListToArray(this.state.injectableDoseRangeCanine)
-      injectableDoseRangeFeline = this.translateListToArray(this.state.injectableDoseRangeFeline)
-    }
+    let injectableDoseRangeCanine = this.translateObjectToArray(this.state.injectableDoseRangeCanine,'float')
+    let injectableDoseRangeFeline = this.translateObjectToArray(this.state.injectableDoseRangeFeline,'float')
 
     let injectableObj = {
       available: this.state.injectableAvailable,
@@ -188,22 +179,11 @@ class MedicineForm extends Component {
     return injectableObj
   }
 
-  getTabletObj = (mode) => {
-     
-    let tabletSizes = ['']
-    let tabletDoseRangeCanine = ['']
-    let tabletDoseRangeFeline = ['']
-
-    if (mode === 'edit') {
-      tabletSizes = this.state.tabletSizes
-      tabletDoseRangeCanine = this.state.tabletDoseRangeCanine
-      tabletDoseRangeFeline = this.state.tabletDoseRangeFeline
-    }
-    else {
-      tabletSizes = this.translateListToArray(this.state.tabletSizes)
-      tabletDoseRangeCanine = this.translateListToArray(this.state.tabletDoseRangeCanine)
-      tabletDoseRangeFeline = this.translateListToArray(this.state.tabletDoseRangeFeline)
-    }
+  getTabletObj = () => {
+         
+    let tabletSizes = this.translateObjectToArray(this.state.tabletSizes,'number')
+    let tabletDoseRangeCanine = this.translateObjectToArray(this.state.tabletDoseRangeCanine,'float')
+    let tabletDoseRangeFeline = this.translateObjectToArray(this.state.tabletDoseRangeFeline,'float')
 
     let tabletObj = {
       available: this.state.tabletAvailable,
@@ -217,54 +197,34 @@ class MedicineForm extends Component {
     return tabletObj
   }
 
-  getCapsuleObj = (mode) => {
+  getCapsuleObj = () => {
      
-    let capsuleSizes = ['']
-    let capsuledoseRangeCanine = ['']
-    let capsuledoseRangeFeline = ['']
-
-    if (mode === 'edit') {
-      capsuleSizes = this.state.capsuleSizes
-      capsuledoseRangeCanine = this.state.capsuledoseRangeCanine
-      capsuledoseRangeFeline = this.state.capsuledoseRangeFeline
-    }
-    else {
-      capsuleSizes = this.translateListToArray(this.state.capsuleSizes)
-      capsuledoseRangeCanine = this.translateListToArray(this.state.capsuledoseRangeCanine)
-      capsuledoseRangeFeline = this.translateListToArray(this.state.capsuledoseRangeFeline)
-    }
+    let capsuleSizes = this.translateObjectToArray(this.state.capsuleSizes,'number')
+    let capsuleDoseRangeCanine = this.translateObjectToArray(this.state.capsuleDoseRangeCanine,'float')
+    let capsuleDoseRangeFeline = this.translateObjectToArray(this.state.capsuleDoseRangeFeline,'float')
 
     let capsuleObj = {
       available: this.state.capsuleAvailable,
       capsuleSizes: capsuleSizes,
       doseCanine: this.state.capsuleDoseCanine,
-      doseRangeCanine: capsuledoseRangeCanine,
-      doseFeline: this.state.capsuledoseFeline,
-      doseRangeFeline: capsuledoseRangeFeline
+      doseRangeCanine: capsuleDoseRangeCanine,
+      doseFeline: this.state.capsuleDoseFeline,
+      doseRangeFeline: capsuleDoseRangeFeline
     }
 
     return capsuleObj
 
   }
 
-  getSuspensionObj = (mode) => {
+  getSuspensionObj = () => {
     
-    let suspensionDoseCanine = ['']
-    let suspensionDoseRangeFeline = ['']
-
-    if (mode === 'edit') {
-      suspensionDoseCanine = this.state.suspensionDoseCanine
-      suspensionDoseRangeFeline = this.state.suspensionDoseRangeFeline
-    }
-    else {
-      suspensionDoseCanine = this.translateListToArray(this.state.suspensionDoseCanine)
-      suspensionDoseRangeFeline = this.translateListToArray(this.state.suspensionDoseRangeFeline)
-    }
+    let suspensionDoseRangeCanine = this.translateObjectToArray(this.state.suspensionDoseRangeCanine,'float')
+    let suspensionDoseRangeFeline = this.translateObjectToArray(this.state.suspensionDoseRangeFeline,'float')
 
     let suspensionObj = {
       available: this.state.suspensionAvailable,
-      doseCanine: suspensionDoseCanine,
-      doseRangeCanine: this.state.suspensionDoseRangeCanine,
+      doseCanine: this.state.suspensionDoseCanine,
+      doseRangeCanine: suspensionDoseRangeCanine,
       doseFeline: this.state.suspensionDoseFeline,
       doseRangeFeline: suspensionDoseRangeFeline
     }
@@ -272,21 +232,35 @@ class MedicineForm extends Component {
     return suspensionObj
   }
 
-  translateListToArray = (tgtList) => {
+  translateObjectToArray = (tgtObj, convertToType = 'string') => {
+    
+    console.log('tgtObj',tgtObj)
+    console.log('isArray',Array.isArray(tgtObj))
 
-    console.log('tgtList',tgtList)
+    let resArray = ['']
+    let finalArray = [''] 
+  
+    if (tgtObj !== undefined && Array.isArray(tgtObj)) {
+      resArray = tgtObj
+    } else if (tgtObj !== undefined && tgtObj !== '') {
+      resArray = tgtObj.split(',')
+    } 
+    
+    if (convertToType === 'number') {
+      resArray.forEach( (item,index) => {
+        finalArray[index] = parseInt(item)
+      })
+    } else if ( convertToType === 'float') {
+      resArray.forEach( (item,index) => {
+        finalArray[index] = parseFloat(item)
+      })
+    } else {
+      finalArray = resArray
+    }
 
-    let tgtArray = ['']
-
-    if (Array.isArray(tgtList)) {
-      tgtArray = tgtList
-    } else if (tgtList !== '') {
-        tgtArray = tgtList.split(',')
-    }  
-
-    console.log('tgtArray',tgtList)
-
-    return tgtArray
+    console.log('finalArray',finalArray)
+  
+    return finalArray
   }
 
   handleSave = () => {
@@ -294,13 +268,12 @@ class MedicineForm extends Component {
       // EDIT MODE: Validate 
       if (this.state.name === '' || this.state.description === '' )  {    
         this.setState({userError: 'Please provide medication name and description'}) 
-       } else {
-            
+       } else {          
           // get children objects
-          let injectableObj = this.getInjectableObject(this.state.mode)          
-          let tabletObj = this.getTabletObj(this.state.mode)
-          let capsuleObj = this.getCapsuleObj(this.state.mode)
-          let suspensionObj = this.getSuspensionObj(this.state.mode)
+          let injectableObj = this.getInjectableObject()        
+          let tabletObj = this.getTabletObj()    
+          let capsuleObj = this.getCapsuleObj()
+          let suspensionObj = this.getSuspensionObj()
 
           // translate
           let newMed ={
@@ -326,21 +299,13 @@ class MedicineForm extends Component {
        } else {
           
           // get children objects
-          console.log('injectableObj',this.state.mode)
-          let injectableObj = this.getInjectableObject(this.state.mode) 
-
-          console.log('tabletObj',this.state.mode)         
-          let tabletObj = this.getTabletObj(this.state.mode)
-
-          console.log('capsuleObj',this.state.mode)    
-          let capsuleObj = this.getCapsuleObj(this.state.mode)
-
-          console.log('suspensionObj',this.state.mode) 
-          let suspensionObj = this.getSuspensionObj(this.state.mode)
+          let injectableObj = this.getInjectableObject()        
+          let tabletObj = this.getTabletObj()  
+          let capsuleObj = this.getCapsuleObj()
+          let suspensionObj = this.getSuspensionObj()
           
           // translate elements into an array
-          console.log('aliasArr',this.state.mode) 
-          let aliasArr = this.translateListToArray(this.state.alias) 
+          let aliasArr = this.translateObjectToArray(this.state.alias) 
           
           // translate
           let newMed ={
