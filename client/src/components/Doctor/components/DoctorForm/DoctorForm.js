@@ -59,7 +59,7 @@ class DoctorForm extends Component {
     phone: '',
     mobilePhone: '',
     email: '',
-    userError: ''
+    doctorError: ''
   }
 
   componentDidMount = () => {
@@ -87,7 +87,7 @@ class DoctorForm extends Component {
     if (this.state.mode === 'edit') {
       // EDIT MODE: Validate
       if (this.state.name === '' || this.state.phone === '' || this.state.email === '') {
-        this.setState({ userError: 'Please provide name, number, and email' })
+        this.setState({ doctorError: 'Please provide name, number, and email' })
       } else {
 
         // translate
@@ -103,12 +103,14 @@ class DoctorForm extends Component {
         // send information back 
         this.props.handleLeftButtonSelection(newDoctorData)
       }
+
     } else {
 
       // ADD MODE: Validate
       if (this.state.name === '' || this.state.phone === '' || this.state.email === '') {
-        this.setState({ userError: 'Please provide name, number, and email' })
+      this.setState({ doctorError: 'Please provide name, number, and email' })
       } else {
+
         // Translation
         let newDoctorData = {
           name: this.state.name,
@@ -117,12 +119,23 @@ class DoctorForm extends Component {
           email: this.state.email,
           userCreated: Date.now(),
         }
+
+        //Check if doctor already exit
+       APIdoctor.findOne(this.state.name)
+          .then(res => {  
+            if(res.data !== null) {
+            this.setState({userError: `The medication "${res.data.name}" already exist, please provide a new one`})  
+              } else {
+       
         // Send New Doctor Data
         this.props.handleLeftButtonSelection(newDoctorData)
       }
+    })
+    .catch(err => console.log(err)) 
     }
   }
-
+  }
+  
   render() {
 
     const { classes } = this.props
@@ -159,7 +172,7 @@ class DoctorForm extends Component {
               <div className='formItem'>
                 <TextField
                   id="user-phone"
-                  label="Phone :"
+                  label="Office Phone :"
                   className={classes.textField}
                   name='phone'
                   type="string"
@@ -179,7 +192,7 @@ class DoctorForm extends Component {
               <div className='formItem'>
                 <TextField
                   id="user-mobilePhone"
-                  label="Phone :"
+                  label="Mobile Phone :"
                   className={classes.textField}
                   name='mobilePhone'
                   type="string"

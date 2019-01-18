@@ -120,7 +120,7 @@ class Doctor extends Component {
       return(
         <>
           <h1 className={classes.pageHead}>
-            Add new Doctor
+            Add new a Doctor
           </h1>
           <DoctorForm 
             mode={this.state.screenMode}
