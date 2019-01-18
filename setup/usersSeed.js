@@ -16,6 +16,7 @@ module.exports = {
         fullname: 'admin account',
         phone: '949-123-1234',
         email: 'admin@admin.com',
+        isAdmin : true,
         userCreated: Date.now()
       },
       {
@@ -24,6 +25,7 @@ module.exports = {
         fullname: 'Armando Pensado',
         phone: '949-876-8755',
         email: 'armando@pensadotech.com',
+        isAdmin : false,
         userCreated: Date.now()
       }
     ]
