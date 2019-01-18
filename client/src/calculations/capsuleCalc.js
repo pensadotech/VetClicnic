@@ -11,6 +11,8 @@ const calcCapsule = (medication, patient) => {
             for (let i = 0; i < med.capsuleSizes.length; i++)
                 if (med.capsuleSizes[i] / kg >= med.doseRangeCanine[0] && med.capsuleSizes[i] / kg <= med.doseRangeCanine[1]) {
                     let goodDose = {
+                        medication: medication,
+                        patient: patient,
                         capSize: med.capsuleSizes[i],
                         numCaps: 1,
                         mgkg: (med.capsuleSizes[i] / kg).toFixed(2)
@@ -23,6 +25,8 @@ const calcCapsule = (medication, patient) => {
                 if (med.capsuleSizes[i] * 2 !== med.capsuleSizes[i + 1]) {
                     if (med.capsuleSizes[i] / kg * 2 >= med.doseRangeCanine[0] && med.capsuleSizes[i] / kg * 2 <= med.doseRangeCanine[1]) {
                         let goodDose = {
+                            medication: medication,
+                            patient: patient,
                             capSize: med.capsuleSizes[i],
                             numCaps: 2,
                             mgkg: (med.capsuleSizes[i] * 2 / kg).toFixed(2)
@@ -41,6 +45,8 @@ const calcCapsule = (medication, patient) => {
                         if (med.capsuleSizes[i] * 3 !== med.capsuleSizes[i + 1] * 2) {
                             if (med.capsuleSizes[i] / kg * 3 >= med.doseRangeCanine[0] && med.capsuleSizes[i] / kg * 3 <= med.doseRangeCanine[1]) {
                                 let goodDose = {
+                                    medication: medication,
+                                    patient: patient,
                                     capSize: med.capsuleSizes[i],
                                     numCaps: 3,
                                     mgkg: (med.capsuleSizes[i] * 3 / kg).toFixed(2)
@@ -63,6 +69,8 @@ const calcCapsule = (medication, patient) => {
             for (let i = 0; i < med.capsuleSizes.length; i++)
                 if (med.capsuleSizes[i] / kg >= med.doseRangeFeline[0] && med.capsuleSizes[i] / kg <= med.doseRangeFeline[1]) {
                     let goodDose = {
+                        medication: medication,
+                        patient: patient,
                         capSize: med.capsuleSizes[i],
                         numCaps: 1,
                         mgkg: (med.capsuleSizes[i] / kg).toFixed(2)
@@ -75,6 +83,8 @@ const calcCapsule = (medication, patient) => {
                 if (med.capsuleSizes[i] * 2 !== med.capsuleSizes[i + 1]) {
                     if (med.capsuleSizes[i] / kg * 2 >= med.doseRangeFeline[0] && med.capsuleSizes[i] / kg * 2 <= med.doseRangeFeline[1]) {
                         let goodDose = {
+                            medication: medication,
+                            patient: patient,
                             capSize: med.capsuleSizes[i],
                             numCaps: 2,
                             mgkg: (med.capsuleSizes[i] * 2 / kg).toFixed(2)
@@ -93,6 +103,8 @@ const calcCapsule = (medication, patient) => {
                         if (med.capsuleSizes[i] * 3 !== med.capsuleSizes[i + 1] * 2) {
                             if (med.capsuleSizes[i] / kg * 3 >= med.doseRangeFeline[0] && med.capsuleSizes[i] / kg * 3 <= med.doseRangeFeline[1]) {
                                 let goodDose = {
+                                    medication: medication,
+                                    patient: patient,
                                     capSize: med.capsuleSizes[i],
                                     numCaps: 3,
                                     mgkg: (med.capsuleSizes[i] * 3 / kg).toFixed(2)
@@ -174,12 +186,16 @@ const calcCapsule = (medication, patient) => {
                 }
             }
             let goodDoseLow = {
+                medication: medication,
+                patient: patient,
                 capSize: capLow,
                 numCaps: numLow,
                 mgkg: mgKgLow.toFixed(2)
             }
             returnedDose.push(goodDoseLow)
             let goodDoseHi = {
+                medication: medication,
+                patient: patient,
                 capSize: capHi,
                 numCaps: numHi,
                 mgkg: mgKgHi.toFixed(2)
@@ -304,12 +320,16 @@ const calcCapsule = (medication, patient) => {
                 }
             }
             let goodDoseLow = {
+                medication: medication,
+                patient: patient,
                 capSize: capLow,
                 numCaps: numLow,
                 mgkg: mgKgLow.toFixed(2)
             }
             returnedDose.push(goodDoseLow)
             let goodDoseHi = {
+                medication: medication,
+                patient: patient,
                 capSize: capHi,
                 numCaps: numHi,
                 mgkg: mgKgHi.toFixed(2)

@@ -110,7 +110,7 @@ class LoginView extends Component {
 
           <Grid container spacing={0}>       
               <Grid item>
-                <img className="logingImage imgRnd10 imageShadow imageRotate" src="./images/sorin.jpg" alt="Vetenary" />
+                <img className="logingImage imgRnd10 imageShadow imageRotate" src="./images/paw-print1.jpg" alt="Veterinary" />
               </Grid>
               <Grid item>
                 <form className={classes.container} noValidate autoComplete="off">

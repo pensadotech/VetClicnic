@@ -29,7 +29,11 @@
     "express-session": "^1.15.6",
     "if-env": "^1.0.4",
     "mongoose": "^5.4.1",
+<<<<<<< HEAD
     "mongoose-double": "0.0.1",
+=======
+    "mongoose-auto-increment-2": "^1.0.3",
+>>>>>>> ac9cc8e49ad8dbae4de5c2f3185c8a2d6f2e7133
     "nodemailer": "^5.1.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",

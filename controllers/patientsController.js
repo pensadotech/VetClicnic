@@ -49,6 +49,7 @@ module.exports = {
     // Create or Update
     db.Patient.findOne({ patientname: { $eq: patient.patientname } })
       .then((r) => {
+        console.log(r)
         if (r === null) {
           // create
           db.Patient.create(patient)
@@ -70,6 +71,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   remove: function (req, res) {
+    console.log(req.params.id)
     db.Patient
       .findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())
