@@ -61,15 +61,12 @@ class Medicine extends Component {
   }
 
   handleCreateMed =(tgtMed) => {
-<<<<<<< HEAD
      
     console.log('create-med',tgtMed)
     
     // tst
     this.setState({screenMode: 'list',targetMed: ''}) 
 
-=======
->>>>>>> ac9cc8e49ad8dbae4de5c2f3185c8a2d6f2e7133
     // create new user
     APImeds.createUpdateMed(tgtMed)
       .then(r => {       
@@ -82,12 +79,9 @@ class Medicine extends Component {
   }
 
   handleSaveMed = (tgtMed) => {
-<<<<<<< HEAD
      
     console.log('save-med',tgtMed)
 
-=======
->>>>>>> ac9cc8e49ad8dbae4de5c2f3185c8a2d6f2e7133
     // Save updated user data    
     APImeds.updateMed(tgtMed._id, tgtMed)
       .then(r => {  
