@@ -1,12 +1,12 @@
- import React, { Component } from "react"
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Avatar from '@material-ui/core/Avatar'
 import SettingsIcon from '@material-ui/icons/Settings'
-import Fab from '@material-ui/core/Fab';
+import Fab from '@material-ui/core/Fab'
 import ColorizeIcon from '@material-ui/icons/Colorize'
-import AddIcon from '@material-ui/icons/Add';
+import AddIcon from '@material-ui/icons/Add'
 
 // Components
 import DoctorCard from './components/DoctorCard'
@@ -120,7 +120,7 @@ class Doctor extends Component {
       return(
         <>
           <h1 className={classes.pageHead}>
-            Add new Doctor
+            Add new a Doctor
           </h1>
           <DoctorForm 
             mode={this.state.screenMode}
