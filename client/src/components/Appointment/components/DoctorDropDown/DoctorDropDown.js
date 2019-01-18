@@ -1,68 +1,100 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Input from '@material-ui/core/Input';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import FilledInput from '@material-ui/core/FilledInput';
+import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
-class SimpleMenu extends React.Component {
+const styles = theme => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing.unit * 2,
+  },
+});
+
+class SimpleSelect extends React.Component {
   state = {
-    anchorEl: null,
+    age: '',
+    name: 'hai',
+    labelWidth: 0
   };
 
-  handleClick = event => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
+  componentDidMount() {
+    this.setState({
+      labelWidth: ReactDOM.findDOMNode(this.InputLabelRef)
+    });
+  }
 
-  handleClose = () => {
-    this.setState({ anchorEl: null });
+  handleDoctorChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+  
+  handlePatientChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   render() {
-    const { anchorEl } = this.state;
+    const { classes } = this.props;
 
     return (
-        <>
-      <div>
-        <Button
-          aria-owns={anchorEl ? 'simple-menu' : undefined}
-          aria-haspopup="true"
-          onClick={this.handleClick}
-        >
-          Select Patient
-        </Button>
-        <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={this.handleClose}
-        >
-          <MenuItem onClick={this.handleClose}>Patient</MenuItem>
-          <MenuItem onClick={this.handleClose}>Patient</MenuItem>
-          <MenuItem onClick={this.handleClose}>Patient</MenuItem>
-        </Menu>
-      </div>
-      <br></br>
-      <div>
-        <Button
-          aria-owns={anchorEl ? 'simple-menu' : undefined}
-          aria-haspopup="true"
-          onClick={this.handleClick}
-        >
-          Select Doctor
-        </Button>
-        <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={this.handleClose}
-        >
-          <MenuItem onClick={this.handleClose}>Doctor</MenuItem>
-          <MenuItem onClick={this.handleClose}>Doctor</MenuItem>
-          <MenuItem onClick={this.handleClose}>Doctor</MenuItem>
-        </Menu>
-      </div>
-      </>
+      <form className={classes.root} autoComplete="off">
+        <FormControl className={classes.formControl}>
+          <InputLabel htmlFor="age-simple">Age</InputLabel>
+          <Select
+            value={this.state.age}
+            onChange={this.handleDoctorChange}
+            inputProps={{
+              name: 'age',
+              id: 'age-simple',
+            }}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <InputLabel htmlFor="age-helper">Age</InputLabel>
+          <Select
+            value={this.props.selectedName}
+            onChange={this.props.handleSelection}
+            name={this.props.fieldName}
+            input={<Input name="age" id="age-helper" />}
+          >
+            {
+              this.state.optionArr.map((option, index) => (
+                <option value={option.name}>
+                  {option.name}
+                </option>  
+             ))
+            }
+            
+          </Select>
+          <FormHelperText>Some important helper text</FormHelperText>
+        </FormControl>
+      </form>
     );
-    }
+  }
 }
 
-export default SimpleMenu;
+SimpleSelect.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(SimpleSelect);
