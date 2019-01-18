@@ -20,6 +20,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid'
+import CancelIcon from '@material-ui/icons/Cancel';
 
 const styles = theme => ({
   card: {
@@ -57,7 +58,8 @@ class RecipeReviewCard extends React.Component {
     hours: 0,
     days: 0,
     quantity: 0,
-    notes: ""
+    notes: "",
+    removeMe: false
   };
 
   handleExpandClick = () => {
@@ -73,22 +75,84 @@ componentWillReceiveProps = (props) => {
   this.setState({
     hours: this.props.medication.hours,
     days: this.props.medication.days,
+    removeMe: false
   })
 }
+
+  renderSuggestedDose = (medication, patient) => {
+    let med = medication.capsule
+    let diff = ((medication.capsule.doseCanine - this.props.mgkg) / medication.capsule.doseCanine * 100 * -1).toFixed(2)
+
+    if (med.dose !== 0) {
+      if (patient.species === "Canine") {
+        return (
+          <>
+            <Typography component="p">
+              Target dose for a dog is {med.doseCanine} mg/kg
+          </Typography>
+            <Typography component="p">
+              Current dosing is {this.props.mgkg} mg/kg. Difference of {diff}%
+          </Typography>
+          </>
+        )
+      } else if (patient.species === "Feline") {
+        return (
+          <>
+            <Typography component="p">
+              Target dose for a cat is {med.doseFeline} mg/kg
+          </Typography>
+            <Typography component="p">
+              Current dosing is {this.props.mgkg} mg/kg. Difference of {diff}%
+          </Typography>
+          </>
+        )
+      }
+    } else if (med.dose === 0) {
+      if (patient.species === "Canine") {
+        return (
+          <>
+            <Typography component="p">
+              Target dose for a dog is between {med.doseRangeCanine[0]} and {med.doseRangeCanine[1]} mg/kg
+          </Typography>
+            <Typography component="p">
+              Current dosing is {this.props.mgkg} mg/kg.
+          </Typography>
+          </>
+        )
+      } else if (patient.species === "Feline") {
+        return (
+          <>
+            <Typography component="p">
+              Target dose for a cat is between {med.doseRangeFeline[0]} and {med.doseRangeFeline[1]} mg/kg
+          </Typography>
+            <Typography component="p">
+              Current dosing is {this.props.mgkg} mg/kg.
+          </Typography>
+          </>
+        )
+      }
+    }
+  }
   render() {
     const { classes } = this.props;
+    if(this.state.removeMe === false) {
 
-    return (
-      <Card className={classes.card}>
+      return (
+        <Card className={classes.card}>
         <CardHeader
           avatar={
             <Avatar aria-label="Rx" className={classes.avatar}>
               Rx
             </Avatar>
           }
+          action={
+            <IconButton>
+              <CancelIcon onClick={() => this.setState({ removeMe: true })} />
+            </IconButton>
+          }
           title={this.props.patient.patientname}
           subheader={this.props.patient.ownername}
-        />
+          />
 
         <CardContent>
           <Grid container spacing={12}>
@@ -132,13 +196,13 @@ componentWillReceiveProps = (props) => {
             onClick={this.handleExpandClick}
             aria-expanded={this.state.expanded}
             aria-label="Show more"
-          >
+            >
             <ExpandMoreIcon />
           </IconButton>
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Typography paragraph></Typography>
+            {this.renderSuggestedDose(this.props.medication, this.props.patient)}
             <Grid container spacing={12}>
               <Grid item xs={6}>
                 <TextField
@@ -151,7 +215,7 @@ componentWillReceiveProps = (props) => {
                   defaultValue={this.props.medication.hours}
                   margin="normal"
                   variant="outlined"
-                />
+                  />
               </Grid>
               <Grid item xs={6}>
                 <TextField
@@ -164,7 +228,7 @@ componentWillReceiveProps = (props) => {
                   margin="normal"
                   variant="outlined"
                   type="number"
-                />
+                  />
               </Grid>
 
               <TextField
@@ -178,14 +242,15 @@ componentWillReceiveProps = (props) => {
                 fullWidth
                 margin="normal"
                 variant="outlined"
-              />
+                />
 
             </Grid>
           </CardContent>
         </Collapse>
       </Card>
     );
-  }
+  } else { return(null)}
+} 
 }
 
 RecipeReviewCard.propTypes = {

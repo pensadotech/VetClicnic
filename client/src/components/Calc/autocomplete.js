@@ -429,7 +429,9 @@ class IntegrationReactSelect extends React.Component {
     if (chosen === "Capsule") {
       let capDose = calcCapsule(medication, patient)
       this.setState({ capsuleDose: capDose })
+
     }
+
   }
 
   renderSig = (chosen) => {
@@ -442,33 +444,44 @@ class IntegrationReactSelect extends React.Component {
             doctor={this.state.doctor.label}
             tabSize={this.state.tabletDose1.tabSize}
             numTabs={this.state.tabletDose1.numTabs}
-            mgkg={this.state.tabletDose1}
+            mgkg={this.state.tabletDose1.mgkg}
+            removeMe={false}
+          />
+          <TabletSigCard
+            medication={this.state.medication}
+            patient={this.state.patient}
+            doctor={this.state.doctor.label}
+            tabSize={this.state.tabletDose2.tabSize}
+            numTabs={this.state.tabletDose2.numTabs}
+            mgkg={this.state.tabletDose2.mgkg}
+            removeMe={false}
           />
         </>
       )
     } else if (chosen === "Injectable") {
-      return(
-        <>
-      <InjectSigCard
-        medication={this.state.medication}
-        patient={this.state.patient}
-        doctor={this.state.doctor.label}
-        dose={this.state.injectableDose}
-        />
-        </>
-        )
-    } else if (chosen === "Capsule") {
       return (
         <>
-          <CapsuleSigCard
+          <InjectSigCard
             medication={this.state.medication}
             patient={this.state.patient}
             doctor={this.state.doctor.label}
-            dose={this.state.capsuleDose}
+            dose={this.state.injectableDose}
           />
         </>
       )
-  } else if (chosen === "Suspension") {
+    } else if (chosen === "Capsule") {
+      console.log(this.state.capsuleDose)
+        return (
+          <>
+            <CapsuleSigCard
+              medication={this.state.medication}
+              patient={this.state.patient}
+              doctor={this.state.doctor.label}
+              dose={this.state.capsuleDose}
+            />
+          </>
+        )
+    } else if (chosen === "Suspension") {
       return (
         <>
           <SuspensionSigCard
@@ -479,8 +492,8 @@ class IntegrationReactSelect extends React.Component {
           />
         </>
       )
+    }
   }
-}
 
   render() {
     const { classes, theme } = this.props;

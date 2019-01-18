@@ -209,7 +209,8 @@ class RecipeReviewCard extends React.Component {
     quantity: 0,
     notes: "",
     route: null,
-    routes: null
+    routes: null,
+    removeMe: false
   };
 
   handleExpandClick = () => {
@@ -235,7 +236,9 @@ class RecipeReviewCard extends React.Component {
     this.setState({
       hours: this.props.medication.hours,
       days: this.props.medication.days,
-      routes: this.props.medication.injectable.routes
+      routes: this.props.medication.injectable.routes,
+      box: this.props.dose.boxSize,
+      removeMe: false
     })
   }
 
@@ -261,7 +264,7 @@ class RecipeReviewCard extends React.Component {
         },
       }),
     };
-
+    if (this.state.removeMe === false) {
     return (
       <Card className={classes.card}>
         <CardHeader
@@ -269,6 +272,11 @@ class RecipeReviewCard extends React.Component {
             <Avatar aria-label="Rx" className={classes.avatar}>
               Rx
             </Avatar>
+          }
+          action={
+            <IconButton>
+              <CancelIcon onClick={() => this.setState({ removeMe: true })} />
+            </IconButton>
           }
           title={this.props.patient.patientname}
           subheader={this.props.patient.ownername}
@@ -287,7 +295,10 @@ class RecipeReviewCard extends React.Component {
             {this.props.medication.name}: ({this.props.medication.alias[0]}) {this.props.medication.suspension.premade[0].concentration}mg/mL
           </Typography>
           <Typography component="p">
-            Give {this.props.dose.low} to {this.props.dose.hi} mL orally every {this.props.medication.hours} for {this.props.medication.days} days.
+            Give {this.props.dose.mL} mL orally every {this.props.medication.hours} for {this.props.medication.days} days.
+          </Typography>
+          <Typography component="p">
+          {this.state.box}mL will last for {this.props.medication.days} days.
           </Typography>
           <Typography component="p">
             {this.state.notes}
@@ -346,7 +357,7 @@ class RecipeReviewCard extends React.Component {
         </Collapse>
       </Card>
     );
-  }
+  }else {return(null)}}
 }
 
 RecipeReviewCard.propTypes = {

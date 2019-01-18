@@ -209,7 +209,8 @@ class RecipeReviewCard extends React.Component {
     quantity: 0,
     notes: "",
     route: null,
-    routes: null
+    routes: null,
+    removeMe: false
   };
 
   handleExpandClick = () => {
@@ -232,10 +233,18 @@ class RecipeReviewCard extends React.Component {
     this.props.medication.injectable.routes.map(route => ({
       label: route,
     }))
+    let routeSuggestions = this.props.medication.injectable.routes.map(route => ({
+      value: route.label,
+      label: route.label,
+    }))
+    this.setState({
+      routes: routeSuggestions
+    })
     this.setState({
       hours: this.props.medication.hours,
       days: this.props.medication.days,
-      routes: this.props.medication.injectable.routes
+      routes: this.props.medication.injectable.routes,
+      removeMe: false
     })
   }
 
@@ -261,7 +270,7 @@ class RecipeReviewCard extends React.Component {
         },
       }),
     };
-
+    if (this.state.removeMe === false) {
     return (
       <Card className={classes.card}>
         <CardHeader
@@ -269,6 +278,11 @@ class RecipeReviewCard extends React.Component {
             <Avatar aria-label="Inj" className={classes.avatar}>
               Inj
             </Avatar>
+          }
+          action={
+            <IconButton>
+              <CancelIcon onClick={() => this.setState({ removeMe: true })} />
+            </IconButton>
           }
           title={this.props.patient.patientname}
           subheader={this.props.patient.ownername}
@@ -346,7 +360,8 @@ class RecipeReviewCard extends React.Component {
         </Collapse>
       </Card>
     );
-  }
+  } else {return(null)}
+}
 }
 
 RecipeReviewCard.propTypes = {

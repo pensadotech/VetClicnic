@@ -143,7 +143,7 @@ class AppointForm extends Component {
           // retreive the selected doctor in the screen
           let doctorObj = this.getDoctors(this.state.selectedDoctorName)
           // gete the selected patient from screen
-          let patientObj = this.getPatient(his.state.selectedPatientName)
+          let patientObj = this.getPatient(this.state.selectedPatientName)
           
          // translate
           let newApptData = { 
