@@ -61,6 +61,12 @@ class Medicine extends Component {
   }
 
   handleCreateMed =(tgtMed) => {
+     
+    console.log('create-med',tgtMed)
+    
+    // tst
+    this.setState({screenMode: 'list',targetMed: ''}) 
+
     // create new user
     APImeds.createUpdateMed(tgtMed)
       .then(r => {       
@@ -73,6 +79,9 @@ class Medicine extends Component {
   }
 
   handleSaveMed = (tgtMed) => {
+     
+    console.log('save-med',tgtMed)
+
     // Save updated user data    
     APImeds.updateMed(tgtMed._id, tgtMed)
       .then(r => {  
@@ -144,7 +153,7 @@ class Medicine extends Component {
             rightbuttonColor='default'
             rightButtonLabel='Cancel'   
             handleRightButtonSelection={this.handleCancel}
-            isNameDisabled={true}
+            isNameDisabled={false}
           />
         </>
       ) // return()
