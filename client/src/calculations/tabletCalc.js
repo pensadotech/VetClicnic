@@ -6,7 +6,7 @@ const calcTablet = (medication, patient) => {
     //use only dosing specific to canines
     if (patient.species === "Canine") {
         //checks if the medication has a specific dosage as opposed to a range
-        if (med.doseCanine !== 0) {
+        if (med.doseRangeCanine[0] !== 0) {
             //checks the mg/kg of all whole tablets - 1 tablet
             for (let i = 0; i < med.tabletSizes.length; i++)
                 if (med.tabletSizes[i] / kg >= med.doseRangeCanine[0] && med.tabletSizes[i] / kg <= med.doseRangeCanine[1]) {
@@ -120,7 +120,7 @@ const calcTablet = (medication, patient) => {
     //use only dosing specific to fenines
     if (patient.species === "Feline") {
         //checks if the medication has a specific dosage as opposed to a range
-        if (med.doseFeline !== 0) {
+        if (med.doseRangeFeline[0] !== 0) {
             //checks the mg/kg of all whole tablets - 1 tablet
             for (let i = 0; i < med.tabletSizes.length; i++)
                 if (med.tabletSizes[i] / kg >= med.doseRangeFeline[0] && med.tabletSizes[i] / kg <= med.doseRangeFeline[1]) {
@@ -504,6 +504,7 @@ const calcTablet = (medication, patient) => {
             returnedDose.push(goodDoseHi)
         }
     }
+    console.log(returnedDose)
     return returnedDose
 }
 
