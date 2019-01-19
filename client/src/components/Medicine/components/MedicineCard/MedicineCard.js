@@ -27,6 +27,29 @@ const styles = {
 }
 
 class MedicineCard extends Component {
+  
+  componentDidMount() {
+    console.log('MedicineCard:',this.props.userSession)
+  }
+
+  renderThirButton = () => {
+
+    if( this.props.viewThirdButton ) {
+      return(
+        <>
+          <Button size="small" variant="contained" color={this.props.viewButtonColor} 
+                  onClick={() => this.props.handleViewButtonSelection(this.props.med)} >{this.props.viewButtonLabel}</Button>
+        </> 
+      )
+    } else {
+      
+      return( 
+        <> 
+        </>
+      )
+    }
+
+  }
 
   render() {
     
@@ -49,11 +72,19 @@ class MedicineCard extends Component {
         </Typography>
       </CardContent>
       <CardActions> 
-        <Button size="small" variant="contained" color={this.props.leftbuttonColor} disabled={this.props.isDisabled}  
-                onClick={() => this.props.handleLeftButtonSelection(this.props.med)}>{this.props.leftButtonLabel}</Button>    
-        <Button size="small" variant="contained" color={this.props.rightbuttonColor} disabled={this.props.isDisabled}
+        
+        <Button size="small" variant="contained" color={this.props.leftbuttonColor} 
+                disabled={this.props.userSession.isAdmin ? false : true}  
+                onClick={() => this.props.handleLeftButtonSelection(this.props.med)}>{this.props.leftButtonLabel}</Button>  
+
+        <Button size="small" variant="contained" color={this.props.rightbuttonColor} 
+                disabled={this.props.userSession.isAdmin ? false : true}
                 onClick={() => this.props.handleRightButtonSelection(this.props.med)} >{this.props.rightButtonLabel}</Button>
         
+         {this.renderThirButton()}
+
+        }
+             
       </CardActions>
     </Card>
 
