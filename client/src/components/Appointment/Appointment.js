@@ -61,10 +61,9 @@ class Appointment extends Component {
   };
   
   componentDidMount() {
-    this.loadAppointData()
     this.loadDoctorData()
-    this.loadPatientData()
-
+    // this.loadAppointData()
+    // this.loadPatientData()
   };
 
   loadDoctorData = () => {
@@ -73,6 +72,7 @@ class Appointment extends Component {
       .then(res => {
         //console.log('doctors', res.data)
         this.setState({ doctors: res.data })
+        this.loadPatientData()
       })
       .catch(err => console.log(err))
   };
@@ -83,6 +83,7 @@ class Appointment extends Component {
       .then(res => {
         // console.log('patients', res.data)
         this.setState({ patients: res.data })
+        this.loadAppointData()
       })
       .catch(err => console.log(err))
   };
@@ -118,7 +119,8 @@ class Appointment extends Component {
         // Restore main view
         this.setState({ screenMode: 'list', targetAppoint: '' })
         // reload the data
-        this.loadAppointData()
+        // this.loadAppointData()
+        this.loadDoctorData()
       })
       .catch(err => console.log(err))
   };
@@ -131,7 +133,8 @@ class Appointment extends Component {
         // Restore main view
        this.setState({screenMode: 'list', targetAppoint: ''})  
        // reload the data
-      this.loadAppointData()
+      //this.loadAppointData()
+        this.loadDoctorData()
       })
       .catch(err => console.log(err))
   };

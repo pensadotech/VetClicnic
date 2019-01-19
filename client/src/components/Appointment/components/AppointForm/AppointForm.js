@@ -70,10 +70,13 @@ class AppointForm extends Component {
               appoint: this.props.appoint,
               _id: this.props.appoint._id, 
               title: this.props.appoint.title,
-              description: this.props.appoint.description
+              description: this.props.appoint.description,
+              selectedDoctor: this.props.appoint.doctor.name,
+              selectedPatient: this.props.appoint.patient.patientname
             })  
         }
     };
+
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -85,7 +88,7 @@ class AppointForm extends Component {
     const { name, value } = event.target;
     this.setState({ [name]: value })
     console.log(name)
-  }
+  };
 
   getDoctors = (doctorName) => {
     let targetDoctor = null;
@@ -98,13 +101,14 @@ class AppointForm extends Component {
       }
     }
   };
-
+  
   getPatients = (patientName) => {
     let targetPatient = null;
     let patientArr = this.props.patients
+    console.log(patientName)
     for (let i = 0; i < patientArr.length; i++) {
       let patient = patientArr[i]
-      if (patient.name === patientName) {
+      if (patient.patientname === patientName) {
         targetPatient = patient
         return targetPatient
       }
@@ -123,7 +127,9 @@ class AppointForm extends Component {
            // retreive the selected doctor in the screen
           let doctorObj = this.getDoctors(this.state.selectedDoctorName)
           // gete the selected patient from screen
+
           let patientObj = this.getPatients(this.state.selectedPatientName)
+        
           
          // translate
           let newApptData = { 
@@ -149,7 +155,8 @@ class AppointForm extends Component {
           let doctorObj = this.getDoctors(this.state.selectedDoctorName)
           // gete the selected patient from screen
           let patientObj = this.getPatients(this.state.selectedPatientName)
-          
+          console.log(this.state.date)
+          console.log(this.state.time)
          // translate
           let newApptData = { 
              title: this.state.title,

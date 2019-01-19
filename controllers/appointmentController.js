@@ -5,18 +5,24 @@ module.exports = {
 
   findAll: function (req, res) {
     db.Appointment.find({})
+      .populate('doctor')
+      .populate('patient')
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findOne: function (req, res) {
     // find record base on first or last name
     db.Appointment.findOne({ title: { $eq: req.params.title } })
+      .populate('doctor')
+      .populate('patient')
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findById: function (req, res) {
     db.Appointment
       .findById(req.params.id)
+      .populate('doctor')
+      .populate('patient')
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
