@@ -68,8 +68,8 @@ class PatientForm extends Component {
                 __id: this.props.__id,
                 weight: this.props.weight,
                 ownername: this.props.ownername,
-                phone: this.props.phone
-
+                phone: this.props.phone,
+                species: this.props.species
             })
         }
     }
@@ -96,6 +96,7 @@ class PatientForm extends Component {
                 ownername: this.state.ownername,
                 weight: this.state.weight,
                 phone: this.state.phone,
+                species: this.props.species
               }
     
               // send information back 
@@ -114,7 +115,8 @@ class PatientForm extends Component {
                 ownername: this.state.ownername,
                 weight: this.state.weight,
                 phone: this.state.phone,
-                formNumber: this.props.patientsLength
+                species: this.props.species
+                // formNumber: this.props.patientsLength
               }
               
               // Check if user already exist 

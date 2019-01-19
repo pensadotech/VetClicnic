@@ -10,6 +10,7 @@ import Calc from './components/Calc'
 import Medicine from './components/Medicine'
 import Appointment from './components/Appointment'
 import Prescription from './components/Prescription'
+import AboutUs from './components/AboutUs'
 import Admin from  './components/Admin'
 
 // API bridge for express routes
@@ -110,6 +111,7 @@ class App extends Component {
                <Route path='/medicines' component={Medicine} />
                <Route path='/appointments' component={Appointment} />
                <Route path='/prescriptions' component={Prescription} />
+               <Route path='/aboutus' component={AboutUs} />
                <Route path='/admin' component={Admin} />
              </div>
            </Router>             
