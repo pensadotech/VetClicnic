@@ -1,17 +1,17 @@
 // dependencies
 let mongoose = require('mongoose');
 // Save a reference to the Schema constructor
-let Schema = mongoose.Schema
+let Schema = mongoose.Schema;
 
 let AppointSchema = new Schema({
   date: {
     type: Date,
-    time: {
-      type: Number, default: (new Date()).getTime()
-    },
     default: Date.now,
     trim: true,
     required: 'Date is required'
+  },
+  time: {
+    type: Number, default: (new Date()).getTime(Number)
   },
   title: {
     type: String,

@@ -6,12 +6,12 @@ const calcSuspension = (medication, patient) => {
 
 
     if (patient.species === "Canine") {
-        let ml = med.doseCanine * kg / conc;
+        let ml = med.doseCanine * kg / med.premade[0].concentration;
         let mlLow = med.doseRangeCanine[0] * kg / med.premade[0].concentration;
         let mlHi = med.doseRangeCanine[1] * kg / med.premade[0].concentration;
-        if (med.premade[0].volume !== 0) {
+        if (med.premade[0].concentration !== 0) {
             if (med.doseCanine !== 0) {
-                for (int i = 0; i < med.premade.length; i++)
+                for (let i = 0; i < med.premade.length; i++)
                 {
 
                     let goodDose = {
@@ -27,8 +27,8 @@ const calcSuspension = (medication, patient) => {
                 }
 
             }
-            if (med.doseCanine === 0) {
-                for (int i = 0; i < med.premade.length; i++)
+            if (med.doseRangeCanine[0] !== 0) {
+                for (let i = 0; i < med.premade.length; i++)
                 {
 
                     let goodDose = {
@@ -48,12 +48,12 @@ const calcSuspension = (medication, patient) => {
         }
     }
     if (patient.species === "Feline") {
-        let ml = med.doseFeline * kg / conc;
+        let ml = med.doseFeline * kg / med.premade[0].concentration;
         let mlLow = med.doseRangeFeline[0] * kg / med.premade[0].concentration;
         let mlHi = med.doseRangeFeline[1] * kg / med.premade[0].concentration;
-        if (med.premade[0].volume !== 0) {
-            if (doseFeline !== 0) {
-                for (int i = 0; i < med.premade.length; i++)
+        if (med.premade[0].concentration !== 0) {
+            if (med.doseFeline !== 0) {
+                for (let i = 0; i < med.premade.length; i++)
                 {
 
                     let goodDose = {
@@ -69,8 +69,8 @@ const calcSuspension = (medication, patient) => {
                 }
 
             }
-            if (med.doseFeline === 0) {
-                for (int i = 0; i < med.premade.length; i++)
+            if (med.doseRangeFeline[0] !== 0) {
+                for (let i = 0; i < med.premade.length; i++)
                 {
 
                     let goodDose = {
@@ -89,6 +89,8 @@ const calcSuspension = (medication, patient) => {
                 }
             }
         }
+        console.log(returnedDose)
         return returnedDose;
     }
-    module.exports = calcInjectble;
+}
+    module.exports = calcSuspension

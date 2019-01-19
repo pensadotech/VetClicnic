@@ -292,7 +292,7 @@ class RecipeReviewCard extends React.Component {
         />
 
         <CardContent>
-          <Grid container spacing={12}>
+          <Grid container spacing={24}>
           </Grid>
           <Typography component="p">
             {this.props.doctor}
@@ -330,7 +330,7 @@ class RecipeReviewCard extends React.Component {
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Grid container spacing={12}>
+            <Grid container spacing={24}>
             <Grid item xs={12}>
             <Select
               id="types"

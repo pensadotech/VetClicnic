@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -25,68 +25,47 @@ const styles = theme => ({
   },
 });
 
-class SimpleSelect extends React.Component {
+class SimpleSelect extends Component {
   state = {
-    age: '',
-    name: 'hai',
+    selectedOption: '',
+    selectedName: '',
     labelWidth: 0
   };
 
   componentDidMount() {
     this.setState({
-      labelWidth: ReactDOM.findDOMNode(this.InputLabelRef)
+      labelWidth: ReactDOM.findDOMNode(this.InputLabelRef),
+      selectedName : this.props.selectedName
     });
   }
 
-  handleDoctorChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-  
-  handlePatientChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
   render() {
     const { classes } = this.props;
+    
+   
 
     return (
       <form className={classes.root} autoComplete="off">
+        
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="age-simple">Age</InputLabel>
-          <Select
-            value={this.state.age}
-            onChange={this.handleDoctorChange}
-            inputProps={{
-              name: 'age',
-              id: 'age-simple',
-            }}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
-        </FormControl>
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="age-helper">Age</InputLabel>
+          <InputLabel htmlFor="age-helper">{this.props.mainLabel}</InputLabel>
           <Select
             value={this.props.selectedName}
             onChange={this.props.handleSelection}
             name={this.props.fieldName}
-            input={<Input name="age" id="age-helper" />}
+            input={<Input name="selectedOption" id="age-helper" />}
           >
             {
-              this.state.optionArr.map((option, index) => (
-                <option value={option.name}>
-                  {option.name}
+              this.props.itemArr.map((item, index) => (
+                <option 
+                    key={index}
+                  value={this.props.table === 'patient' ? item.patientname : item.name}>
+                   {this.props.table === 'patient' ? item.patientname : item.name}
                 </option>  
              ))
-            }
-            
+            }    
           </Select>
-          <FormHelperText>Some important helper text</FormHelperText>
+          <FormHelperText>Select a {this.props.mainLabel}</FormHelperText>
         </FormControl>
       </form>
     );

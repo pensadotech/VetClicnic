@@ -162,12 +162,12 @@ componentDidMount = (props) => {
           />
 
         <CardContent>
-          <Grid container spacing={12}>
+          <Grid container spacing={24}>
           </Grid>
           <Typography component="p">
             {this.props.doctor}
           </Typography>
-          <Grid container spacing={12}>
+          <Grid container spacing={24}>
             <Grid item xs={6}>
               <Typography component="p">
                 {this.props.medication.name}:({this.props.medication.alias[0]}) {this.props.capSize}mg
@@ -210,7 +210,7 @@ componentDidMount = (props) => {
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
             {this.renderSuggestedDose(this.props.medication, this.props.patient)}
-            <Grid container spacing={12}>
+            <Grid container spacing={24}>
               <Grid item xs={6}>
                 <TextField
                   id="outlined-name"

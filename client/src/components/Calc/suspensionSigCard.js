@@ -209,10 +209,7 @@ class RecipeReviewCard extends React.Component {
     expanded: false,
     hours: 0,
     days: 0,
-    quantity: 0,
     notes: "",
-    route: null,
-    routes: null,
     removeMe: false
   };
 
@@ -233,26 +230,11 @@ class RecipeReviewCard extends React.Component {
   };
 
   componentWillReceiveProps = (props) => {
-    this.props.medication.injectable.routes.map(route => ({
-      label: route,
-    }))
     this.setState({
       hours: this.props.medication.hours,
       days: this.props.medication.days,
-      routes: this.props.medication.injectable.routes,
-      box: this.props.dose.boxSize,
       removeMe: false
     })
-  }
-
-  componentDidMount = () => {
-   let routeSuggestions = this.props.medication.injectable.routes.map(route => ({
-      value: route.label,
-      label: route.label,
-    }))
-    this.setState({
-      routes: routeSuggestions
-      })
   }
 
   render() {
@@ -286,7 +268,7 @@ class RecipeReviewCard extends React.Component {
         />
 
         <CardContent>
-          <Grid container spacing={12}>
+          <Grid container spacing={24}>
           </Grid>
           <Typography component="p">
             {this.props.doctor}
@@ -295,7 +277,7 @@ class RecipeReviewCard extends React.Component {
             {this.props.medication.name}: ({this.props.medication.alias[0]}) {this.props.medication.suspension.premade[0].concentration}mg/mL
           </Typography>
           <Typography component="p">
-            Give {this.props.dose.mL} mL orally every {this.props.medication.hours} for {this.props.medication.days} days.
+            Give {this.props.mL} mL orally every {this.props.medication.hours} for {this.props.medication.days} days.
           </Typography>
           <Typography component="p">
           {this.state.box}mL will last for {this.props.medication.days} days.
@@ -327,7 +309,7 @@ class RecipeReviewCard extends React.Component {
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Grid container spacing={12}>
+            <Grid container spacing={24}>
             <Grid item xs={6}>
             <Select
               id="types"

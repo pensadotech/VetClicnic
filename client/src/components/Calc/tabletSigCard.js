@@ -166,12 +166,12 @@ class RecipeReviewCard extends React.Component {
             />
 
             <CardContent>
-              <Grid container spacing={12}>
+              <Grid container spacing={24}>
               </Grid>
               <Typography component="p">
                 {this.props.doctor}
               </Typography>
-              <Grid container spacing={12}>
+              <Grid container spacing={24}>
                 <Grid item xs={6}>
                   <Typography component="p">
                     {this.props.medication.name}:({this.props.medication.alias[0]}) {this.props.tabSize}mg
@@ -216,7 +216,7 @@ class RecipeReviewCard extends React.Component {
             <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
               <CardContent>
                 {this.renderSuggestedDose(this.props.medication, this.props.patient)}
-                <Grid container spacing={12}>
+                <Grid container spacing={24}>
                   <Grid item xs={6}>
                     <TextField
                       id="outlined-name"
@@ -224,8 +224,8 @@ class RecipeReviewCard extends React.Component {
                       label="Hours"
                       className={classes.textField}
                       value={this.state.hours}
-                      onChange={this.handleChange('hours')}
                       defaultValue={this.props.medication.hours}
+                      onChange={this.handleChange('hours')}
                       margin="normal"
                       variant="outlined"
                     />
@@ -236,8 +236,8 @@ class RecipeReviewCard extends React.Component {
                       label="Days"
                       className={classes.textField}
                       value={this.state.days}
-                      onChange={this.handleChange('days')}
                       defaultValue={this.props.medication.days}
+                      onChange={this.handleChange('days')}
                       margin="normal"
                       variant="outlined"
                       type="number"
