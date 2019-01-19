@@ -77,6 +77,10 @@ const styles = theme => ({
       margin: '0px 0px 30px 30px',
       font: 'cursive'
     },
+    aboutP : {
+        color: 'darkgrey',
+        margin: '0px 0px 20px 20px',
+    },
     developerImage : {
       width: '200px',
       margin: '0px 20px 20px 25px'
@@ -115,23 +119,65 @@ class AboutUs extends Component {
             <Grid container spacing={0}>       
                 <Grid item>
                   <img className="developerImage imgRnd10 imageShadow imageRotate" src="public/images/jellyfish.jpg" alt="Armando Pensado" />
+                    <Typography>
+                        Skills:
+                    </Typography>
+                    <Typography>
+                        Hobbies:
+                    </Typography>
                 </Grid>
                 <Grid item>
                   <img className="developerImage imgRnd10 imageShadow imageRotate" src="public/images/jellyfish.jpg" alt="Aja Magdaleno"/>
+                  <Typography>
+                        Skills:
+                    </Typography>
+                    <Typography>
+                        Hobbies:
+                    </Typography>
                 <Grid item>
                   <img className="developerImage imgRnd10 imageShadow imageRotate" src="public/images/jellyfish.jpg" alt="James Rodgick" />
+                  <Typography>
+                        Skills:
+                    </Typography>
+                    <Typography>
+                        Hobbies:
+                    </Typography>
                 </Grid>
                 <Grid item>
                   <img className="developerImage imgRnd10 imageShadow imageRotate" src="public/images/jellyfish.jpg" alt="Tommy Dang" />
+                  <Typography>
+                        Skills:
+                    </Typography>
+                    <Typography>
+                        Hobbies:
+                    </Typography>
                 </Grid>
                 <Grid item>
                   <img className="developerImage imgRnd10 imageShadow imageRotate" src="public/images/jellyfish.jpg" alt="Eddie Kader" />
+                  <Typography>
+                        Skills:
+                    </Typography>
+                    <Typography>
+                        Hobbies:
+                    </Typography>
                 </Grid>
                 <Grid item>
                   <img className="developerImage imgRnd10 imageShadow imageRotate" src="public/images/jellyfish.jpg" alt="Sam Awi" />
+                  <Typography>
+                        Skills:
+                    </Typography>
+                    <Typography>
+                        Hobbies:
+                    </Typography>
                 </Grid>
                 <Grid item>
                   <img className="developerImage imgRnd10 imageShadow imageRotate" src="public/images/jellyfish.jpg" alt="Daniel Border" />
+                  <Typography>
+                        Skills:
+                    </Typography>
+                    <Typography>
+                        Hobbies:
+                    </Typography>
                 </Grid>
 
                

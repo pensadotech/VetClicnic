@@ -113,7 +113,8 @@ class App extends Component {
                <Route path='/medicines' component={Medicine} />
                <Route path='/appointments' component={Appointment} />
                <Route path='/prescriptions' component={this.state.sessionUser.isAdmin ? Prescription : MainMenu} />
-               <Route path='/calc' component={Calc} />            
+               <Route path='/calc' component={Calc} />         
+               <Route path='/aboutus' component={AboutUs} /> 
                <Route path='/admin' component={this.state.sessionUser.isAdmin ? Admin : MainMenu} />           
              </div>
            </Router>             
