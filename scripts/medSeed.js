@@ -2850,7 +2850,7 @@ const medsSeed = [{
   hours: 12,
   days: 14,
   description: "cerenia thingy",
-  link: "plumbs/cerenia",
+  link: "https://www.google.com",
   controlled: false,
   injectable: {
     available: true,
