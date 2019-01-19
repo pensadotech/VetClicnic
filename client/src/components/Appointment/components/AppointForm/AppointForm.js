@@ -55,6 +55,8 @@ class AppointForm extends Component {
     _id : '',
     title: '',
     description: '',
+    date: '',
+    time: '',
     appointmentError: '',
     selectedDoctorName : '',
     selectedPatientName: ''
@@ -87,7 +89,7 @@ class AppointForm extends Component {
 
   getDoctors = (doctorName) => {
     let targetDoctor = null;
-    let doctorArr = this.state.doctors
+    let doctorArr = this.props.doctors
     for (let i = 0; i < doctorArr.length; i++) {
       let doctor = doctorArr[i]
       if (doctor.name === doctorName) {
@@ -97,9 +99,9 @@ class AppointForm extends Component {
     }
   };
 
-  getPatient = (patientName) => {
+  getPatients = (patientName) => {
     let targetPatient = null;
-    let patientArr = this.state.patients
+    let patientArr = this.props.patients
     for (let i = 0; i < patientArr.length; i++) {
       let patient = patientArr[i]
       if (patient.name === patientName) {
@@ -118,14 +120,19 @@ class AppointForm extends Component {
           this.setState({appointmentError: 'Please provide appointment title and brief description'}) 
        } else {
                 
-           // translate
-           let newApptData = {
-              _id: this.state._id, 
-              title: this.state.title,
-              description: this.state.description,
-              appointmentCreated: Date.now()
-            //   needsEcnryption: doesItNeedEncryption 
-           }
+           // retreive the selected doctor in the screen
+          let doctorObj = this.getDoctors(this.state.selectedDoctorName)
+          // gete the selected patient from screen
+          let patientObj = this.getPatients(this.state.selectedPatientName)
+          
+         // translate
+          let newApptData = { 
+             title: this.state.title,
+             description: this.state.description,
+             appointmentCreated: Date.now(),
+             doctor: doctorObj,
+             patient: patientObj
+          } 
           
            // send information back 
            this.props.handleLeftButtonSelection(newApptData)
@@ -141,7 +148,7 @@ class AppointForm extends Component {
           // retreive the selected doctor in the screen
           let doctorObj = this.getDoctors(this.state.selectedDoctorName)
           // gete the selected patient from screen
-          let patientObj = this.getPatient(this.state.selectedPatientName)
+          let patientObj = this.getPatients(this.state.selectedPatientName)
           
          // translate
           let newApptData = { 
@@ -231,7 +238,7 @@ class AppointForm extends Component {
                     name='date'
                     type="date"
                     // autoComplete="current-fullname"
-                    value={this.state.Date}
+                    value={this.state.date}
                     onChange={this.handleInputChange}
                     margin="normal"
                     InputProps={{
@@ -249,10 +256,10 @@ class AppointForm extends Component {
                     id="apnt-time"
                     label="Time :"
                     className={classes.textField}
-                    name='date'
+                    name='time'
                     type="time"
                     // autoComplete="current-fullname"
-                    value={this.state.Date}
+                    value={this.state.time}
                     onChange={this.handleInputChange}
                     margin="normal"
                     InputProps={{
