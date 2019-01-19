@@ -97,7 +97,7 @@ class DoctorForm extends Component {
           phone: this.state.phone,
           mobilePhone: this.state.mobilePhone,
           email: this.state.email,
-          userCreated: Date.now(),
+          doctorCreated: Date.now(),
         }
 
         // send information back 
@@ -108,7 +108,7 @@ class DoctorForm extends Component {
 
       // ADD MODE: Validate
       if (this.state.name === '' || this.state.phone === '' || this.state.email === '') {
-      this.setState({ doctorError: 'Please provide name, number, and email' })
+        this.setState({ doctorError: 'Please provide name, number, and email' })
       } else {
 
         // Translation
@@ -117,31 +117,32 @@ class DoctorForm extends Component {
           phone: this.state.phone,
           mobilePhone: this.state.mobilePhone,
           email: this.state.email,
-          userCreated: Date.now(),
+          doctorCreated: Date.now(),
         }
 
         //Check if doctor already exit
-       APIdoctor.findOne(this.state.name)
-          .then(res => {  
-            if(res.data !== null) {
-            this.setState({userError: `The medication "${res.data.name}" already exist, please provide a new one`})  
-              } else {
-       
-        // Send New Doctor Data
-        this.props.handleLeftButtonSelection(newDoctorData)
+        APIdoctor.findOne(this.state.name)
+          .then(res => {
+            if (res.data !== null) {
+              this.setState({ userError: `The medication "${res.data.name}" already exist, please provide a new one` })
+            } else {
+
+              // Send New Doctor Data
+              this.props.handleLeftButtonSelection(newDoctorData)
+            }
+          })
+          .catch(err => console.log(err))
       }
-    })
-    .catch(err => console.log(err)) 
     }
   }
-  }
-  
+
   render() {
 
     const { classes } = this.props
 
     return (
       <>
+
         <Card className={classes.card}>
           <CardContent>
             <p className='DoctorError'>{this.state.DoctorError}</p>
@@ -237,11 +238,11 @@ class DoctorForm extends Component {
             <Button size="small" variant="contained" color={this.props.leftbuttonColor}
               onClick={() => this.handleSave()}>
               {this.props.leftButtonLabel}
-              </Button>
+            </Button>
             <Button size="small" variant="contained" color={this.props.rightbuttonColor}
               onClick={() => this.props.handleRightButtonSelection(this.state.doctor)} >
               {this.props.rightButtonLabel}
-              </Button>
+            </Button>
           </CardActions>
         </Card>
 
