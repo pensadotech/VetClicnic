@@ -29,6 +29,8 @@ const styles = {
 class AppointCard extends Component {
   render () {
     const { classes } = this.props;
+    
+    console.log(this.props.appt)
 
     return (
       <Card className={classes.card}>
@@ -40,7 +42,10 @@ class AppointCard extends Component {
             {this.props.appt.title}
           </Typography>
           <Typography className={classes.pos} color='textSecondary'>
-            Patient:
+            Doctor: {this.props.appt.doctor ? this.props.appt.doctor.name : ''}
+          </Typography>
+          <Typography className={classes.pos} color='textSecondary'>
+            Patient: {this.props.appt.patient ? this.props.appt.patient.patientname : ''}
           </Typography>
           <Typography component='p'>
             {this.props.appt.description}

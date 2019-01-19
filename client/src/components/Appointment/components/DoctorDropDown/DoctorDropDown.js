@@ -27,21 +27,21 @@ const styles = theme => ({
 
 class SimpleSelect extends Component {
   state = {
-    selectedOption: '',
     selectedName: '',
     labelWidth: 0
   };
 
   componentDidMount() {
+    console.log(this.state.selectedName)
     this.setState({
       labelWidth: ReactDOM.findDOMNode(this.InputLabelRef),
-      selectedName : this.props.selectedName
+      selectedName: this.props.selectedName
     });
   }
 
   render() {
     const { classes } = this.props;
-    
+    console.log(this.state.selectedName)
    
 
     return (
