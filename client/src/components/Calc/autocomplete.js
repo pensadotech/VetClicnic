@@ -288,8 +288,7 @@ class IntegrationReactSelect extends React.Component {
     owner: "",
     chart: 0,
     doctor: "",
-    tabletDose1: {},
-    tabletDose2: {},
+    tabletDose: [],
     suspensionDose: [],
     injectableDose: [],
     capsuleDose: []
@@ -417,14 +416,7 @@ class IntegrationReactSelect extends React.Component {
     }
     if (chosen === "Tablet") {
       let tabDose = calcTablet(medication, patient)
-      for (let i = 0; i < tabDose.length; i++) {
-        if (i === 0) {
-          this.setState({ tabletDose1: tabDose[i] })
-        }
-        if (i === 1) {
-          this.setState({ tabletDose2: tabDose[i] })
-        }
-      }
+      this.setState({ tabletDose: tabDose })
     }
     if (chosen === "Capsule") {
       let capDose = calcCapsule(medication, patient)
@@ -436,39 +428,51 @@ class IntegrationReactSelect extends React.Component {
     if (chosen === "Tablet") {
       return (
         <>
-          <TabletSigCard
-            medication={this.state.medication}
-            patient={this.state.patient}
-            doctor={this.state.doctor.label}
-            tabSize={this.state.tabletDose1.tabSize}
-            numTabs={this.state.tabletDose1.numTabs}
-            mgkg={this.state.tabletDose1}
-          />
+          {this.state.tabletDose.map(dose => (
+            <TabletSigCard
+              medication={this.state.medication}
+              patient={this.state.patient}
+              doctor={this.state.doctor.label}
+              tabSize={dose.tabSize}
+              numTabs={dose.numTabs}
+              mgkg={dose.mgkg}
+              removeMe={false}
+              key={dose}
+            />
+          ))}
+          <br/>
         </>
-      )
+      );
     } else if (chosen === "Injectable") {
-      return(
-        <>
-      <InjectSigCard
-        medication={this.state.medication}
-        patient={this.state.patient}
-        doctor={this.state.doctor.label}
-        dose={this.state.injectableDose}
-        />
-        </>
-        )
-    } else if (chosen === "Capsule") {
       return (
         <>
-          <CapsuleSigCard
+          <InjectSigCard
             medication={this.state.medication}
             patient={this.state.patient}
             doctor={this.state.doctor.label}
-            dose={this.state.capsuleDose}
+            dose={this.state.injectableDose}
           />
         </>
       )
-  } else if (chosen === "Suspension") {
+    } else if (chosen === "Capsule") {
+        return (
+          <>
+              {this.state.capsuleDose.map(dose => (
+                  <CapsuleSigCard
+                  medication={this.state.medication}
+                  patient={this.state.patient}
+                  doctor={this.state.doctor.label}
+                  capSize={dose.capSize}
+                  numCaps={dose.numCaps}
+                  mgkg={dose.mgkg}
+                  removeMe={false}
+                  key={dose}
+                  />
+              ))}  
+              <br/>
+          </>
+          );
+    } else if (chosen === "Suspension") {
       return (
         <>
           <SuspensionSigCard
@@ -479,8 +483,8 @@ class IntegrationReactSelect extends React.Component {
           />
         </>
       )
+    }
   }
-}
 
   render() {
     const { classes, theme } = this.props;

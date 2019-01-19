@@ -313,7 +313,7 @@ const medsSeed = [{
     doseRangeCanine: [0],
     doseFeline: 0,
     doseRangeFeline: [0],
-    alert: ""
+    alert: "Give with food."
   },
   suspension: {
     available: true,
@@ -322,7 +322,7 @@ const medsSeed = [{
     doseFeline: 0,
     doseRangeFeline: [0],
     premade: [{ concentration: 50, volume: 15 }, { concentration: 50, volume: 30 }],
-    alert: ""
+    alert: "Give with food."
   }
 }, {
   name: "Amoxicillin Clavulanate",
@@ -349,7 +349,7 @@ const medsSeed = [{
     doseRangeCanine: [0],
     doseFeline: 0,
     doseRangeFeline: [0],
-    alert: ""
+    alert: "Give with food."
   },
   capsule: {
     available: false,
@@ -367,7 +367,7 @@ const medsSeed = [{
     doseFeline: 0,
     doseRangeFeline: [0],
     premade: [{ concentration: 62.5, volume: 15 }, { concentration: 62.5, volume: 30 }],
-    alert: ""
+    alert: "Give with food. Keep refrigerated."
   }
 }, {
   name: "Ampicillin",
@@ -403,7 +403,7 @@ const medsSeed = [{
     doseRangeCanine: [0],
     doseFeline: 0,
     doseRangeFeline: [0],
-    alert: ""
+    alert: "Give with food."
   },
   suspension: {
     available: false,
@@ -894,7 +894,7 @@ const medsSeed = [{
   capsule: {
     available: true,
     capsuleSizes: [250, 500],
-    doseCanine: 0,
+    doseCanine: 25,
     doseRangeCanine: [0],
     doseFeline: 0,
     doseRangeFeline: [0],
@@ -2850,7 +2850,7 @@ const medsSeed = [{
   hours: 12,
   days: 14,
   description: "cerenia thingy",
-  link: "plumbs/cerenia",
+  link: "https://www.google.com",
   controlled: false,
   injectable: {
     available: true,

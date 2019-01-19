@@ -9,8 +9,10 @@ import AddIcon from '@material-ui/icons/Add'
 // Components
 import MedCard from './components/MedicineCard'
 import MedForm from './components/MedicineForm'
+import MedView from './components/MedicineView'
 // API
 import APImeds from '../../utils/APImeds'
+import APIsession from '../../utils/APIsession'
 
 const styles = theme => ({
   avatar: {
@@ -28,13 +30,25 @@ const styles = theme => ({
 class Medicine extends Component {
    
   state = {
+    sessionUser: '',
     meds: [],
     screenMode: 'list',
     targetMed: ''
   }
   
   componentDidMount() {
-    this.loadMeds()
+    this.loadData() 
+  }
+
+  loadData = () => {    
+    // have user logged-in
+    APIsession.getSessionUser()
+      .then(r => {  
+        let sessionUser = r.data
+        this.setState({ sessionUser : sessionUser }) 
+        this.loadMeds()   
+      })
+      .catch(err => console.log(err))
   }
 
   loadMeds = () => {
@@ -59,8 +73,18 @@ class Medicine extends Component {
     // Change screen mode to User DELETE mode, and store target-med
     this.setState({ screenMode: 'delete', targetMed: tgtMed })
   }
+  handleMedViewSelection = (tgtMed) => {
+    // Change screen mode to User DELETE mode, and store target-med
+    this.setState({ screenMode: 'view', targetMed: tgtMed })
+  }
 
   handleCreateMed =(tgtMed) => {
+     
+    console.log('create-med',tgtMed)
+    
+    // tst
+    this.setState({screenMode: 'list',targetMed: ''}) 
+
     // create new user
     APImeds.createUpdateMed(tgtMed)
       .then(r => {       
@@ -73,6 +97,9 @@ class Medicine extends Component {
   }
 
   handleSaveMed = (tgtMed) => {
+     
+    console.log('save-med',tgtMed)
+
     // Save updated user data    
     APImeds.updateMed(tgtMed._id, tgtMed)
       .then(r => {  
@@ -105,112 +132,146 @@ class Medicine extends Component {
 
 
   renderView = () => {
+
     const { classes } = this.props
-    
-    if (this.state.screenMode === 'add') {
-        
-      return(
-        <>
-          <h1 className={classes.pageHead}>
-            Add new medicine
-          </h1>
-          <MedForm 
-             mode={this.state.screenMode}
-            med=''
-            leftbuttonColor='primary'
-            leftButtonLabel='Add'
-            handleLeftButtonSelection={this.handleCreateMed}
-            rightbuttonColor='default'
-            rightButtonLabel='Cancel'   
-            handleRightButtonSelection={this.handleCancel}
-            isNameDisabled={false}
-          />
-        </>
-      ) // return()
-
-    } else  if (this.state.screenMode === 'edit') {
-
-      return(
-        <>
-          <h1 className={classes.pageHead}>
-            Update medicine information
-          </h1>
-          <MedForm 
-            mode={this.state.screenMode}
-            med={this.state.targetMed}
-            leftbuttonColor='primary'
-            leftButtonLabel='Save'
-            handleLeftButtonSelection={this.handleSaveMed}
-            rightbuttonColor='default'
-            rightButtonLabel='Cancel'   
-            handleRightButtonSelection={this.handleCancel}
-            isNameDisabled={true}
-          />
-        </>
-      ) // return()
-
-    } else  if (this.state.screenMode === 'delete') {
-
-      return(
-        <>
-          <div>
+     
+    if (this.state.sessionUser) {
+      
+      if (this.state.screenMode === 'add') {
+          
+        return(
+          <>
             <h1 className={classes.pageHead}>
-              Do you want to delete this Medicine?
+              Add new medicine
             </h1>
-            <MedCard 
-                   med={this.state.targetMed}
-                   leftbuttonColor='secondary'
-                   leftButtonLabel='Delete'
-                   handleLeftButtonSelection={this.handleDeleteMed}
-                   rightbuttonColor='default'
-                   rightButtonLabel='Cancel'
-                  isDisabled={false}
-                  handleRightButtonSelection={this.handleCancel}
-                 />   
-          </div>
-        </>
-      ) // return
+            <MedForm 
+              mode={this.state.screenMode}
+              med=''
+              leftbuttonColor='primary'
+              leftButtonLabel='Add'
+              handleLeftButtonSelection={this.handleCreateMed}
+              rightbuttonColor='default'
+              rightButtonLabel='Cancel'   
+              handleRightButtonSelection={this.handleCancel}
+              isNameDisabled={false}
+            />
+          </>
+        ) // return()
 
-    } else {
+      } else  if (this.state.screenMode === 'edit') {
 
-      return(
-        <>
-            <Grid container spacing={0}>
-            <Grid item>
-              <Avatar className={classes.avatar}>
-              <ColorizeIcon /> 
-              </Avatar>
-            </Grid>
-            <Grid item>
-              <h1 className={classes.pageHead}>Medications</h1>
-            </Grid>
-            <Grid item>
-              <Fab color="secondary" aria-label="Add" className={classes.fab}>
-                <AddIcon  onClick={() => this.handleMedAddSelection()}/>
-              </Fab>
-            </Grid>
-          </Grid>
+        return(
+          <>
+            <h1 className={classes.pageHead}>
+              Update medicine information
+            </h1>
+            <MedForm 
+              mode={this.state.screenMode}
+              med={this.state.targetMed}
+              leftbuttonColor='primary'
+              leftButtonLabel='Save'
+              handleLeftButtonSelection={this.handleSaveMed}
+              rightbuttonColor='default'
+              rightButtonLabel='Cancel'   
+              handleRightButtonSelection={this.handleCancel}
+              isNameDisabled={false}
+            />
+          </>
+        ) // return()
+
+      } else  if (this.state.screenMode === 'delete') {
+
+        return(
+          <>
+            <div>
+              <h1 className={classes.pageHead}>
+                Do you want to delete this Medicine?
+              </h1>
+              <MedCard 
+                    med={this.state.targetMed}
+                    userSession={this.state.sessionUser}
+                    leftbuttonColor='secondary'
+                    leftButtonLabel='Delete'
+                    handleLeftButtonSelection={this.handleDeleteMed}
+                    rightbuttonColor='default'
+                    rightButtonLabel='Cancel'
+                    handleRightButtonSelection={this.handleCancel}
+                    viewThirdButton={false}
+                    viewButtonColor='primary'
+                    viewButtonLabel='View'
+                    handleViewButtonSelection={this.handleMedViewSelection}   
+                  />   
+            </div>
+          </>
+        ) // return
+
+      } else  if (this.state.screenMode === 'view') {
+          
+        return(
+          <>
+            <h1 className={classes.pageHead}>
+              View medicine information
+            </h1>
+            <MedView 
+              mode={this.state.screenMode}
+              med={this.state.targetMed}
+              leftbuttonColor='primary'
+              leftButtonLabel='Save'
+              handleLeftButtonSelection={this.handleSaveMed}
+              rightbuttonColor='primary'
+              rightButtonLabel='Return'   
+              handleRightButtonSelection={this.handleCancel}
+              isNameDisabled={false}
+            />
+          </>
+        ) // return()
+          
+      }else {
         
-          <div>
-            {
-              this.state.meds.map((med, index) => (
-                 <MedCard 
-                   key={index}
-                   med={med}
-                   leftbuttonColor='primary'
-                   leftButtonLabel='Update'
-                   handleLeftButtonSelection={this.handleMedUpdateSelection}
-                   rightbuttonColor='secondary'
-                   rightButtonLabel='Remove'
-                  isDisabled={false}
-                  handleRightButtonSelection={this.handleMedDeleteSelection}
-                 />   
-              ))
-            }
-          </div>
-            
-        </>
-      ) // return()
+        return(
+          <>
+              <Grid container spacing={0}>
+              <Grid item>
+                <Avatar className={classes.avatar}>
+                <ColorizeIcon /> 
+                </Avatar>
+              </Grid>
+              <Grid item>
+                <h1 className={classes.pageHead}>Medications</h1>
+              </Grid>
+              <Grid item>
+                <Fab color="secondary" aria-label="Add" className={classes.fab}>
+                  <AddIcon  onClick={() => this.handleMedAddSelection()}/>
+                </Fab>
+              </Grid>
+            </Grid>
+          
+            <div>
+              {
+                this.state.meds.map((med, index) => (
+                  <MedCard 
+                    key={index}
+                    med={med}
+                    userSession={this.state.sessionUser}
+                    leftbuttonColor='primary'
+                    leftButtonLabel='Update'
+                    handleLeftButtonSelection={this.handleMedUpdateSelection}
+                    rightbuttonColor='secondary'
+                    rightButtonLabel='Remove'
+                    handleRightButtonSelection={this.handleMedDeleteSelection}
+                    viewThirdButton={true}
+                    viewButtonColor='primary'
+                    viewButtonLabel='View'
+                    handleViewButtonSelection={this.handleMedViewSelection}                  
+                  />   
+                ))
+              }
+            </div>
+              
+          </>
+        ) // return()
+
+      }
 
     }
   }

@@ -1,10 +1,17 @@
 // dependencies
-let mongoose = require('mongoose');
+let mongoose = require('mongoose')
+require('mongoose-double')(mongoose)
+
+let SchemaTypes = mongoose.Schema.Types
+
 // Save a reference to the Schema constructor
 let Schema = mongoose.Schema
 
-let AppointSchema = new Schema({
-  date: {
+let PrescriptionSchema = new Schema({
+  prescriptioNumber: {
+    type: SchemaTypes.Number
+  },
+  startDate: {
     type: Date,
     time: {
       type: Number, default: (new Date()).getTime()
@@ -13,15 +20,11 @@ let AppointSchema = new Schema({
     trim: true,
     required: 'Date is required'
   },
-  title: {
-    type: String,
-    trim: true,
-    required: 'Title is required'
+  frequency: {
+    type: SchemaTypes.Number
   },
-  description: {
-    type: String,
-    trim: true,
-    required: 'Breif description is required'
+  medDosage: {
+    type: SchemaTypes.Double
   },
   doctor: {
     type: Schema.Types.ObjectId,
@@ -31,15 +34,18 @@ let AppointSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Patient'
   },
-  appointCreated: {
+  medicine : {
+    type: Schema.Types.ObjectId,
+    ref: 'Meds'
+  },
+  RecordCreated: {
     type: Date,
     default: Date.now
-  }
-});
+  }  
+})
 
 // This creates our model from the above schema, using mongoose's model method
-const Appointment = mongoose.model('Appointments', AppointSchema);
+const Prescription = mongoose.model('Prescriptions', PrescriptionSchema);
 
 // Export the model
-module.exports = Appointment
-;
+module.exports = Prescription
