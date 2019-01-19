@@ -241,10 +241,10 @@ class Medicine extends Component {
               </Grid>
               <Grid item>
                 <Fab color="secondary" aria-label="Add" className={classes.fab} 
-                     disabled = {this.state.sessionUser.isAdmin ? false : true}>
-                  <AddIcon                       
-                       onClick={() => this.handleMedAddSelection()}
-                  />
+                     disabled = {this.state.sessionUser.isAdmin ? false : true}
+                     onClick={() => this.handleMedAddSelection()}
+                     >
+                  <AddIcon />
                 </Fab>
               </Grid>
             </Grid>
