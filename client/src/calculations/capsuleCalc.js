@@ -4,7 +4,7 @@ const calcCapsule = (medication, patient) => {
     let returnedDose = []
 
     //use only dosing specific to canines
-    if (patient.species === "canine") {
+    if (patient.species === "Canine") {
         //checks if the medication has a specific dosage as opposed to a range
         if (med.doseCanine !== 0) {
             //checks the mg/kg of all whole capsules - 1 capsule
@@ -62,7 +62,7 @@ const calcCapsule = (medication, patient) => {
     }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //use only dosing specific to fenines
-    if (patient.species === "feline") {
+    if (patient.species === "Feline") {
         //checks if the medication has a specific dosage as opposed to a range
         if (med.doseFeline !== 0) {
             //checks the mg/kg of all whole capsules - 1 capsule
@@ -121,7 +121,7 @@ const calcCapsule = (medication, patient) => {
     //end specific dose calcs
     //check for medications with a specific dose
     //check for canines
-    if (patient.species === "canine") {
+    if (patient.species === "Canine") {
         if (med.doseCanine !== 0) {
             // variables to hold one higher dose and one lower dose
             let mgKg = med.doseCanine;
@@ -185,26 +185,29 @@ const calcCapsule = (medication, patient) => {
                     numLow = 1;
                 }
             }
-            let goodDoseLow = {
-                medication: medication,
-                patient: patient,
-                capSize: capLow,
-                numCaps: numLow,
-                mgkg: mgKgLow.toFixed(2)
+            if(capLow !== 0){
+                let goodDoseLow = {
+                    medication: medication,
+                    patient: patient,
+                    capSize: capLow,
+                    numCaps: numLow,
+                    mgkg: mgKgLow
+                }
+                returnedDose.push(goodDoseLow)
             }
-            returnedDose.push(goodDoseLow)
+            
             let goodDoseHi = {
                 medication: medication,
                 patient: patient,
                 capSize: capHi,
                 numCaps: numHi,
-                mgkg: mgKgHi.toFixed(2)
+                mgkg: mgKgHi
             }
             returnedDose.push(goodDoseHi)
         }
     }
     //feline specific dosages
-    if (patient.species === "feline") {
+    if (patient.species === "Feline") {
         if (med.doseFeline !== 0) {
             // variables to hold one higher dose and one lower dose
             let mgKg = med.doseFeline;
@@ -319,20 +322,22 @@ const calcCapsule = (medication, patient) => {
                     numLow = 1;
                 }
             }
-            let goodDoseLow = {
-                medication: medication,
-                patient: patient,
-                capSize: capLow,
-                numCaps: numLow,
-                mgkg: mgKgLow.toFixed(2)
+            if(capLow !== 0){
+                let goodDoseLow = {
+                    medication: medication,
+                    patient: patient,
+                    capSize: capLow,
+                    numCaps: numLow,
+                    mgkg: mgKgLow
+                }
+                returnedDose.push(goodDoseLow)
             }
-            returnedDose.push(goodDoseLow)
             let goodDoseHi = {
                 medication: medication,
                 patient: patient,
                 capSize: capHi,
                 numCaps: numHi,
-                mgkg: mgKgHi.toFixed(2)
+                mgkg: mgKgHi
             }
             returnedDose.push(goodDoseHi)
         }

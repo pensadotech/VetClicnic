@@ -27,6 +27,8 @@ import classNames from 'classnames';
 import CancelIcon from '@material-ui/icons/Cancel';
 import Paper from '@material-ui/core/Paper';
 import { emphasize } from '@material-ui/core/styles/colorManipulator';
+import SendIcon from '@material-ui/icons/Send';
+import Plumbs from '../../images/plumbs.jpg'
 
 const styles = theme => ({
   card: {
@@ -89,6 +91,7 @@ const styles = theme => ({
   },
   avatar: {
     backgroundColor: red[500],
+    margin: 10,
   },
   divider: {
     height: theme.spacing.unit * 5,
@@ -209,7 +212,8 @@ class RecipeReviewCard extends React.Component {
     quantity: 0,
     notes: "",
     route: null,
-    routes: null
+    routes: null,
+    removeMe: false
   };
 
   handleExpandClick = () => {
@@ -232,10 +236,18 @@ class RecipeReviewCard extends React.Component {
     this.props.medication.injectable.routes.map(route => ({
       label: route,
     }))
+    let routeSuggestions = this.props.medication.injectable.routes.map(route => ({
+      value: route.label,
+      label: route.label,
+    }))
+    this.setState({
+      routes: routeSuggestions
+    })
     this.setState({
       hours: this.props.medication.hours,
       days: this.props.medication.days,
-      routes: this.props.medication.injectable.routes
+      routes: this.props.medication.injectable.routes,
+      removeMe: false
     })
   }
 
@@ -261,7 +273,7 @@ class RecipeReviewCard extends React.Component {
         },
       }),
     };
-
+    if (this.state.removeMe === false) {
     return (
       <Card className={classes.card}>
         <CardHeader
@@ -270,15 +282,17 @@ class RecipeReviewCard extends React.Component {
               Inj
             </Avatar>
           }
+          action={
+            <IconButton>
+              <CancelIcon onClick={() => this.setState({ removeMe: true })} />
+            </IconButton>
+          }
           title={this.props.patient.patientname}
           subheader={this.props.patient.ownername}
         />
 
         <CardContent>
-          <Grid container spacing={12}>
-            <div className="mui--text-caption">
-              {this.props.patient.phone} {this.props.patient.address}
-            </div>
+          <Grid container spacing={24}>
           </Grid>
           <Typography component="p">
             {this.props.doctor}
@@ -300,6 +314,9 @@ class RecipeReviewCard extends React.Component {
           <IconButton aria-label="Share">
             <PrintIcon />
           </IconButton>
+          <a href={this.props.medication.link} target="_blank">
+            <Avatar src={Plumbs} className={classes.avatar} />
+          </a>
           <IconButton
             className={classnames(classes.expand, {
               [classes.expandOpen]: this.state.expanded,
@@ -313,8 +330,8 @@ class RecipeReviewCard extends React.Component {
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Grid container spacing={12}>
-            <Grid item xs={6}>
+            <Grid container spacing={24}>
+            <Grid item xs={12}>
             <Select
               id="types"
               classes={classes}
@@ -346,7 +363,8 @@ class RecipeReviewCard extends React.Component {
         </Collapse>
       </Card>
     );
-  }
+  } else {return(null)}
+}
 }
 
 RecipeReviewCard.propTypes = {
