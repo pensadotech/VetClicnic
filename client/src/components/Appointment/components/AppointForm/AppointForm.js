@@ -11,7 +11,6 @@ import AccountCircle from '@material-ui/icons/AccountCircle'
 import PersonIcon from '@material-ui/icons/PermIdentity'
 // API
 import APIappointment from '../../../../utils/APIappointment'
-
 // Local style
 import './AppointForm'
 import MainSelect from "../DoctorDropDown";
@@ -62,8 +61,8 @@ class AppointForm extends Component {
   };
   
   componentDidMount = () => {
-      
-      if(this.props.appoint !== '') {
+    
+    if(this.props.appoint !== '') {
           this.setState({
               mode: this.props.mode,
               appoint: this.props.appoint,
@@ -74,7 +73,6 @@ class AppointForm extends Component {
         }
     };
 
- 
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value })  
@@ -154,7 +152,7 @@ class AppointForm extends Component {
              patient: patientObj
           } 
              
-          // Check if user already exist 
+          // Check if appt already exist 
          APIappointment.getApointments(this.state.title)
             .then(res => {  
 
@@ -203,7 +201,6 @@ class AppointForm extends Component {
                     }}
                   />   
               </div>
-
               <div className='formItem'> 
                   <TextField
                     required
@@ -225,15 +222,35 @@ class AppointForm extends Component {
                     }}
                   />                 
               </div>
-
               <div className='formItem'> 
                   <TextField
                     required
-                    id="apnt-dateTime"
-                    label="Date and Time :"
+                    id="apnt-date"
+                    label="Date :"
                     className={classes.textField}
-                    name='dateTime'
-                    type="number"
+                    name='date'
+                    type="date"
+                    // autoComplete="current-fullname"
+                    value={this.state.Date}
+                    onChange={this.handleInputChange}
+                    margin="normal"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                           <PersonIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />                 
+              </div>
+              <div className='formItem'> 
+                  <TextField
+                    required
+                    id="apnt-time"
+                    label="Time :"
+                    className={classes.textField}
+                    name='date'
+                    type="time"
                     // autoComplete="current-fullname"
                     value={this.state.Date}
                     onChange={this.handleInputChange}
@@ -250,7 +267,9 @@ class AppointForm extends Component {
 
               <div className='formItem'>
                 <MainSelect 
-                  optionArr={this.props.doctors}
+                  mainLabel='Doctor'
+                  table="doctor"
+                  itemArr={this.props.doctors}
                   fieldName={'selectedDoctorName'}
                   selectedName={this.state.selectedDoctorName}
                   handleSelection={this.handleDropSelection}/>
@@ -258,12 +277,13 @@ class AppointForm extends Component {
 
               <div className='formItem'>
                 <MainSelect
-                  optionArr={this.props.patients}
+                  mainLabel='Patient'
+                  table="patient"
+                  itemArr={this.props.patients}
                   fieldName={'selectedPatientName'}
                   selectedName={this.state.selectedPatientName}
                   handleSelection={this.handleDropSelection} />
               </div>
-
 
           </form>
         </CardContent>

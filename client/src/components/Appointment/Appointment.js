@@ -62,19 +62,26 @@ class Appointment extends Component {
   
   componentDidMount() {
     this.loadAppointData()
+    this.loadDoctorData()
+    this.loadPatientData()
+
   };
 
   loadDoctorData = () => {
+    //console.log('loadDoctorData')
     APIdoctor.getDoctors()
       .then(res => {
+        //console.log('doctors', res.data)
         this.setState({ doctors: res.data })
       })
       .catch(err => console.log(err))
   };
 
   loadPatientData = () => {
+    //console.log('loadPatientData')
     APIpatient.getPatients()
       .then(res => {
+        // console.log('patients', res.data)
         this.setState({ patients: res.data })
       })
       .catch(err => console.log(err))
@@ -83,6 +90,7 @@ class Appointment extends Component {
   loadAppointData = () => {
     APIappointment.getApointments()
     .then(res => {
+      // console.log('patients', res.data)
       this.setState({ aptments: res.data })
     })
     .catch(err => console.log(err))
