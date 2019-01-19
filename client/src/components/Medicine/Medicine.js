@@ -240,8 +240,11 @@ class Medicine extends Component {
                 <h1 className={classes.pageHead}>Medications</h1>
               </Grid>
               <Grid item>
-                <Fab color="secondary" aria-label="Add" className={classes.fab}>
-                  <AddIcon  onClick={() => this.handleMedAddSelection()}/>
+                <Fab color="secondary" aria-label="Add" className={classes.fab} 
+                     disabled = {this.state.sessionUser.isAdmin ? false : true}>
+                  <AddIcon                       
+                       onClick={() => this.handleMedAddSelection()}
+                  />
                 </Fab>
               </Grid>
             </Grid>

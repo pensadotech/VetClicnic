@@ -2,19 +2,13 @@ import React, { Component } from "react"
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import InputAdornment from '@material-ui/core/InputAdornment'
 import TextField from '@material-ui/core/TextField'
-import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
 import Checkbox from '@material-ui/core/Checkbox'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
-import ColorizeIcon from '@material-ui/icons/Colorize'
 // API
 import APImeds from '../../../../utils/APImeds'
 
