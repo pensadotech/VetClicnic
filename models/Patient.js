@@ -1,11 +1,10 @@
 // dependencies
 let mongoose = require('mongoose');
+
 //for the auto-increment _id
-// var autoincrement = require('mongoose-auto-increment-2');
+var autoincrement = require('mongoose-auto-increment-2');
 // Save a reference to the Schema constructor
 let Schema = mongoose.Schema;
-
-
 
 let PatientSchema = new Schema({
   patientname: {
@@ -68,7 +67,7 @@ let PatientSchema = new Schema({
 
 });
 
-// PatientSchema.plugin(autoincrement,{ field: 'chartNumber' });
+PatientSchema.plugin(autoincrement,{ field: 'chartNumber' });
 
 // This creates our model from the above schema, using mongoose's model method
 var Patient = mongoose.model('Patient', PatientSchema);

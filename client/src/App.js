@@ -10,6 +10,7 @@ import Calc from './components/Calc'
 import Medicine from './components/Medicine'
 import Appointment from './components/Appointment'
 import Prescription from './components/Prescription'
+import AboutUs from './components/AboutUs'
 import Admin from  './components/Admin'
 
 // API bridge for express routes

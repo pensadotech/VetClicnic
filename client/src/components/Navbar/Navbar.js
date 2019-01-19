@@ -22,6 +22,7 @@ import EventIcon from '@material-ui/icons/Event'
 import AssignmentIcon from '@material-ui/icons/Assignment'
 import SettingsIcon from '@material-ui/icons/Settings'
 import GradientIcon from '@material-ui/icons/Gradient'
+import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAlt'
 import Grid from '@material-ui/core/Grid'
 
 
@@ -122,6 +123,12 @@ class Navbar extends Component {
               <ListItem button key='Calculator'>
                 <ListItemIcon> <GradientIcon /></ListItemIcon>
                 <ListItemText primary='Dosage Calculator' />
+              </ListItem>
+           </Link>
+           <Link to='/aboutus' style={{ color: 'black', textDecoration: 'none' }}>
+              <ListItem button key='AboutUs'>
+                <ListItemIcon> <SentimentSatisfiedAltIcon /></ListItemIcon>
+                <ListItemText primary='About Us' />
               </ListItem>
            </Link>
         </List>

@@ -11,6 +11,7 @@ import ColorizeIcon from '@material-ui/icons/Colorize';
 import EventIcon from '@material-ui/icons/Event';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import GradientIcon from '@material-ui/icons/Gradient';
+import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAlt';
 
 import './MainMenu.css';
 
@@ -96,6 +97,18 @@ class MainMenu extends Component {
                     <GradientIcon />
                     <Typography variant='h6' color='inherit' className={classes.grow}>
                            Dosage Calculator
+                    </Typography>
+                  </IconButton>
+                  </div>
+              </Link>            
+            </Grid>
+            <Grid item>           
+              <Link to='/aboutus' style={{ color: 'black', textDecoration: 'none' }}>
+                <div className='menuBlock aboutus'>
+                  <IconButton color='inherit'>
+                    <SentimentSatisfiedAltIcon />
+                    <Typography variant='h6' color='inherit' className={classes.grow}>
+                           About Us
                     </Typography>
                   </IconButton>
                   </div>
