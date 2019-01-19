@@ -215,13 +215,9 @@ class Medicine extends Component {
             <MedView 
               mode={this.state.screenMode}
               med={this.state.targetMed}
-              leftbuttonColor='primary'
-              leftButtonLabel='Save'
-              handleLeftButtonSelection={this.handleSaveMed}
               rightbuttonColor='primary'
-              rightButtonLabel='Return'   
-              handleRightButtonSelection={this.handleCancel}
-              isNameDisabled={false}
+              rightButtonLabel='Return'  
+              handleRightButtonSelection={this.handleCancel} 
             />
           </>
         ) // return()

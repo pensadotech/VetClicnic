@@ -9,8 +9,6 @@ import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
-// API
-import APImeds from '../../../../utils/APImeds'
 
 const styles = theme => ({
   root: {
@@ -143,16 +141,6 @@ class MedicineForm extends Component {
     }
   }
 
-  handleInputChange = event => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value })  
-  }
-
-  handleCheckboxChange = name => event => {
-    this.setState({ [name]: event.target.checked });
-  }
-
-
   render() {
     
     const { classes } = this.props
@@ -180,9 +168,8 @@ class MedicineForm extends Component {
                               type="string"
                               autoComplete="current-medname"
                               value={this.state.name}
-                              onChange={this.handleInputChange}
                               margin="normal"
-                              disabled={this.props.isNameDisabled}
+                              disabled={true}
                             />   
                       </div>
                       <div className='formItem'>
@@ -195,8 +182,8 @@ class MedicineForm extends Component {
                               type="string"
                               autoComplete="current-alias"
                               value={this.state.alias}
-                              onChange={this.handleInputChange}
                               margin="normal"
+                              disabled={true}
                             />   
                       </div>
                       <div className='formItem'> 
@@ -208,8 +195,8 @@ class MedicineForm extends Component {
                             type="string"
                             autoComplete="current-description"
                             value={this.state.description}
-                            onChange={this.handleInputChange}
                             margin="normal"
+                            disabled={true}
                           />                 
                       </div>
                       <div className='formItem'> 
@@ -217,12 +204,12 @@ class MedicineForm extends Component {
                                 control={
                                     <Checkbox
                                       checked={this.state.controlled}
-                                      onChange={this.handleCheckboxChange('controlled')}
                                       value="controlled"
                                       color="primary"
+                                      disabled={true}
                                     />
                                   }
-                                  label="Controlled Medicine"
+                                  label="Controlled Medicine"                                
                               />                   
                             </div>      
                     </form>
@@ -241,9 +228,9 @@ class MedicineForm extends Component {
                                     control={
                                       <Checkbox
                                         checked={this.state.injectableAvailable}
-                                        onChange={this.handleCheckboxChange('injectableAvailable')}
                                         value="injectableAvailable"
                                         color="primary"
+                                        disabled={true}
                                       />
                                     }
                                     label="Available"
@@ -258,8 +245,8 @@ class MedicineForm extends Component {
                                     type="string"
                                     autoComplete="current-Concentration"
                                     value={this.state.injectableConcentration}
-                                    onChange={this.handleInputChange}
                                     margin="normal"
+                                    disabled={true}
                                   />          
                               </div>
                               <div className='formItem'> 
@@ -271,8 +258,8 @@ class MedicineForm extends Component {
                                   type="string"
                                   autoComplete="current-DoseCanine"
                                   value={this.state.injectableDoseCanine}
-                                  onChange={this.handleInputChange}
                                   margin="normal"
+                                  disabled={true}
                                 />          
                               </div>
                               <div className='formItem'> 
@@ -284,8 +271,8 @@ class MedicineForm extends Component {
                                       type="string"
                                       autoComplete="current-doseRangeCanine"
                                       value={this.state.injectableDoseRangeCanine}
-                                      onChange={this.handleInputChange}
                                       margin="normal"
+                                      disabled={true}
                                     />          
                               </div>
                               <div className='formItem'> 
@@ -297,8 +284,8 @@ class MedicineForm extends Component {
                                   type="string"
                                   autoComplete="current-DoseFeline"
                                   value={this.state.injectableDoseFeline}
-                                  onChange={this.handleInputChange}
                                   margin="normal"
+                                  disabled={true}
                                 />          
                               </div>
                               <div className='formItem'> 
@@ -310,8 +297,8 @@ class MedicineForm extends Component {
                                       type="string"
                                       autoComplete="current-doseRangeFeline"
                                       value={this.state.injectableDoseRangeFeline}
-                                      onChange={this.handleInputChange}
                                       margin="normal"
+                                      disabled={true}
                                     />          
                               </div>
                               <div className='formItem'> 
@@ -323,8 +310,8 @@ class MedicineForm extends Component {
                                       type="string"
                                       autoComplete="current-injectableRoutes"
                                       value={this.state.injectableRoutes}
-                                      onChange={this.handleInputChange}
                                       margin="normal"
+                                      disabled={true}
                                     />          
                               </div>
                           </form>
@@ -342,10 +329,9 @@ class MedicineForm extends Component {
                                 <FormControlLabel
                                   control={
                                     <Checkbox
-                                      checked={this.state.tabletAvailable}
-                                      onChange={this.handleCheckboxChange('tabletAvailable')}
-                                      value="tabletAvailable"
+                                      checked={this.state.tabletAvailable}                                      value="tabletAvailable"
                                       color="primary"
+                                      disabled={true}
                                     />
                                   }
                                   label="Available"
@@ -360,8 +346,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-tabletSizes"
                                 value={this.state.tabletSizes}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                             <div className='formItem'> 
@@ -373,8 +359,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-tabletDoseCanine"
                                 value={this.state.tabletDoseCanine}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                             <div className='formItem'> 
@@ -386,8 +372,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-tabletDoseRangeCanine"
                                 value={this.state.tabletDoseRangeCanine}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                             <div className='formItem'> 
@@ -399,8 +385,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-tabletDoseFeline"
                                 value={this.state.tabletDoseFeline}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                             <div className='formItem'> 
@@ -412,8 +398,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-tabletDoseRangeFeline"
                                 value={this.state.tabletDoseRangeFeline}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                           </form>
@@ -433,9 +419,9 @@ class MedicineForm extends Component {
                                   control={
                                     <Checkbox
                                       checked={this.state.capsuleAvailable}
-                                      onChange={this.handleCheckboxChange('capsuleAvailable')}
                                       value="capsuleAvailable"
                                       color="primary"
+                                      disabled={true}
                                     />
                                   }
                                   label="Available"
@@ -450,8 +436,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-capsuleSizes"
                                 value={this.state.capsuleSizes}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                             <div className='formItem'> 
@@ -463,8 +449,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-capsuleDoseCanine"
                                 value={this.state.capsuleDoseCanine}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                             <div className='formItem'> 
@@ -476,8 +462,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-capsuleDoseRangeCanine"
                                 value={this.state.capsuleDoseRangeCanine}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                             <div className='formItem'> 
@@ -489,8 +475,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-capsuleDoseFeline"
                                 value={this.state.capsuleDoseFeline}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                             <div className='formItem'> 
@@ -502,8 +488,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-capsuleDoseRangeFeline"
                                 value={this.state.capsuleDoseRangeFeline}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                           </form>
@@ -523,9 +509,9 @@ class MedicineForm extends Component {
                                   control={
                                     <Checkbox
                                       checked={this.state.suspensionAvailable}
-                                      onChange={this.handleCheckboxChange('suspensionAvailable')}
                                       value="suspensionAvailable"
                                       color="primary"
+                                      disabled={true}
                                     />
                                   }
                                   label="Available"
@@ -540,8 +526,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-suspensionDoseCanine"
                                 value={this.state.suspensionDoseCanine}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                             <div className='formItem'> 
@@ -553,8 +539,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-suspensionDoseRangeCanine"
                                 value={this.state.suspensionDoseRangeCanine}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                             <div className='formItem'> 
@@ -566,8 +552,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-suspensionDoseFeline"
                                 value={this.state.suspensionDoseFeline}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                             <div className='formItem'> 
@@ -579,8 +565,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-suspensionDoseRangeFeline"
                                 value={this.state.suspensionDoseRangeFeline}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                           </form>
