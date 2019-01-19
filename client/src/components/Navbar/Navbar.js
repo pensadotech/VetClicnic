@@ -125,12 +125,6 @@ class Navbar extends Component {
                 <ListItemText primary='Dosage Calculator' />
               </ListItem>
            </Link>
-           <Link to='/aboutus' style={{ color: 'black', textDecoration: 'none' }}>
-              <ListItem button key='AboutUs'>
-                <ListItemIcon> <SentimentSatisfiedAltIcon /></ListItemIcon>
-                <ListItemText primary='About Us' />
-              </ListItem>
-           </Link>
         </List>
         <Divider />
         <List>
@@ -138,6 +132,12 @@ class Navbar extends Component {
               <ListItem button key='Admin'>
                 <ListItemIcon> <SettingsIcon /></ListItemIcon>
                 <ListItemText primary='Admin' />
+              </ListItem>
+           </Link>
+           <Link to='/aboutus' style={{ color: 'black', textDecoration: 'none' }}>
+              <ListItem button key='AboutUs'>
+                <ListItemIcon> <SentimentSatisfiedAltIcon /></ListItemIcon>
+                <ListItemText primary='About Us' />
               </ListItem>
            </Link>
         </List>
