@@ -7,8 +7,8 @@ import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import ImportantDevicesIcon from '@material-ui/icons/ImportantDevices';
+// Components
+import AboutUsCard from './components/AboutUsCard'
 
 // API
 //import APIaboutus from '../../utils/APIaboutus'
@@ -17,7 +17,7 @@ import ImportantDevicesIcon from '@material-ui/icons/ImportantDevices';
 import './AboutUs.css'
 
 const styles = theme => ({
-    mainContainer: {
+    maincontainer: {
       display: 'flex',
       flexWrap: 'wrap',   
     },
@@ -77,6 +77,10 @@ const styles = theme => ({
       margin: '0px 0px 30px 30px',
       font: 'cursive'
     },
+    aboutP : {
+        color: 'darkgrey',
+        margin: '0px 0px 20px 20px',
+    },
     developerImage : {
       width: '200px',
       margin: '0px 20px 20px 25px'
@@ -92,58 +96,22 @@ class AboutUs extends Component {
   
       return (
         <>
-        <Grid mainContainer spacing={0}>
+        <Grid maincontainer spacing={0}>
         <Grid item>
         <Card className={classes.card}>       
           <CardContent> 
            <Typography className={classes.aboutTitle}>
                 Meet The Developers
             </Typography>
-            <Typography
-                InputProps={{
-                startAdornment: (
-                    <InputAdornment position="start">
-                    <ImportantDevicesIcon />
-                    </InputAdornment>
-                ),
-                }}
-            />
             <Typography className={classes.aboutSubtitle}>
-                {"BLUE!Team Design and Development"}
+            {"BLUe!Team Design and Development"}
             </Typography>
   
-            <Grid container spacing={0}>       
-                <Grid item>
-                  <img className="developerImage imgRnd10 imageShadow imageRotate" src="public/images/jellyfish.jpg" alt="Armando Pensado" />
-                </Grid>
-                <Grid item>
-                  <img className="developerImage imgRnd10 imageShadow imageRotate" src="public/images/jellyfish.jpg" alt="Aja Magdaleno"/>
-                <Grid item>
-                  <img className="developerImage imgRnd10 imageShadow imageRotate" src="public/images/jellyfish.jpg" alt="James Rodgick" />
-                </Grid>
-                <Grid item>
-                  <img className="developerImage imgRnd10 imageShadow imageRotate" src="public/images/jellyfish.jpg" alt="Tommy Dang" />
-                </Grid>
-                <Grid item>
-                  <img className="developerImage imgRnd10 imageShadow imageRotate" src="public/images/jellyfish.jpg" alt="Eddie Kader" />
-                </Grid>
-                <Grid item>
-                  <img className="developerImage imgRnd10 imageShadow imageRotate" src="public/images/jellyfish.jpg" alt="Sam Awi" />
-                </Grid>
-                <Grid item>
-                  <img className="developerImage imgRnd10 imageShadow imageRotate" src="public/images/jellyfish.jpg" alt="Daniel Border" />
+                <Grid container spacing={0}>       
+                    <AboutUsCard>
+                    </AboutUsCard>
                 </Grid>
 
-               
-                      <CardActions>
-                      <Button variant="contained" color="primary" className={classes.button} onClick={this.props.handleLogingAction}>
-                        Contact
-                      </Button>
-                      </CardActions> 
-                    
-              </Grid>
-  
-            </Grid>
             </CardContent>
         </Card> 
         </Grid>

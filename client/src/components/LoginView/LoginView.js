@@ -16,7 +16,7 @@ import PetsIcon from '@material-ui/icons/Pets'
 import './LoginView.css'
 
 const styles = theme => ({
-  mainContainer: {
+  maincontainer: {
     display: 'flex',
     flexWrap: 'wrap',   
   },
@@ -96,7 +96,7 @@ class LoginView extends Component {
 
     return (
       <>
-      <Grid mainContainer spacing={0}>
+      <Grid maincontainer spacing={0}>
       <Grid item>
       <Card className={classes.card}>       
         <CardContent> 

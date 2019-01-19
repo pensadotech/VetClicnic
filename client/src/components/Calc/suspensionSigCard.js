@@ -29,6 +29,7 @@ import Paper from '@material-ui/core/Paper';
 import { emphasize } from '@material-ui/core/styles/colorManipulator';
 import SendIcon from '@material-ui/icons/Send';
 import Plumbs from '../../images/plumbs.jpg'
+import Slider from '@material-ui/lab/Slider';
 
 const styles = theme => ({
   card: {
@@ -88,6 +89,9 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing.unit,
+  },
+  slider: {
+    padding: '22px 0px',
   },
   avatar: {
     backgroundColor: red[500],
@@ -210,7 +214,8 @@ class RecipeReviewCard extends React.Component {
     hours: 0,
     days: 0,
     notes: "",
-    removeMe: false
+    removeMe: false,
+    value: null
   };
 
   handleExpandClick = () => {
@@ -223,23 +228,57 @@ class RecipeReviewCard extends React.Component {
     });
   };
 
+  handleSliderChange = (event, value) => {
+    value = value.toFixed(2)
+    this.setState({ value });
+  };
+
   handleRouteChange = name => value => {
     this.setState({
       [name]: value,
     });
   };
 
-  componentWillReceiveProps = (props) => {
+  componentWillMount = (props) => {
     this.setState({
       hours: this.props.medication.hours,
       days: this.props.medication.days,
       removeMe: false
     })
+    if (this.props.mL === 0) {
+      let formatmL = ((this.props.low + this.props.hi) / 2).toFixed(2)
+      this.setState({
+      value: formatmL
+      })
+    }
+  }
+
+  renderRangeVariant = (props) => {
+    if (this.props.mL !== 0){
+      return(  
+        <>
+      <Typography component="p">
+            {this.props.boxSize}mL will last for {this.props.boxSize / this.state.value/(24 / this.state.hours)} days.
+          </Typography>
+          </>
+      )
+    } else if (this.props.low !== 0){
+      return(
+        <>
+        <Typography component="p">
+            Dosage range: {this.props.low.toFixed(2)} to {this.props.hi.toFixed(2)} mL.
+          </Typography>
+        <Typography component="p">
+          {this.props.boxSize}mL will last {parseInt(this.props.boxSize / this.state.value / (24 / this.props.medication.hours))} days.
+          </Typography>
+          </>
+      )
+    }
   }
 
   render() {
     const { classes, theme } = this.props;
-
+    const { value } = this.state;
     const selectStyles = {
       input: base => ({
         ...base,
@@ -277,10 +316,10 @@ class RecipeReviewCard extends React.Component {
             {this.props.medication.name}: ({this.props.medication.alias[0]}) {this.props.medication.suspension.premade[0].concentration}mg/mL
           </Typography>
           <Typography component="p">
-            Give {this.props.mL} mL orally every {this.props.medication.hours} for {this.props.medication.days} days.
+            Give {this.state.value} mL orally every {this.state.hours} hours for {this.state.days} days.
           </Typography>
           <Typography component="p">
-          {this.state.box}mL will last for {this.props.medication.days} days.
+            {this.props.medication.suspension.alert}
           </Typography>
           <Typography component="p">
             {this.state.notes}
@@ -309,22 +348,19 @@ class RecipeReviewCard extends React.Component {
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Grid container spacing={24}>
-            <Grid item xs={6}>
-            <Select
-              id="types"
-              classes={classes}
-              styles={selectStyles}
-              value={this.state.route}
-              options={this.state.routes}
-              onChange={this.handleRouteChange('route')}
-              components={components}
-              placeholder="Select Route"
-              isClearable
+        <Grid container spacing={24}>
+        <Grid item xs={12}>
+            {this.renderRangeVariant()}
+            <Slider
+              classes={{ container: classes.slider }}
+              value={value}
+              aria-labelledby="label"
+              onChange={this.handleSliderChange}
+              min={this.props.low}
+              max={this.props.hi}
+              
               />
               </Grid>
-              </Grid>
-            <Grid item xs={12}>
             <TextField
               id="outlined-multiline-flexible"
               label="Notes"
@@ -336,8 +372,8 @@ class RecipeReviewCard extends React.Component {
               fullWidth
               margin="normal"
               variant="outlined"
-            />
-            </Grid>
+              />
+              </Grid>
           </CardContent>
         </Collapse>
       </Card>
