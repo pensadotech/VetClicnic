@@ -10,9 +10,6 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 
-// API
-import APImeds from '../../../../utils/APImeds'
-
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -144,191 +141,6 @@ class MedicineForm extends Component {
     }
   }
 
-  handleInputChange = event => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value })  
-  }
-
-  handleCheckboxChange = name => event => {
-    this.setState({ [name]: event.target.checked });
-  }
-  
-
-  getInjectableObject = () => {
-
-    let injectableDoseRangeCanine = this.translateObjectToArray(this.state.injectableDoseRangeCanine,'float')
-    let injectableDoseRangeFeline = this.translateObjectToArray(this.state.injectableDoseRangeFeline,'float')
-
-    let injectableObj = {
-      available: this.state.injectableAvailable,
-      concentration: this.state.injectableConcentration,
-      doseCanine: this.state.injectableDoseCanine,
-      doseRangeCanine: injectableDoseRangeCanine,
-      doseFeline:this.state.injectableDoseFeline,
-      doseRangeFeline: injectableDoseRangeFeline,
-      routes: this.state.injectableRoutes
-    }
-
-    return injectableObj
-  }
-
-  getTabletObj = () => {
-         
-    let tabletSizes = this.translateObjectToArray(this.state.tabletSizes,'number')
-    let tabletDoseRangeCanine = this.translateObjectToArray(this.state.tabletDoseRangeCanine,'float')
-    let tabletDoseRangeFeline = this.translateObjectToArray(this.state.tabletDoseRangeFeline,'float')
-
-    let tabletObj = {
-      available: this.state.tabletAvailable,
-      tabletSizes: tabletSizes,
-      doseCanine: this.state.tabletDoseCanine,
-      doseRangeCanine: tabletDoseRangeCanine,
-      doseFeline: this.state.tabletDoseFeline,
-      doseRangeFeline: tabletDoseRangeFeline
-    }
-
-    return tabletObj
-  }
-
-  getCapsuleObj = () => {
-     
-    let capsuleSizes = this.translateObjectToArray(this.state.capsuleSizes,'number')
-    let capsuleDoseRangeCanine = this.translateObjectToArray(this.state.capsuleDoseRangeCanine,'float')
-    let capsuleDoseRangeFeline = this.translateObjectToArray(this.state.capsuleDoseRangeFeline,'float')
-
-    let capsuleObj = {
-      available: this.state.capsuleAvailable,
-      capsuleSizes: capsuleSizes,
-      doseCanine: this.state.capsuleDoseCanine,
-      doseRangeCanine: capsuleDoseRangeCanine,
-      doseFeline: this.state.capsuleDoseFeline,
-      doseRangeFeline: capsuleDoseRangeFeline
-    }
-
-    return capsuleObj
-
-  }
-
-  getSuspensionObj = () => {
-    
-    let suspensionDoseRangeCanine = this.translateObjectToArray(this.state.suspensionDoseRangeCanine,'float')
-    let suspensionDoseRangeFeline = this.translateObjectToArray(this.state.suspensionDoseRangeFeline,'float')
-
-    let suspensionObj = {
-      available: this.state.suspensionAvailable,
-      doseCanine: this.state.suspensionDoseCanine,
-      doseRangeCanine: suspensionDoseRangeCanine,
-      doseFeline: this.state.suspensionDoseFeline,
-      doseRangeFeline: suspensionDoseRangeFeline
-    }
-
-    return suspensionObj
-  }
-
-  translateObjectToArray = (tgtObj, convertToType = 'string') => {
-    
-    console.log('tgtObj',tgtObj)
-    console.log('isArray',Array.isArray(tgtObj))
-
-    let resArray = ['']
-    let finalArray = [''] 
-  
-    if (tgtObj !== undefined && Array.isArray(tgtObj)) {
-      resArray = tgtObj
-    } else if (tgtObj !== undefined && tgtObj !== '') {
-      resArray = tgtObj.split(',')
-    } 
-    
-    if (convertToType === 'number') {
-      resArray.forEach( (item,index) => {
-        finalArray[index] = parseInt(item)
-      })
-    } else if ( convertToType === 'float') {
-      resArray.forEach( (item,index) => {
-        finalArray[index] = parseFloat(item)
-      })
-    } else {
-      finalArray = resArray
-    }
-
-    console.log('finalArray',finalArray)
-  
-    return finalArray
-  }
-
-  handleSave = () => {
-    if (this.state.mode === 'edit') {
-      // EDIT MODE: Validate 
-      if (this.state.name === '' || this.state.description === '' )  {    
-        this.setState({userError: 'Please provide medication name and description'}) 
-       } else {          
-          // get children objects
-          let injectableObj = this.getInjectableObject()        
-          let tabletObj = this.getTabletObj()    
-          let capsuleObj = this.getCapsuleObj()
-          let suspensionObj = this.getSuspensionObj()
-
-          // translate
-          let newMed ={
-            _id: this.state._id,
-            name: this.state.name,
-            alias: this.state.alias,
-            description: this.state.description,
-            controlled: this.state.controlled,
-            injectable : injectableObj,
-            tablet : tabletObj,
-            capsule: capsuleObj,
-            suspension : suspensionObj
-          }
-
-          // send information back 
-          this.props.handleLeftButtonSelection(newMed)
-       }
-
-    } else {
-       // ADD MODE: Validate
-       if (this.state.name === '' || this.state.description === '' )  {    
-        this.setState({userError: 'Please provide medication name and description'}) 
-       } else {
-          
-          // get children objects
-          let injectableObj = this.getInjectableObject()        
-          let tabletObj = this.getTabletObj()  
-          let capsuleObj = this.getCapsuleObj()
-          let suspensionObj = this.getSuspensionObj()
-          
-          // translate elements into an array
-          let aliasArr = this.translateObjectToArray(this.state.alias) 
-          
-          // translate
-          let newMed ={
-            name: this.state.name,
-            alias: aliasArr,
-            description: this.state.description,
-            controlled: this.state.controlled,
-            injectable : injectableObj,
-            tablet : tabletObj,
-            capsule: capsuleObj,
-            suspension : suspensionObj
-          }
-          
-          // Check if user already exist 
-          APImeds.findOne(this.state.name)
-            .then(res => {  
-
-              if(res.data !== null) {
-                this.setState({userError: `The medication "${res.data.name}" already exist, please provide a new one`})  
-              } else {
-                // send information back 
-                this.props.handleLeftButtonSelection(newMed)
-              }           
-           })
-           .catch(err => console.log(err))   
-                     
-       }
-    }
-  }
-
   render() {
     
     const { classes } = this.props
@@ -356,9 +168,8 @@ class MedicineForm extends Component {
                               type="string"
                               autoComplete="current-medname"
                               value={this.state.name}
-                              onChange={this.handleInputChange}
                               margin="normal"
-                              disabled={this.props.isNameDisabled}
+                              disabled={true}
                             />   
                       </div>
                       <div className='formItem'>
@@ -371,8 +182,8 @@ class MedicineForm extends Component {
                               type="string"
                               autoComplete="current-alias"
                               value={this.state.alias}
-                              onChange={this.handleInputChange}
                               margin="normal"
+                              disabled={true}
                             />   
                       </div>
                       <div className='formItem'> 
@@ -384,8 +195,8 @@ class MedicineForm extends Component {
                             type="string"
                             autoComplete="current-description"
                             value={this.state.description}
-                            onChange={this.handleInputChange}
                             margin="normal"
+                            disabled={true}
                           />                 
                       </div>
                       <div className='formItem'> 
@@ -393,12 +204,12 @@ class MedicineForm extends Component {
                                 control={
                                     <Checkbox
                                       checked={this.state.controlled}
-                                      onChange={this.handleCheckboxChange('controlled')}
                                       value="controlled"
                                       color="primary"
+                                      disabled={true}
                                     />
                                   }
-                                  label="Controlled Medicine"
+                                  label="Controlled Medicine"                                
                               />                   
                             </div>      
                     </form>
@@ -417,9 +228,9 @@ class MedicineForm extends Component {
                                     control={
                                       <Checkbox
                                         checked={this.state.injectableAvailable}
-                                        onChange={this.handleCheckboxChange('injectableAvailable')}
                                         value="injectableAvailable"
                                         color="primary"
+                                        disabled={true}
                                       />
                                     }
                                     label="Available"
@@ -434,8 +245,8 @@ class MedicineForm extends Component {
                                     type="string"
                                     autoComplete="current-Concentration"
                                     value={this.state.injectableConcentration}
-                                    onChange={this.handleInputChange}
                                     margin="normal"
+                                    disabled={true}
                                   />          
                               </div>
                               <div className='formItem'> 
@@ -447,8 +258,8 @@ class MedicineForm extends Component {
                                   type="string"
                                   autoComplete="current-DoseCanine"
                                   value={this.state.injectableDoseCanine}
-                                  onChange={this.handleInputChange}
                                   margin="normal"
+                                  disabled={true}
                                 />          
                               </div>
                               <div className='formItem'> 
@@ -460,8 +271,8 @@ class MedicineForm extends Component {
                                       type="string"
                                       autoComplete="current-doseRangeCanine"
                                       value={this.state.injectableDoseRangeCanine}
-                                      onChange={this.handleInputChange}
                                       margin="normal"
+                                      disabled={true}
                                     />          
                               </div>
                               <div className='formItem'> 
@@ -473,8 +284,8 @@ class MedicineForm extends Component {
                                   type="string"
                                   autoComplete="current-DoseFeline"
                                   value={this.state.injectableDoseFeline}
-                                  onChange={this.handleInputChange}
                                   margin="normal"
+                                  disabled={true}
                                 />          
                               </div>
                               <div className='formItem'> 
@@ -486,8 +297,8 @@ class MedicineForm extends Component {
                                       type="string"
                                       autoComplete="current-doseRangeFeline"
                                       value={this.state.injectableDoseRangeFeline}
-                                      onChange={this.handleInputChange}
                                       margin="normal"
+                                      disabled={true}
                                     />          
                               </div>
                               <div className='formItem'> 
@@ -499,8 +310,8 @@ class MedicineForm extends Component {
                                       type="string"
                                       autoComplete="current-injectableRoutes"
                                       value={this.state.injectableRoutes}
-                                      onChange={this.handleInputChange}
                                       margin="normal"
+                                      disabled={true}
                                     />          
                               </div>
                           </form>
@@ -518,10 +329,9 @@ class MedicineForm extends Component {
                                 <FormControlLabel
                                   control={
                                     <Checkbox
-                                      checked={this.state.tabletAvailable}
-                                      onChange={this.handleCheckboxChange('tabletAvailable')}
-                                      value="tabletAvailable"
+                                      checked={this.state.tabletAvailable}                                      value="tabletAvailable"
                                       color="primary"
+                                      disabled={true}
                                     />
                                   }
                                   label="Available"
@@ -536,8 +346,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-tabletSizes"
                                 value={this.state.tabletSizes}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                             <div className='formItem'> 
@@ -549,8 +359,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-tabletDoseCanine"
                                 value={this.state.tabletDoseCanine}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                             <div className='formItem'> 
@@ -562,8 +372,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-tabletDoseRangeCanine"
                                 value={this.state.tabletDoseRangeCanine}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                             <div className='formItem'> 
@@ -575,8 +385,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-tabletDoseFeline"
                                 value={this.state.tabletDoseFeline}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                             <div className='formItem'> 
@@ -588,8 +398,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-tabletDoseRangeFeline"
                                 value={this.state.tabletDoseRangeFeline}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                           </form>
@@ -609,9 +419,9 @@ class MedicineForm extends Component {
                                   control={
                                     <Checkbox
                                       checked={this.state.capsuleAvailable}
-                                      onChange={this.handleCheckboxChange('capsuleAvailable')}
                                       value="capsuleAvailable"
                                       color="primary"
+                                      disabled={true}
                                     />
                                   }
                                   label="Available"
@@ -626,8 +436,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-capsuleSizes"
                                 value={this.state.capsuleSizes}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                             <div className='formItem'> 
@@ -639,8 +449,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-capsuleDoseCanine"
                                 value={this.state.capsuleDoseCanine}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                             <div className='formItem'> 
@@ -652,8 +462,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-capsuleDoseRangeCanine"
                                 value={this.state.capsuleDoseRangeCanine}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                             <div className='formItem'> 
@@ -665,8 +475,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-capsuleDoseFeline"
                                 value={this.state.capsuleDoseFeline}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                             <div className='formItem'> 
@@ -678,8 +488,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-capsuleDoseRangeFeline"
                                 value={this.state.capsuleDoseRangeFeline}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                           </form>
@@ -699,9 +509,9 @@ class MedicineForm extends Component {
                                   control={
                                     <Checkbox
                                       checked={this.state.suspensionAvailable}
-                                      onChange={this.handleCheckboxChange('suspensionAvailable')}
                                       value="suspensionAvailable"
                                       color="primary"
+                                      disabled={true}
                                     />
                                   }
                                   label="Available"
@@ -716,8 +526,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-suspensionDoseCanine"
                                 value={this.state.suspensionDoseCanine}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                             <div className='formItem'> 
@@ -729,8 +539,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-suspensionDoseRangeCanine"
                                 value={this.state.suspensionDoseRangeCanine}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                             <div className='formItem'> 
@@ -742,8 +552,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-suspensionDoseFeline"
                                 value={this.state.suspensionDoseFeline}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                             <div className='formItem'> 
@@ -755,8 +565,8 @@ class MedicineForm extends Component {
                                 type="string"
                                 autoComplete="current-suspensionDoseRangeFeline"
                                 value={this.state.suspensionDoseRangeFeline}
-                                onChange={this.handleInputChange}
                                 margin="normal"
+                                disabled={true}
                               />          
                             </div>
                           </form>
@@ -772,9 +582,6 @@ class MedicineForm extends Component {
        </CardContent>
 
        <CardActions>
-            <Button size="small" variant="contained" color={this.props.leftbuttonColor}  
-                onClick={() => this.handleSave()}>{this.props.leftButtonLabel}
-            </Button>
             <Button size="small" variant="contained" color={this.props.rightbuttonColor} 
                 onClick={() => this.props.handleRightButtonSelection(this.props.med)}>
                 {this.props.rightButtonLabel}

@@ -11,19 +11,19 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
 
 const medsSeed = [{
   name: "Acepromazine",
-  alias: [""],
+  alias: ["PromAce®"],
   hours: 12,
   days: 14,
-  description: "Sedative thingy",
-  link: "plumbs/ace",
+  description: "Phenothiazine Sedative/Tranquilizer",
+  link: "https://www.plumbsveterinarydrugs.com/#!/monograph/InADFktnHk",
   controlled: false,
   injectable: {
     available: true,
     concentration: 1,
-    doseCanine: 0.05,
-    doseRangeCanine: [0.03, 0.1],
-    doseFeline: 0.05,
-    doseRangeFeline: [0.03, 0.1],
+    doseCanine: 0,
+    doseRangeCanine: [0.01, 0.2],
+    doseFeline: 0,
+    doseRangeFeline: [0.01, 0.2],
     routes: ["IV", "IM", "SQ"],
     alert: ""
   },
@@ -31,7 +31,7 @@ const medsSeed = [{
     available: true,
     tabletSizes: [10, 25],
     doseCanine: 0,
-    doseRangeCanine: [0],
+    doseRangeCanine: [0.55, 2.2],
     doseFeline: 0,
     doseRangeFeline: [0],
     alert: ""
@@ -55,22 +55,22 @@ const medsSeed = [{
     alert: ""
   }
 }, {
-  name: "Adequan",
-  alias: [""],
-  hours: 12,
-  days: 14,
-  description: "Arthritis thingy",
-  link: "plumbs/adequan",
+  name: "Polysulfated Glycosaminoglycan",
+  alias: ["Adequan®"],
+  hours: 0,
+  days: 0,
+  description: "Proteolytic Enzyme Inhibitor, Chondroprotectant",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/NKPPXPvMpI",
   controlled: false,
   injectable: {
     available: true,
     concentration: 100,
     doseCanine: 4.4,
-    doseRangeCanine: [4, 5],
+    doseRangeCanine: [0],
     doseFeline: 0,
     doseRangeFeline: [0],
     routes: ["IM"],
-    alert: ""
+    alert: "Twice weekly for up to 4 weeks."
   },
   tablet: {
     available: false,
@@ -101,11 +101,11 @@ const medsSeed = [{
   }
 }, {
   name: "Alprazolam",
-  alias: ["Xanax"],
+  alias: ["Xanax®"],
   hours: 12,
   days: 14,
-  description: "xanax thingy",
-  link: "plumbs/xanax",
+  description: "Benzodiazepine, Sedative/Tranquilizer",
+  link: "https://www.plumbsveterinarydrugs.com/#!/monograph/0NWIBWBwSo/",
   controlled: true,
   injectable: {
     available: false,
@@ -121,10 +121,10 @@ const medsSeed = [{
     available: true,
     tabletSizes: [0.5, 1],
     doseCanine: 0,
-    doseRangeCanine: [0],
+    doseRangeCanine: [0.02, 0.1],
     doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
+    doseRangeFeline: [0.125, 0.25],
+    alert: "Give 30-60 minutes before triggering event."
   },
   capsule: {
     available: false,
@@ -146,11 +146,11 @@ const medsSeed = [{
   }
 }, {
   name: "Amikacin",
-  alias: [""],
+    alias: ["Amiglyde-V®"],
   hours: 12,
-  days: 14,
-  description: "other thingy",
-  link: "plumbs/amikacin",
+  days: 7,
+    description: "Aminoglycoside Antibiotic",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/i4lS9zaIxk/",
   controlled: false,
   injectable: {
     available: true,
@@ -158,8 +158,8 @@ const medsSeed = [{
     doseCanine: 10,
     doseRangeCanine: [8, 12],
     doseFeline: 0,
-    doseRangeFeline: [0],
-    routes: [""],
+    doseRangeFeline: [10, 15],
+    routes: ["IV","IM", "SQ"],
     alert: ""
   },
   tablet: {
@@ -194,18 +194,18 @@ const medsSeed = [{
   alias: [""],
   hours: 12,
   days: 14,
-  description: "amino thingy",
-  link: "plumbs/aminophylline",
+    description: "Phosphodiesterase Inhibitor Bronchodilator",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/b2DgzPgtdP/",
   controlled: false,
   injectable: {
     available: true,
     concentration: 25,
-    doseCanine: 7,
+    doseCanine: 0,
     doseRangeCanine: [3, 11],
     doseFeline: 0,
     doseRangeFeline: [0],
-    routes: ["IV"],
-    alert: ""
+    routes: ["IV","IM"],
+    alert: "Administer over at least several minutes or as an infusion."
   },
   tablet: {
     available: false,
@@ -236,11 +236,11 @@ const medsSeed = [{
   }
 }, {
   name: "Amitryptyline",
-  alias: [""],
+    alias: ["Elavil®"],
   hours: 12,
   days: 14,
-  description: "amitrypo thingy",
-  link: "plumbs/amitryptop",
+    description: "Tricyclic Behavior Modifier, Antipruritic, Neuropathic Pain Modifier",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/ZD52cH2F6D/",
   controlled: false,
   injectable: {
     available: false,
@@ -256,9 +256,9 @@ const medsSeed = [{
     available: true,
     tabletSizes: [10],
     doseCanine: 0,
-    doseRangeCanine: [0],
+    doseRangeCanine: [1, 2],
     doseFeline: 0,
-    doseRangeFeline: [0],
+    doseRangeFeline: [2.5, 12.5],
     alert: ""
   },
   capsule: {
@@ -281,11 +281,11 @@ const medsSeed = [{
   }
 }, {
   name: "Amoxicillin",
-  alias: [""],
+    alias: ["Amoxil®"],
   hours: 12,
   days: 14,
-  description: "amoxi thingy",
-  link: "plumbs/amoxicillin",
+    description: "Aminopenicillin",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/OY3UkyA1JA/",
   controlled: false,
   injectable: {
     available: true,
@@ -295,591 +295,6 @@ const medsSeed = [{
     doseFeline: 0,
     doseRangeFeline: [0],
     routes: ["IV"],
-    alert: ""
-  },
-  tablet: {
-    available: false,
-    tabletSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  capsule: {
-    available: true,
-    capsuleSizes: [500],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  suspension: {
-    available: true,
-    doseCanine: 11,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    premade: [{ concentration: 50, volume: 15 }, { concentration: 50, volume: 30 }],
-    alert: ""
-  }
-}, {
-  name: "Amoxicillin Clavulanate",
-  alias: [""],
-  hours: 12,
-  days: 14,
-  description: "clavamox thingy",
-  link: "plumbs/clavamox",
-  controlled: false,
-  injectable: {
-    available: false,
-    concentration: 0,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    routes: [""],
-    alert: ""
-  },
-  tablet: {
-    available: true,
-    tabletSizes: [62.5, 125, 250, 375],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  capsule: {
-    available: false,
-    capsuleSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  suspension: {
-    available: true,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    premade: [{ concentration: 62.5, volume: 15 }, { concentration: 62.5, volume: 30 }],
-    alert: ""
-  }
-}, {
-  name: "Ampicillin",
-  alias: [""],
-  hours: 12,
-  days: 14,
-  description: "ampi thingy",
-  link: "plumbs/ampicillin",
-  controlled: false,
-  injectable: {
-    available: true,
-    concentration: 100,
-    doseCanine: 22,
-    doseRangeCanine: [18, 24],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    routes: ["IV"],
-    alert: ""
-  },
-  tablet: {
-    available: false,
-    tabletSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  capsule: {
-    available: true,
-    capsuleSizes: [500],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  suspension: {
-    available: false,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    premade: [{ concentration: 0, volume: 0 }],
-    alert: ""
-  }
-}, {
-  name: "Antesedan",
-  alias: [""],
-  hours: 12,
-  days: 14,
-  description: "anti thingy",
-  link: "plumbs/antesedan",
-  controlled: false,
-  injectable: {
-    available: true,
-    concentration: 5,
-    doseCanine: 1,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    routes: ["IV", "IM", "SQ"],
-    alert: ""
-  },
-  tablet: {
-    available: false,
-    tabletSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  capsule: {
-    available: false,
-    capsuleSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  suspension: {
-    available: false,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    premade: [{ concentration: 0, volume: 0 }],
-    alert: ""
-  }
-}, {
-  name: "Apomorphine",
-  alias: [""],
-  hours: 12,
-  days: 14,
-  description: "apo thingy",
-  link: "plumbs/antesedan",
-  controlled: false,
-  injectable: {
-    available: true,
-    concentration: 3,
-    doseCanine: 0.03,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    routes: ["IV"],
-    alert: ""
-  },
-  tablet: {
-    available: true,
-    tabletSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  capsule: {
-    available: false,
-    capsuleSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  suspension: {
-    available: false,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    premade: [{ concentration: 0, volume: 0 }],
-    alert: ""
-  }
-}, {
-  name: "Atropine",
-  alias: [""],
-  hours: 12,
-  days: 14,
-  description: "atro thingy",
-  link: "plumbs/atropine",
-  controlled: false,
-  injectable: {
-    available: true,
-    concentration: 0.54,
-    doseCanine: 0.05,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    routes: ["IV", "IM", "SQ"],
-    alert: ""
-  },
-  tablet: {
-    available: false,
-    tabletSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  capsule: {
-    available: false,
-    capsuleSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  suspension: {
-    available: false,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    premade: [{ concentration: 0, volume: 0 }],
-    alert: ""
-  }
-}, {
-  name: "Azithromycin",
-  alias: [""],
-  hours: 12,
-  days: 14,
-  description: "azithro thingy",
-  link: "plumbs/azithromycin",
-  controlled: false,
-  injectable: {
-    available: false,
-    concentration: 0,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    routes: [""],
-    alert: ""
-  },
-  tablet: {
-    available: false,
-    tabletSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  capsule: {
-    available: false,
-    capsuleSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  suspension: {
-    available: true,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    premade: [{ concentration: 40, volume: 30 }],
-    alert: ""
-  }
-}, {
-  name: "Benazapril",
-  alias: [""],
-  hours: 12,
-  days: 14,
-  description: "benaza thingy",
-  link: "plumbs/benaza",
-  controlled: false,
-  injectable: {
-    available: false,
-    concentration: 0,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    routes: [""],
-    alert: ""
-  },
-  tablet: {
-    available: true,
-    tabletSizes: [5],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  capsule: {
-    available: false,
-    capsuleSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  suspension: {
-    available: false,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    premade: [{ concentration: 0, volume: 0 }],
-    alert: ""
-  }
-}, {
-  name: "Bupivicaine",
-  alias: [""],
-  hours: 12,
-  days: 14,
-  description: "bupivi thingy",
-  link: "plumbs/bupivicaine",
-  controlled: false,
-  injectable: {
-    available: true,
-    concentration: 5,
-    doseCanine: 1.5,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    routes: ["IM", "ID"],
-    alert: ""
-  },
-  tablet: {
-    available: false,
-    tabletSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  capsule: {
-    available: false,
-    capsuleSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  suspension: {
-    available: false,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    premade: [{ concentration: 0, volume: 0 }],
-    alert: ""
-  }
-}, {
-  name: "Buprenorphine",
-  alias: [""],
-  hours: 12,
-  days: 14,
-  description: "bup thingy",
-  link: "plumbs/buprenorphine",
-  controlled: true,
-  injectable: {
-    available: true,
-    concentration: 0.3,
-    doseCanine: 1.5,
-    doseRangeCanine: [1, 2],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    routes: ["IV", "IM", "SQ"],
-    alert: ""
-  },
-  tablet: {
-    available: false,
-    tabletSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  capsule: {
-    available: false,
-    capsuleSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  suspension: {
-    available: false,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    premade: [{ concentration: 0, volume: 0 }],
-    alert: ""
-  }
-}, {
-  name: "Butorphanol",
-  alias: [""],
-  hours: 12,
-  days: 14,
-  description: "anti thingy",
-  link: "plumbs/butorphanol",
-  controlled: true,
-  injectable: {
-    available: true,
-    concentration: 10,
-    doseCanine: 0.4,
-    doseRangeCanine: [0.2, 0.6],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    routes: ["IV", "IM", "SQ"],
-    alert: ""
-  },
-  tablet: {
-    available: true,
-    tabletSizes: [5],
-    doseCanine: 0.55,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  capsule: {
-    available: false,
-    capsuleSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  suspension: {
-    available: false,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    premade: [{ concentration: 0, volume: 0 }],
-    alert: ""
-  }
-}, {
-  name: "Capromorelin",
-  alias: ["Entyce"],
-  hours: 12,
-  days: 14,
-  description: "entyce thingy",
-  link: "plumbs/entyce",
-  controlled: false,
-  injectable: {
-    available: false,
-    concentration: 0,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    routes: [""],
-    alert: ""
-  },
-  tablet: {
-    available: false,
-    tabletSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  capsule: {
-    available: false,
-    capsuleSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  suspension: {
-    available: true,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    premade: [{ concentration: 30, volume: 15 }, { concentration: 30, volume: 30 }],
-    alert: ""
-  }
-}, {
-  name: "Carprofen",
-  alias: ["Rimadyl", "Rovera"],
-  hours: 12,
-  days: 14,
-  description: "rimadyl thingy",
-  link: "plumbs/rimady",
-  controlled: false,
-  injectable: {
-    available: true,
-    concentration: 50,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    routes: [""],
-    alert: ""
-  },
-  tablet: {
-    available: true,
-    tabletSizes: [25, 75, 100],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  capsule: {
-    available: false,
-    capsuleSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  suspension: {
-    available: false,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    premade: [{ concentration: 0, volume: 0 }],
-    alert: ""
-  }
-}, {
-  name: "Cefalexin",
-  alias: [""],
-  hours: 12,
-  days: 14,
-  description: "cefalexin thingy",
-  link: "plumbs/cefalexin",
-  controlled: false,
-  injectable: {
-    available: false,
-    concentration: 0,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    routes: [""],
     alert: ""
   },
   tablet: {
@@ -895,36 +310,81 @@ const medsSeed = [{
     available: true,
     capsuleSizes: [250, 500],
     doseCanine: 0,
+    doseRangeCanine: [11, 15],
+    doseFeline: 0,
+    doseRangeFeline: [11, 15],
+    alert: "Give with food."
+  },
+  suspension: {
+    available: true,
+    doseCanine: 0,
+    doseRangeCanine: [11, 15],
+    doseFeline: 0,
+    doseRangeFeline: [11, 15],
+    premade: [{ concentration: 50, volume: 15 }, { concentration: 50, volume: 30 }],
+    alert: "Give with food."
+  }
+}, {
+  name: "Amoxicillin Clavulanate",
+    alias: ["Clavamox®"],
+  hours: 12,
+  days: 14,
+    description: "Potentiated Aminopenicillin",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/6v6zCQ9xHJ/",
+  controlled: false,
+  injectable: {
+    available: false,
+    concentration: 0,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    routes: [""],
+    alert: ""
+  },
+  tablet: {
+    available: true,
+    tabletSizes: [62.5, 125, 250, 375],
+    doseCanine: 0,
+    doseRangeCanine: [12.5, 25],
+    doseFeline: 0,
+    doseRangeFeline: [12.5, 25],
+    alert: "Give with food."
+  },
+  capsule: {
+    available: false,
+    capsuleSizes: [0],
+    doseCanine: 0,
     doseRangeCanine: [0],
     doseFeline: 0,
     doseRangeFeline: [0],
     alert: ""
   },
   suspension: {
-    available: false,
+    available: true,
     doseCanine: 0,
-    doseRangeCanine: [0],
+    doseRangeCanine: [12.5, 25],
     doseFeline: 0,
-    doseRangeFeline: [0],
-    premade: [{ concentration: 0, volume: 0 }],
-    alert: ""
+    doseRangeFeline: [12.5, 25],
+    premade: [{ concentration: 62.5, volume: 15 }, { concentration: 62.5, volume: 30 }],
+    alert: "Give with food. Keep refrigerated."
   }
 }, {
-  name: "Cefazolin",
-  alias: [""],
-  hours: 12,
+  name: "Ampicillin",
+    alias: [""],
+  hours: 8,
   days: 14,
-  description: "cefaz thingy",
-  link: "plumbs/cefazolin",
+    description: "Aminopenicillin",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/z3agzaIA7H/",
   controlled: false,
   injectable: {
     available: true,
     concentration: 100,
-    doseCanine: 22,
-    doseRangeCanine: [18, 26],
+    doseCanine: 0,
+    doseRangeCanine: [20, 40],
     doseFeline: 0,
-    doseRangeFeline: [0],
-    routes: ["SQ", "IV"],
+    doseRangeFeline: [20, 40],
+    routes: ["IV", "IM", "SQ"],
     alert: ""
   },
   tablet: {
@@ -955,376 +415,16 @@ const medsSeed = [{
     alert: ""
   }
 }, {
-  name: "Cefovecin",
-  alias: ["Convenia"],
-  hours: 12,
-  days: 14,
-  description: "conve thingy",
-  link: "plumbs/convenia",
+    name: "Atipamezole",
+    alias: ["Antisedan®"],
+  hours: 0,
+  days: 0,
+    description: "Alpha-2 Adrenergic Antagonist",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/0ZHDbLgl7W/",
   controlled: false,
   injectable: {
     available: true,
-    concentration: 80,
-    doseCanine: 8,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    routes: ["SQ"],
-    alert: ""
-  },
-  tablet: {
-    available: false,
-    tabletSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  capsule: {
-    available: false,
-    capsuleSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  suspension: {
-    available: false,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    premade: [{ concentration: 0, volume: 0 }],
-    alert: ""
-  }
-}, {
-  name: "Cefpodoxime",
-  alias: ["Simplicef"],
-  hours: 12,
-  days: 14,
-  description: "simpli  thingy",
-  link: "plumbs/csimply",
-  controlled: false,
-  injectable: {
-    available: false,
-    concentration: 0,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    routes: [""],
-    alert: ""
-  },
-  tablet: {
-    available: true,
-    tabletSizes: [100, 200],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  capsule: {
-    available: false,
-    capsuleSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  suspension: {
-    available: false,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    premade: [{ concentration: 0, volume: 0 }],
-    alert: ""
-  }
-}, {
-  name: "Chloramphenicol",
-  alias: [""],
-  hours: 12,
-  days: 14,
-  description: "chlorfieind  thingy",
-  link: "plumbs/chloram",
-  controlled: false,
-  injectable: {
-    available: false,
-    concentration: 0,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    routes: [""],
-    alert: ""
-  },
-  tablet: {
-    available: true,
-    tabletSizes: [500, 1000],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  capsule: {
-    available: false,
-    capsuleSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  suspension: {
-    available: false,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    premade: [{ concentration: 0, volume: 0 }],
-    alert: ""
-  }
-}, {
-  name: "Chlorpheniramine",
-  alias: [""],
-  hours: 12,
-  days: 14,
-  description: "chlorp thingy",
-  link: "plumbs/cchlorp",
-  controlled: false,
-  injectable: {
-    available: false,
-    concentration: 0,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    routes: [""],
-    alert: ""
-  },
-  tablet: {
-    available: true,
-    tabletSizes: [4],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  capsule: {
-    available: false,
-    capsuleSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  suspension: {
-    available: false,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    premade: [{ concentration: 0, volume: 0 }],
-    alert: ""
-  }
-}, {
-  name: "Clindamycin",
-  alias: [""],
-  hours: 12,
-  days: 14,
-  description: "clinda thingy",
-  link: "plumbs/clindamycin",
-  controlled: false,
-  injectable: {
-    available: true,
-    concentration: 150,
-    doseCanine: 12.5,
-    doseRangeCanine: [10, 15],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    routes: ["IV", "SQ"],
-    alert: ""
-  },
-  tablet: {
-    available: false,
-    tabletSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  capsule: {
-    available: true,
-    capsuleSizes: [75, 150],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  suspension: {
-    available: true,
-    doseCanine: 0,
-    doseRangeCanine: [5.5, 10],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    premade: [{ concentration: 25, volume: 20 }],
-    alert: ""
-  }
-}, {
-  name: "Clomipramine",
-  alias: ["Clomicalm"],
-  hours: 12,
-  days: 14,
-  description: "comaa thingy",
-  link: "plumbs/cloma",
-  controlled: false,
-  injectable: {
-    available: false,
-    concentration: 0,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    routes: [""],
-    alert: ""
-  },
-  tablet: {
-    available: true,
-    tabletSizes: [20],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  capsule: {
-    available: false,
-    capsuleSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  suspension: {
-    available: false,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    premade: [{ concentration: 0, volume: 0 }],
-    alert: ""
-  }
-}, {
-  name: "Cyclosporine",
-  alias: [""],
-  hours: 12,
-  days: 14,
-  description: "cyclo",
-  link: "plumbs/cyclosporine",
-  controlled: false,
-  injectable: {
-    available: false,
-    concentration: 0,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    routes: [""],
-    alert: ""
-  },
-  tablet: {
-    available: false,
-    tabletSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  capsule: {
-    available: true,
-    capsuleSizes: [10, 25, 100],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  suspension: {
-    available: true,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    premade: [{ concentration: 100, volume: 5 }],
-    alert: ""
-  }
-}, {
-  name: "Cyproheptadine",
-  alias: [""],
-  hours: 12,
-  days: 14,
-  description: "cyprothihngg",
-  link: "plumbs/cyprthin",
-  controlled: false,
-  injectable: {
-    available: false,
-    concentration: 0,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    routes: [""],
-    alert: ""
-  },
-  tablet: {
-    available: true,
-    tabletSizes: [4],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  capsule: {
-    available: false,
-    capsuleSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  suspension: {
-    available: false,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    premade: [{ concentration: 0, volume: 0 }],
-    alert: ""
-  }
-}, {
-  name: "Depo-Medrol",
-  alias: [""],
-  hours: 12,
-  days: 14,
-  description: "depom thingy",
-  link: "plumbs/depomedrol",
-  controlled: false,
-  injectable: {
-    available: true,
-    concentration: 20,
+    concentration: 5,
     doseCanine: 1,
     doseRangeCanine: [0],
     doseFeline: 0,
@@ -1360,12 +460,912 @@ const medsSeed = [{
     alert: ""
   }
 }, {
-  name: "Dexdomitor",
+  name: "Apomorphine",
+    alias: ["Apometic®"],
+  hours: 12,
+  days: 14,
+    description: "Emetic",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/9113HOC31W/",
+  controlled: false,
+  injectable: {
+    available: true,
+    concentration: 3,
+    doseCanine: 0.03,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    routes: ["IV"],
+    alert: ""
+  },
+  tablet: {
+    available: true,
+    tabletSizes: [6.25],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: "Dissolve 1 tablet in saline and instill into the conjunctival sac."
+  },
+  capsule: {
+    available: false,
+    capsuleSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  suspension: {
+    available: false,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    premade: [{ concentration: 0, volume: 0 }],
+    alert: ""
+  }
+}, {
+  name: "Atropine",
+    alias: [""],
+  hours: 12,
+  days: 14,
+    description: "Anticholinergic, Antidote",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/hPMGRNTLxZ/",
+  controlled: false,
+  injectable: {
+    available: true,
+    concentration: 0.54,
+    doseCanine: 0,
+    doseRangeCanine: [0.02, 0.04],
+    doseFeline: 0,
+    doseRangeFeline: [0.02, 0.04],
+    routes: ["IV", "IM", "SQ"],
+    alert: ""
+  },
+  tablet: {
+    available: false,
+    tabletSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  capsule: {
+    available: false,
+    capsuleSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  suspension: {
+    available: false,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    premade: [{ concentration: 0, volume: 0 }],
+    alert: ""
+  }
+}, {
+  name: "Azithromycin",
+    alias: ["Zithromax®"],
+  hours: 24,
+  days: 7,
+    description: "Macrolide Antibiotic",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/MkBhdO3gtm/",
+  controlled: false,
+  injectable: {
+    available: false,
+    concentration: 0,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    routes: [""],
+    alert: ""
+  },
+  tablet: {
+    available: false,
+    tabletSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  capsule: {
+    available: false,
+    capsuleSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  suspension: {
+    available: true,
+    doseCanine: 0,
+    doseRangeCanine: [5, 10],
+    doseFeline: 0,
+    doseRangeFeline: [5, 10],
+    premade: [{ concentration: 40, volume: 30 }],
+    alert: ""
+  }
+}, {
+  name: "Benazapril",
   alias: [""],
   hours: 12,
   days: 14,
-  description: "dexdom thingy",
-  link: "plumbs/dexdomitor",
+    description: "Angiotensin-Converting Enzyme (ACE) Inhibitor",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/PGVZkcnorQ/",
+  controlled: false,
+  injectable: {
+    available: false,
+    concentration: 0,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    routes: [""],
+    alert: ""
+  },
+  tablet: {
+    available: true,
+    tabletSizes: [5],
+    doseCanine: 0,
+    doseRangeCanine: [0.25, 0.5],
+    doseFeline: 0,
+    doseRangeFeline: [0.25, 1],
+    alert: ""
+  },
+  capsule: {
+    available: false,
+    capsuleSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  suspension: {
+    available: false,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    premade: [{ concentration: 0, volume: 0 }],
+    alert: ""
+  }
+}, {
+    name: "Bupivacaine",
+    alias: ["Marcaine®"],
+  hours: 12,
+  days: 14,
+    description: "Local Anesthetic",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/Ljf37PSR3g/",
+  controlled: false,
+  injectable: {
+    available: true,
+    concentration: 5,
+    doseCanine: 0,
+    doseRangeCanine: [1, 2],
+    doseFeline: 1,
+    doseRangeFeline: [0],
+    routes: ["ID"],
+    alert: ""
+  },
+  tablet: {
+    available: false,
+    tabletSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  capsule: {
+    available: false,
+    capsuleSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  suspension: {
+    available: false,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    premade: [{ concentration: 0, volume: 0 }],
+    alert: ""
+  }
+}, {
+  name: "Buprenorphine",
+    alias: ["Buprenex®"],
+  hours: 12,
+  days: 14,
+    description: "Opiate Partial Agonist",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/8r3dFe6zhm/",
+  controlled: true,
+  injectable: {
+    available: true,
+    concentration: 0.3,
+    doseCanine: 1.5,
+    doseRangeCanine: [0.005, 0.03],
+    doseFeline: 0,
+    doseRangeFeline: [0.01, 0.03],
+    routes: ["IV", "IM", "SQ", "PO"],
+    alert: ""
+  },
+  tablet: {
+    available: false,
+    tabletSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  capsule: {
+    available: false,
+    capsuleSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  suspension: {
+    available: false,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    premade: [{ concentration: 0, volume: 0 }],
+    alert: ""
+  }
+}, {
+  name: "Butorphanol",
+    alias: ["Torbugesic®", "Torbutrol®"],
+  hours: 12,
+  days: 7,
+    description: "Opiate Partial Agonist",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/qZ8Rb9KuWc/",
+  controlled: true,
+  injectable: {
+    available: true,
+    concentration: 10,
+    doseCanine: 0.2,
+    doseRangeCanine: [0.1, 0.5],
+    doseFeline: 0.4,
+    doseRangeFeline: [0.1, 0.5],
+    routes: ["IV", "IM", "SQ"],
+    alert: ""
+  },
+  tablet: {
+    available: true,
+    tabletSizes: [5],
+    doseCanine: 0.55,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  capsule: {
+    available: false,
+    capsuleSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  suspension: {
+    available: false,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    premade: [{ concentration: 0, volume: 0 }],
+    alert: ""
+  }
+}, {
+  name: "Capromorelin",
+    alias: ["Entyce®"],
+  hours: 24,
+  days: 4,
+    description: "Appetite Stimulant",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/GxKEBGhNqK/",
+  controlled: false,
+  injectable: {
+    available: false,
+    concentration: 0,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    routes: [""],
+    alert: ""
+  },
+  tablet: {
+    available: false,
+    tabletSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  capsule: {
+    available: false,
+    capsuleSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  suspension: {
+    available: true,
+    doseCanine: 3,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [1, 3],
+    premade: [{ concentration: 30, volume: 10 }, { concentration: 30, volume: 30 }],
+    alert: ""
+  }
+}, {
+  name: "Carprofen",
+    alias: ["Rimadyl®", "Rovera®"],
+  hours: 24,
+  days: 14,
+    description: "Nonsteroidal Anti-Inflammatory Agent",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/pnIL0k8dzD/",
+  controlled: false,
+  injectable: {
+    available: true,
+    concentration: 50,
+    doseCanine: 4.4,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    routes: ["SQ"],
+    alert: ""
+  },
+  tablet: {
+    available: true,
+    tabletSizes: [25, 75, 100],
+    doseCanine: 4.4,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  capsule: {
+    available: false,
+    capsuleSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  suspension: {
+    available: false,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    premade: [{ concentration: 0, volume: 0 }],
+    alert: ""
+  }
+}, {
+  name: "Cephalexin",
+    alias: ["Keflex®"],
+  hours: 12,
+  days: 14,
+    description: "First-Generation Cephalosporin",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/uW02zxOqcV/",
+  controlled: false,
+  injectable: {
+    available: false,
+    concentration: 0,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    routes: [""],
+    alert: ""
+  },
+  tablet: {
+    available: false,
+    tabletSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  capsule: {
+    available: true,
+    capsuleSizes: [250, 500],
+    doseCanine: 22,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  suspension: {
+    available: false,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    premade: [{ concentration: 0, volume: 0 }],
+    alert: ""
+  }
+}, {
+  name: "Cefazolin",
+    alias: ["Ancef®", "Kefzol®", "Zolicef®"],
+  hours: 12,
+  days: 14,
+    description: "1st-Generation Cephalosporin",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/cGmiMsgFjh/",
+  controlled: false,
+  injectable: {
+    available: true,
+    concentration: 100,
+    doseCanine: 20,
+    doseRangeCanine: [15, 35],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    routes: ["SQ", "IV", "IM"],
+    alert: ""
+  },
+  tablet: {
+    available: false,
+    tabletSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  capsule: {
+    available: false,
+    capsuleSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  suspension: {
+    available: false,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    premade: [{ concentration: 0, volume: 0 }],
+    alert: ""
+  }
+}, {
+  name: "Cefovecin",
+    alias: ["Convenia®"],
+  hours: 12,
+  days: 14,
+    description: "Third-Generation Cephalosporin",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/B97y0UeIRi/",
+  controlled: false,
+  injectable: {
+    available: true,
+    concentration: 80,
+    doseCanine: 8,
+    doseRangeCanine: [0],
+    doseFeline: 8,
+    doseRangeFeline: [0],
+    routes: ["SQ"],
+    alert: ""
+  },
+  tablet: {
+    available: false,
+    tabletSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  capsule: {
+    available: false,
+    capsuleSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  suspension: {
+    available: false,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    premade: [{ concentration: 0, volume: 0 }],
+    alert: ""
+  }
+}, {
+  name: "Cefpodoxime",
+    alias: ["Simplicef®"],
+  hours: 24,
+  days: 7,
+    description: "Third-Generation Cephalosporin",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/csB00JGcUF/",
+  controlled: false,
+  injectable: {
+    available: false,
+    concentration: 0,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    routes: [""],
+    alert: ""
+  },
+  tablet: {
+    available: true,
+    tabletSizes: [100, 200],
+    doseCanine: 0,
+    doseRangeCanine: [5, 10],
+    doseFeline: 0,
+    doseRangeFeline: [5, 10],
+    alert: ""
+  },
+  capsule: {
+    available: false,
+    capsuleSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  suspension: {
+    available: false,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    premade: [{ concentration: 0, volume: 0 }],
+    alert: ""
+  }
+}, {
+  name: "Chloramphenicol",
+    alias: ["Chloromycetin®"],
+  hours: 6,
+  days: 14,
+    description: "Broad-Spectrum Antibacterial",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/YN0OIXddU2/",
+  controlled: false,
+  injectable: {
+    available: true,
+    concentration: 20,
+    doseCanine: 0,
+    doseRangeCanine: [40, 50],
+    doseFeline: 0,
+    doseRangeFeline: [10, 20],
+    routes: ["IV", "SQ", "IM"],
+    alert: ""
+  },
+  tablet: {
+    available: true,
+    tabletSizes: [500, 1000],
+    doseCanine: 55,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [10, 20],
+    alert: ""
+  },
+  capsule: {
+    available: false,
+    capsuleSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  suspension: {
+    available: false,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    premade: [{ concentration: 0, volume: 0 }],
+    alert: ""
+  }
+}, {
+  name: "Chlorpheniramine",
+    alias: ["Chlor-Trimetron®"],
+  hours: 12,
+  days: 14,
+    description: "1st-Generation Antihistamine",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/5ZVW1yX3ea/",
+  controlled: false,
+  injectable: {
+    available: false,
+    concentration: 0,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    routes: [""],
+    alert: ""
+  },
+  tablet: {
+    available: true,
+    tabletSizes: [4],
+    doseCanine: 0,
+    doseRangeCanine: [0.2, 0.5],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  capsule: {
+    available: false,
+    capsuleSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  suspension: {
+    available: false,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    premade: [{ concentration: 0, volume: 0 }],
+    alert: ""
+  }
+}, {
+  name: "Clindamycin",
+    alias: ["Antirobe®", "Cleocin®"],
+  hours: 12,
+  days: 14,
+    description: "Lincosamide Antibiotic",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/wzgsE03T5n/",
+  controlled: false,
+  injectable: {
+    available: true,
+    concentration: 150,
+    doseCanine: 0,
+    doseRangeCanine: [10, 15],
+    doseFeline: 0,
+    doseRangeFeline: [10, 15],
+    routes: ["IV", "SQ"],
+    alert: ""
+  },
+  tablet: {
+    available: false,
+    tabletSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  capsule: {
+    available: true,
+    capsuleSizes: [75, 150],
+    doseCanine: 0,
+    doseRangeCanine: [5.5, 33],
+    doseFeline: 0,
+    doseRangeFeline: [11, 33],
+    alert: ""
+  },
+  suspension: {
+    available: true,
+    doseCanine: 0,
+    doseRangeCanine: [5.5, 10],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    premade: [{ concentration: 25, volume: 20 }],
+    alert: ""
+  }
+}, {
+  name: "Clomipramine",
+    alias: ["Clomicalm®"],
+  hours: 24,
+  days: 14,
+    description: "Tricyclic Antidepressant",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/8lUxQzYRPp/",
+  controlled: false,
+  injectable: {
+    available: false,
+    concentration: 0,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    routes: [""],
+    alert: ""
+  },
+  tablet: {
+    available: true,
+    tabletSizes: [20],
+    doseCanine: 0,
+    doseRangeCanine: [2, 4],
+    doseFeline: 0,
+    doseRangeFeline: [0.25, 1],
+    alert: ""
+  },
+  capsule: {
+    available: false,
+    capsuleSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  suspension: {
+    available: false,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    premade: [{ concentration: 0, volume: 0 }],
+    alert: ""
+  }
+}, {
+  name: "Cyclosporine",
+    alias: ["Atopica®"],
+  hours: 24,
+  days: 30,
+    description: "Immunosuppressive",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/b2qDVutWDR/",
+  controlled: false,
+  injectable: {
+    available: false,
+    concentration: 0,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    routes: [""],
+    alert: ""
+  },
+  tablet: {
+    available: false,
+    tabletSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  capsule: {
+    available: true,
+    capsuleSizes: [10, 25, 100],
+    doseCanine: 5,
+    doseRangeCanine: [3.3, 6.7],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  suspension: {
+    available: true,
+    doseCanine: 5,
+    doseRangeCanine: [3.3, 6.7],
+    doseFeline: 7,
+    doseRangeFeline: [0],
+    premade: [{ concentration: 100, volume: 5 }],
+    alert: ""
+  }
+}, {
+  name: "Cyproheptadine",
+    alias: ["Periactin®"],
+  hours: 12,
+  days: 14,
+    description: "First-Generation Antihistamine",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/ik3d544UkK/",
+  controlled: false,
+  injectable: {
+    available: false,
+    concentration: 0,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    routes: [""],
+    alert: ""
+  },
+  tablet: {
+    available: true,
+    tabletSizes: [4],
+    doseCanine: 0,
+    doseRangeCanine: [0.5, 2],
+    doseFeline: 0,
+    doseRangeFeline: [2, 4],
+    alert: ""
+  },
+  capsule: {
+    available: false,
+    capsuleSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  suspension: {
+    available: false,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    premade: [{ concentration: 0, volume: 0 }],
+    alert: ""
+  }
+}, {
+    name: "Methylprednisolone",
+    alias: ["Depo-Medrol®"],
+  hours: 12,
+  days: 14,
+    description: "Glucocorticoid",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/WKIacBZAgl/",
+  controlled: false,
+  injectable: {
+    available: true,
+    concentration: 20,
+    doseCanine: 20,
+    doseRangeCanine: [2, 120],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    routes: ["IM"],
+    alert: ""
+  },
+  tablet: {
+    available: false,
+    tabletSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  capsule: {
+    available: false,
+    capsuleSizes: [0],
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    alert: ""
+  },
+  suspension: {
+    available: false,
+    doseCanine: 0,
+    doseRangeCanine: [0],
+    doseFeline: 0,
+    doseRangeFeline: [0],
+    premade: [{ concentration: 0, volume: 0 }],
+    alert: ""
+  }
+}, {
+    name: "Dexmedetomidine",
+    alias: ["Dexdomitor®"],
+  hours: 12,
+  days: 14,
+    description: "Alpha-2 Adrenergic Agonist",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/2ZRdK5kAcz/",
   controlled: false,
   injectable: {
     available: true,
@@ -1406,19 +1406,19 @@ const medsSeed = [{
   }
 }, {
   name: "Dexamethasone",
-  alias: [""],
-  hours: 12,
+    alias: [""],
+  hours: 24,
   days: 14,
-  description: "dex thingy",
-  link: "plumbs/dexamethasone",
+    description: "Glucocorticoid",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/uXRbPgQQYj/",
   controlled: false,
   injectable: {
     available: true,
     concentration: 2,
-    doseCanine: 0.1,
-    doseRangeCanine: [0.05, 0.15],
+    doseCanine: 0,
+    doseRangeCanine: [0.07, 0.14],
     doseFeline: 0,
-    doseRangeFeline: [0],
+    doseRangeFeline: [0.14, 0.28],
     routes: ["IM", "IV", "SQ"],
     alert: ""
   },
@@ -1452,18 +1452,18 @@ const medsSeed = [{
 }, {
   name: "Dexamethasone Sodium Phosphate",
   alias: [""],
-  hours: 12,
+  hours: 24,
   days: 14,
-  description: "dexsp thingy",
-  link: "plumbs/dexsp",
+    description: "Glucocorticoid",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/uXRbPgQQYj/",
   controlled: false,
   injectable: {
     available: true,
     concentration: 4,
     doseCanine: 0.25,
-    doseRangeCanine: [0.2, 0.3],
+    doseRangeCanine: [0.07, 0.14],
     doseFeline: 0,
-    doseRangeFeline: [0],
+    doseRangeFeline: [0.14, 0.28],
     routes: ["IM", "IV", "SQ"],
     alert: ""
   },
@@ -1496,11 +1496,11 @@ const medsSeed = [{
   }
 }, {
   name: "Diazepam",
-  alias: [""],
+    alias: ["Valium®"],
   hours: 12,
   days: 14,
-  description: "val thingy",
-  link: "plumbs/diazepam",
+    description: "Benzodiazepine",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/x9Kt8MPnT1/",
   controlled: true,
   injectable: {
     available: true,
@@ -1541,11 +1541,11 @@ const medsSeed = [{
   }
 }, {
   name: "Diphenhydramine",
-  alias: [""],
+    alias: ["Benadryl®"],
   hours: 12,
   days: 14,
-  description: "diph thingy",
-  link: "plumbs/diphenhydramine",
+    description: "First-Generation Antihistamine",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/tDYQtMqVRG/",
   controlled: false,
   injectable: {
     available: true,
@@ -1586,11 +1586,11 @@ const medsSeed = [{
   }
 }, {
   name: "Dopamine",
-  alias: [""],
+    alias: ["Intropin®"],
   hours: 12,
   days: 14,
-  description: "dopey thingy",
-  link: "plumbs/dopamine",
+    description: "Adrenergic/Dopaminergic Inotropic Agent",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/qeuRpielfJ/",
   controlled: false,
   injectable: {
     available: true,
@@ -1631,11 +1631,11 @@ const medsSeed = [{
   }
 }, {
   name: "Doxapram",
-  alias: [""],
+    alias: ["Dopram-V®"],
   hours: 12,
   days: 14,
-  description: "doxa thingy",
-  link: "plumbs/doxapram",
+    description: "CNS/Respiratory Stimulant",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/3Bixh0K81N/",
   controlled: false,
   injectable: {
     available: true,
@@ -1676,11 +1676,11 @@ const medsSeed = [{
   }
 }, {
   name: "Doxycycline",
-  alias: [""],
+    alias: ["Vibramycin®"],
   hours: 12,
   days: 14,
-  description: "doxi thingy",
-  link: "plumbs/doxycycline",
+    description: "Tetracycline Antibiotic",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/cqWG1Kqvh9/",
   controlled: false,
   injectable: {
     available: false,
@@ -1721,11 +1721,11 @@ const medsSeed = [{
   }
 }, {
   name: "Enalapril",
-  alias: [""],
+    alias: ["Enacard®"],
   hours: 12,
   days: 14,
-  description: "enala thingy",
-  link: "plumbs/enalapril",
+    description: "Angiotensin-Converting Enzyme (ACE) Inhibitor",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/bXHR68GoUz/",
   controlled: false,
   injectable: {
     available: false,
@@ -1766,11 +1766,11 @@ const medsSeed = [{
   }
 }, {
   name: "Enrofloxacin",
-  alias: [""],
+    alias: ["Baytril®"],
   hours: 12,
   days: 14,
-  description: "bae thingy",
-  link: "plumbs/enrofloxacin",
+    description: "Fluoroquinolone Antibiotic",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/ajastQOmuU/",
   controlled: false,
   injectable: {
     available: true,
@@ -1811,11 +1811,11 @@ const medsSeed = [{
   }
 }, {
   name: "Epinephrine",
-  alias: [""],
+    alias: ["Adrenalin®"],
   hours: 12,
   days: 14,
-  description: "epi thingy",
-  link: "plumbs/epinephrine",
+    description: "Alpha- & Beta-Adrenergic Agonist",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/yTTIqZPq6H/",
   controlled: false,
   injectable: {
     available: true,
@@ -1856,11 +1856,11 @@ const medsSeed = [{
   }
 }, {
   name: "Estriol",
-  alias: ["Incurin"],
+    alias: ["Incurin®"],
   hours: 12,
   days: 14,
-  description: "incuri thingy",
-  link: "plumbs/incurin",
+    description: "Hormonal Agent (Estrogen)",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/644PuhOUnX/",
   controlled: false,
   injectable: {
     available: false,
@@ -1901,11 +1901,11 @@ const medsSeed = [{
   }
 }, {
   name: "Famciclovir",
-  alias: [""],
+    alias: ["Famvir®"],
   hours: 12,
   days: 14,
-  description: "fami thingy",
-  link: "plumbs/fami",
+    description: "Antiviral (Herpes)",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/WvQAfRA0Tv/",
   controlled: false,
   injectable: {
     available: false,
@@ -1946,11 +1946,11 @@ const medsSeed = [{
   }
 }, {
   name: "Famotidine",
-  alias: ["Pepcid"],
+    alias: ["Pepcid®"],
   hours: 12,
   days: 14,
-  description: "fam thingy",
-  link: "plumbs/famotidine",
+    description: "H2-Receptor Antagonist",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/9h9AS93L6I/",
   controlled: false,
   injectable: {
     available: true,
@@ -1991,11 +1991,11 @@ const medsSeed = [{
   }
 }, {
   name: "Fenbendazole",
-  alias: ["Panacur"],
+    alias: ["Panacur®"],
   hours: 12,
   days: 14,
-  description: "giardia cocaine",
-  link: "plumbs/fenbendazole",
+    description: "Antiparasitic Agent",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/luWztPs06N/",
   controlled: false,
   injectable: {
     available: false,
@@ -2036,11 +2036,11 @@ const medsSeed = [{
   }
 }, {
   name: "Flumazenil",
-  alias: [""],
+    alias: ["Romazicon®"],
   hours: 12,
   days: 14,
-  description: "fluma thingy",
-  link: "plumbs/flumazenil",
+    description: "Benzodiazepine Antagonist",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/uhVYi3nn8c/",
   controlled: false,
   injectable: {
     available: true,
@@ -2081,11 +2081,11 @@ const medsSeed = [{
   }
 }, {
   name: "Furosemide",
-  alias: [""],
+    alias: ["Lasix®"],
   hours: 12,
   days: 14,
-  description: "furo thingy",
-  link: "plumbs/furosemide",
+    description: "Loop Diuretic",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/mbPAOQoO7D/",
   controlled: false,
   injectable: {
     available: true,
@@ -2126,11 +2126,11 @@ const medsSeed = [{
   }
 }, {
   name: "Gabapentin",
-  alias: [""],
+    alias: ["Neurontin®"],
   hours: 12,
   days: 14,
-  description: "yogabagaba thingy",
-  link: "plumbs/gabapentin",
+    description: "Anticonvulsant, Neuropathic Pain Analgesic",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/CSJtfV8dnf/",
   controlled: false,
   injectable: {
     available: false,
@@ -2171,11 +2171,11 @@ const medsSeed = [{
   }
 }, {
   name: "Genatmicin",
-  alias: [""],
+    alias: ["Gentocin®"],
   hours: 12,
   days: 14,
-  description: "genta thingy",
-  link: "plumbs/gentamicin",
+    description: "Aminoglycoside Antibiotic",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/FWuAk8l86N/",
   controlled: false,
   injectable: {
     available: true,
@@ -2216,11 +2216,11 @@ const medsSeed = [{
   }
 }, {
   name: "Grapiprant",
-  alias: ["Galliprant"],
+    alias: ["Galliprant®"],
   hours: 12,
   days: 14,
-  description: "galla thingy",
-  link: "plumbs/galla",
+    description: "Prostaglandin E2, EP4-Receptor Antagonist",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/rThuMgYujA/",
   controlled: false,
   injectable: {
     available: false,
@@ -2261,11 +2261,11 @@ const medsSeed = [{
   }
 }, {
   name: "Hydrocodone",
-  alias: [""],
+    alias: ["Tussigon®"],
   hours: 12,
   days: 14,
-  description: "hydro thingy",
-  link: "plumbs/galla",
+    description: "Opiate",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/sdBMJSbkwo/",
   controlled: true,
   injectable: {
     available: false,
@@ -2306,11 +2306,11 @@ const medsSeed = [{
   }
 }, {
   name: "Hydromorphone",
-  alias: [""],
+    alias: ["Dilaudid®"],
   hours: 12,
   days: 14,
-  description: "hydro thingy",
-  link: "plumbs/hydromorphone",
+    description: "Opiate Agonist",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/UvzrLrOaaC/",
   controlled: true,
   injectable: {
     available: true,
@@ -2351,11 +2351,11 @@ const medsSeed = [{
   }
 }, {
   name: "Hydroxyzine",
-  alias: [""],
+    alias: ["Atarax®", "Vistaril®"],
   hours: 12,
   days: 14,
-  description: "hydroxy thingy",
-  link: "plumbs/hydroxy",
+    description: "1st Generation Antihistamine",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/J0INpFLgZE/",
   controlled: false,
   injectable: {
     available: false,
@@ -2399,8 +2399,8 @@ const medsSeed = [{
   alias: [""],
   hours: 12,
   days: 14,
-  description: "iron thingy",
-  link: "plumbs/irondextran",
+    description: "Injectable Hematinic",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/7MNfaeTvcz/",
   controlled: false,
   injectable: {
     available: true,
@@ -2441,11 +2441,11 @@ const medsSeed = [{
   }
 }, {
   name: "Itraconazole",
-  alias: ["Itrafungol"],
+    alias: ["Itrafungol®"],
   hours: 12,
   days: 14,
-  description: "fungal thingy",
-  link: "plumbs/itraconazol",
+    description: "Antifungal",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/yB1yAq7aNT/",
   controlled: false,
   injectable: {
     available: false,
@@ -2485,12 +2485,12 @@ const medsSeed = [{
     alert: ""
   }
 }, {
-  name: "Kenalog",
-  alias: [""],
+    name: "Triamcinolone Acetonide",
+    alias: ["Vetalog®", "Kenalog®"],
   hours: 12,
   days: 14,
-  description: "kena thingy",
-  link: "plumbs/kenelog",
+    description: "Glucocorticoid",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/bxThYXphcj/",
   controlled: false,
   injectable: {
     available: true,
@@ -2531,11 +2531,11 @@ const medsSeed = [{
   }
 }, {
   name: "Ketamine",
-  alias: [""],
+    alias: ["Ketaset®"],
   hours: 12,
   days: 14,
-  description: "keta thingy",
-  link: "plumbs/ketamine",
+    description: "Dissociative General Anesthetic, NMDA-Receptor Antagonist",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/imxUTZ1jdB/",
   controlled: true,
   injectable: {
     available: true,
@@ -2576,11 +2576,11 @@ const medsSeed = [{
   }
 }, {
   name: "Ketoconazole",
-  alias: [""],
+    alias: ["Nizoral®"],
   hours: 12,
   days: 14,
-  description: "keto thingy",
-  link: "plumbs/ketocon",
+    description: "Azole Antifungal",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/YlbeliBGEQ/",
   controlled: false,
   injectable: {
     available: false,
@@ -2621,11 +2621,11 @@ const medsSeed = [{
   }
 }, {
   name: "Lactulose",
-  alias: [""],
+    alias: ["Cephulac®"],
   hours: 12,
   days: 14,
-  description: "lacta thingy",
-  link: "plumbs/lactulose",
+    description: "Disaccharide Laxative, Ammonia Reducer",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/Jst8QaYCxf/",
   controlled: false,
   injectable: {
     available: false,
@@ -2666,11 +2666,11 @@ const medsSeed = [{
   }
 }, {
   name: "Levothyroxine",
-  alias: ["Soloxine"],
+    alias: ["Soloxine®"],
   hours: 12,
   days: 14,
-  description: "thyroid thingy",
-  link: "plumbs/greyhounds",
+    description: "Thyroid Hormone",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/CEWcOGBgRE/",
   controlled: false,
   injectable: {
     available: false,
@@ -2711,11 +2711,11 @@ const medsSeed = [{
   }
 }, {
   name: "Lidocaine",
-  alias: [""],
+    alias: ["Xylocaine®"],
   hours: 12,
   days: 14,
-  description: "lido thingy",
-  link: "plumbs/lidocaine",
+    description: "Antiarrhythmic, Analgesic, Prokinetic",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/j26OaOklr5/",
   controlled: false,
   injectable: {
     available: true,
@@ -2756,11 +2756,11 @@ const medsSeed = [{
   }
 }, {
   name: "Mannitol",
-  alias: [""],
+    alias: ["Osmitrol®"],
   hours: 12,
   days: 14,
-  description: "mann thingy",
-  link: "plumbs/mannitol",
+    description: "Osmotic Diuretic",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/kJbZqNUFKO/",
   controlled: false,
   injectable: {
     available: true,
@@ -2801,11 +2801,11 @@ const medsSeed = [{
   }
 }, {
   name: "Marbofloxacin",
-  alias: ["Zeniquin"],
+    alias: ["Zeniquin®"],
   hours: 12,
   days: 14,
-  description: "zeni thingy",
-  link: "plumbs/zenzen",
+    description: "Fluoroquinolone Antibiotic",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/G6dqDvtnJi/",
   controlled: false,
   injectable: {
     available: false,
@@ -2846,18 +2846,18 @@ const medsSeed = [{
   }
 }, {
   name: "Maropitant",
-  alias: ["Cerenia"],
+    alias: ["Cerenia®"],
   hours: 12,
   days: 14,
-  description: "cerenia thingy",
-  link: "plumbs/cerenia",
+    description: "Neurokinin (NK-1) Receptor Antagonist Antiemetic",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/ufI3PM2LJI/",
   controlled: false,
   injectable: {
     available: true,
     concentration: 10,
     doseCanine: 1,
     doseRangeCanine: [0],
-    doseFeline: 0,
+    doseFeline: 1,
     doseRangeFeline: [0],
     routes: ["IV", "SQ"],
     alert: ""
@@ -2891,11 +2891,11 @@ const medsSeed = [{
   }
 }, {
   name: "Meclizine",
-  alias: [""],
+    alias: ["Antivert®"],
   hours: 12,
   days: 14,
-  description: "mecli thingy",
-  link: "plumbs/mecliz",
+    description: "Antihistamine, Antiemetic",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/xTLKnRkrtQ/",
   controlled: false,
   injectable: {
     available: false,
@@ -2936,11 +2936,11 @@ const medsSeed = [{
   }
 }, {
   name: "Meloxicam",
-  alias: [""],
+    alias: ["Metacam®", "Meloxidyl®"],
   hours: 12,
   days: 14,
-  description: "moxi thingy",
-  link: "plumbs/meloxicam",
+    description: "Nonsteroidal Anti-Inflammatory Agent (NSAID)",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/QKyHusjUbe/",
   controlled: false,
   injectable: {
     available: true,
@@ -2981,11 +2981,11 @@ const medsSeed = [{
   }
 }, {
   name: "Methimazole",
-  alias: [""],
+    alias: ["Tapazole®"],
   hours: 12,
   days: 14,
-  description: "methy thingy",
-  link: "plumbs/methy",
+    description: "Antithyroid",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/RMkR7BGrPo/",
   controlled: false,
   injectable: {
     available: false,
@@ -3026,11 +3026,11 @@ const medsSeed = [{
   }
 }, {
   name: "Methocarbamol",
-  alias: [""],
+    alias: ["Robaxin®"],
   hours: 12,
   days: 14,
-  description: "meth thingy",
-  link: "plumbs/methocarbamol",
+    description: "Muscle Relaxant",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/HcPJUBzmSg/",
   controlled: false,
   injectable: {
     available: true,
@@ -3071,11 +3071,11 @@ const medsSeed = [{
   }
 }, {
   name: "Metoclopramide",
-  alias: [""],
+    alias: ["Reglan®"],
   hours: 12,
   days: 14,
-  description: "meto thingy",
-  link: "plumbs/metoclopramide",
+    description: "GI Prokinetic Agent",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/x3e7rB4LS5/",
   controlled: false,
   injectable: {
     available: true,
@@ -3116,11 +3116,11 @@ const medsSeed = [{
   }
 }, {
   name: "Metronidazole",
-  alias: [""],
+    alias: ["Flagyl®"],
   hours: 12,
   days: 14,
-  description: "metro thingy",
-  link: "plumbs/metronidazole",
+    description: "Antibiotic, Antiparasitic",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/qwJQlPmivi/",
   controlled: false,
   injectable: {
     available: true,
@@ -3161,11 +3161,11 @@ const medsSeed = [{
   }
 }, {
   name: "Midazolam",
-  alias: [""],
+    alias: ["Versed®"],
   hours: 12,
   days: 14,
-  description: "midaz thingy",
-  link: "plumbs/midazolam",
+    description: "Parenteral Benzodiazepine",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/4yqiVGLueS/",
   controlled: true,
   injectable: {
     available: true,
@@ -3206,11 +3206,11 @@ const medsSeed = [{
   }
 }, {
   name: "Minocycline",
-  alias: [""],
+    alias: ["Minocin®"],
   hours: 12,
   days: 14,
-  description: "mino thingy",
-  link: "plumbs/minocycline",
+    description: "Tetracycline Antibiotic",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/nUq8Rwks31/",
   controlled: false,
   injectable: {
     available: false,
@@ -3251,11 +3251,11 @@ const medsSeed = [{
   }
 }, {
   name: "Mirtazapine",
-  alias: [""],
+    alias: ["Remeron®"],
   hours: 12,
   days: 14,
-  description: "mirtaz thingy",
-  link: "plumbs/mirtazy",
+    description: "Tetracyclic Antidepressant; 5-HT3 Antagonist",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/TVaxA1tGB5/",
   controlled: false,
   injectable: {
     available: false,
@@ -3296,11 +3296,11 @@ const medsSeed = [{
   }
 }, {
   name: "Naloxone",
-  alias: [""],
+    alias: ["Narcan®"],
   hours: 12,
   days: 14,
-  description: "nalox thingy",
-  link: "plumbs/naloxone",
+    description: "Antidote, Opiate Antagonist",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/OoTGJbg80T/",
   controlled: false,
   injectable: {
     available: true,
@@ -3341,11 +3341,11 @@ const medsSeed = [{
   }
 }, {
   name: "Niacinamide",
-  alias: [""],
+    alias: ["Nicotinamide"],
   hours: 12,
   days: 14,
-  description: "niacin thingy",
-  link: "plumbs/niacin",
+    description: "Immunomodulator; Nutritional",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/NBGZsjNMfi/",
   controlled: false,
   injectable: {
     available: false,
@@ -3386,11 +3386,11 @@ const medsSeed = [{
   }
 }, {
   name: "Oclacitinib",
-  alias: ["Apoquel"],
+    alias: ["Apoquel®"],
   hours: 12,
   days: 14,
-  description: "apoquel thingy",
-  link: "plumbs/apoquel",
+    description: "Janus Kinase (JAK) Inhibitor, Antipruritic, Anti-Inflammatory",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/ooIQfS2sVC/",
   controlled: false,
   injectable: {
     available: false,
@@ -3406,7 +3406,7 @@ const medsSeed = [{
     available: true,
     tabletSizes: [3.6, 5.4, 16],
     doseCanine: 0,
-    doseRangeCanine: [0],
+    doseRangeCanine: [0.4, 0.6],
     doseFeline: 0,
     doseRangeFeline: [0],
     alert: ""
@@ -3431,11 +3431,11 @@ const medsSeed = [{
   }
 }, {
   name: "Ondansetron",
-  alias: [""],
+    alias: ["Zofran®"],
   hours: 12,
   days: 14,
-  description: "onda thingy",
-  link: "plumbs/ondansetron",
+    description: "5-HT3 Receptor Antagonist",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/HaMjUv5DhL/",
   controlled: false,
   injectable: {
     available: true,
@@ -3476,11 +3476,11 @@ const medsSeed = [{
   }
 }, {
   name: "Pantoprozole",
-  alias: [""],
+    alias: ["Protonix®", "Pantoloc®"],
   hours: 12,
   days: 14,
-  description: "pants thingy",
-  link: "plumbs/pantoprozole",
+    description: "Proton Pump Inhibitor",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/D4ONiyuzIq/",
   controlled: false,
   injectable: {
     available: true,
@@ -3520,12 +3520,12 @@ const medsSeed = [{
     alert: ""
   }
 }, {
-  name: "Percorten-V",
-  alias: [""],
+    name: "Desoxycorticosterone Pivalate",
+    alias: ["Percorten-V®", "Zycortal®"],
   hours: 12,
   days: 14,
-  description: "percort thingy",
-  link: "plumbs/percortenV",
+    description: "Mineralocorticoid",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/vDTVjymouk/",
   controlled: false,
   injectable: {
     available: true,
@@ -3569,8 +3569,8 @@ const medsSeed = [{
   alias: [""],
   hours: 12,
   days: 14,
-  description: "pheno thingy",
-  link: "plumbs/phenobarb",
+    description: "Barbiturate",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/8YXk71VSMD/",
   controlled: true,
   injectable: {
     available: true,
@@ -3611,11 +3611,11 @@ const medsSeed = [{
   }
 }, {
     name: "Phenylpropanolamine",
-  alias: ["Proin"],
+    alias: ["Proin®"],
   hours: 12,
   days: 14,
-  description: "peepee thingy",
-  link: "plumbs/peepee",
+    description: "Sympathomimetic",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/qH2f6709Sb/",
   controlled: false,
   injectable: {
     available: false,
@@ -3656,11 +3656,11 @@ const medsSeed = [{
   }
 }, {
   name: "Piroxicam",
-  alias: [""],
+    alias: ["Feldene®"],
   hours: 12,
   days: 14,
-  description: "pirox thingy",
-  link: "plumbs/piroxi",
+    description: "Nonsteroidal Anti-Inflammatory (NSAID), Anti-Tumor",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/mbT3YecrKA/",
   controlled: false,
   injectable: {
     available: false,
@@ -3701,11 +3701,11 @@ const medsSeed = [{
   }
 }, {
   name: "Pradofloxacin",
-  alias: ["Veraflox"],
+    alias: ["Veraflox®"],
   hours: 12,
   days: 14,
-  description: "veraf thingy",
-  link: "plumbs/veraflox",
+    description: "Fluoroquinolone Antibiotic",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/XBe74rmYr8/",
   controlled: false,
   injectable: {
     available: false,
@@ -3746,11 +3746,11 @@ const medsSeed = [{
   }
 }, {
   name: "Praziquantel",
-  alias: [""],
+    alias: ["Droncit®", "Drontal®"],
   hours: 12,
   days: 14,
-  description: "prazi thingy",
-  link: "plumbs/praziquantel",
+    description: "Anticestodal Antiparasitic",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/07U5OlaMHV/",
   controlled: false,
   injectable: {
     available: true,
@@ -3791,11 +3791,11 @@ const medsSeed = [{
   }
 }, {
   name: "Prazosin",
-  alias: [""],
+    alias: ["Minipress®"],
   hours: 12,
   days: 14,
-  description: "prazo thingy",
-  link: "plumbs/prazosin",
+    description: "Alpha-1 Adrenergic Blocker",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/U5r7uX5uea/",
   controlled: false,
   injectable: {
     available: false,
@@ -3836,11 +3836,11 @@ const medsSeed = [{
   }
 }, {
   name: "Prednisolone",
-  alias: [""],
+    alias: [""],
   hours: 12,
   days: 14,
-  description: "cat pred thingy",
-  link: "plumbs/cat pred",
+    description: "Glucocorticoid",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/sShl11M9aP/",
   controlled: false,
   injectable: {
     available: false,
@@ -3884,8 +3884,8 @@ const medsSeed = [{
   alias: [""],
   hours: 12,
   days: 14,
-  description: "pred thingy",
-  link: "plumbs/pred",
+    description: "Glucocorticoid",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/sShl11M9aP/",
   controlled: false,
   injectable: {
     available: false,
@@ -3926,11 +3926,11 @@ const medsSeed = [{
   }
 }, {
   name: "Propofol",
-  alias: [""],
+    alias: ["Diprivan®"],
   hours: 12,
   days: 14,
-  description: "prop thingy",
-  link: "plumbs/propofol",
+    description: "Injectable Anesthetic",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/RJ86WnI9L8/",
   controlled: false,
   injectable: {
     available: true,
@@ -3971,11 +3971,11 @@ const medsSeed = [{
   }
 }, {
   name: "Pyrantel Pamoate",
-  alias: ["Nemex"],
+    alias: ["Strongid T®", "Nemex®"],
   hours: 12,
   days: 14,
-  description: "pyrantel thingy",
-  link: "plumbs/pyrantel",
+    description: "Antiparasitic",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/q21WnXeZ3X/",
   controlled: false,
   injectable: {
     available: false,
@@ -4016,11 +4016,11 @@ const medsSeed = [{
   }
 }, {
   name: "Robenacoxib",
-  alias: ["Onsior"],
+    alias: ["Onsior®"],
   hours: 12,
   days: 14,
-  description: "onsior thingy",
-  link: "plumbs/onsior",
+    description: "NSAID",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/4q64hZacBm/",
   controlled: false,
   injectable: {
     available: true,
@@ -4060,12 +4060,12 @@ const medsSeed = [{
     alert: ""
   }
 }, {
-  name: "Silybin-Adenosylmethionine",
-  alias: ["Denamarin"],
+    name: "S-Adenosyl-Methionine (SAMe) + Silybin",
+    alias: ["Denamarin®"],
   hours: 12,
   days: 14,
-  description: "retarded name thingy",
-  link: "plumbs/^",
+    description: "Hepatoprotectant",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/xjkR4SUPqH/",
   controlled: false,
   injectable: {
     available: false,
@@ -4105,12 +4105,12 @@ const medsSeed = [{
     alert: ""
   }
 }, {
-  name: "Solu-Delta-Cortef",
-  alias: [""],
+    name: "Prednisolone Sodium Succinate",
+    alias: ["Solu-Delta-Cortef®"],
   hours: 12,
   days: 14,
-  description: "cortef thingy",
-  link: "plumbs/soludeltacortef",
+    description: "Glucocorticoid",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/sShl11M9aP/",
   controlled: false,
   injectable: {
     available: true,
@@ -4150,57 +4150,12 @@ const medsSeed = [{
     alert: ""
   }
 }, {
-  name: "Solu-Medrol",
-  alias: [""],
-  hours: 12,
-  days: 14,
-  description: "medrol thingy",
-  link: "plumbs/medrol",
-  controlled: false,
-  injectable: {
-    available: true,
-    concentration: 62.5,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    routes: [],
-    alert: ""
-  },
-  tablet: {
-    available: false,
-    tabletSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  capsule: {
-    available: false,
-    capsuleSizes: [0],
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    alert: ""
-  },
-  suspension: {
-    available: false,
-    doseCanine: 0,
-    doseRangeCanine: [0],
-    doseFeline: 0,
-    doseRangeFeline: [0],
-    premade: [{ concentration: 0, volume: 0 }],
-    alert: ""
-  }
-}, {
   name: "Spironolactone",
-  alias: [""],
+    alias: ["Aldactone®"],
   hours: 12,
   days: 14,
-  description: "spirit thingy",
-  link: "plumbs/spironononon",
+    description: "Aldosterone Antagonist",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/3TyfZRCbI1/",
   controlled: false,
   injectable: {
     available: false,
@@ -4241,11 +4196,11 @@ const medsSeed = [{
   }
 }, {
   name: "Sucralfate",
-  alias: [""],
+    alias: ["Carafate®"],
   hours: 12,
   days: 14,
-  description: "sucral thingy",
-  link: "plumbs/sucralfate",
+    description: "GI-mucosal Protectant",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/izfzRjbdYh/",
   controlled: false,
   injectable: {
     available: false,
@@ -4286,11 +4241,11 @@ const medsSeed = [{
   }
 }, {
   name: "Sufladimethoxine",
-  alias: ["Albon"],
+    alias: ["Albon®"],
   hours: 12,
   days: 14,
-  description: "albo thingy",
-  link: "plumbs/albon",
+    description: "Sulfonamide Antimicrobial",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/SmEZcejqP5/",
   controlled: false,
   injectable: {
     available: false,
@@ -4331,11 +4286,11 @@ const medsSeed = [{
   }
 }, {
   name: "Suflamethoxazole Trimethoprim",
-  alias: ["Bactrim"],
+    alias: ["Co-trimoxazole", "Tribrissen®"],
   hours: 12,
   days: 14,
-  description: "sulfa thingy",
-  link: "plumbs/sulfa",
+    description: "Potentiated Sulfonamide Antimicrobial",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/nf1vK8vdaA/",
   controlled: false,
   injectable: {
     available: false,
@@ -4376,11 +4331,11 @@ const medsSeed = [{
   }
 }, {
   name: "Tramadol",
-  alias: [""],
+    alias: ["Ultram®"],
   hours: 12,
   days: 14,
-  description: "trama thingy",
-  link: "plumbs/trama",
+    description: "Opioid (mu-Receptor) Agonist",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/7e1DpW9m56/",
   controlled: true,
   injectable: {
     available: false,
@@ -4421,11 +4376,11 @@ const medsSeed = [{
   }
 }, {
   name: "Trazodone",
-  alias: [""],
+    alias: ["Desyrel®"],
   hours: 12,
   days: 14,
-  description: "trazything",
-  link: "plumbs/trazodone",
+    description: "Serotonin 2a Antagonist/Reuptake Inhibitor",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/ba9xQv20CJ/",
   controlled: false,
   injectable: {
     available: false,
@@ -4466,11 +4421,11 @@ const medsSeed = [{
   }
 }, {
   name: "Trilostane",
-  alias: ["Vetoryl"],
+    alias: ["Vetoryl®"],
   hours: 12,
   days: 14,
-  description: "vetoryl thingy",
-  link: "plumbs/vetoryl",
+    description: "Adrenal Steroid Synthesis Inhibitor",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/B63WMMEz5k/",
   controlled: false,
   injectable: {
     available: false,
@@ -4510,12 +4465,12 @@ const medsSeed = [{
     alert: ""
   }
 }, {
-  name: "Trimeprazine with Prednisolone",
+    name: "Trimeprazine Tartrate with Prednisolone",
   alias: ["Temaril-P"],
   hours: 12,
   days: 14,
-  description: "temaril thingy",
-  link: "plumbs/temaril",
+    description: "Phenothiazine Antihistamine with Corticosteroid",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/nveMMKI4i9/",
   controlled: false,
   injectable: {
     available: false,
@@ -4555,12 +4510,12 @@ const medsSeed = [{
     alert: ""
   }
 }, {
-  name: "Vitamin B 12",
-  alias: [""],
+    name: "Cyanocobalamin",
+    alias: ["Vitamin B12"],
   hours: 12,
   days: 14,
-  description: "b12 thingy",
-  link: "plumbs/b12",
+    description: "Vitamin/Nutritional",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/bw326rE9VM/",
   controlled: false,
   injectable: {
     available: true,
@@ -4600,12 +4555,12 @@ const medsSeed = [{
     alert: ""
   }
 }, {
-  name: "Vitamin K",
-  alias: [""],
+    name: "Phytonadione",
+    alias: ["Vitamin K1"],
   hours: 12,
   days: 14,
-  description: "K thingy",
-  link: "plumbs/vitK",
+    description: "Antidote, Fat Soluble Vitamin",
+    link: "https://www.plumbsveterinarydrugs.com/#!/monograph/gHNMY88Kcn/",
   controlled: false,
   injectable: {
     available: false,
