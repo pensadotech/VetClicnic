@@ -40,7 +40,7 @@ const doctorsSeed = [{
   mobilePhone: '714-123-4567',
   email: 'hee.yoo@vca.com',
   doctorCreated: Date.now()
-}];
+}]
 
 db.Doctor
   .remove({})

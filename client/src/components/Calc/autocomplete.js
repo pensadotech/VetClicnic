@@ -484,6 +484,8 @@ class IntegrationReactSelect extends React.Component {
             daysWillLast={dose.daysWillLast}
             mgkg={dose.mgkg}
             mL={dose.mL}
+            low={dose.low}
+            hi={dose.hi}
             removeMe={false}
             key={dose.boxSize + dose.mgkg}
           />
