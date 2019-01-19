@@ -6,11 +6,13 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
+import Checkbox from '@material-ui/core/Checkbox'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 
 const styles = {
   card: {
     minWidth: 275,
-    maxHeight: 220,
+    maxHeight: 260,
     margin: '10px 20px 0px 20px',  
   },
   bullet: {
@@ -50,6 +52,18 @@ class UserCard extends Component {
           <Typography component="p">
             Email:  {this.props.user.email}
           </Typography>
+          <FormControlLabel
+              control={
+                <Checkbox
+                  disabled 
+                  checked={this.props.user.isAdmin}
+                  value={this.props.user.isAdmin}
+                  color="primary"
+                />
+              }
+              label="Admin Role"
+          />            
+
         </CardContent>
         <CardActions>     
           <Button size="small" variant="contained" color={this.props.leftbuttonColor} disabled={this.props.isDisabled}  
