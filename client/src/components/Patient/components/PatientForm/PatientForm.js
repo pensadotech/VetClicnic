@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import TextField from '@material-ui/core/TextField'
-
+import MenuItem from '@material-ui/core/MenuItem';
 
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
@@ -47,12 +47,18 @@ const styles = theme => ({
       }
 })
 
+const species = [
+  { id: 1, name: 'Canine'},
+  { id: 2, name: 'Feline'}
+]
+
 class PatientForm extends Component {
 
     state = {
         mode: '',
         patientname: '',
-        __id: '',
+        _id: '',
+        species: '',
         ownername: '',
         weight: '',
         phone: '',
@@ -65,7 +71,7 @@ class PatientForm extends Component {
             this.setState( {
                 mode: this.props.mode,
                 patientname: this.props.patientname,
-                __id: this.props.__id,
+                _id: this.props._id,
                 weight: this.props.weight,
                 ownername: this.props.ownername,
                 phone: this.props.phone,
@@ -185,6 +191,7 @@ class PatientForm extends Component {
               <div className='formItem'> 
                   <TextField
                     id="species"
+                    select
                     label="Species :"
                     className={classes.textField}
                     name='species'
@@ -193,7 +200,15 @@ class PatientForm extends Component {
                     value={this.state.species}
                     onChange={this.handleInputChange}
                     margin="normal"
-                  />                    
+                  >
+                  {
+                    species.map(species => {
+                      return (
+                        <MenuItem key={species.id} value={species.name}>{species.name}</MenuItem>
+                      )
+                    })
+                  }
+                  </TextField>                    
               </div>
               <div className='formItem'> 
                   <TextField

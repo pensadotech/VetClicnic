@@ -54,7 +54,7 @@ const calcTablet = (medication, patient) => {
             //checks the mg/kg of all one and a half tablets - 1.5 tablets
             for (let i = 0; i < med.tabletSizes.length; i++) {
                 //check for "Apoquel" tablet sizes - 1.5 tablets of 3.6mg will use 5.4mg tablets instead
-                if (med.tabletSizes[0] !== 3.6 && i !== 0 && i !== 1) {
+                if (med.tabletSizes[0] !== 3.6 ) {
                     //ignores duplicate sizes where 1.5 tablets is equal to 1 whole tablet of another size
                     if (med.tabletSizes[i] * 1.5 !== med.tabletSizes[i + 1]) {
                         //ignores duplicate sizes where 1.5 tablets is equal to 1 whole tablet of another size
@@ -168,7 +168,7 @@ const calcTablet = (medication, patient) => {
             //checks the mg/kg of all one and a half tablets - 1.5 tablets
             for (let i = 0; i < med.tabletSizes.length; i++) {
                 //check for "Apoquel" tablet sizes - 1.5 tablets of 3.6mg will use 5.4mg tablets instead
-                if (med.tabletSizes[0] !== 3.6 && i !== 0 && i !== 1) {
+                if (med.tabletSizes[0] !== 3.6) {
                     //ignores duplicate sizes where 1.5 tablets is equal to 1 whole tablet of another size
                     if (med.tabletSizes[i] * 1.5 !== med.tabletSizes[i + 1]) {
                         //ignores duplicate sizes where 1.5 tablets is equal to 1 whole tablet of another size

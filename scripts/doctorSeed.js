@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const db = require('../models');
-const passwordHash = require('password-hash');
 
 // Connect to the Mongo DB
 var MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/vetclinic';
@@ -43,7 +42,7 @@ const doctorsSeed = [{
     email: 'hee.yoo@vca.com',
     doctorCreated: Date.now()
   }
-];
+]
 
 db.Doctor
   .remove({})

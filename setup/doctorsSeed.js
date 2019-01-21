@@ -45,10 +45,9 @@ module.exports = {
         name: 'Dr. Pensado',
         phone: '949-770-1808',
         mobilePhone: '714-123-4567',
-        email: 'armando@pensadotech.com',
+        email: 'hee.yoo@vca.com',
         doctorCreated: Date.now()
-      }
-    ]
+      }]
     // Add to database
     db.Doctor
       .remove({})

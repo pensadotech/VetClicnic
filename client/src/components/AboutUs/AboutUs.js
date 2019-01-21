@@ -7,8 +7,8 @@ import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import ImportantDevicesIcon from '@material-ui/icons/ImportantDevices';
+// Components
+import AboutUsCard from './components/AboutUsCard'
 
 // API
 //import APIaboutus from '../../utils/APIaboutus'
@@ -17,7 +17,7 @@ import ImportantDevicesIcon from '@material-ui/icons/ImportantDevices';
 import './AboutUs.css'
 
 const styles = theme => ({
-    mainContainer: {
+    maincontainer: {
       display: 'flex',
       flexWrap: 'wrap',   
     },
@@ -96,100 +96,22 @@ class AboutUs extends Component {
   
       return (
         <>
-        <Grid mainContainer spacing={0}>
+        <Grid maincontainer spacing={0}>
         <Grid item>
         <Card className={classes.card}>       
           <CardContent> 
            <Typography className={classes.aboutTitle}>
                 Meet The Developers
             </Typography>
-            <Typography
-                InputProps={{
-                startAdornment: (
-                    <InputAdornment position="start">
-                    <ImportantDevicesIcon />
-                    </InputAdornment>
-                ),
-                }}
-            />
             <Typography className={classes.aboutSubtitle}>
-                {"BLUE!Team Design and Development"}
+            {"BLUe!Team Design and Development"}
             </Typography>
   
-            <Grid container spacing={0}>       
-                <Grid item>
-                  <img className="developerImage imgRnd10 imageShadow imageRotate" src="public/images/jellyfish.jpg" alt="Armando Pensado" />
-                    <Typography>
-                        Skills:
-                    </Typography>
-                    <Typography>
-                        Hobbies:
-                    </Typography>
-                </Grid>
-                <Grid item>
-                  <img className="developerImage imgRnd10 imageShadow imageRotate" src="public/images/jellyfish.jpg" alt="Aja Magdaleno"/>
-                  <Typography>
-                        Skills:
-                    </Typography>
-                    <Typography>
-                        Hobbies:
-                    </Typography>
-                <Grid item>
-                  <img className="developerImage imgRnd10 imageShadow imageRotate" src="public/images/jellyfish.jpg" alt="James Rodgick" />
-                  <Typography>
-                        Skills:
-                    </Typography>
-                    <Typography>
-                        Hobbies:
-                    </Typography>
-                </Grid>
-                <Grid item>
-                  <img className="developerImage imgRnd10 imageShadow imageRotate" src="public/images/jellyfish.jpg" alt="Tommy Dang" />
-                  <Typography>
-                        Skills:
-                    </Typography>
-                    <Typography>
-                        Hobbies:
-                    </Typography>
-                </Grid>
-                <Grid item>
-                  <img className="developerImage imgRnd10 imageShadow imageRotate" src="public/images/jellyfish.jpg" alt="Eddie Kader" />
-                  <Typography>
-                        Skills:
-                    </Typography>
-                    <Typography>
-                        Hobbies:
-                    </Typography>
-                </Grid>
-                <Grid item>
-                  <img className="developerImage imgRnd10 imageShadow imageRotate" src="public/images/jellyfish.jpg" alt="Sam Awi" />
-                  <Typography>
-                        Skills:
-                    </Typography>
-                    <Typography>
-                        Hobbies:
-                    </Typography>
-                </Grid>
-                <Grid item>
-                  <img className="developerImage imgRnd10 imageShadow imageRotate" src="public/images/jellyfish.jpg" alt="Daniel Border" />
-                  <Typography>
-                        Skills:
-                    </Typography>
-                    <Typography>
-                        Hobbies:
-                    </Typography>
+                <Grid container spacing={0}>       
+                    <AboutUsCard>
+                    </AboutUsCard>
                 </Grid>
 
-               
-                      <CardActions>
-                      <Button variant="contained" color="primary" className={classes.button} onClick={this.props.handleLogingAction}>
-                        Contact
-                      </Button>
-                      </CardActions> 
-                    
-              </Grid>
-  
-            </Grid>
             </CardContent>
         </Card> 
         </Grid>
