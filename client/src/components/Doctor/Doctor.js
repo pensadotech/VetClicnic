@@ -42,9 +42,6 @@ class Doctor extends Component {
   loadDoctors = () => {
     APIdoctors.getDoctors()
       .then(res => {
-
-        console.log(res.data)
-
         this.setState({ doctors: res.data })
       })
       .catch(err => console.log(err))
