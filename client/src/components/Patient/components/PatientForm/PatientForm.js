@@ -4,17 +4,18 @@ import { withStyles } from '@material-ui/core/styles'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem';
-
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import PetsIcon from '@material-ui/icons/Pets'
+import MailIcon from '@material-ui/icons/MailOutline'
+import PhoneIcon from '@material-ui/icons/Phone'
+import PersonIcon from '@material-ui/icons/PermIdentity'
 // API
 import APIpatient from '../../../../utils/APIpatient'
 // Local style
 import './PatientForm.css'
-import { Grid } from "@material-ui/core";
 
 const styles = theme => ({
     container: {
@@ -56,26 +57,31 @@ class PatientForm extends Component {
 
     state = {
         mode: '',
-        patientname: '',
+        patient: '',    
         _id: '',
+        patientname: '',
         species: '',
         ownername: '',
         weight: '',
         phone: '',
+        email: '',
         userError: '',
 
     }
 
     componentDidMount = () => {
-        if(this.props.patientname !== '') {
+
+        if(this.props.patient !== '') {
             this.setState( {
                 mode: this.props.mode,
-                patientname: this.props.patientname,
+                patient: this.props.patient,            
                 _id: this.props._id,
-                weight: this.props.weight,
-                ownername: this.props.ownername,
-                phone: this.props.phone,
-                species: this.props.species
+                patientname: this.props.patient.patientname,
+                weight: this.props.patient.weight,
+                ownername: this.props.patient.ownername,
+                phone: this.props.patient.phone,
+                email: this.props.patient.email,
+                species: this.props.patient.species
             })
         }
     }
@@ -84,9 +90,6 @@ class PatientForm extends Component {
         const { name, value } = event.target;
         this.setState( { [name] : value})
     }
-
-
-
 
     handleSave = () => {
         if (this.state.mode === 'edit') {
@@ -102,6 +105,7 @@ class PatientForm extends Component {
                 ownername: this.state.ownername,
                 weight: this.state.weight,
                 phone: this.state.phone,
+                email: this.state.email,
                 species: this.props.species
               }
     
@@ -121,6 +125,7 @@ class PatientForm extends Component {
                 ownername: this.state.ownername,
                 weight: this.state.weight,
                 phone: this.state.phone,
+                email: this.state.email,
                 species: this.props.species
                 // formNumber: this.props.patientsLength
               }
@@ -183,9 +188,16 @@ class PatientForm extends Component {
                       name='ownername'
                       type="string"
                       autoComplete="current-ownername"
-                      value={this.state.name}
+                      value={this.state.ownername}
                       onChange={this.handleInputChange}
                       margin="normal"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <PersonIcon />
+                          </InputAdornment>
+                        ),
+                      }}
                     />   
               </div>
               <div className='formItem'> 
@@ -247,6 +259,33 @@ class PatientForm extends Component {
                     value={this.state.phone}
                     onChange={this.handleInputChange}
                     margin="normal"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <PhoneIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />                    
+              </div>
+              <div className='formItem'> 
+                  <TextField
+                    id="email"
+                    label="Email :"
+                    className={classes.textField}
+                    name='email'
+                    type="string"
+                    autoComplete="current-email"
+                    value={this.state.email}
+                    onChange={this.handleInputChange}
+                    margin="normal"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <MailIcon />
+                        </InputAdornment>
+                      ),
+                    }}
                   />                    
               </div>
            

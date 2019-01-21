@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography'
 const styles = {
   card: {
     minWidth: 275,
-    maxHeight: 260,
+    maxHeight: 390,
     margin: '10px 20px 0px 20px',  
   },
   bullet: {
@@ -41,9 +41,17 @@ class PatientCard extends Component {
           <Typography variant="h5" component="h2">
           Patient: {this.props.patient.patientname}
           </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-          
+
+          <Typography component="p">    
+            Owner:   {this.props.patient.ownername} 
           </Typography>
+          <Typography component="p">    
+            Phone:   {this.props.patient.phone} 
+          </Typography>
+          <Typography component="p">    
+            Email:   {this.props.patient.email} 
+          </Typography>
+
           <Typography component="p">
             Species: {this.props.patient.species}
           </Typography>
