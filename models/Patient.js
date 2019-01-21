@@ -17,6 +17,11 @@ let PatientSchema = new Schema({
     trim: true,
     //required: 'Full name is Required'
   },
+  email: {
+    type: String,
+    unique: true,
+    match: [/.+@.+\..+/, 'Please enter a valid e-mail address']
+  },
   breed: {
     type: String,
     trim: true,

@@ -12,14 +12,10 @@ const nodemailer = require('nodemailer')
 
 module.exports = {
    
-  send: function (req, res) {  
-     
+  send: function (req, res) {      
     let emailData = req.body
-    
-    console.log('send: function - ', emailData)
-
     sendEmail(emailData)
-     .then(news => res.json(news))
+     .then(r => res.json(r))
      .catch(err => res.status(422).json(err))
   }
 }

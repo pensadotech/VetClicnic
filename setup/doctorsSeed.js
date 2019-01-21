@@ -2,29 +2,50 @@
 const db = require("../models")
 
 module.exports = {
-  
+
   initialize: function () {
 
     // Mongo documents array
     const doctorsSeed = [{
-        name: 'John Doe',
-        phone: '949-123-1234',
+        name: 'Dr. Malecek',
+        phone: '949-770-1808',
         mobilePhone: '949-123-4567',
-        email: 'johndoe@doctor.com',
+        email: 'nicole.malecek@vca.com',
         doctorCreated: Date.now()
       },
       {
-        name: 'Bob Joe',
-        phone: '949-876-8755',
+        name: 'Dr. Ota',
+        phone: '949-770-1808',
         mobilePhone: '714-123-4567',
-        email: 'bobjoe@doctor.com',
+        email: 'jamie.ota@vca.com',
         doctorCreated: Date.now()
       },
       {
-        name: 'Susan Roberts',
-        phone: '949-876-8755',
+        name: 'Dr. Steenis',
+        phone: '949-770-1808',
         mobilePhone: '714-123-4567',
-        email: 'susanroberts@doctor.com',
+        email: 'jason.steenis@vca.com',
+        doctorCreated: Date.now()
+      },
+      {
+        name: 'Dr. Buehler',
+        phone: '949-770-1808',
+        mobilePhone: '714-123-4567',
+        email: 'lisa.buehler@vca.com',
+        doctorCreated: Date.now()
+      },
+      {
+        name: 'Dr. Yoo',
+        phone: '949-770-1808',
+        mobilePhone: '714-123-4567',
+        email: 'hee.yoo@vca.com',
+        doctorCreated: Date.now()
+      },
+      {
+        name: 'Dr. Pensado',
+        phone: '949-770-1808',
+        mobilePhone: '714-123-4567',
+        email: 'armando@pensadotech.com',
         doctorCreated: Date.now()
       }
     ]

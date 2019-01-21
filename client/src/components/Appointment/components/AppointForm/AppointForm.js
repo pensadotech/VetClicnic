@@ -158,7 +158,6 @@ class AppointForm extends Component {
          this.setState({appointmentError: 'The appointment cannot be in the past!'}) 
        } else {  
          
-        console.log('ok?')
           // retreive the selected doctor in the screen
           let doctorObj = this.getDoctorObject(this.state.selectedDoctorName)
           // retreive the selected patient from screen

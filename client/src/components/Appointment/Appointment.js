@@ -3,17 +3,18 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Avatar from '@material-ui/core/Avatar'
-// import EventIcon from '@material-ui/icons/Event';
 import EventIcon from '@material-ui/icons/Event'
 import Fab from '@material-ui/core/Fab'
 import AddIcon from '@material-ui/icons/Add'
+import Moment from 'moment'
 // Components
 import AppointCard from './components/AppointCard'
 import AppointForm from './components/AppointForm'
+// API
 import APIappointment from '../../utils/APIappointment'
 import APIdoctor from '../../utils/APIdoctor'
 import APIpatient from '../../utils/APIpatient'
-
+import APIemails from '../../utils/APIemails'
 
 const styles = theme => ({
  
@@ -103,40 +104,160 @@ class Appointment extends Component {
     this.setState({ screenMode: 'delete', targetAppoint: tgtApnt })
   }
 
+  getEmailRecipients =(tgtApnt) =>{
+     
+    let emailrecipients = ''
+    
+    if (tgtApnt.doctor) {
+      emailrecipients = tgtApnt.doctor.email
+     }
+
+     if(tgtApnt.patient) {
+      if(emailrecipients !== '') {
+        emailrecipients = emailrecipients + ';'
+                        + tgtApnt.patient.email
+      } else {
+        emailrecipients = tgtApnt.patient.email
+      }
+     }
+
+     return emailrecipients
+  }
+
   handleCreateAppt = (tgtApnt) => {
+
     // create new user
     APIappointment.createAppoint(tgtApnt)
       .then(r => {
         // reload the data
         this.loadAppointData()
         // Restore main view
-        this.setState({ screenMode: 'list', targetAppoint: '' })       
+        this.setState({
+          screenMode: 'list',
+          targetAppoint: ''
+        })
+
+        // send email if at list an email is present
+        if ((tgtApnt.doctor && tgtApnt.doctor.email !== '') ||
+          (tgtApnt.patient && tgtApnt.patient.email !== '')) {
+          // make a list with doctor and patience emails 
+          let emailrecipients = this.getEmailRecipients(tgtApnt)
+          // Prepare email message
+          let email = {
+            to: emailrecipients,
+            subject: 'Blue Animal Clinic / New Appointment',
+            text: `
+             Blue Animal Clinic - SORIN: New Appointment
+
+                 Title:  ${tgtApnt.title}
+                 Description:  ${tgtApnt.description} 
+                 Date:  ${Moment(tgtApnt.date).format('YYYY-MM-DD hh:mm a')}
+                 Doctor: ${tgtApnt.doctor.name} 
+                 Patient: ${tgtApnt.patient.patientname} 
+           `
+          }
+
+          // send email indicating user was added to the system
+          APIemails.sendEmail(email)
+            .then(r => {
+              console.log('Email sent: ' + r.response)
+            })
+            .catch(err => console.error(err))
+
+        } //  if (tgtApnt.doctor || tgtApnt.patient)
+
       })
       .catch(err => console.log(err))
   }
 
   handleSaveAppt = (tgtApnt) => {
     // Save updated user data    
-    APIappointment.updateAppoint(tgtApnt._id,tgtApnt)
-      .then(r => {  
+    APIappointment.updateAppoint(tgtApnt._id, tgtApnt)
+      .then(r => {
         // reload the data
         this.loadAppointData()
         // Restore main view
-       this.setState({screenMode: 'list', targetAppoint: ''})  
+        this.setState({
+          screenMode: 'list',
+          targetAppoint: ''
+        })
+
+        // send email if at list an email is present
+        if ((tgtApnt.doctor && tgtApnt.doctor.email !== '') ||
+          (tgtApnt.patient && tgtApnt.patient.email !== '')) {
+          // make a list with doctor and patience emails 
+          let emailrecipients = this.getEmailRecipients(tgtApnt)
+          // Prepare email message
+          let email = {
+            to: emailrecipients,
+            subject: 'Blue Animal Clinic /  Appointment Update',
+            text: `
+           Blue Animal Clinic - SORIN: Appointment Update
+
+               Title:  ${tgtApnt.title}
+               Description:  ${tgtApnt.description} 
+               Date:  ${Moment(tgtApnt.date).format('YYYY-MM-DD hh:mm a')}
+               Doctor: ${tgtApnt.doctor.name} 
+               Patient: ${tgtApnt.patient.patientname} 
+         `
+          }
+
+          // send email indicating user was added to the system
+          APIemails.sendEmail(email)
+            .then(r => {
+              console.log('Email sent: ' + r.response)
+            })
+            .catch(err => console.error(err))
+
+        } //  if (tgtApnt.doctor || tgtApnt.patient)
+
       })
       .catch(err => console.log(err))
-  };
+  }
 
   handleDeleteAppt = (tgtApnt) => {
     // delete user    
     APIappointment.deleteAppoint(tgtApnt._id)
-      .then(r => {  
+      .then(r => {
         // Restore main view
-        this.setState({screenMode: 'list',targetAppoint: ''})  
+        this.setState({
+          screenMode: 'list',
+          targetAppoint: ''
+        })
         // reload the data
         this.loadAppointData()
+
+        // send email if at list an email is present
+        if ((tgtApnt.doctor && tgtApnt.doctor.email !== '') ||
+          (tgtApnt.patient && tgtApnt.patient.email !== '')) {
+          // make a list with doctor and patience emails 
+          let emailrecipients = this.getEmailRecipients(tgtApnt)
+          // Prepare email message
+          let email = {
+            to: emailrecipients,
+            subject: 'Blue Animal Clinic /  Appointment Cancellation',
+            text: `
+           Blue Animal Clinic - SORIN: Appointment Cancellation
+
+               Title:  ${tgtApnt.title}
+               Description:  ${tgtApnt.description} 
+               Date:  ${Moment(tgtApnt.date).format('YYYY-MM-DD hh:mm a')}
+               Doctor: ${tgtApnt.doctor.name} 
+               Patient: ${tgtApnt.patient.patientname} 
+         `
+          }
+
+          // send email indicating user was added to the system
+          APIemails.sendEmail(email)
+            .then(r => {
+              console.log('Email sent: ' + r.response)
+            })
+            .catch(err => console.error(err))
+
+        } //  if (tgtApnt.doctor || tgtApnt.patient)
+
       })
-      .catch(err => console.log(err)) 
+      .catch(err => console.log(err))
   }
 
   handleCancel = (tgtAppt) => {
