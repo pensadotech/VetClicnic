@@ -45,7 +45,10 @@ module.exports = {
   },
   createUpdate: function (req, res) {
     // body has an article
-    let patient = req.body;
+    let patient = req.body
+
+    console.log('patient',patient)
+    
     // Create or Update
     db.Patient.findOne({ patientname: { $eq: patient.patientname } })
       .then((r) => {

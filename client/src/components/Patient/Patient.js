@@ -61,48 +61,65 @@ class Patient extends Component {
   }
 
   handleCreatePatient = (tgtPat) => {
-    console.log(tgtPat);
-    //creates new patient
-    APIpatient.createUpdatePatient(tgtPat)
-    .then(r => {
-      //restores the main view
-      this.setState({ screenMode: 'list', targetPatient: ''})
-      //reloads the data
-      this.loadPatients()
-    })
-    .catch(e => console.log(e))
+
+      console.log('handleSavePatient',tgtPat)
+
+      //creates new patient
+      APIpatient.createUpdatePatient(tgtPat)
+        .then(r => {
+          //restores the main view
+          this.setState({
+            screenMode: 'list',
+            targetPatient: ''
+          })
+          //reloads the data
+          this.loadPatients()
+        })
+        .catch(e => console.log(e))
   }
 
-    handleSavePatient = (tgtPat) => {
+  handleSavePatient = (tgtPat) => {
+
+      console.log('handleSavePatient',tgtPat)
+
       //save updated user data
-      APIpatient.updatePatient(tgtPat.__id, tgtPat)
-      .then(r => {
-        //restores the main view
-        this.setState({ screenMode: 'list', targetPatient:''})
-        //reload the data
-        this.loadPatients()
-      })
-      .catch(e => console.log(e))
-    }
+      // APIpatient.updatePatient(tgtPat.__id, tgtPat)
+      //   .then(r => {
+      //     //restores the main view
+      //     this.setState({
+      //       screenMode: 'list',
+      //       targetPatient: ''
+      //     })
+      //     //reload the data
+      //     this.loadPatients()
+      //   })
+      //   .catch(e => console.log(e))
+  }
    
-    handleDeletePatient = (tgtPat) => {
+  handleDeletePatient = (tgtPat) => {
       //deletes the patient
       APIpatient.deletePatient(tgtPat._id)
-      .then(r => {
-        //restores the mainview
-        this.setState( { screenMode: 'list', targetPatient: ''})
-        //reloads the data
-        this.loadPatients()
-      })
-      .catch(e => console.log(e))
-    }
+        .then(r => {
+          //restores the mainview
+          this.setState({
+            screenMode: 'list',
+            targetPatient: ''
+          })
+          //reloads the data
+          this.loadPatients()
+        })
+        .catch(e => console.log(e))
+  }
 
-    handleCancel = (tgtPat) => {
+  handleCancel = (tgtPat) => {
       //reload the data
-    this.loadPatients()
-    // Just reset selected user and change screen mode to list
-    this.setState({ screenMode: 'list', targetPatient: '' })
-    }
+      this.loadPatients()
+      // Just reset selected user and change screen mode to list
+      this.setState({
+        screenMode: 'list',
+        targetPatient: ''
+      })
+   }
 
 
   renderView = () => {

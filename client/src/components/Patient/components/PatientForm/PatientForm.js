@@ -48,7 +48,7 @@ const styles = theme => ({
       }
 })
 
-const species = [
+const speciesArr = [
   { id: 1, name: 'Canine'},
   { id: 2, name: 'Feline'}
 ]
@@ -75,7 +75,7 @@ class PatientForm extends Component {
             this.setState( {
                 mode: this.props.mode,
                 patient: this.props.patient,            
-                _id: this.props._id,
+                _id: this.props.patient._id,
                 patientname: this.props.patient.patientname,
                 weight: this.props.patient.weight,
                 ownername: this.props.patient.ownername,
@@ -106,7 +106,7 @@ class PatientForm extends Component {
                 weight: this.state.weight,
                 phone: this.state.phone,
                 email: this.state.email,
-                species: this.props.species
+                species: this.state.species
               }
     
               // send information back 
@@ -126,7 +126,7 @@ class PatientForm extends Component {
                 weight: this.state.weight,
                 phone: this.state.phone,
                 email: this.state.email,
-                species: this.props.species
+                species: this.state.species
                 // formNumber: this.props.patientsLength
               }
               
@@ -214,9 +214,12 @@ class PatientForm extends Component {
                     margin="normal"
                   >
                   {
-                    species.map(species => {
+                    speciesArr.map(species => {
                       return (
-                        <MenuItem key={species.id} value={species.name}>{species.name}</MenuItem>
+                        <MenuItem key={species.id} 
+                           value={species.name}>
+                           {species.name}
+                        </MenuItem>
                       )
                     })
                   }
