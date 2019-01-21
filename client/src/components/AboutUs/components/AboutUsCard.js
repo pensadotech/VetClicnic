@@ -37,30 +37,35 @@ class AboutUsCard extends Component {
 
   render() {
     const { classes } = this.props;
+    console.log(this.props)
+    // console.log(classes)
 
     return (
-      <Card className={classes.card}>
+      <Card 
+      className={classes.card}
+      >
         <CardHeader
           avatar={
-            <Avatar aria-label="Developer" className={classes.avatar}>
+            <Avatar aria-label="Developer" 
+            className={classes.avatar}
+            >
               BLUe
             </Avatar>
           }
-           
-          developername=" "
+           devlopername={this.props.developername}
             
         />
         <CardMedia
-          className={classes.media}
-          image="../../../../public/images/AjaMagdaleno.JPG"
+         className={classes.media}
+          image={this.props.image}
           developername=""
         />
         <CardContent>
           <Typography component="p">
-            Skills:
+            Skills: {this.props.skills}
           </Typography>
           <Typography component="p">
-            Hobbies:
+            Hobbies: {this.props.hobbies}
           </Typography>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
