@@ -6,6 +6,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Moment from 'moment'
 
 const styles = {
   card: {
@@ -18,40 +19,60 @@ const styles = {
     margin: '0 2px',
     transform: 'scale(0.8)'
   },
-  title: {
-    fontSize: 14
+  subtitle : {
+    fontSize: 16,
+    marginLeft: '10px'
+  },
+  firstTextInfo : {
+    fontSize: 14,
+    margin: '10px 0px 0px 0px'
+  },
+  textInfo : {
+    fontSize: 12,
   },
   pos: {
     marginBottom: 12
   }
-};
+}
 
 class AppointCard extends Component {
+  
+  state = {
+    appointment: null
+  }
+
+  componentDidMount() { 
+
+     if(this.props.appt) {
+
+       this.setState({
+        appointment : Moment(this.props.appt.date).format('YYYY-MM-DD hh:mm a') 
+       })
+     }
+  }
+
   render () {
     const { classes } = this.props;
     
-    console.log(this.props.appt)
-
     return (
       <Card className={classes.card}>
         <CardContent>
-          <Typography className={classes.title} color='textSecondary' gutterBottom>
-            {this.props.appt.date}
+           <Typography variant='h5'>
+             {this.props.appt.title}
           </Typography>
-          <Typography variant='h5' component='h2'>
-            {this.props.appt.title}
+          <Typography className={classes.subtitle}>
+             {this.props.appt.description}
           </Typography>
-          <Typography className={classes.pos} color='textSecondary'>
-            Doctor: {this.props.appt.doctor ? this.props.appt.doctor.name : ''}
+          <Typography className={classes.firstTextInfo} >
+            <b>Date: </b> {this.state.appointment}
+          </Typography>     
+          <Typography className={classes.textInfo} >
+            <b>Doctor: </b> {this.props.appt.doctor ? this.props.appt.doctor.name : ''}
           </Typography>
-          <Typography className={classes.pos} color='textSecondary'>
-            Patient: {this.props.appt.patient ? this.props.appt.patient.patientname : ''}
+          <Typography className={classes.textInfo} >
+            <b>Patient: </b> {this.props.appt.patient ? this.props.appt.patient.patientname : ''}
           </Typography>
-          <Typography component='p'>
-            {this.props.appt.description}
-            <br />
-
-          </Typography>
+          
         </CardContent>
         <CardActions>
           <Button size='small' variant='contained' color={this.props.leftbuttonColor}
@@ -66,6 +87,6 @@ class AppointCard extends Component {
 
 AppointCard.propTypes = {
   classes: PropTypes.object.isRequired
-};
+}
 
 export default withStyles(styles)(AppointCard);

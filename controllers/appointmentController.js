@@ -18,6 +18,14 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  findWhere: function (req, res) {
+    db.Appointment
+      .find(req.query)
+      .populate('doctor')
+      .populate('patient')
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   findById: function (req, res) {
     db.Appointment
       .findById(req.params.id)
@@ -27,25 +35,25 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {
+    
     let newAppoint = req.body;
-    console.log(newAppoint);
+    
+    console.log('controller-add:', newAppoint)
+
     // create the appointment
     db.Appointment.create(newAppoint)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   update: function (req, res) {
-    // body has the user
-    let appointment = req.body;
-    // Translate
-    let apptData = {
-      title: appointment.title,
-      description: appointment.description,
-      appointmentCreated: Date.now()
-    };
+
+    let appointment = req.body
+
+    console.log('controller-upd:', appointment)
+
     // Update
     db.Appointment
-      .findOneAndUpdate({ _id: req.params.id }, apptData)
+      .findOneAndUpdate({ _id: req.params.id }, appointment)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

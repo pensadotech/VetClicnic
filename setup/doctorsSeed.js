@@ -7,17 +7,24 @@ module.exports = {
 
     // Mongo documents array
     const doctorsSeed = [{
-        name: 'doctor name',
+        name: 'John Doe',
         phone: '949-123-1234',
         mobilePhone: '949-123-4567',
-        email: 'doctor@doctor.com',
+        email: 'johndoe@doctor.com',
         doctorCreated: Date.now()
       },
       {
         name: 'Bob Joe',
         phone: '949-876-8755',
         mobilePhone: '714-123-4567',
-        email: 'armando@pensadotech.com',
+        email: 'bobjoe@doctor.com',
+        doctorCreated: Date.now()
+      },
+      {
+        name: 'Susan Roberts',
+        phone: '949-876-8755',
+        mobilePhone: '714-123-4567',
+        email: 'susanroberts@doctor.com',
         doctorCreated: Date.now()
       }
     ]

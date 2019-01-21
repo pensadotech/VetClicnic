@@ -28,6 +28,7 @@
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "if-env": "^1.0.4",
+    "moment": "^2.23.0",
     "mongoose": "^5.4.1",
     "mongoose-auto-increment-2": "^1.0.3",
     "nodemailer": "^5.1.1",

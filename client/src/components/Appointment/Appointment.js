@@ -1,23 +1,21 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Avatar from '@material-ui/core/Avatar';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
+import Avatar from '@material-ui/core/Avatar'
 // import EventIcon from '@material-ui/icons/Event';
-import SettingsIcon from '@material-ui/icons/Settings'
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
+import EventIcon from '@material-ui/icons/Event'
+import Fab from '@material-ui/core/Fab'
+import AddIcon from '@material-ui/icons/Add'
 // Components
-import AppointCard from './components/AppointCard';
-import AppointForm from './components/AppointForm';
-import DoctorDropDown from './components/DoctorDropDown';
-import APIappointment from '../../utils/APIappointment';
-import APIdoctor from '../../utils/APIdoctor';
-import APIpatient from '../../utils/APIpatient';
+import AppointCard from './components/AppointCard'
+import AppointForm from './components/AppointForm'
+import APIappointment from '../../utils/APIappointment'
+import APIdoctor from '../../utils/APIdoctor'
+import APIpatient from '../../utils/APIpatient'
 
 
 const styles = theme => ({
- 
  
   avatar: {
     margin: ' 10px 0px 0px 50px'
@@ -48,7 +46,7 @@ const styles = theme => ({
   extendedIcon: {
     marginRight: theme.spacing.unit,
   }
-});
+})
 
 class Appointment extends Component {
   
@@ -58,59 +56,52 @@ class Appointment extends Component {
     doctors: [],
     screenMode: 'list',
     targetAppoint: ''
-  };
+  }
   
   componentDidMount() {
-    this.loadDoctorData()
-    // this.loadAppointData()
-    // this.loadPatientData()
-  };
-
-  loadDoctorData = () => {
-    //console.log('loadDoctorData')
-    APIdoctor.getDoctors()
-      .then(res => {
-        //console.log('doctors', res.data)
-        this.setState({ doctors: res.data })
-        this.loadPatientData()
-      })
-      .catch(err => console.log(err))
-  };
-
-  loadPatientData = () => {
-    //console.log('loadPatientData')
-    APIpatient.getPatients()
-      .then(res => {
-        // console.log('patients', res.data)
-        this.setState({ patients: res.data })
-        this.loadAppointData()
-      })
-      .catch(err => console.log(err))
-  };
+    this.loadAppointData()
+  } 
 
   loadAppointData = () => {
     APIappointment.getApointments()
     .then(res => {
-      // console.log('patients', res.data)
       this.setState({ aptments: res.data })
+      this.loadDoctorData()    
     })
     .catch(err => console.log(err))
-  };
+  }
+
+  loadDoctorData = () => {
+    APIdoctor.getDoctors()
+      .then(res => {
+        this.setState({ doctors: res.data })
+        this.loadPatientData()
+      })
+      .catch(err => console.log(err))
+  }
+
+  loadPatientData = () => {
+    APIpatient.getPatients()
+      .then(res => {
+        this.setState({ patients: res.data })
+      })
+      .catch(err => console.log(err))
+  }
 
   handleAppointAddSelection = () => {
     // change screen mode to Appointment ADD mode
     this.setState({ screenMode: 'add' })
-  };
+  }
 
   handleAppointUpdateSelection = (tgtApnt) => {
     // change screen mode to Appointment EDIT mode, and store target-appoint
     this.setState({ screenMode: 'edit', targetAppoint: tgtApnt })
-  };
+  }
 
   handleAppointDeleteSelection = (tgtApnt) => {
     // Change screen mode to Appointment DELETE mode, and store target-appointment
     this.setState({ screenMode: 'delete', targetAppoint: tgtApnt })
-  };
+  }
 
   handleCreateAppt = (tgtApnt) => {
     // create new user
@@ -119,22 +110,19 @@ class Appointment extends Component {
         // Restore main view
         this.setState({ screenMode: 'list', targetAppoint: '' })
         // reload the data
-        // this.loadAppointData()
-        this.loadDoctorData()
+        this.loadAppointData()
       })
       .catch(err => console.log(err))
-  };
+  }
 
   handleSaveAppt = (tgtApnt) => {
-    console.log(tgtApnt)
     // Save updated user data    
     APIappointment.updateAppoint(tgtApnt._id,tgtApnt)
       .then(r => {  
         // Restore main view
        this.setState({screenMode: 'list', targetAppoint: ''})  
        // reload the data
-      //this.loadAppointData()
-        this.loadDoctorData()
+        this.loadAppointData()
       })
       .catch(err => console.log(err))
   };
@@ -152,13 +140,12 @@ class Appointment extends Component {
   }
 
   handleCancel = (tgtAppt) => {
-    // reload the data
-    this.loadAppointData() 
     // Just reset selected appt and change screen mode to list
     this.setState({ screenMode: 'list', targetAppoint: '' })
-  };
+    // reload the data
+    this.loadAppointData()    
+  }
 
-  
   renderView = () => {
 
     const { classes } = this.props;
@@ -168,7 +155,7 @@ class Appointment extends Component {
         return (
           <>
           <h1 className={classes.pageHead}>
-            Set new appointment
+            Create new appointment
           </h1>
           <AppointForm 
             mode={this.state.screenMode}
@@ -237,15 +224,17 @@ class Appointment extends Component {
           <Grid container spacing={0}>
             <Grid item>
               <Avatar className={classes.avatar}>
-                <SettingsIcon />
+                <EventIcon />
               </Avatar>
             </Grid>
             <Grid item>
               <h1 className={classes.pageHead}>Appointments</h1>
             </Grid>
             <Grid item>
-              <Fab color="secondary" aria-label="Add" className={classes.fab}>
-                <AddIcon onClick={() => this.handleAppointAddSelection()} />
+              <Fab color="secondary" aria-label="Add" 
+                  className={classes.fab}
+                  onClick={() => this.handleAppointAddSelection()}>
+                <AddIcon />
               </Fab>
             </Grid>
           </Grid>
@@ -273,7 +262,7 @@ class Appointment extends Component {
         </>
     )
   }
-};
+}
 
   render() {
     return(
@@ -287,25 +276,6 @@ class Appointment extends Component {
 
 Appointment.propTypes = {
   classes: PropTypes.object.isRequired
-};
+}
 
-export default withStyles(styles)(Appointment);
-
-// render () {
-//   const { classes } = this.props;
-//   return (
-//     <>
-//       <Grid container spacing={0}>
-//         <Grid item>
-//           <Avatar className={classes.avatar}>
-//             <EventIcon />
-//           </Avatar>
-//         </Grid>
-//         <Grid item>
-//           <h1 className={classes.pageHead}>Appointments</h1>
-//         </Grid>
-//         <AppointCard />
-//       </Grid>
-//     </>
-//   );
-// }
+export default withStyles(styles)(Appointment)

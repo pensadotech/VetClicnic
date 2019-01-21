@@ -3,29 +3,29 @@ const db = require('../models');
 
 // Connect to the Mongo DB
 var MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/vetclinic';
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true
+});
 
-// Find an exiting doctor 
-doctor ={}
-// find an existing patient
-patience ={}
+doctor = {}
+patience = {}
 
 const appointSeed = [{
-  date: Date.now(),
-  title: '',
-  description: '',
-  appointCreated: Date.now(),
-  doctor: doctor,
-  patient: patience
-},
-{
-  date: Date.now(),
-  title: '',
-  description: '',
-  appointCreated: Date.now(),
-  doctor: doctor,
-  patient: patience
-}
+    date: new Date(),
+    title: 'Fido Date for Vaccines',
+    description: 'Provide vaccines to Fido',
+    doctor: null,
+    patient: null,
+    appointCreated: new Date()
+  },
+  {
+    date: new Date(),
+    title: 'Boby Nail trim',
+    description: 'Trime nails for Boby',
+    doctor: null,
+    patient: null,
+    appointCreated: new Date()
+  }
 ];
 
 db.Appointment

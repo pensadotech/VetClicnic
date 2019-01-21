@@ -73,6 +73,7 @@ class Medicine extends Component {
     // Change screen mode to User DELETE mode, and store target-med
     this.setState({ screenMode: 'delete', targetMed: tgtMed })
   }
+
   handleMedViewSelection = (tgtMed) => {
     // Change screen mode to User DELETE mode, and store target-med
     this.setState({ screenMode: 'view', targetMed: tgtMed })
@@ -129,7 +130,6 @@ class Medicine extends Component {
     // Just reset selected user and change screen mode to list
     this.setState({ screenMode: 'list', targetMed: '' })
   }
-
 
   renderView = () => {
 

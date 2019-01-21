@@ -6,12 +6,7 @@ let Schema = mongoose.Schema;
 let AppointSchema = new Schema({
   date: {
     type: Date,
-    default: Date.now,
-    trim: true,
     required: 'Date is required'
-  },
-  time: {
-    type: Number, default: (new Date()).getTime(Number)
   },
   title: {
     type: String,
@@ -32,8 +27,7 @@ let AppointSchema = new Schema({
     ref: 'Patient'
   },
   appointCreated: {
-    type: Date,
-    default: Date.now
+    type: Date
   }
 });
 

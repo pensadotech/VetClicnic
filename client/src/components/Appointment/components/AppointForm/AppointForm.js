@@ -7,13 +7,16 @@ import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
-import AccountCircle from '@material-ui/icons/AccountCircle'
-import PersonIcon from '@material-ui/icons/PermIdentity'
+import EventIcon from '@material-ui/icons/Event'
+import ScheduleIcon from '@material-ui/icons/Schedule'
+import Moment from 'moment'
+
+import AppointItemSelect from "../AppointItemSelect"
 // API
 import APIappointment from '../../../../utils/APIappointment'
 // Local style
-import './AppointForm'
-import MainSelect from "../DoctorDropDown";
+import './AppointForm.css'
+
 
 const styles = theme => ({
   container: {
@@ -46,7 +49,6 @@ const styles = theme => ({
   }
 })
 
-
 class AppointForm extends Component {
   
   state = {
@@ -55,42 +57,48 @@ class AppointForm extends Component {
     _id : '',
     title: '',
     description: '',
-    date: '',
-    time: '',
-    appointmentError: '',
+    appointmentDate: '',  
     selectedDoctorName : '',
-    selectedPatientName: ''
+    selectedPatientName: '',
+    appointmentError: ''
   };
   
   componentDidMount = () => {
     
     if(this.props.appoint !== '') {
-          this.setState({
+      
+      // console.log('apptdate',this.props.appoint.date)
+      // let newDate = new Date()
+      // let dateStr = Moment(newDate).format('YYYY-MM-DDTHH:MM')
+      // console.log('newDate',newDate)
+      // console.log('dateStr',dateStr)
+ 
+       this.setState({
               mode: this.props.mode,
               appoint: this.props.appoint,
               _id: this.props.appoint._id, 
               title: this.props.appoint.title,
               description: this.props.appoint.description,
-              selectedDoctor: this.props.appoint.doctor.name,
-              selectedPatient: this.props.appoint.patient.patientname
-            })  
-        }
-    };
-
+              appointmentDate : Moment(this.props.appoint.date).format('YYYY-MM-DDTHH:MM'),
+              selectedDoctorName: this.props.appoint.doctor ? this.props.appoint.doctor.name : '',
+              selectedPatientName: this.props.appoint.patient ? this.props.appoint.patient.patientname : ''
+        })     
+    }
+    
+  }
+  
 
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value })  
-    console.log(name)
-  };
+  }
 
   handleDropSelection = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value })
-    console.log(name)
-  };
+  }
 
-  getDoctors = (doctorName) => {
+  getDoctorObject = (doctorName) => {
     let targetDoctor = null;
     let doctorArr = this.props.doctors
     for (let i = 0; i < doctorArr.length; i++) {
@@ -100,12 +108,11 @@ class AppointForm extends Component {
         return targetDoctor
       }
     }
-  };
+  }
   
-  getPatients = (patientName) => {
+  getPatientObject = (patientName) => {
     let targetPatient = null;
     let patientArr = this.props.patients
-    console.log(patientName)
     for (let i = 0; i < patientArr.length; i++) {
       let patient = patientArr[i]
       if (patient.patientname === patientName) {
@@ -113,8 +120,7 @@ class AppointForm extends Component {
         return targetPatient
       }
     }
-  };
-
+  }
 
   handleSave = () => {
   
@@ -122,22 +128,20 @@ class AppointForm extends Component {
        // EDIT MODE: Validate
        if (this.state.title === '' || this.state.description === '')  {    
           this.setState({appointmentError: 'Please provide appointment title and brief description'}) 
-       } else {
-                
+       } else {                
            // retreive the selected doctor in the screen
-          let doctorObj = this.getDoctors(this.state.selectedDoctorName)
-          // gete the selected patient from screen
+          let doctorObj = this.getDoctorObject(this.state.selectedDoctorName)
+          // retreive the selected patient from screen
+          let patientObj = this.getPatientObject(this.state.selectedPatientName)
 
-          let patientObj = this.getPatients(this.state.selectedPatientName)
-        
-          
          // translate
           let newApptData = { 
+             date : this.state.appointmentDate,
              title: this.state.title,
-             description: this.state.description,
-             appointmentCreated: Date.now(),
+             description: this.state.description,    
              doctor: doctorObj,
-             patient: patientObj
+             patient: patientObj,
+             appointmentCreated: new Date()
           } 
           
            // send information back 
@@ -148,29 +152,28 @@ class AppointForm extends Component {
        // ADD MODE: Validate
        if (this.state.title === '' || this.state.description === '')  {    
         this.setState({appointmentError: 'Please provide title and brief description'}) 
-       } else {
-          console.log('addbutton')
-            
+       } else {           
           // retreive the selected doctor in the screen
-          let doctorObj = this.getDoctors(this.state.selectedDoctorName)
-          // gete the selected patient from screen
-          let patientObj = this.getPatients(this.state.selectedPatientName)
-          console.log(this.state.date)
-          console.log(this.state.time)
+          let doctorObj = this.getDoctorObject(this.state.selectedDoctorName)
+          // retreive the selected patient from screen
+          let patientObj = this.getPatientObject(this.state.selectedPatientName)
+         
          // translate
           let newApptData = { 
+             date : this.state.appointmentDate,
              title: this.state.title,
-             description: this.state.description,
-             appointmentCreated: Date.now(),
+             description: this.state.description,     
              doctor: doctorObj,
-             patient: patientObj
+             patient: patientObj,
+             appointmentCreated: new Date()
           } 
+
+          console.log('newApptData',newApptData)
              
           // Check if appt already exist 
-         APIappointment.getApointments(this.state.title)
+         APIappointment.findOne(this.state.title)
             .then(res => {  
-
-              if(res.data === null) {
+              if(res.data !== null) {
                 this.setState({appointmentError: `The title "${res.data.title}" already exist, please provide a new one`})  
               } else {
                 // send information back 
@@ -185,139 +188,96 @@ class AppointForm extends Component {
   render() {
 
     const { classes } = this.props
+     
+    return (
 
-    return ( 
-      <>
-      <Card className={classes.card}>
-         <CardContent>
-          <p className='apntError'>{this.state.appointmentError}</p>
-          <form className={classes.container} noValidate autoComplete="off">
-
-              <div className='formItem'>
-                 <TextField
-                    required
-                    id="apnt-title"
-                    label="Title :"
-                    className={classes.textField}
-                    name='title'
-                    type="string"
-                    // autoComplete="current-username"
-                    value={this.state.title}
-                    onChange={this.handleInputChange}
-                    margin="normal"
-                    // disabled={this.props.isUserNameDisabled}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                           <AccountCircle />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />   
-              </div>
-              <div className='formItem'> 
-                  <TextField
-                    required
-                    id="apnt-description"
-                    label="Description :"
-                    className={classes.textField}
-                    name='description'
-                    type="string"
-                    // autoComplete="current-fullname"
-                    value={this.state.description}
-                    onChange={this.handleInputChange}
-                    margin="normal"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                           <PersonIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />                 
-              </div>
-              <div className='formItem'> 
-                  <TextField
-                    required
-                    id="apnt-date"
-                    label="Date :"
-                    className={classes.textField}
-                    name='date'
-                    type="date"
-                    // autoComplete="current-fullname"
-                    value={this.state.date}
-                    onChange={this.handleInputChange}
-                    margin="normal"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                           <PersonIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />                 
-              </div>
-              <div className='formItem'> 
-                  <TextField
-                    required
-                    id="apnt-time"
-                    label="Time :"
-                    className={classes.textField}
-                    name='time'
-                    type="time"
-                    // autoComplete="current-fullname"
-                    value={this.state.time}
-                    onChange={this.handleInputChange}
-                    margin="normal"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                           <PersonIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />                 
-              </div>
-
-              <div className='formItem'>
-                <MainSelect 
-                  mainLabel='Doctor'
-                  table="doctor"
-                  itemArr={this.props.doctors}
-                  fieldName={'selectedDoctorName'}
-                  selectedName={this.state.selectedDoctorName}
-                  handleSelection={this.handleDropSelection}/>
-              </div>
-
-              <div className='formItem'>
-                <MainSelect
-                  mainLabel='Patient'
-                  table="patient"
-                  itemArr={this.props.patients}
-                  fieldName={'selectedPatientName'}
-                  selectedName={this.state.selectedPatientName}
-                  handleSelection={this.handleDropSelection} />
-              </div>
-
-          </form>
-        </CardContent>
-        <CardActions>          
-            <Button size="small" variant="contained" color={this.props.leftbuttonColor} 
-               onClick={() => this.handleSave()}>{this.props.leftButtonLabel}
-            </Button>
-            <Button size="small" variant="contained" color={this.props.rightbuttonColor}  
-               onClick={() => this.props.handleRightButtonSelection(this.props.apnt)}>
-               {this.props.rightButtonLabel}
-            </Button>
-        </CardActions>    
-      </Card>
-
-      </>
-
-    ) 
-
+        <>
+        <Card className={classes.card}>
+           <CardContent>
+            <p className='apntError'>{this.state.appointmentError}</p>
+            <form className={classes.container} noValidate autoComplete="off">
+                <div className='formItem'>
+                   <TextField
+                      required
+                      id="apnt-title"
+                      label="Title :"
+                      className={classes.textField}
+                      name='title'
+                      type="string"
+                      // autoComplete="current-username"
+                      value={this.state.title}
+                      onChange={this.handleInputChange}
+                      margin="normal"
+                    />   
+                </div>
+                <div className='formItem'> 
+                    <TextField
+                      required
+                      id="apnt-description"
+                      label="Description :"
+                      className={classes.textField}
+                      name='description'
+                      type="string"
+                      // autoComplete="current-fullname"
+                      value={this.state.description}
+                      onChange={this.handleInputChange}
+                      margin="normal"
+                    />                 
+                </div>  
+                <div className='formItem'> 
+                    <TextField
+                      required
+                      id="appnt-date"
+                      label="Date and Time :"
+                      className={classes.textField}
+                      name='appointmentDate'
+                      type='datetime-local'
+                      value={this.state.appointmentDate}
+                      onChange={this.handleInputChange}
+                      margin="normal"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                             <EventIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />                 
+                </div>              
+                <div className='formItem'>
+                  <AppointItemSelect 
+                    mainLabel='Doctor'
+                    table="doctor"
+                    itemArr={this.props.doctors}
+                    selectedfieldName='selectedDoctorName'
+                    selectedName={this.state.selectedDoctorName}
+                    handleSelection={this.handleDropSelection}/>
+                </div>
+                <div className='formItem'>
+                  <AppointItemSelect
+                    mainLabel='Patient'
+                    table="patient"
+                    itemArr={this.props.patients}
+                    selectedfieldName='selectedPatientName'
+                    selectedName={this.state.selectedPatientName}
+                    handleSelection={this.handleDropSelection} />
+                </div>
+            </form>
+          </CardContent>
+          <CardActions>          
+              <Button size="small" variant="contained" color={this.props.leftbuttonColor} 
+                 onClick={() => this.handleSave()}>{this.props.leftButtonLabel}
+              </Button>
+              <Button size="small" variant="contained" color={this.props.rightbuttonColor}  
+                 onClick={() => this.props.handleRightButtonSelection(this.props.apnt)}>
+                 {this.props.rightButtonLabel}
+              </Button>
+          </CardActions>    
+        </Card>
+  
+        </>
+    )
   } 
-
 }
 
 AppointForm.propTypes = {
