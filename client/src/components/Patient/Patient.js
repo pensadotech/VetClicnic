@@ -12,14 +12,18 @@ import APIpatient from '../../utils/APIpatient'
 import PatientCard from './components/PatientCard'
 import PatientForm from './components/PatientForm'
 
-const styles = theme => (
-  {
+const styles = theme => ({
     avatar: {
       margin: ' 10px 0px 0px 50px'
     },
     pageHead : {
       color:'white',
       margin: '7px 0px 0px 20px'
+    },
+    card: {
+      minWidth: 275,
+      maxHeight: 220,
+      margin: '10px 20px 0px 20px',
     },
     fab: {
       margin: theme.spacing.unit
@@ -193,7 +197,9 @@ class Patient extends Component {
           </Grid>
         </Grid>
 
-        <div>
+        <Grid alignContent='center'
+            style={{ margin: 'auto', minHeight: '94vh', marginLeft: '5%' }}
+            container spacing={32}>
             {
               this.state.patients.map((patient, index) => (
                  <PatientCard
@@ -209,7 +215,7 @@ class Patient extends Component {
                  />   
               ))
             }
-          </div>
+          </Grid>
             
         </>
       ) //return()

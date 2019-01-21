@@ -28,22 +28,8 @@ const styles = theme => ({
     maxHeight: 220,
     margin: '10px 20px 0px 20px',
   },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
   fab: {
-    margin: theme.spacing.unit,
-  },
-  extendedIcon: {
-    marginRight: theme.spacing.unit,
+    margin: theme.spacing.unit
   }
 })
 
@@ -269,7 +255,8 @@ class Admin extends Component {
             container spacing={32}>
             {
               this.state.users.map((user, index) => (
-                <UserCard key={index}
+                <UserCard 
+                  key={index}
                   user={user} 
                   leftbuttonColor='primary'
                   leftButtonLabel='Update' 

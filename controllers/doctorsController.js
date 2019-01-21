@@ -33,11 +33,8 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   createUpdate: function (req, res) {
-    console.log(req.body)
-    console.log(success)
     // body has the user
     let doctor = req.body;
-
     // Create or Update
     db.Doctor.findOne({ name: { $eq: doctor.name } })
       .then((r) => {

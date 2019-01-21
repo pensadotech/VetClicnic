@@ -41,6 +41,13 @@ const doctorsSeed = [{
     mobilePhone: '714-123-4567',
     email: 'hee.yoo@vca.com',
     doctorCreated: Date.now()
+  },
+  {
+    name: 'Dr. Pensado',
+    phone: '949-770-1808',
+    mobilePhone: '714-123-4567',
+    email: 'armando@pensadotech.com',
+    doctorCreated: Date.now()
   }
 ]
 

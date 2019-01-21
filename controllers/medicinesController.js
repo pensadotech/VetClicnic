@@ -40,9 +40,6 @@ module.exports = {
   createUpdate: function (req, res) {
     // body has the user
     let medsData = req.body
-     
-    console.log('createUpdate',medsData)
-
     // Create or Update
     db.Meds.findOne({ name: { $eq: medsData.name} })
       .then((r) => {
