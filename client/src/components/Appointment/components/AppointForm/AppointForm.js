@@ -46,12 +46,16 @@ const styles = theme => ({
   },
   pos: {
     marginBottom: 12,
+  },
+  apntError : {
+    color: 'red'
   }
 })
 
 class AppointForm extends Component {
   
   state = {
+    currentDate: new Date(),
     mode: '',
     appoint: '',
     _id : '',
@@ -120,15 +124,18 @@ class AppointForm extends Component {
   
     if (this.state.mode === 'edit') {
        // EDIT MODE: Validate
-       if (this.state.title === '' || this.state.description === '')  {    
-          this.setState({appointmentError: 'Please provide appointment title and brief description'}) 
-       } else {                
-           // retreive the selected doctor in the screen
+       if (this.state.title === '' || this.state.description === '' || this.state.appointmentDate === '')  {   
+        this.setState({appointmentError: 'Please provide title, description, and appointment date-time.'}) 
+       } else if(new Date(this.state.appointmentDate) < this.state.currentDate ) {
+        this.setState({appointmentError: 'The appointment cannot be in the past!'}) 
+       } else {    
+
+          // retreive the selected doctor in the screen
           let doctorObj = this.getDoctorObject(this.state.selectedDoctorName)
           // retreive the selected patient from screen
           let patientObj = this.getPatientObject(this.state.selectedPatientName)
 
-         // translate
+          // prepare object to return
           let newApptData = { 
              _id : this.state._id,
              date : this.state.appointmentDate,
@@ -145,15 +152,19 @@ class AppointForm extends Component {
     } else {
         
        // ADD MODE: Validate
-       if (this.state.title === '' || this.state.description === '')  {    
-        this.setState({appointmentError: 'Please provide title and brief description'}) 
-       } else {           
+       if (this.state.title === '' || this.state.description === '' || this.state.appointmentDate === '')  {   
+         this.setState({appointmentError: 'Please provide title, description, and appointment date-time.'}) 
+       } else if(new Date(this.state.appointmentDate) < this.state.currentDate ) {
+         this.setState({appointmentError: 'The appointment cannot be in the past!'}) 
+       } else {  
+         
+        console.log('ok?')
           // retreive the selected doctor in the screen
           let doctorObj = this.getDoctorObject(this.state.selectedDoctorName)
           // retreive the selected patient from screen
           let patientObj = this.getPatientObject(this.state.selectedPatientName)
-         
-         // translate
+          
+          // prepare object to return
           let newApptData = { 
              date : this.state.appointmentDate,
              title: this.state.title,
@@ -162,20 +173,9 @@ class AppointForm extends Component {
              patient: patientObj,
              appointmentCreated: new Date()
           } 
-
-          console.log('newApptData',newApptData)
-             
-          // Check if appt already exist 
-         APIappointment.findOne(this.state.title)
-            .then(res => {  
-              if(res.data !== null) {
-                this.setState({appointmentError: `The title "${res.data.title}" already exist, please provide a new one`})  
-              } else {
-                // send information back 
-                this.props.handleLeftButtonSelection(newApptData)
-              }           
-           })
-           .catch(err => console.log(err))          
+            
+           // send information back 
+           this.props.handleLeftButtonSelection(newApptData)       
        }
     } 
   }
@@ -189,7 +189,7 @@ class AppointForm extends Component {
         <>
         <Card className={classes.card}>
            <CardContent>
-            <p className='apntError'>{this.state.appointmentError}</p>
+            <p className={classes.apntError}>{this.state.appointmentError}</p>
             <form className={classes.container} noValidate autoComplete="off">
                 <div className='formItem'>
                    <TextField

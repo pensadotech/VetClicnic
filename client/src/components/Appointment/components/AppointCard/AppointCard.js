@@ -11,7 +11,7 @@ import Moment from 'moment'
 const styles = {
   card: {
     minWidth: 275,
-    maxHeight: 220,
+    maxHeight: 200,
     margin: '10px 20px 0px 20px'
   },
   bullet: {
