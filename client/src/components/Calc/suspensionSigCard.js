@@ -250,26 +250,31 @@ class RecipeReviewCard extends React.Component {
       this.setState({
       value: formatmL
       })
+    } else {
+      this.setState({value: this.props.mL.toFixed(2)})
     }
   }
 
   renderRangeVariant = (props) => {
-    if (this.props.mL !== 0){
-      return(  
+    if (this.props.mL !== 0 && this.props.boxSize !== 0){
+      return(
         <>
       <Typography component="p">
-            {this.props.boxSize}mL will last for {this.props.boxSize / this.state.value/(24 / this.state.hours)} days.
+            {this.props.boxSize}mL will last for {parseInt(this.props.boxSize / this.state.value/(24 / this.state.hours))} days.
           </Typography>
           </>
       )
-    } else if (this.props.low !== 0){
+    } else if (this.props.low !== 0 && this.props.boxSize !== 0){
       return(
         <>
         <Typography component="p">
-            Dosage range: {this.props.low.toFixed(2)} to {this.props.hi.toFixed(2)} mL.
+            Dosage range: {this.props.low.toFixed(2)} to {this.props.hi.toFixed(2)} mL. ({this.props.medication.suspension.doseRangeCanine[0]} to {this.props.medication.suspension.doseRangeCanine[1]} mg/kg)
           </Typography>
         <Typography component="p">
-          {this.props.boxSize}mL will last {parseInt(this.props.boxSize / this.state.value / (24 / this.props.medication.hours))} days.
+            Current dose: {(this.state.value*this.props.medication.suspension.premade[0].concentration/(this.props.patient.weight/2.2)).toFixed(2)} mg/kg
+          </Typography>
+        <Typography component="p">
+          {this.props.boxSize}mL will last {parseInt(this.props.boxSize / this.state.value / (24 / this.state.hours))} days.
           </Typography>
           </>
       )
@@ -313,16 +318,16 @@ class RecipeReviewCard extends React.Component {
             {this.props.doctor}
           </Typography>
           <Typography component="p">
-            {this.props.medication.name}: ({this.props.medication.alias[0]}) {this.props.medication.suspension.premade[0].concentration}mg/mL
+            {this.props.medication.name}: ({this.props.medication.alias[0]}) {this.props.boxSize !== 0 ? <>{this.props.boxSize}mL</>: null} {this.props.medication.suspension.premade[0].concentration}mg/mL
           </Typography>
           <Typography component="p">
-            Give {this.state.value} mL orally every {this.state.hours} hours for {this.state.days} days.
-          </Typography>
-          <Typography component="p">
-            {this.props.medication.suspension.alert}
+            Give {this.state.value} mL {this.props.medication.name === "Meloxicam" ? <>({parseInt(this.props.patient.weight)} lb dose)</> : null} orally every {this.state.hours} hours for {this.state.days} days.
           </Typography>
           <Typography component="p">
             {this.state.notes}
+          </Typography>
+          <Typography component="p">
+            {this.props.medication.suspension.alert}
           </Typography>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
@@ -351,15 +356,41 @@ class RecipeReviewCard extends React.Component {
         <Grid container spacing={24}>
         <Grid item xs={12}>
             {this.renderRangeVariant()}
-            <Slider
-              classes={{ container: classes.slider }}
-              value={value}
-              aria-labelledby="label"
-              onChange={this.handleSliderChange}
-              min={this.props.low}
-              max={this.props.hi}
-              
-              />
+            {this.props.low? 
+              <Slider
+                classes={{ container: classes.slider }}
+                value={value}
+                aria-labelledby="label"
+                onChange={this.handleSliderChange}
+                min={this.props.low}
+                max={this.props.hi}
+              /> : null}
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  id="outlined-name"
+                  type="number"
+                  label="Hours"
+                  className={classes.textField}
+                  value={this.state.hours}
+                  defaultValue={this.props.medication.hours}
+                  onChange={this.handleChange('hours')}
+                  margin="normal"
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  id="outlined-name"
+                  label="Days"
+                  className={classes.textField}
+                  value={this.state.days}
+                  defaultValue={this.props.medication.days}
+                  onChange={this.handleChange('days')}
+                  margin="normal"
+                  variant="outlined"
+                  type="number"
+                />
               </Grid>
             <TextField
               id="outlined-multiline-flexible"

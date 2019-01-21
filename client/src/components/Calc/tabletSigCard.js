@@ -94,7 +94,7 @@ class RecipeReviewCard extends React.Component {
     let med = medication.tablet
     let diff = ((medication.tablet.doseCanine - this.props.mgkg) / medication.tablet.doseCanine * 100 * -1).toFixed(2)
 
-    if (med.dose !== 0) {
+    if (med.doseCanine !== 0) {
       if (patient.species === "Canine") {
         return (
           <>
@@ -117,7 +117,7 @@ class RecipeReviewCard extends React.Component {
           </Typography>
           </>
         )
-      }} else if (med.dose === 0) {
+      }} else if (med.doseRangeCanine[0] !== 0) {
         if (patient.species === "Canine") {
           return (
             <>
@@ -143,7 +143,6 @@ class RecipeReviewCard extends React.Component {
         }
       }
     }
-
 
     render() {
       const { classes } = this.props;
@@ -172,7 +171,7 @@ class RecipeReviewCard extends React.Component {
                 {this.props.doctor}
               </Typography>
               <Grid container spacing={24}>
-                <Grid item xs={6}>
+                <Grid item xs={8}>
                   <Typography component="p">
                     {this.props.medication.name}:({this.props.medication.alias[0]}) {this.props.tabSize}mg
           </Typography>
@@ -185,9 +184,18 @@ class RecipeReviewCard extends React.Component {
               </Grid>
               <Typography component="p">
                 Give {this.props.numTabs} tablet(s) every {this.state.hours} hours for {this.state.days} days.
-          </Typography>
+              </Typography>
+              {this.props.medication.name === "Prednisone" || this.props.medication.name === "Trimeprazine Tartrate with Prednisolone"? <> <Typography component="p">
+                Then give {this.props.numTabs} tablet(s) every {this.state.hours*2} hours for {this.state.days} days.
+              </Typography> 
+                <Typography component="p">
+                Then give {this.props.numTabs} tablet(s) every other day for {this.state.days} days.
+              </Typography></> : null}
               <Typography component="p">
                 {this.state.notes}
+              </Typography>
+              <Typography component="p">
+                {this.props.medication.tablet.alert}
               </Typography>
             </CardContent>
             <CardActions className={classes.actions} disableActionSpacing>

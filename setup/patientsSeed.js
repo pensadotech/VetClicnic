@@ -26,7 +26,7 @@ module.exports = {
         breed: "Calico Cat",
         species: "Feline",
         age: 5,
-        weight: 15,
+        weight: 15.5,
         color: "grey / tan",
         address: "456 First Street",
         phone: "951-987-1790",

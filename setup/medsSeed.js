@@ -2844,8 +2844,8 @@ module.exports = {
     }, {
       name: "Maropitant",
       alias: ["Cerenia®"],
-      hours: 12,
-      days: 14,
+      hours: 24,
+      days: 4,
       description: "Neurokinin (NK-1) Receptor Antagonist Antiemetic",
       link: "https://www.plumbsveterinarydrugs.com/#!/monograph/ufI3PM2LJI/",
       controlled: false,
@@ -2969,12 +2969,12 @@ module.exports = {
       },
       suspension: {
         available: true,
-        doseCanine: 0,
+        doseCanine: 0.1,
         doseRangeCanine: [0],
         doseFeline: 0,
         doseRangeFeline: [0],
-        premade: [{ concentration: 0.5, volume: 10 }, { concentration: 1.5, volume: 10 }, { concentration: 1.5, volume: 32 }, { concentration: 1.5, volume: 100 }],
-        alert: ""
+        premade: [{ concentration: 1.5, volume: 10 }, { concentration: 1.5, volume: 32 }, { concentration: 1.5, volume: 100 }],
+        alert: "Give with food."
       }
     }, {
       name: "Methimazole",
@@ -3122,7 +3122,7 @@ module.exports = {
       injectable: {
         available: true,
         concentration: 250,
-        doseCanine: 0,
+        doseCanine: 15,
         doseRangeCanine: [0],
         doseFeline: 0,
         doseRangeFeline: [0],
@@ -3132,7 +3132,7 @@ module.exports = {
       tablet: {
         available: true,
         tabletSizes: [250, 500],
-        doseCanine: 0,
+        doseCanine: 25,
         doseRangeCanine: [0],
         doseFeline: 0,
         doseRangeFeline: [0],
@@ -3149,7 +3149,7 @@ module.exports = {
       },
       suspension: {
         available: true,
-        doseCanine: 0,
+        doseCanine: 25,
         doseRangeCanine: [0],
         doseFeline: 0,
         doseRangeFeline: [0],
@@ -3835,7 +3835,7 @@ module.exports = {
       name: "Prednisolone",
       alias: [""],
       hours: 12,
-      days: 14,
+      days: 5,
       description: "Glucocorticoid",
       link: "https://www.plumbsveterinarydrugs.com/#!/monograph/sShl11M9aP/",
       controlled: false,
@@ -3855,7 +3855,7 @@ module.exports = {
         doseCanine: 0,
         doseRangeCanine: [0],
         doseFeline: 0,
-        doseRangeFeline: [0],
+        doseRangeFeline: [2, 8],
         alert: ""
       },
       capsule: {
@@ -3880,7 +3880,7 @@ module.exports = {
       name: "Prednisone",
       alias: [""],
       hours: 12,
-      days: 14,
+      days: 5,
       description: "Glucocorticoid",
       link: "https://www.plumbsveterinarydrugs.com/#!/monograph/sShl11M9aP/",
       controlled: false,
@@ -3898,9 +3898,9 @@ module.exports = {
         available: true,
         tabletSizes: [5, 10, 20],
         doseCanine: 0,
-        doseRangeCanine: [0],
+        doseRangeCanine: [0.5,2],
         doseFeline: 0,
-        doseRangeFeline: [0],
+        doseRangeFeline: [],
         alert: ""
       },
       capsule: {

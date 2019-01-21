@@ -1,6 +1,6 @@
 // dependencies
 let mongoose = require('mongoose');
-
+var Float = require('mongoose-float').loadType(mongoose, 2);
 //for the auto-increment _id
 var autoincrement = require('mongoose-auto-increment-2');
 // Save a reference to the Schema constructor
@@ -41,8 +41,7 @@ let PatientSchema = new Schema({
     //required: 'Age is Required'
   },
   weight: {
-    type: String,
-    trim: true,
+    type: Float,
     //required: 'Weight is Required'
   },
   color: {

@@ -16,7 +16,7 @@ const patientsSeed = [
     species: 'Canine',
     age: 4,
     chartNumber: 1,
-    weight: 12,
+    weight: 12.5,
     color: 'white / brown',
     address: '123 Main Street',
     phone: '951-246-2134',
