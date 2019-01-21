@@ -67,12 +67,6 @@ class AppointForm extends Component {
     
     if(this.props.appoint !== '') {
       
-      // console.log('apptdate',this.props.appoint.date)
-      // let newDate = new Date()
-      // let dateStr = Moment(newDate).format('YYYY-MM-DDTHH:MM')
-      // console.log('newDate',newDate)
-      // console.log('dateStr',dateStr)
- 
        this.setState({
               mode: this.props.mode,
               appoint: this.props.appoint,
@@ -136,6 +130,7 @@ class AppointForm extends Component {
 
          // translate
           let newApptData = { 
+             _id : this.state._id,
              date : this.state.appointmentDate,
              title: this.state.title,
              description: this.state.description,    

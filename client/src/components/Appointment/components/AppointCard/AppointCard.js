@@ -37,20 +37,6 @@ const styles = {
 
 class AppointCard extends Component {
   
-  state = {
-    appointment: null
-  }
-
-  componentDidMount() { 
-
-     if(this.props.appt) {
-
-       this.setState({
-        appointment : Moment(this.props.appt.date).format('YYYY-MM-DD hh:mm a') 
-       })
-     }
-  }
-
   render () {
     const { classes } = this.props;
     
@@ -64,7 +50,7 @@ class AppointCard extends Component {
              {this.props.appt.description}
           </Typography>
           <Typography className={classes.firstTextInfo} >
-            <b>Date: </b> {this.state.appointment}
+            <b>Date: </b> {Moment(this.props.appt.date).format('YYYY-MM-DD hh:mm a') }
           </Typography>     
           <Typography className={classes.textInfo} >
             <b>Doctor: </b> {this.props.appt.doctor ? this.props.appt.doctor.name : ''}

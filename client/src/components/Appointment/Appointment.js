@@ -60,13 +60,13 @@ class Appointment extends Component {
   
   componentDidMount() {
     this.loadAppointData()
+    this.loadDoctorData()
   } 
 
   loadAppointData = () => {
     APIappointment.getApointments()
     .then(res => {
-      this.setState({ aptments: res.data })
-      this.loadDoctorData()    
+      this.setState({ aptments: res.data })   
     })
     .catch(err => console.log(err))
   }
@@ -107,10 +107,10 @@ class Appointment extends Component {
     // create new user
     APIappointment.createAppoint(tgtApnt)
       .then(r => {
-        // Restore main view
-        this.setState({ screenMode: 'list', targetAppoint: '' })
         // reload the data
         this.loadAppointData()
+        // Restore main view
+        this.setState({ screenMode: 'list', targetAppoint: '' })       
       })
       .catch(err => console.log(err))
   }
@@ -119,10 +119,10 @@ class Appointment extends Component {
     // Save updated user data    
     APIappointment.updateAppoint(tgtApnt._id,tgtApnt)
       .then(r => {  
+        // reload the data
+        this.loadAppointData()
         // Restore main view
        this.setState({screenMode: 'list', targetAppoint: ''})  
-       // reload the data
-        this.loadAppointData()
       })
       .catch(err => console.log(err))
   };

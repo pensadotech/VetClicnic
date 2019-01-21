@@ -118,8 +118,8 @@ class UserForm extends Component {
               phone: this.state.phone,
               email: this.state.email,
               isAdmin: this.state.isAdmin,
-              userCreated: Date.now(),
-              needsEcnryption: doesItNeedEncryption 
+              needsEcnryption: doesItNeedEncryption,
+              userCreated: new Date()            
            }
            
            // keep original password if not encryption needed
@@ -147,8 +147,8 @@ class UserForm extends Component {
              phone: this.state.phone,
              email: this.state.email,
              isAdmin: this.state.isAdmin,
-             userCreated: Date.now(),
-             needsEcnryption: true 
+             needsEcnryption: true,
+             userCreated: new Date() 
           } 
              
           // Check if user already exist 
