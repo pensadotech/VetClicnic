@@ -62,7 +62,9 @@ class PatientForm extends Component {
         patientname: '',
         species: '',
         ownername: '',
-        weight: '',
+        breed: '',
+        color: '',
+        weight: 0.00,
         phone: '',
         email: '',
         userError: '',
@@ -78,7 +80,9 @@ class PatientForm extends Component {
                 _id: this.props.patient._id,
                 patientname: this.props.patient.patientname,
                 weight: this.props.patient.weight,
+                color: this.props.patient.color,
                 ownername: this.props.patient.ownername,
+                breed: this.props.patient.breed,
                 phone: this.props.patient.phone,
                 email: this.props.patient.email,
                 species: this.props.patient.species
@@ -97,18 +101,20 @@ class PatientForm extends Component {
           if (this.state.patientname === '' || this.state.ownername === '' )  {    
             this.setState({userError: 'Please provide patient name and owner name'}) 
            } else {
-    
+               
               // translate
               let newPatient ={
                 _id: this.state._id,
                 patientname: this.state.patientname,
+                species: this.state.species,
                 ownername: this.state.ownername,
-                weight: this.state.weight,
+                breed: this.state.breed,
+                color: this.state.color,
+                weight: parseFloat(this.state.weight),          
                 phone: this.state.phone,
-                email: this.state.email,
-                species: this.state.species
+                email: this.state.email            
               }
-    
+              
               // send information back 
               this.props.handleLeftButtonSelection(newPatient)
            }
@@ -122,12 +128,13 @@ class PatientForm extends Component {
               // translate
               let newPatient ={
                 patientname: this.state.patientname,
+                species: this.state.species,
                 ownername: this.state.ownername,
-                weight: this.state.weight,
+                breed: this.state.breed,
+                color: this.state.color,
+                weight: parseFloat(this.state.weight),          
                 phone: this.state.phone,
-                email: this.state.email,
-                species: this.state.species
-                // formNumber: this.props.patientsLength
+                email: this.state.email     
               }
               
               // Check if user already exist 
@@ -240,11 +247,24 @@ class PatientForm extends Component {
               </div>
               <div className='formItem'> 
                   <TextField
+                    id="color"
+                    label="Color :"
+                    className={classes.textField}
+                    name='color'
+                    type="string"
+                    autoComplete="current-color"
+                    value={this.state.color}
+                    onChange={this.handleInputChange}
+                    margin="normal"
+                  />                    
+              </div>
+              <div className='formItem'> 
+                  <TextField
                     id="weight"
                     label="Weight :"
                     className={classes.textField}
                     name='weight'
-                    type="string"
+                    type="number"
                     autoComplete="current-weight"
                     value={this.state.weight}
                     onChange={this.handleInputChange}

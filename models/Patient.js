@@ -2,7 +2,7 @@
 let mongoose = require('mongoose');
 var Float = require('mongoose-float').loadType(mongoose, 2);
 //for the auto-increment _id
-var autoincrement = require('mongoose-auto-increment-2');
+// var autoincrement = require('mongoose-auto-increment-2');
 // Save a reference to the Schema constructor
 let Schema = mongoose.Schema;
 
@@ -14,24 +14,20 @@ let PatientSchema = new Schema({
   },
   ownername: {
     type: String,
-    trim: true,
-    //required: 'Full name is Required'
+    trim: true
   },
   email: {
     type: String,
-    unique: true,
     match: [/.+@.+\..+/, 'Please enter a valid e-mail address']
   },
   breed: {
     type: String,
-    trim: true,
-    //required: 'Breed is Required'
+    trim: true
   },
   species: {
     type: String,
     trim: true,
-    enum: ["Canine", "Feline"],
-    //required: 'Species is Required, must be "Canine" or "Feline"'
+    enum: ["Canine", "Feline"]
   }, 
   age: {
     type: Number,
@@ -40,29 +36,22 @@ let PatientSchema = new Schema({
   },
   chartNumber: {
     type: Number,
-    default: 0,
-    unique: true,
-    trim: true,
-    //required: 'Age is Required'
+    default: 0
   },
   weight: {
-    type: Float,
-    //required: 'Weight is Required'
+    type: Float
   },
   color: {
     type: String,
-    trim: true,
-    // required: 'Color is Required'
+    trim: true
   },
   address: {
     type: String,
-    trim: true,
-    // required: 'Patient Address is Required'
+    trim: true
   },
   phone: {
     type: String,
-    trim: true,
-    //required: 'Phone number is Required'
+    trim: true
   },
   userCreated: {
     type: Date,
@@ -71,7 +60,7 @@ let PatientSchema = new Schema({
 
 });
 
-PatientSchema.plugin(autoincrement,{ field: 'chartNumber' });
+// PatientSchema.plugin(autoincrement,{ field: 'chartNumber' });
 
 // This creates our model from the above schema, using mongoose's model method
 var Patient = mongoose.model('Patient', PatientSchema);

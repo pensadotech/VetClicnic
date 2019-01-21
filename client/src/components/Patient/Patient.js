@@ -40,7 +40,7 @@ class Patient extends Component {
   loadPatients = () => {
     APIpatient.getPatients()
     .then( r => {
-      this.setState({ patients: r.data})
+      this.setState({ patients: r.data })
     })
     .catch(e => console.log(e))
   }  
@@ -62,8 +62,6 @@ class Patient extends Component {
 
   handleCreatePatient = (tgtPat) => {
 
-      console.log('handleSavePatient',tgtPat)
-
       //creates new patient
       APIpatient.createUpdatePatient(tgtPat)
         .then(r => {
@@ -80,20 +78,18 @@ class Patient extends Component {
 
   handleSavePatient = (tgtPat) => {
 
-      console.log('handleSavePatient',tgtPat)
-
       //save updated user data
-      // APIpatient.updatePatient(tgtPat.__id, tgtPat)
-      //   .then(r => {
-      //     //restores the main view
-      //     this.setState({
-      //       screenMode: 'list',
-      //       targetPatient: ''
-      //     })
-      //     //reload the data
-      //     this.loadPatients()
-      //   })
-      //   .catch(e => console.log(e))
+      APIpatient.updatePatient(tgtPat._id, tgtPat)
+        .then(r => {
+          //restores the main view
+          this.setState({
+            screenMode: 'list',
+            targetPatient: ''
+          })
+          //reload the data
+          this.loadPatients()
+        })
+        .catch(e => console.log(e))
   }
    
   handleDeletePatient = (tgtPat) => {
