@@ -193,8 +193,8 @@ class Patient extends Component {
         </Grid>
 
         <Grid alignContent='center'
-            style={{ margin: 'auto', minHeight: '94vh', marginLeft: '5%' }}
-            container spacing={32}>
+              style={{ margin: 'auto', marginLeft: '5%' }}
+              container spacing={32}>
             {
               this.state.patients.map((patient, index) => (
                  <PatientCard

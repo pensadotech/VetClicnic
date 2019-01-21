@@ -200,7 +200,7 @@ class Doctor extends Component {
           </Grid>
         
           <Grid alignContent='center'
-            style={{ margin: 'auto', minHeight: '94vh', marginLeft: '5%' }}
+            style={{ margin: 'auto',marginLeft: '5%' }}
             container spacing={32}>
             {
               this.state.doctors.map((doctor, index) => (
