@@ -186,8 +186,10 @@ class Patient extends Component {
             <h1 className={classes.pageHead}>Patients</h1>
           </Grid>
           <Grid item>
-            <Fab color="secondary" aria-label="Add" className={classes.fab}>
-              <AddIcon  onClick={() => this.handlePatientAddSelection()}/>
+            <Fab color="secondary" aria-label="Add" 
+                 className={classes.fab}
+                 onClick={() => this.handlePatientAddSelection()}>
+              <AddIcon  />
             </Fab>
           </Grid>
         </Grid>

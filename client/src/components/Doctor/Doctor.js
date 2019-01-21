@@ -190,8 +190,10 @@ class Doctor extends Component {
               <h1 className={classes.pageHead}>Doctors</h1>
             </Grid>
             <Grid item>
-              <Fab color="secondary" aria-label="Add" className={classes.fab}>
-                <AddIcon  onClick={() => this.handleDoctorAddSelection()}/>
+              <Fab color="secondary" aria-label="Add" 
+                   className={classes.fab}
+                   onClick={() => this.handleDoctorAddSelection()}>
+                <AddIcon />
               </Fab>
             </Grid>
           </Grid>
