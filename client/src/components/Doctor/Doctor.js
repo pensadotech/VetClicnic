@@ -3,15 +3,12 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Avatar from '@material-ui/core/Avatar'
-import SettingsIcon from '@material-ui/icons/Settings'
 import Fab from '@material-ui/core/Fab'
-import ColorizeIcon from '@material-ui/icons/Colorize'
+import FaceIcon from '@material-ui/icons/Face'
 import AddIcon from '@material-ui/icons/Add'
-
 // Components
 import DoctorCard from './components/DoctorCard'
 import DoctorForm from './components/DoctorForm'
-
 // API
 import APIdoctors from '../../utils/APIdoctor'
 // Local style
@@ -186,7 +183,7 @@ class Doctor extends Component {
             <Grid container spacing={0}>
             <Grid item>
               <Avatar className={classes.avatar}>
-              <ColorizeIcon /> 
+              <FaceIcon /> 
               </Avatar>
             </Grid>
             <Grid item>
