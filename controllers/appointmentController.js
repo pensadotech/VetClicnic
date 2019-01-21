@@ -34,23 +34,15 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  create: function (req, res) {
-    
+  create: function (req, res) {   
     let newAppoint = req.body;
-    
-    console.log('controller-add:', newAppoint)
-
     // create the appointment
     db.Appointment.create(newAppoint)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   update: function (req, res) {
-
     let appointment = req.body
-
-    console.log('controller-upd:', appointment)
-
     // Update
     db.Appointment
       .findOneAndUpdate({ _id: req.params.id }, appointment)
@@ -65,4 +57,4 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   }
 
-};
+}
