@@ -23,11 +23,6 @@ const styles = theme => ({
     color: 'white',
     margin: '7px 0px 0px 20px'
   },
-  card: {
-    minWidth: 275,
-    maxHeight: 220,
-    margin: '10px 20px 0px 20px',
-  },
   fab: {
     margin: theme.spacing.unit
   }

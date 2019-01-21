@@ -79,10 +79,6 @@ const styles = theme => ({
     color: 'gray',
     margin: '0px 0px 30px 30px'
   },
-  logingImage : {
-    width: '200px',
-    margin: '0px 20px 20px 25px'
-  },
   userError : {
     color: 'red',
   }
