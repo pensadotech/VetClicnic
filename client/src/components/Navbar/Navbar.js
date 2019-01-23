@@ -23,8 +23,6 @@ import AssignmentIcon from '@material-ui/icons/Assignment'
 import SettingsIcon from '@material-ui/icons/Settings'
 import GradientIcon from '@material-ui/icons/Gradient'
 import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAlt'
-import Grid from '@material-ui/core/Grid'
-
 
 const styles = theme => ({
   root: {

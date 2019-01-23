@@ -8,10 +8,8 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import AccountCircle from '@material-ui/icons/AccountCircle'
-import PetsIcon from '@material-ui/icons/Pets'
 import MailIcon from '@material-ui/icons/MailOutline'
 import PhoneIcon from '@material-ui/icons/Phone'
-import PersonIcon from '@material-ui/icons/PermIdentity'
 // API
 import APIdoctor from '../../../../utils/APIdoctor'
 

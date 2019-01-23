@@ -8,7 +8,6 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import EventIcon from '@material-ui/icons/Event'
-import ScheduleIcon from '@material-ui/icons/Schedule'
 import Moment from 'moment'
 
 import AppointItemSelect from "../AppointItemSelect"
