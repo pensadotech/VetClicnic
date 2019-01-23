@@ -504,7 +504,6 @@ const calcTablet = (medication, patient) => {
             returnedDose.push(goodDoseHi)
         }
     }
-    console.log(returnedDose)
     return returnedDose
 }
 

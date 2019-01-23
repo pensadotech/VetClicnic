@@ -211,7 +211,7 @@ class RecipeReviewCard extends React.Component {
     days: 0,
     quantity: 0,
     notes: "",
-    route: null,
+    route: "",
     routes: null,
     removeMe: false
   };
@@ -228,37 +228,31 @@ class RecipeReviewCard extends React.Component {
 
   handleRouteChange = name => value => {
     this.setState({
-      [name]: value,
+      [name]: value.label,
     });
   };
 
-  componentWillReceiveProps = (props) => {
-    this.props.medication.injectable.routes.map(route => ({
-      label: route,
-    }))
-    let routeSuggestions = this.props.medication.injectable.routes.map(route => ({
-      value: route.label,
-      label: route.label,
-    }))
-    this.setState({
-      routes: routeSuggestions
+  componentDidMount = (props) => {
+    let routeSuggestions = []
+
+    this.props.medication.injectable.routes.map(route => {
+      let tempRoute = {
+        label: route,
+      }
+
+      routeSuggestions.push(tempRoute)
     })
+
+    routeSuggestions.map(suggestion => ({
+      value: suggestion.label,
+      label: suggestion.label,
+    }));
     this.setState({
       hours: this.props.medication.hours,
       days: this.props.medication.days,
-      routes: this.props.medication.injectable.routes,
-      removeMe: false
-    })
-  }
-
-  componentDidMount = () => {
-   let routeSuggestions = this.props.medication.injectable.routes.map(route => ({
-      value: route.label,
-      label: route.label,
-    }))
-    this.setState({
+      removeMe: false,
       routes: routeSuggestions
-      })
+    })
   }
 
   render() {
@@ -300,9 +294,19 @@ class RecipeReviewCard extends React.Component {
           <Typography component="p">
             {this.props.medication.name}: ({this.props.medication.alias[0]}) {this.props.medication.injectable.concentration}mg/mL
           </Typography>
+            {this.props.dose.mL !== 0 ? 
+            <> 
           <Typography component="p">
             Give {this.props.dose.mL} mL {this.state.route}.
           </Typography>
+             </> : <>
+              <Typography component="p">
+                Give {this.state.mL} mL {this.state.route}.
+          </Typography>
+             <Typography component="p">
+                Dosage range: {this.props.dose.low} to {this.props.dose.hi} mL. ({this.props.medication.injectable.doseRangeCanine[0]} to {this.props.medication.injectable.doseRangeCanine[1]} mg/kg)
+          </Typography>
+          </>}
           <Typography component="p">
             {this.state.notes}
           </Typography>
