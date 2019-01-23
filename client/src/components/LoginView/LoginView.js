@@ -92,7 +92,7 @@ class LoginView extends Component {
 
     return (
       <>
-      <Grid maincontainer spacing={0}>
+      <Grid maincontainer >
       <Grid item>
       <Card className={classes.card}>       
         <CardContent> 
