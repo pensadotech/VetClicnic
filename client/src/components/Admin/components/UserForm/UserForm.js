@@ -288,7 +288,6 @@ class UserForm extends Component {
                       <Checkbox
                         checked={this.state.isAdmin}
                         onChange={this.handleCheckboxChange('isAdmin')}
-                        value={this.state.isAdmin}
                         color="primary"
                       />
                     }
