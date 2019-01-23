@@ -125,7 +125,7 @@ class AppointForm extends Component {
     if (this.state.mode === 'edit') {
        // EDIT MODE: Validate
        if (this.state.title === '' || this.state.description === '' || this.state.appointmentDate === '')  {   
-        this.setState({appointmentError: 'Please provide title, description, and appointment date-time.'}) 
+        this.setState({appointmentError: 'Please provide title, description, appointment date and time.'}) 
        } else if(new Date(this.state.appointmentDate) < this.state.currentDate ) {
         this.setState({appointmentError: 'The appointment cannot be in the past!'}) 
        } else {    
