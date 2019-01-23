@@ -15,7 +15,7 @@ module.exports = {
         species: 'Canine',
         age: 4,
         chartNumber: 1,
-        weight: 12,
+        weight: 12.00,
         color: 'white / brown',
         address: '123 Main Street',
         phone: '951-246-2134',
@@ -29,7 +29,7 @@ module.exports = {
         species: 'Canine',
         age: 5,
         chartNumber: 2,
-        weight: 15,
+        weight: 15.22,
         color: 'grey / tan',
         address: '456 First Street',
         phone: '951-987-1790',
@@ -43,7 +43,7 @@ module.exports = {
         species: 'Feline',
         age: 4,
         chartNumber: 3,
-        weight: 22,
+        weight: 22.22,
         color: 'black',
         address: '3456 Center Street',
         phone: '714-234-8765',
@@ -57,13 +57,14 @@ module.exports = {
         species: 'Canine',
         age: 10,
         chartNumber: 4,
-        weight: 30,
+        weight: 30.03,
         color: 'brown',
         address: '3456 Center Street',
         phone: '714-234-8765',
         created: Date.now()
       }
     ]
+
     // Add to database
     db.Patient
       .remove({})

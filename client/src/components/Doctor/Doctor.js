@@ -3,15 +3,12 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Avatar from '@material-ui/core/Avatar'
-import SettingsIcon from '@material-ui/icons/Settings'
 import Fab from '@material-ui/core/Fab'
-import ColorizeIcon from '@material-ui/icons/Colorize'
+import FaceIcon from '@material-ui/icons/Face'
 import AddIcon from '@material-ui/icons/Add'
-
 // Components
 import DoctorCard from './components/DoctorCard'
 import DoctorForm from './components/DoctorForm'
-
 // API
 import APIdoctors from '../../utils/APIdoctor'
 // Local style
@@ -45,9 +42,6 @@ class Doctor extends Component {
   loadDoctors = () => {
     APIdoctors.getDoctors()
       .then(res => {
-
-        console.log(res.data)
-
         this.setState({ doctors: res.data })
       })
       .catch(err => console.log(err))
@@ -186,21 +180,23 @@ class Doctor extends Component {
             <Grid container spacing={0}>
             <Grid item>
               <Avatar className={classes.avatar}>
-              <ColorizeIcon /> 
+              <FaceIcon /> 
               </Avatar>
             </Grid>
             <Grid item>
               <h1 className={classes.pageHead}>Doctors</h1>
             </Grid>
             <Grid item>
-              <Fab color="secondary" aria-label="Add" className={classes.fab}>
-                <AddIcon  onClick={() => this.handleDoctorAddSelection()}/>
+              <Fab color="secondary" aria-label="Add" 
+                   className={classes.fab}
+                   onClick={() => this.handleDoctorAddSelection()}>
+                <AddIcon />
               </Fab>
             </Grid>
           </Grid>
         
           <Grid alignContent='center'
-            style={{ margin: 'auto', minHeight: '94vh', marginLeft: '5%' }}
+            style={{ margin: 'auto',marginLeft: '5%' }}
             container spacing={32}>
             {
               this.state.doctors.map((doctor, index) => (

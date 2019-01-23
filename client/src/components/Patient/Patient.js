@@ -12,8 +12,7 @@ import APIpatient from '../../utils/APIpatient'
 import PatientCard from './components/PatientCard'
 import PatientForm from './components/PatientForm'
 
-const styles = theme => (
-  {
+const styles = theme => ({
     avatar: {
       margin: ' 10px 0px 0px 50px'
     },
@@ -41,7 +40,7 @@ class Patient extends Component {
   loadPatients = () => {
     APIpatient.getPatients()
     .then( r => {
-      this.setState({ patients: r.data})
+      this.setState({ patients: r.data })
     })
     .catch(e => console.log(e))
   }  
@@ -62,48 +61,61 @@ class Patient extends Component {
   }
 
   handleCreatePatient = (tgtPat) => {
-    console.log(tgtPat);
-    //creates new patient
-    APIpatient.createUpdatePatient(tgtPat)
-    .then(r => {
-      //restores the main view
-      this.setState({ screenMode: 'list', targetPatient: ''})
-      //reloads the data
-      this.loadPatients()
-    })
-    .catch(e => console.log(e))
+
+      //creates new patient
+      APIpatient.createUpdatePatient(tgtPat)
+        .then(r => {
+          //restores the main view
+          this.setState({
+            screenMode: 'list',
+            targetPatient: ''
+          })
+          //reloads the data
+          this.loadPatients()
+        })
+        .catch(e => console.log(e))
   }
 
-    handleSavePatient = (tgtPat) => {
+  handleSavePatient = (tgtPat) => {
+
       //save updated user data
-      APIpatient.updatePatient(tgtPat.__id, tgtPat)
-      .then(r => {
-        //restores the main view
-        this.setState({ screenMode: 'list', targetPatient:''})
-        //reload the data
-        this.loadPatients()
-      })
-      .catch(e => console.log(e))
-    }
+      APIpatient.updatePatient(tgtPat._id, tgtPat)
+        .then(r => {
+          //restores the main view
+          this.setState({
+            screenMode: 'list',
+            targetPatient: ''
+          })
+          //reload the data
+          this.loadPatients()
+        })
+        .catch(e => console.log(e))
+  }
    
-    handleDeletePatient = (tgtPat) => {
+  handleDeletePatient = (tgtPat) => {
       //deletes the patient
       APIpatient.deletePatient(tgtPat._id)
-      .then(r => {
-        //restores the mainview
-        this.setState( { screenMode: 'list', targetPatient: ''})
-        //reloads the data
-        this.loadPatients()
-      })
-      .catch(e => console.log(e))
-    }
+        .then(r => {
+          //restores the mainview
+          this.setState({
+            screenMode: 'list',
+            targetPatient: ''
+          })
+          //reloads the data
+          this.loadPatients()
+        })
+        .catch(e => console.log(e))
+  }
 
-    handleCancel = (tgtPat) => {
+  handleCancel = (tgtPat) => {
       //reload the data
-    this.loadPatients()
-    // Just reset selected user and change screen mode to list
-    this.setState({ screenMode: 'list', targetPatient: '' })
-    }
+      this.loadPatients()
+      // Just reset selected user and change screen mode to list
+      this.setState({
+        screenMode: 'list',
+        targetPatient: ''
+      })
+   }
 
 
   renderView = () => {
@@ -187,13 +199,17 @@ class Patient extends Component {
             <h1 className={classes.pageHead}>Patients</h1>
           </Grid>
           <Grid item>
-            <Fab color="secondary" aria-label="Add" className={classes.fab}>
-              <AddIcon  onClick={() => this.handlePatientAddSelection()}/>
+            <Fab color="secondary" aria-label="Add" 
+                 className={classes.fab}
+                 onClick={() => this.handlePatientAddSelection()}>
+              <AddIcon  />
             </Fab>
           </Grid>
         </Grid>
 
-        <div>
+        <Grid alignContent='center'
+              style={{ margin: 'auto', marginLeft: '5%' }}
+              container spacing={32}>
             {
               this.state.patients.map((patient, index) => (
                  <PatientCard
@@ -209,7 +225,7 @@ class Patient extends Component {
                  />   
               ))
             }
-          </div>
+          </Grid>
             
         </>
       ) //return()

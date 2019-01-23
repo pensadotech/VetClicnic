@@ -4,7 +4,9 @@ var db = require('../models');
 module.exports = {
   findAll: function (req, res) {
     db.Patient.find({})
-      .then(dbModel => res.json(dbModel))
+      .then(dbModel => {
+        res.json(dbModel)
+      })
       .catch(err => res.status(422).json(err));
   },
   findOne: function (req, res) {
@@ -37,19 +39,18 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  create: function (req, res) {
+  create: function (req, res) {    
     db.Patient
       .create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   createUpdate: function (req, res) {
-    // body has an article
-    let patient = req.body;
+    // body item
+    let patient = req.body
     // Create or Update
     db.Patient.findOne({ patientname: { $eq: patient.patientname } })
       .then((r) => {
-        console.log(r)
         if (r === null) {
           // create
           db.Patient.create(patient)
@@ -71,7 +72,6 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   remove: function (req, res) {
-    console.log(req.params.id)
     db.Patient
       .findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())

@@ -26,24 +26,17 @@ module.exports = {
       .catch(err => res.status(422).json(err))
   },
   create: function (req, res) {
-
-    // TODO: How to get the largest prescription number?
-
-    // create the user
+    // create
     db.Prescription.create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err))
   },
   createUpdate: function (req, res) {
-    // body has the user
     let prescriptionData = req.body  
     // Create or Update
     db.Prescription.findOne({ prescriptioNumber: { $eq: prescriptionData.prescriptioNumber} })
       .then((r) => {
         if (r === null) {
-
-           // TODO: How to get the largest prescription number?
-
           // create
           db.Prescription.create(prescriptionData)
             .then(() => res.sendStatus(200))

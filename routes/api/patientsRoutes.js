@@ -4,7 +4,7 @@ const patientsController = require("../../controllers/patientsController");
 // Matches with "/api/patients"
 router.route("/")
   .get(patientsController.findAll)
-  .post(patientsController.createUpdate)
+  .post(patientsController.create)
 
 // Matches with "/api/patients/:id"
 router.route("/:id")

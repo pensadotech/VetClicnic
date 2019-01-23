@@ -4,17 +4,18 @@ import { withStyles } from '@material-ui/core/styles'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem';
-
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import PetsIcon from '@material-ui/icons/Pets'
+import MailIcon from '@material-ui/icons/MailOutline'
+import PhoneIcon from '@material-ui/icons/Phone'
+import PersonIcon from '@material-ui/icons/PermIdentity'
 // API
 import APIpatient from '../../../../utils/APIpatient'
 // Local style
 import './PatientForm.css'
-import { Grid } from "@material-ui/core";
 
 const styles = theme => ({
     container: {
@@ -47,7 +48,7 @@ const styles = theme => ({
       }
 })
 
-const species = [
+const speciesArr = [
   { id: 1, name: 'Canine'},
   { id: 2, name: 'Feline'}
 ]
@@ -56,26 +57,35 @@ class PatientForm extends Component {
 
     state = {
         mode: '',
-        patientname: '',
+        patient: '',    
         _id: '',
+        patientname: '',
         species: '',
         ownername: '',
-        weight: '',
+        breed: '',
+        color: '',
+        weight: 0.00,
         phone: '',
+        email: '',
         userError: '',
 
     }
 
     componentDidMount = () => {
-        if(this.props.patientname !== '') {
+
+        if(this.props.patient !== '') {
             this.setState( {
                 mode: this.props.mode,
-                patientname: this.props.patientname,
-                _id: this.props._id,
-                weight: this.props.weight,
-                ownername: this.props.ownername,
-                phone: this.props.phone,
-                species: this.props.species
+                patient: this.props.patient,            
+                _id: this.props.patient._id,
+                patientname: this.props.patient.patientname,
+                weight: this.props.patient.weight,
+                color: this.props.patient.color,
+                ownername: this.props.patient.ownername,
+                breed: this.props.patient.breed,
+                phone: this.props.patient.phone,
+                email: this.props.patient.email,
+                species: this.props.patient.species
             })
         }
     }
@@ -85,26 +95,26 @@ class PatientForm extends Component {
         this.setState( { [name] : value})
     }
 
-
-
-
     handleSave = () => {
         if (this.state.mode === 'edit') {
           // EDIT MODE: Validate 
           if (this.state.patientname === '' || this.state.ownername === '' )  {    
             this.setState({userError: 'Please provide patient name and owner name'}) 
            } else {
-    
+               
               // translate
               let newPatient ={
                 _id: this.state._id,
                 patientname: this.state.patientname,
+                species: this.state.species,
                 ownername: this.state.ownername,
-                weight: this.state.weight,
+                breed: this.state.breed,
+                color: this.state.color,
+                weight: parseFloat(this.state.weight),          
                 phone: this.state.phone,
-                species: this.props.species
+                email: this.state.email            
               }
-    
+              
               // send information back 
               this.props.handleLeftButtonSelection(newPatient)
            }
@@ -118,11 +128,13 @@ class PatientForm extends Component {
               // translate
               let newPatient ={
                 patientname: this.state.patientname,
+                species: this.state.species,
                 ownername: this.state.ownername,
-                weight: this.state.weight,
+                breed: this.state.breed,
+                color: this.state.color,
+                weight: parseFloat(this.state.weight),          
                 phone: this.state.phone,
-                species: this.props.species
-                // formNumber: this.props.patientsLength
+                email: this.state.email     
               }
               
               // Check if user already exist 
@@ -183,9 +195,16 @@ class PatientForm extends Component {
                       name='ownername'
                       type="string"
                       autoComplete="current-ownername"
-                      value={this.state.name}
+                      value={this.state.ownername}
                       onChange={this.handleInputChange}
                       margin="normal"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <PersonIcon />
+                          </InputAdornment>
+                        ),
+                      }}
                     />   
               </div>
               <div className='formItem'> 
@@ -202,9 +221,12 @@ class PatientForm extends Component {
                     margin="normal"
                   >
                   {
-                    species.map(species => {
+                    speciesArr.map(species => {
                       return (
-                        <MenuItem key={species.id} value={species.name}>{species.name}</MenuItem>
+                        <MenuItem key={species.id} 
+                           value={species.name}>
+                           {species.name}
+                        </MenuItem>
                       )
                     })
                   }
@@ -225,11 +247,24 @@ class PatientForm extends Component {
               </div>
               <div className='formItem'> 
                   <TextField
+                    id="color"
+                    label="Color :"
+                    className={classes.textField}
+                    name='color'
+                    type="string"
+                    autoComplete="current-color"
+                    value={this.state.color}
+                    onChange={this.handleInputChange}
+                    margin="normal"
+                  />                    
+              </div>
+              <div className='formItem'> 
+                  <TextField
                     id="weight"
                     label="Weight :"
                     className={classes.textField}
                     name='weight'
-                    type="string"
+                    type="number"
                     autoComplete="current-weight"
                     value={this.state.weight}
                     onChange={this.handleInputChange}
@@ -247,6 +282,33 @@ class PatientForm extends Component {
                     value={this.state.phone}
                     onChange={this.handleInputChange}
                     margin="normal"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <PhoneIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />                    
+              </div>
+              <div className='formItem'> 
+                  <TextField
+                    id="email"
+                    label="Email :"
+                    className={classes.textField}
+                    name='email'
+                    type="string"
+                    autoComplete="current-email"
+                    value={this.state.email}
+                    onChange={this.handleInputChange}
+                    margin="normal"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <MailIcon />
+                        </InputAdornment>
+                      ),
+                    }}
                   />                    
               </div>
            
