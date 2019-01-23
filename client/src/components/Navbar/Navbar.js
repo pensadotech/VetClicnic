@@ -61,7 +61,6 @@ class Navbar extends Component {
   }
 
   toggleDrawer = changeOpen => {
-    console.log(changeOpen)
     this.setState({ open: changeOpen })
   }
 
