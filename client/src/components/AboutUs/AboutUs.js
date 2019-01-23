@@ -25,7 +25,9 @@ const styles = theme => ({
       display: 'flex',
       flexWrap: 'wrap',
     },
-
+    avatar: {
+        backgroundColor: 'blueviolet',
+      },
     dense: {
       marginTop: 19,
     },
@@ -52,7 +54,7 @@ const styles = theme => ({
     },
     aboutTitle:  {
       [theme.breakpoints.down('sm')]: {
-        fontSize: '30px',
+        fontSize: '4rem',
       },
       [theme.breakpoints.up('md')]: {
         fontSize: '40px',
@@ -65,7 +67,7 @@ const styles = theme => ({
     },
     aboutSubtitle : {
       [theme.breakpoints.down('sm')]: {
-        fontSize: '15px',
+        fontSize: '3rem',
       },
       [theme.breakpoints.up('md')]: {
         fontSize: '25px',
@@ -80,13 +82,54 @@ const styles = theme => ({
     aboutP : {
         color: 'darkgrey',
         margin: '0px 0px 20px 20px',
-    },
-    developerImage : {
-      width: '200px',
-      margin: '0px 20px 20px 25px'
+    }
+  })
+
+let developerArr = [
+    { 
+    developername: 'Aja Magdaleno',
+    image: '/images/AjaMagdaleno.JPG',
+    skills: 'Javascript, MongoDB',
+    hobbies: 'Hiking',
     },
 
-  })
+    { 
+    developername: 'Armando Pensado',
+    image: '/images/ArmandoPensado.JPG',
+    skills: ' stuff',
+    hobbies: 'things',
+    },
+    { 
+    developername: 'James Rodgick',
+    image: './images/JamesRodgick.JPG',
+    skills: 'other stuff',
+    hobbies: 'stuffs,'
+    },
+    {
+    developername: 'Tommy Dang',
+    image: './images/TommyDang.JPG',
+    skills: 'things',
+    hobbies: 'stuffs',
+    },
+    {
+    developername: 'Eddie Kader',
+    image: './images/EddieKader.JPG',
+    skills: 'things',
+    hobbies: 'stuffs',
+    },
+    {
+    developername: 'Eddie Kader',
+    image: './images/SamAwi.JPG',
+    skills: 'things',
+    hobbies: 'stuffs',
+    },
+    {
+    developername: 'Daniel Border',
+    image: './images/DanielBorder.JPG',
+    skills: 'things',
+    hobbies: 'stuffs',
+    }
+]
 
 class AboutUs extends Component {
 
@@ -107,9 +150,8 @@ class AboutUs extends Component {
             {"BLUe!Team Design and Development"}
             </Typography>
   
-                <Grid container spacing={0}>       
-                    <AboutUsCard>
-                    </AboutUsCard>
+                <Grid container spacing={1}>       
+                    {developerArr.map(e => <AboutUsCard {...e} />)}
                 </Grid>
 
             </CardContent>
