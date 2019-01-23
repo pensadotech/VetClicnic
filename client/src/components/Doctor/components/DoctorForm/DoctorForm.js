@@ -146,7 +146,7 @@ class DoctorForm extends Component {
         <Card className={classes.card}>
           <CardContent>
             <p className='doctorError'>{this.state.doctorError}</p>
-            <form className={classes.container} Validate autoComplete="off">
+            <form className={classes.container} noValidate autoComplete="off">
               <div className='formItem'>
                 <TextField
                   required
