@@ -124,7 +124,7 @@ class DoctorForm extends Component {
         APIdoctor.findOne(this.state.name)
           .then(res => {
             if (res.data !== null) {
-              this.setState({ userError: `The medication "${res.data.name}" already exist, please provide a new one` })
+              this.setState({ userError: `The doctor name "${res.data.name}" already exist, please provide a new one` })
             } else {
 
               // Send New Doctor Data
@@ -145,8 +145,8 @@ class DoctorForm extends Component {
 
         <Card className={classes.card}>
           <CardContent>
-            <p className='DoctorError'>{this.state.DoctorError}</p>
-            <form className={classes.container} noValidate autoComplete="off">
+            <p className='doctorError'>{this.state.doctorError}</p>
+            <form className={classes.container} Validate autoComplete="off">
               <div className='formItem'>
                 <TextField
                   required
