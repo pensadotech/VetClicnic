@@ -26,7 +26,12 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 250,
+    width: 250
+  },
+  datetimeField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 300
   },
   margin: {
     margin: theme.spacing.unit,
@@ -125,7 +130,7 @@ class AppointForm extends Component {
     if (this.state.mode === 'edit') {
        // EDIT MODE: Validate
        if (this.state.title === '' || this.state.description === '' || this.state.appointmentDate === '')  {   
-        this.setState({appointmentError: 'Please provide title, description, and appointment date-time.'}) 
+        this.setState({appointmentError: 'Please provide title, description, appointment date and time.'}) 
        } else if(new Date(this.state.appointmentDate) < this.state.currentDate ) {
         this.setState({appointmentError: 'The appointment cannot be in the past!'}) 
        } else {    
@@ -223,7 +228,7 @@ class AppointForm extends Component {
                       required
                       id="appnt-date"
                       label="Date and Time :"
-                      className={classes.textField}
+                      className={classes.datetimeField}
                       name='appointmentDate'
                       type='datetime-local'
                       value={this.state.appointmentDate}

@@ -61,7 +61,6 @@ class Navbar extends Component {
   }
 
   toggleDrawer = changeOpen => {
-    console.log(changeOpen)
     this.setState({ open: changeOpen })
   }
 
@@ -82,7 +81,11 @@ class Navbar extends Component {
         <List>
           <Link to='/' style={{ color: 'black', textDecoration: 'none' }}>
             <ListItem button key='Home'>
-               <ListItemIcon> <HomeIcon /></ListItemIcon>
+               <ListItemIcon> 
+                 <div>
+                   <HomeIcon />
+                 </div>              
+               </ListItemIcon>
                <ListItemText primary='Home' />
              </ListItem>
           </Link>
@@ -91,37 +94,61 @@ class Navbar extends Component {
         <List>
             <Link to='/patients' style={{ color: 'black', textDecoration: 'none' }}>
               <ListItem button key='Patients'>
-                <ListItemIcon> <PetsIcon /></ListItemIcon>
+                 <ListItemIcon> 
+                   <div>
+                     <PetsIcon />
+                   </div>                
+                  </ListItemIcon>
                 <ListItemText primary='Patients' />
               </ListItem>
            </Link>
            <Link to='/doctors' style={{ color: 'black', textDecoration: 'none' }}>
               <ListItem button key='Doctors'>
-                <ListItemIcon> <FaceIcon /></ListItemIcon>
+                <ListItemIcon> 
+                  <div>
+                    <FaceIcon />
+                  </div>        
+                </ListItemIcon>
                 <ListItemText primary='Doctors' />
               </ListItem>
            </Link>
            <Link to='/medicines' style={{ color: 'black', textDecoration: 'none' }}>
               <ListItem button key='Medications'>
-                <ListItemIcon> <ColorizeIcon /></ListItemIcon>
+                <ListItemIcon> 
+                  <div>
+                    <ColorizeIcon />
+                  </div>                  
+                  </ListItemIcon>
                 <ListItemText primary='Medications' />
               </ListItem>
            </Link>
            <Link to='/appointments' style={{ color: 'black', textDecoration: 'none' }}>
               <ListItem button key='Appointments'>
-                <ListItemIcon> <EventIcon /></ListItemIcon>
+                <ListItemIcon> 
+                  <div>
+                  <EventIcon />
+                  </div> 
+                </ListItemIcon>
                 <ListItemText primary='Appointments' />
               </ListItem>
            </Link>
            <Link to='/prescriptions' style={{ color: 'black', textDecoration: 'none' }}>
               <ListItem button key='Prescriptions'>
-                <ListItemIcon> <AssignmentIcon /></ListItemIcon>
+                <ListItemIcon> 
+                   <div>
+                     <AssignmentIcon />
+                   </div>                
+                </ListItemIcon>
                 <ListItemText primary='Prescriptions' />
               </ListItem>
            </Link>
            <Link to='/calc' style={{ color: 'black', textDecoration: 'none' }}>
               <ListItem button key='Calculator'>
-                <ListItemIcon> <GradientIcon /></ListItemIcon>
+                <ListItemIcon>
+                  <div>
+                    <GradientIcon />
+                  </div>      
+                </ListItemIcon>
                 <ListItemText primary='Dosage Calculator' />
               </ListItem>
            </Link>
@@ -130,13 +157,21 @@ class Navbar extends Component {
         <List>
            <Link to='/admin' style={{ color: 'black', textDecoration: 'none' }}>
               <ListItem button key='Admin'>
-                <ListItemIcon> <SettingsIcon /></ListItemIcon>
+                <ListItemIcon> 
+                  <div>
+                    <SettingsIcon />
+                  </div>             
+                </ListItemIcon>
                 <ListItemText primary='Admin' />
               </ListItem>
            </Link>
            <Link to='/aboutus' style={{ color: 'black', textDecoration: 'none' }}>
               <ListItem button key='AboutUs'>
-                <ListItemIcon> <SentimentSatisfiedAltIcon /></ListItemIcon>
+                <ListItemIcon> 
+                  <div> 
+                   <SentimentSatisfiedAltIcon />
+                  </div> 
+                </ListItemIcon>
                 <ListItemText primary='About Us' />
               </ListItem>
            </Link>
