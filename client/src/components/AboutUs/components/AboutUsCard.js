@@ -7,26 +7,28 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
+import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
-import red from '@material-ui/core/colors/red';
 import EmailIcon from '@material-ui/icons/Email';
 import HighlightIcon from '@material-ui/icons/Highlight';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Grid from '@material-ui/core/Grid';
+
 
 const styles = theme => ({
   card: {
-    maxWidth: 400,
+    maxWidth: '500',
     backgroundColor: 'darkgrey',
+    margin: '1rem'
   },
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  }, 
   media: {
     height: '3rem',
     paddingTop: '56.25%', // 16:9
-  },
-  actions: {
-    display: 'flex',
+    margin: '1rem',
   },
   avatar: {
     backgroundColor: 'blueviolet',
@@ -37,13 +39,11 @@ class AboutUsCard extends Component {
 
   render() {
     const { classes } = this.props;
-    console.log(this.props)
-    // console.log(classes)
 
     return (
-      <Card 
-      className={classes.card}
-      >
+    <Grid className='cardBlock'> 
+      <Grid container item>
+      <Card className={classes.card}>
         <CardHeader
           avatar={
             <Avatar aria-label="Developer" 
@@ -52,13 +52,11 @@ class AboutUsCard extends Component {
               BLUe
             </Avatar>
           }
-           devlopername={this.props.developername}
-            
+          title={this.props.developername} 
         />
         <CardMedia
          className={classes.media}
-          image={this.props.image}
-          developername=""
+          image={this.props.image} 
         />
         <CardContent>
           <Typography component="p">
@@ -68,23 +66,25 @@ class AboutUsCard extends Component {
             Hobbies: {this.props.hobbies}
           </Typography>
         </CardContent>
-        <CardActions className={classes.actions} disableActionSpacing>
+        <CardActions>
         <Typography component="p">
-            Email
-            <IconButton aria-label="Contact">
+            <Icon aria-label="Contact">
                 <EmailIcon />
-            </IconButton>
+            </Icon>
+            Email: {this.props.email}
         </Typography>
-        <Typography component="p">
-          GitHub
-            <IconButton aria-label="GitHub">
+        {/* <Typography component="p">
+            <Icon aria-label="GitHub">
                 <HighlightIcon />
-            </IconButton>
-        </Typography>    
+            </Icon>
+            Github: {this.props.github}
+        </Typography>     */}
           
         </CardActions>
         
       </Card>
+      </Grid>
+    </Grid>  
     );
   }
 }
