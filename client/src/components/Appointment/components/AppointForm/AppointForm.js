@@ -26,7 +26,12 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 250,
+    width: 250
+  },
+  datetimeField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 300
   },
   margin: {
     margin: theme.spacing.unit,
@@ -223,7 +228,7 @@ class AppointForm extends Component {
                       required
                       id="appnt-date"
                       label="Date and Time :"
-                      className={classes.textField}
+                      className={classes.datetimeField}
                       name='appointmentDate'
                       type='datetime-local'
                       value={this.state.appointmentDate}
