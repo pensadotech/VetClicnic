@@ -38,12 +38,14 @@ class DoctorCard extends Component {
           <Typography variant="h5" component="h2">
             {this.props.doctor.name}
           </Typography>
-          <Typography component="p">'Office Phone: '{this.props.doctor.phone}</Typography>
           <Typography component="p">
-            'Mobile Phone: ' {this.props.doctor.mobilePhone}
+           Office Phone: {this.props.doctor.phone}
           </Typography>
           <Typography component="p">
-            'Email: ' {this.props.doctor.email}
+            Mobile Phone:  {this.props.doctor.mobilePhone}
+          </Typography>
+          <Typography component="p">
+            Email:  {this.props.doctor.email}
           </Typography>
         </CardContent>
         <CardActions>

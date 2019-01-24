@@ -1,0 +1,9 @@
+SORIN (Presentation)
+
+1. Intro (Armando)
+2. Features/Techonlogies (Daniel)
+3. Login/admin/About us (Aja)
+4. Doctors  (Sam)
+5. Patients  (Tommy)
+6. Appointments (Eddie)
+7. Medicines / Dosage Calcuator (James)
