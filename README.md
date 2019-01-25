@@ -110,8 +110,8 @@ Once the account is set, the user needs to manually add to the project a .env fi
 # gmail email keys 
 # open security account to allow emails from this application
 
-EMAIL_USER=’Your Email account’
-EMAIL_PWD='your password
+EMAIL_USER='Your Email account'
+EMAIL_PWD='your password'
 ```
 
 Once the email configuration is in place, the developer can start the application by providing the following **npm** command.
