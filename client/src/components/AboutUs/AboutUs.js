@@ -16,118 +16,118 @@ import AboutUsCard from './components/AboutUsCard'
 // Local style
 import './AboutUs.css'
 
-const styles = theme => ({
-    maincontainer: {
+const styles = theme => ({ 
+    root: {
       display: 'flex',
       flexWrap: 'wrap',   
-    },
-    container: {
-      display: 'flex',
-      flexWrap: 'wrap',
     },
     avatar: {
         backgroundColor: 'blueviolet',
       },
-    dense: {
-      marginTop: 19,
-    },
-    menu: {
-      width: 200,
-    },
-    card: {
-      minWidth: 200,
-      maxHeight: 620,
+    container: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      backgroundColor: 'white',
+      margin: '1rem',
+      opacity: '0.88',
+      
       [theme.breakpoints.down('sm')]: {
-        margin: '30px 40px 0px 40px',
+        margin: '1 rem',
       },
       [theme.breakpoints.up('md')]: {
-        margin: '90px 40px 0px 40px',
+        margin: '2rem',
       },
       [theme.breakpoints.up('lg')]: {
-        margin: '120px 40px 0px 40px',
+        margin: '3 rem',
       },  
-      opacity: '0.8',
-      display: 'flex', 
       justifyContent: 'center',
       alignItems: 'center',
       borderRadius: '40px'
     },
     aboutTitle:  {
       [theme.breakpoints.down('sm')]: {
-        fontSize: '4rem',
+        fontSize: '1.5rem',
       },
       [theme.breakpoints.up('md')]: {
-        fontSize: '40px',
+        fontSize: '2rem',
       },
       [theme.breakpoints.up('lg')]: {
-        fontSize: '50px',
+        fontSize: '2rem',
       },
       color: 'blue',
       margin: '0px 0px 10px 30px',
     },
     aboutSubtitle : {
       [theme.breakpoints.down('sm')]: {
-        fontSize: '3rem',
+        fontSize: '1rem',
       },
       [theme.breakpoints.up('md')]: {
-        fontSize: '25px',
+        fontSize: '1.5rem',
       },
       [theme.breakpoints.up('lg')]: {
-        fontSize: '30px',
+        fontSize: '1.5rem',
       },
       color: 'blueviolet',
-      margin: '0px 0px 30px 30px',
-      font: 'cursive'
+      marginLeft: '1.5rem',
     },
-    aboutP : {
-        color: 'darkgrey',
-        margin: '0px 0px 20px 20px',
-    }
   })
 
 let developerArr = [
     { 
     developername: 'Aja Magdaleno',
     image: '/images/AjaMagdaleno.JPG',
-    skills: 'Javascript, MongoDB',
-    hobbies: 'Hiking',
+    skills: 'CSS, Javascript, SQL, MongoDB, Express, React, Node',
+    hobbies: 'Hiking, Reading, Learning',
+    email: "aja.magdaleno@gmail.com" ,
+    github: 'https://github.com/AjaMag'
     },
-
     { 
     developername: 'Armando Pensado',
     image: '/images/ArmandoPensado.JPG',
-    skills: ' stuff',
-    hobbies: 'things',
+    skills: 'Software, electronics, walking dogs',
+    hobbies: 'Hiking, Guitar, Reading',
+    email: 'armando@pensadotech.com',
+    github: 'https://github.com/pensadotech'
     },
     { 
     developername: 'James Rodgick',
     image: './images/JamesRodgick.JPG',
-    skills: 'other stuff',
-    hobbies: 'stuffs,'
+    hobbies: 'Movies, Video Games, Computers, Guitar, Card Games',
+    skills: 'Making Internet Site Pages, Animal Science',
+    email: 'rodgick@yahoo.com',
+    github: 'https://github.com/Voriah'
     },
     {
     developername: 'Tommy Dang',
     image: './images/TommyDang.JPG',
-    skills: 'things',
-    hobbies: 'stuffs',
+    skills: 'Javascript, SQL',
+    hobbies: 'Jogging, Eating & Sleeping',
+    email: 'ledangt310@live.com',
+    github: 'https://github.com/TL-Dang',
     },
     {
     developername: 'Eddie Kader',
     image: './images/EddieKader.JPG',
-    skills: 'things',
-    hobbies: 'stuffs',
+    skills: 'Making eggs, coding(somewhat), plotting, reading',
+    hobbies: 'Eating, Gym, Hanging out, Video Games',
+    email: 'Eddie.kader@gmail.com',
+    github: 'https://github.com/eddiek123',
     },
     {
-    developername: 'Eddie Kader',
+    developername: 'Sam Awi',
     image: './images/SamAwi.JPG',
-    skills: 'things',
-    hobbies: 'stuffs',
+    skills: 'Professional Chef, Entrepreneur, Restaurant Management',
+    hobbies: 'Learning to code, drinking good beer, making money',
+    email: 'ossamawi@gmail.com',
+    github: 'https://github.com/newcoder2019'
     },
     {
     developername: 'Daniel Border',
     image: './images/DanielBorder.JPG',
-    skills: 'things',
-    hobbies: 'stuffs',
+    skills: 'Javascript, Node, HTML, Cooking',
+    hobbies: 'Traveling, Sports, Eating and Music',
+    email: 'danielpborder@gmail.com',
+    github: 'https://github.com/SirHamsonSmith'
     }
 ]
 
@@ -139,24 +139,33 @@ class AboutUs extends Component {
   
       return (
         <>
-        <Grid maincontainer spacing={0}>
-        <Grid item>
-        <Card className={classes.card}>       
-          <CardContent> 
-           <Typography className={classes.aboutTitle}>
+        <Grid container className={classes.root} spacing={16}>
+         
+        <Grid className={classes.container}>       
+          <Grid >
+            <Grid item>
+            <Typography className={classes.aboutTitle}>
                 Meet The Developers
             </Typography>
-            <Typography className={classes.aboutSubtitle}>
-            {"BLUe!Team Design and Development"}
-            </Typography>
-  
-                <Grid container spacing={1}>       
-                    {developerArr.map(e => <AboutUsCard {...e} />)}
+            </Grid> 
+            <Grid item >
+            <Typography className={classes.aboutSubtitle} >
+                BLUe!Team Design and Development
+            </Typography>  
+            </Grid > 
+                <Grid container
+                style={{ margin: 'auto',marginLeft: '3%' }}>       
+                    {developerArr.map((e,index) => (
+                        <Grid item key={index}>
+                            <AboutUsCard {...e} />
+                        </Grid>   
+                    ) 
+                     )}
                 </Grid>
 
-            </CardContent>
-        </Card> 
-        </Grid>
+            </Grid>
+        </Grid> 
+       
         </Grid>
   
         </>
