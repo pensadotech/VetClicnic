@@ -19,15 +19,8 @@ const styles = theme => ({
   mainContainer: {
     display: 'flex',
     flexWrap: 'wrap',
-    [theme.breakpoints.down('sm')]: {
-      margin: '10px 0px 0px 20px',
-    },
-    [theme.breakpoints.up('md')]: {
-      margin: '10px 40px 0px 40px',
-    },
-    [theme.breakpoints.up('lg')]: {
-      margin: '10px 0px 0px 250px',
-    }
+    justifyContent: 'center',
+    alignItems: 'center' 
   },
   container: {
     display: 'flex',
