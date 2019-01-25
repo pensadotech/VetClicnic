@@ -57,7 +57,6 @@ class UserCard extends Component {
                 <Checkbox
                   disabled 
                   checked={this.props.user.isAdmin}
-                  value={this.props.user.isAdmin}
                   color="primary"
                 />
               }

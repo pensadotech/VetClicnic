@@ -1,6 +1,7 @@
 const calcInjectble = (medication, patient) => {
     let med = medication.injectable
     let kg = patient.weight / 2.2
+    let returnedDose = []
     let dose = {medication: medication,
                 patient: patient,
                 mL: 0,
@@ -28,7 +29,8 @@ const calcInjectble = (medication, patient) => {
             dose.hi = (med.doseRangeFeline[1] * kg / med.concentration).toFixed(2)
         }
     }
-    return dose
+    returnedDose.push(dose)
+    return returnedDose
     }
 
 module.exports = calcInjectble;

@@ -87,7 +87,6 @@ const calcSuspension = (medication, patient) => {
             }
         }
     }
-        console.log(returnedDose)
         return returnedDose;
     }
 module.exports = calcSuspension

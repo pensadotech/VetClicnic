@@ -8,10 +8,8 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import AccountCircle from '@material-ui/icons/AccountCircle'
-import PetsIcon from '@material-ui/icons/Pets'
 import MailIcon from '@material-ui/icons/MailOutline'
 import PhoneIcon from '@material-ui/icons/Phone'
-import PersonIcon from '@material-ui/icons/PermIdentity'
 // API
 import APIdoctor from '../../../../utils/APIdoctor'
 
@@ -124,7 +122,7 @@ class DoctorForm extends Component {
         APIdoctor.findOne(this.state.name)
           .then(res => {
             if (res.data !== null) {
-              this.setState({ userError: `The medication "${res.data.name}" already exist, please provide a new one` })
+              this.setState({ userError: `The doctor name "${res.data.name}" already exist, please provide a new one` })
             } else {
 
               // Send New Doctor Data
@@ -145,7 +143,7 @@ class DoctorForm extends Component {
 
         <Card className={classes.card}>
           <CardContent>
-            <p className='DoctorError'>{this.state.DoctorError}</p>
+            <p className='doctorError'>{this.state.doctorError}</p>
             <form className={classes.container} noValidate autoComplete="off">
               <div className='formItem'>
                 <TextField

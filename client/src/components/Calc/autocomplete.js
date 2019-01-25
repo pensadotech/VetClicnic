@@ -177,7 +177,6 @@ function NoOptionsMessage(props) {
 function showTypes(props) {
   APImeds.findOne(this.state.single)
     .then(res => {
-      console.log(res.data.tablet.available)
     })
     .catch(err => console.log(err))
 }
@@ -281,7 +280,7 @@ class IntegrationReactSelect extends React.Component {
   state = {
     single: null,
     medication: {},
-    patient: {},
+    patient: null,
     avail: [],
     chosen: "",
     pet: "",
@@ -309,7 +308,6 @@ class IntegrationReactSelect extends React.Component {
             chart: { label: res.data.chartNumber }
           })
         }).catch(err => console.log(err))
-      console.log(this.state)
     }
   }
 
@@ -322,7 +320,6 @@ class IntegrationReactSelect extends React.Component {
     if (value !== null) {
       APIpatients.findByOwner(value.label)
         .then(res => {
-          console.log(res.data)
           this.setState({
             patient: res.data,
             pet: { label: res.data.patientname },
@@ -330,7 +327,6 @@ class IntegrationReactSelect extends React.Component {
             chart: { label: res.data.chartNumber }
           })
         }).catch(err => console.log(err))
-      console.log(this.state)
     }
   }
 
@@ -341,7 +337,6 @@ class IntegrationReactSelect extends React.Component {
     if (value !== null) {
       APIpatients.findByChart(value.label)
         .then(res => {
-          console.log(res.data)
           this.setState({
             patient: res.data,
             pet: { label: res.data.patientname },
@@ -349,7 +344,6 @@ class IntegrationReactSelect extends React.Component {
             chart: { label: res.data.chartNumber }
           })
         }).catch(err => console.log(err))
-      console.log(this.state)
     }
   }
 
@@ -377,7 +371,6 @@ class IntegrationReactSelect extends React.Component {
 
       APImeds.findOne(value.label)
         .then(res => {
-          console.log(res.data)
           this.setState({ medication: res.data })
           let tempArr = []
           if (res.data.injectable.available === true) {
@@ -443,15 +436,17 @@ class IntegrationReactSelect extends React.Component {
           <br/>
         </>
       );
-    } else if (chosen === "Injectable") {
+    } else if (chosen === "Injectable" ) {
       return (
-        <>
+         <>
+          {this.state.injectableDose.map(dose => (
           <InjectSigCard
             medication={this.state.medication}
             patient={this.state.patient}
             doctor={this.state.doctor.label}
-            dose={this.state.injectableDose}
+            dose={dose}
           />
+          ))}
         </>
       )
     } else if (chosen === "Capsule") {
@@ -603,7 +598,8 @@ class IntegrationReactSelect extends React.Component {
 
           <Grid item xs={2}></Grid>
           <Grid item xs={3}>
-            <PatientCard patient={this.state.patient} />
+          {this.state.patient !== null? <><PatientCard patient={this.state.patient} /> </> : null}
+            
           </Grid>
           <Grid item xs={2}></Grid>
           <Grid item xs={3}>

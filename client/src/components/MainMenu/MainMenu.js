@@ -27,7 +27,7 @@ class MainMenu extends Component {
 
     return (
       <>
-        <div>
+
           <Grid container spacing={16}>
              
             <Grid item>           
@@ -115,7 +115,7 @@ class MainMenu extends Component {
               </Link>            
             </Grid>
           </Grid>
-        </div>
+
       </>
     );
   }
