@@ -38,6 +38,11 @@ app.use(routes);
 var MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/vetclinic'
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
 
+//for heroku to host the react app from express server
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
+
 // Start listening
 app.listen(PORT, function () {
   console.log(`Listening at http://localhost:${PORT}`)
