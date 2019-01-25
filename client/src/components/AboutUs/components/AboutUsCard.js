@@ -17,9 +17,10 @@ import Grid from '@material-ui/core/Grid';
 
 const styles = theme => ({
   card: {
-    maxWidth: '500',
+    width: '275px',
+    height: '550px',
+    margin: '1rem',
     backgroundColor: 'darkgrey',
-    margin: '1rem'
   },
   container: {
     display: 'flex',
@@ -33,6 +34,9 @@ const styles = theme => ({
   avatar: {
     backgroundColor: 'blueviolet',
   },
+  title: {
+    fontSize: '1rem',
+  }
 });
 
 class AboutUsCard extends Component {
@@ -41,10 +45,12 @@ class AboutUsCard extends Component {
     const { classes } = this.props;
 
     return (
-    <Grid className='cardBlock'> 
+    <Grid > 
       <Grid container item>
       <Card className={classes.card}>
-        <CardHeader
+        <CardHeader classes={{
+        title: classes.title
+      }}
           avatar={
             <Avatar aria-label="Developer" 
             className={classes.avatar}
@@ -62,6 +68,7 @@ class AboutUsCard extends Component {
           <Typography component="p">
             Skills: {this.props.skills}
           </Typography>
+          <br/>
           <Typography component="p">
             Hobbies: {this.props.hobbies}
           </Typography>
@@ -71,17 +78,16 @@ class AboutUsCard extends Component {
             <Icon aria-label="Contact">
                 <EmailIcon />
             </Icon>
-            Email: {this.props.email}
+            Email: {this.props.email}      
         </Typography>
-        {/* <Typography component="p">
+        <br/>
+        </CardActions>
+        <Typography> 
             <Icon aria-label="GitHub">
                 <HighlightIcon />
             </Icon>
             Github: {this.props.github}
-        </Typography>     */}
-          
-        </CardActions>
-        
+        </Typography>
       </Card>
       </Grid>
     </Grid>  

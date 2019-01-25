@@ -17,7 +17,7 @@ import AboutUsCard from './components/AboutUsCard'
 import './AboutUs.css'
 
 const styles = theme => ({ 
-    maincontainer: {
+    root: {
       display: 'flex',
       flexWrap: 'wrap',   
     },
@@ -27,7 +27,9 @@ const styles = theme => ({
     container: {
       display: 'flex',
       flexWrap: 'wrap',
-      minWidth: '90%',
+      backgroundColor: 'white',
+      margin: '1rem',
+      opacity: '0.88',
       
       [theme.breakpoints.down('sm')]: {
         margin: '1 rem',
@@ -60,13 +62,13 @@ const styles = theme => ({
         fontSize: '1rem',
       },
       [theme.breakpoints.up('md')]: {
-        fontSize: '1px',
+        fontSize: '1.5rem',
       },
       [theme.breakpoints.up('lg')]: {
-        fontSize: '1px',
+        fontSize: '1.5rem',
       },
       color: 'blueviolet',
-      margin:'1px',
+      marginLeft: '1.5rem',
     },
   })
 
@@ -137,19 +139,22 @@ class AboutUs extends Component {
   
       return (
         <>
-        <Grid maincontainer spacing={16}>
+        <Grid container className={classes.root} spacing={16}>
          
-        <Card className={classes.container}>       
-          <CardContent> 
-           <Typography className={classes.aboutTitle}>
+        <Grid className={classes.container}>       
+          <Grid >
+            <Grid item>
+            <Typography className={classes.aboutTitle}>
                 Meet The Developers
             </Typography>
-            <Typography className={classes.aboutSubtitle}>
+            </Grid> 
+            <Grid item >
+            <Typography className={classes.aboutSubtitle} >
                 BLUe!Team Design and Development
-            </Typography>
-  
+            </Typography>  
+            </Grid > 
                 <Grid container
-                style={{ margin: 'auto',marginLeft: '5%' }}>       
+                style={{ margin: 'auto',marginLeft: '3%' }}>       
                     {developerArr.map((e,index) => (
                         <Grid item key={index}>
                             <AboutUsCard {...e} />
@@ -158,8 +163,8 @@ class AboutUs extends Component {
                      )}
                 </Grid>
 
-            </CardContent>
-        </Card> 
+            </Grid>
+        </Grid> 
        
         </Grid>
   

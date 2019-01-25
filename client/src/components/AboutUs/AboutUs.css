@@ -1,7 +1,7 @@
 .cardBlock {
-    width: 250px;
-    height: 250px;
-    margin: 10px 10px 10px 20px;
+    width: 3rem;
+    height: 4rem;
+    margin: 2rem;
     /* Rounded image corners */
     -webkit-border-radius: 30px;
     -moz-border-radius: 30px;
