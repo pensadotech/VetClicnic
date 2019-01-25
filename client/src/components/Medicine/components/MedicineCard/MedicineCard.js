@@ -28,10 +28,6 @@ const styles = {
 
 class MedicineCard extends Component {
   
-  componentDidMount() {
-    console.log('MedicineCard:',this.props.userSession)
-  }
-
   renderThirButton = () => {
 
     if( this.props.viewThirdButton ) {

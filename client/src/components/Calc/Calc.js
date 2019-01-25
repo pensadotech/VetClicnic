@@ -4,12 +4,9 @@ import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Avatar from '@material-ui/core/Avatar'
 import GradientIcon from '@material-ui/icons/Gradient'
-import Input from "./inputs"
 import Auto from "./autocomplete"
 import APImeds from '../../utils/APImeds'
 import APIpatient from '../../utils/APIpatient'
-import PatientCard from '../Patient/components/PatientCard'
-
 
 const styles = {
   avatar: {
