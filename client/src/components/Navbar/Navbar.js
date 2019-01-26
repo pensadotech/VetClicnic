@@ -22,14 +22,23 @@ import EventIcon from '@material-ui/icons/Event'
 import AssignmentIcon from '@material-ui/icons/Assignment'
 import SettingsIcon from '@material-ui/icons/Settings'
 import GradientIcon from '@material-ui/icons/Gradient'
+import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAlt'
 
-
-const styles = {
+const styles = theme => ({
   root: {
     flexGrow: 1,
   },
-  grow: {
+  title: {
     flexGrow: 1,
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '12px',
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: '30px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      fontSize: '28px',
+    },
   },
   menuButton: {
     marginLeft: -12,
@@ -41,7 +50,7 @@ const styles = {
   fullList: {
     width: 'auto'
   }
-}
+})
 
 class Navbar extends Component {
   
@@ -50,7 +59,6 @@ class Navbar extends Component {
   }
 
   toggleDrawer = changeOpen => {
-    console.log(changeOpen)
     this.setState({ open: changeOpen })
   }
 
@@ -71,7 +79,11 @@ class Navbar extends Component {
         <List>
           <Link to='/' style={{ color: 'black', textDecoration: 'none' }}>
             <ListItem button key='Home'>
-               <ListItemIcon children='[]'> <HomeIcon /></ListItemIcon>
+               <ListItemIcon> 
+                 <div>
+                   <HomeIcon />
+                 </div>              
+               </ListItemIcon>
                <ListItemText primary='Home' />
              </ListItem>
           </Link>
@@ -80,37 +92,61 @@ class Navbar extends Component {
         <List>
             <Link to='/patients' style={{ color: 'black', textDecoration: 'none' }}>
               <ListItem button key='Patients'>
-                <ListItemIcon> <PetsIcon /></ListItemIcon>
+                 <ListItemIcon> 
+                   <div>
+                     <PetsIcon />
+                   </div>                
+                  </ListItemIcon>
                 <ListItemText primary='Patients' />
               </ListItem>
            </Link>
            <Link to='/doctors' style={{ color: 'black', textDecoration: 'none' }}>
               <ListItem button key='Doctors'>
-                <ListItemIcon> <FaceIcon /></ListItemIcon>
+                <ListItemIcon> 
+                  <div>
+                    <FaceIcon />
+                  </div>        
+                </ListItemIcon>
                 <ListItemText primary='Doctors' />
               </ListItem>
            </Link>
            <Link to='/medicines' style={{ color: 'black', textDecoration: 'none' }}>
-              <ListItem button key='Medicines'>
-                <ListItemIcon> <ColorizeIcon /></ListItemIcon>
-                <ListItemText primary='Medicines' />
+              <ListItem button key='Medications'>
+                <ListItemIcon> 
+                  <div>
+                    <ColorizeIcon />
+                  </div>                  
+                  </ListItemIcon>
+                <ListItemText primary='Medications' />
               </ListItem>
            </Link>
            <Link to='/appointments' style={{ color: 'black', textDecoration: 'none' }}>
               <ListItem button key='Appointments'>
-                <ListItemIcon> <EventIcon /></ListItemIcon>
+                <ListItemIcon> 
+                  <div>
+                  <EventIcon />
+                  </div> 
+                </ListItemIcon>
                 <ListItemText primary='Appointments' />
               </ListItem>
            </Link>
            <Link to='/prescriptions' style={{ color: 'black', textDecoration: 'none' }}>
               <ListItem button key='Prescriptions'>
-                <ListItemIcon> <AssignmentIcon /></ListItemIcon>
+                <ListItemIcon> 
+                   <div>
+                     <AssignmentIcon />
+                   </div>                
+                </ListItemIcon>
                 <ListItemText primary='Prescriptions' />
               </ListItem>
            </Link>
            <Link to='/calc' style={{ color: 'black', textDecoration: 'none' }}>
               <ListItem button key='Calculator'>
-                <ListItemIcon> <GradientIcon /></ListItemIcon>
+                <ListItemIcon>
+                  <div>
+                    <GradientIcon />
+                  </div>      
+                </ListItemIcon>
                 <ListItemText primary='Dosage Calculator' />
               </ListItem>
            </Link>
@@ -119,8 +155,22 @@ class Navbar extends Component {
         <List>
            <Link to='/admin' style={{ color: 'black', textDecoration: 'none' }}>
               <ListItem button key='Admin'>
-                <ListItemIcon> <SettingsIcon /></ListItemIcon>
+                <ListItemIcon> 
+                  <div>
+                    <SettingsIcon />
+                  </div>             
+                </ListItemIcon>
                 <ListItemText primary='Admin' />
+              </ListItem>
+           </Link>
+           <Link to='/aboutus' style={{ color: 'black', textDecoration: 'none' }}>
+              <ListItem button key='AboutUs'>
+                <ListItemIcon> 
+                  <div> 
+                   <SentimentSatisfiedAltIcon />
+                  </div> 
+                </ListItemIcon>
+                <ListItemText primary='About Us' />
               </ListItem>
            </Link>
         </List>
@@ -139,9 +189,9 @@ class Navbar extends Component {
                             aria-label='Menu'>
                   <MenuIcon />
                 </IconButton>
-         
-                <Typography variant="h6" color="inherit" className={classes.grow}>
-                   SORIN- Surgical Operation Reference Interface Network 
+                
+                <Typography color="inherit" className={classes.title}>
+                SORIN Surgical Operation Reference and Interface Network
                 </Typography>
 
                 <Link to='/' style={{ color: 'black', textDecoration: 'none' }}>

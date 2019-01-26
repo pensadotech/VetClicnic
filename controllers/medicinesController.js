@@ -1,28 +1,29 @@
 // Require all models
-var db = require("../models")
+var db = require('../models');
 
 module.exports = {
   findAll: function (req, res) {
     db.Meds.find({})
       .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err))
+      .catch(err => res.status(422).json(err));
   },
   findOne: function (req, res) {
-    // body has the user
-    let med = req.body
     // find record base on user name
-    db.Meds.findOne({ pubId: { $eq: med.name } })
+    db.Meds.findOne().or([{alias: req.params.id}, {name: req.params.id}])
       .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err))
+      .catch(err => res.status(422).json(err));
+  },
+  findByAlias: function (req, res) {
+    // find record base on user name
+    db.Meds.find({alias: { $eq: req.params.id }})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
   },
   findWhere: function (req, res) {
     db.Meds
       .find(req.query)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-  },
-  findById: function(req, res) {
-    db.Medicine
   },
   findById: function (req, res) {
     db.Meds
@@ -31,68 +32,44 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {
-    db.Medicine
-      .create(req.body)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
-  createUpdate: function(req,res) {
-    // body has an article
-    let medicine = req.body
-    // Create or Update
-    db.Medicine.findOne({ pubId: { $eq: medicine.name } })
-      .then((r) => {
-        if (r === null) {
-         // create 
-         db.Medicine.create(medicine)
-           .then(() => res.sendStatus(200))
-           .catch(err => res.status(422).json(err))
-       } else {
-         // Update 
-         db.Medicine.updateOne( { name : { $eq: medicine.name} } , { $set: medicine } )
-           .then(() => res.sendStatus(200))
-           .catch(err => res.status(422).json(err))
-       }
-    })
-    .catch(err => res.status(422).json(err))
-  },
-  update: function(req, res) {
-    db.Medicine
-      .findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
-  remove: function(req, res) {
-    db.Medicine
     // create the user
-    db.Meds
-      .create(user)
+    db.Meds.create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  createUpdate: function (req, res) {
+    // body has the user
+    let medsData = req.body
     // Create or Update
-  
-      db.Meds.findOne({ pubId: { $eq: user.username } })
+    db.Meds.findOne({ name: { $eq: medsData.name} })
       .then((r) => {
         if (r === null) {
-          // create 
-          db.Meds.create(user)
+          // create
+          db.Meds.create(medsData)
             .then(() => res.sendStatus(200))
-            .catch(err => res.status(422).json(err))
+            .catch(err => res.status(422).json(err));
         } else {
-          // Update 
-          db.Meds.updateOne({ username: { $eq: med.name } }, { $set: med })
+          // Update
+          db.Meds.updateOne({
+              name: { $eq: medsData.name }
+            }, {
+              $set: medsData
+            })
             .then(() => res.sendStatus(200))
-            .catch(err => res.status(422).json(err))
+            .catch(err => res.status(422).json(err));
         }
       })
-      .catch(err => res.status(422).json(err))
+      .catch(err => res.status(422).json(err));
   },
+  update: function (req, res) {
+    // body has the user
+    let medsData = req.body;
+    // Update
     db.Meds
-      .findOneAndUpdate({ _id: req.params.id }, user)
+      .findOneAndUpdate({ _id: req.params.id }, medsData)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-  
+  },
   remove: function (req, res) {
     db.Meds
       .findById({ _id: req.params.id })
@@ -100,4 +77,4 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }
-}
+};

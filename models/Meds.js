@@ -1,5 +1,6 @@
 // dependencies
 let mongoose = require('mongoose');
+var Float = require('mongoose-float').loadType(mongoose, 2);
 // Save a reference to the Schema constructor
 let Schema = mongoose.Schema;
 
@@ -11,6 +12,14 @@ let MedsSchema = new Schema({
   },
   alias: {
     type: [String],
+    trim: true
+  },
+  hours: {
+      type: Number,
+      trim: true,
+  },
+  days: {
+    type: Number,
     trim: true
   },
   description: {
@@ -26,36 +35,40 @@ let MedsSchema = new Schema({
   },
   injectable: {
     available: Boolean,
-    concentration: Number,
-    doseCanine: Number,
-    doseRangeCanine: [Number],
-    doseFeline: Number,
-    doseRangeFeline: [Number],
-    routes: [String]
+    concentration: Float,
+    doseCanine: Float,
+    doseRangeCanine: [Float],
+    doseFeline: Float,
+    doseRangeFeline: [Float],
+    routes: [String],
+    alert: String
   },
   tablet: {
     available: Boolean,
-    tabletSizes: [Number],
-    doseCanine: Number,
-    doseRangeCanine: [Number],
-    doseFeline: Number,
-    doseRangeFeline: [Number]
+    tabletSizes: [Float],
+    doseCanine: Float,
+    doseRangeCanine: [Float],
+    doseFeline: Float,
+    doseRangeFeline: [Float],
+    alert: String
   },
   capsule: {
     available: Boolean,
-    capsuleSizes: [Number],
-    doseCanine: Number,
-    doseRangeCanine: [Number],
-    doseFeline: Number,
-    doseRangeFeline: [Number]
+    capsuleSizes: [Float],
+    doseCanine: Float,
+    doseRangeCanine: [Float],
+    doseFeline: Float,
+    doseRangeFeline: [Float],
+    alert: String
   },
   suspension: {
     available: Boolean,
-    doseCanine: Number,
-    doseRangeCanine: [Number],
-    doseFeline: Number,
-    doseRangeFeline: [Number],
-    premade: [{ concentration: Number, volume: Number }]
+    doseCanine: Float,
+    doseRangeCanine: [Float],
+    doseFeline: Float,
+    doseRangeFeline: [Float],
+    premade: [{ concentration: Float, volume: Float }],
+    alert: String
   }
 
 });

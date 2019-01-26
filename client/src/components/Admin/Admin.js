@@ -11,6 +11,7 @@ import UserCard from './components/UserCard'
 import UserForm from './components/UserForm'
 // API
 import APIusers from '../../utils/APIuser'
+import APIemails from '../../utils/APIemails'
 // Local style
 import './Admin.css'
 
@@ -22,27 +23,8 @@ const styles = theme => ({
     color: 'white',
     margin: '7px 0px 0px 20px'
   },
-  card: {
-    minWidth: 275,
-    maxHeight: 220,
-    margin: '10px 20px 0px 20px',
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
   fab: {
-    margin: theme.spacing.unit,
-  },
-  extendedIcon: {
-    marginRight: theme.spacing.unit,
+    margin: theme.spacing.unit
   }
 })
 
@@ -84,40 +66,101 @@ class Admin extends Component {
   handleCreateUser =(tgtUser) => {
     // create new user
     APIusers.createUpdateUser(tgtUser)
-      .then(r => {       
+      .then(r => {  
+        // reload the data
+        this.loadUsers()     
         // Restore main view
         this.setState({screenMode: 'list',targetUser: ''}) 
-        // reload the data
-        this.loadUsers()
+
+        // Prepare email message
+        let email = {
+          to : tgtUser.email,
+          subject: 'Blue Animal Clinic / New user account',
+          text: `
+             Blue Animal Clinic - SORIN: new user was created
+
+             Welcome! 
+
+                 Username:  ${tgtUser.username}
+                 fullname:  ${tgtUser.fullname} 
+                 Phone:     ${tgtUser.phone} 
+          `
+        }
+        // send email indicating user was added to the system
+        APIemails.sendEmail(email)
+          .then(r => {
+             console.log('Email sent: ' + r.response)
+          })
+          .catch(err => console.error(err))
       })
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
   }
 
   handleSaveUser = (tgtUser) => {
     // Save updated user data    
     APIusers.updateUser(tgtUser._id,tgtUser)
       .then(r => {  
+        // reload the data
+       this.loadUsers()
         // Restore main view
        this.setState({screenMode: 'list',targetUser: ''})  
-       // reload the data
-      this.loadUsers()
-      })
-      .catch(err => console.log(err))
+       
+       // Prepare email message
+       let email = {
+         to : tgtUser.email,
+         subject: 'Blue Animal Clinic / User Account modified',
+         text: `
+           Blue Animal Clinic - SORIN: User Account modified
+           
+               Username:  ${tgtUser.username}
+               fullname:  ${tgtUser.fullname} 
+               Phone:     ${tgtUser.phone} 
+        `
+       }
+       // send email indicating user was added to the system
+       APIemails.sendEmail(email)
+         .then(r => {
+            console.log('Email sent: ' + r.response)
+         })
+         .catch(err => console.error(err))
+       })
+       .catch(err => console.log(err))
   }
 
   handleDeleteUser = (tgtUser) => {
     // delete user    
     APIusers.deleteUser(tgtUser._id)
       .then(r => {  
+        // reload the data
+        this.loadUsers() 
         // Restore main view
         this.setState({screenMode: 'list',targetUser: ''})  
-        // reload the data
-        this.loadUsers()  
+         
+        // Prepare email message
+        let email = {
+          to : tgtUser.email,
+          subject: 'Blue Animal Clinic / User account deleted',
+          text: `
+             Blue Animal Clinic - SORIN: user was delete
+
+                 Username:  ${tgtUser.username}
+                 fullname:  ${tgtUser.fullname} 
+                 Phone:     ${tgtUser.phone} 
+          `
+        }
+        // send email indicating user was added to the system
+        APIemails.sendEmail(email)
+          .then(r => {
+             console.log('Email sent: ' + r.response)
+          })
+          .catch(err => console.error(err))
       })
       .catch(err => console.log(err)) 
   }
 
   handleCancel = (tgtUser) => {
+    // reload the data
+    this.loadUsers()  
     // Just reset selected user and change screen mode to list
     this.setState({ screenMode: 'list', targetUser: '' })
   }
@@ -132,15 +175,16 @@ class Admin extends Component {
           <h1 className={classes.pageHead}>
             Create new user
           </h1>
-          <UserForm mode={this.state.screenMode}
+          <UserForm 
+            mode={this.state.screenMode}
             user=''
-            rightbuttonColor='primary'
-            rightButtonLabel='Create'
-            leftbuttonColor='default'
-            leftButtonLabel='Cancel'
+            leftbuttonColor='primary'
+            leftButtonLabel='Create'
+            handleLeftButtonSelection={this.handleCreateUser}
+            rightbuttonColor='default'
+            rightButtonLabel='Cancel'   
+            handleRightButtonSelection={this.handleCancel}
             isUserNameDisabled={false}
-            handleRightButtonSelection={this.handleCreateUser}
-            handleLeftButtonSelection={this.handleCancel}
           />
         </>
       )
@@ -150,15 +194,16 @@ class Admin extends Component {
           <h1 className={classes.pageHead}>
             Update user information
           </h1>
-          <UserForm mode={this.state.screenMode}
+          <UserForm 
+            mode={this.state.screenMode}
             user={this.state.targetUser}
-            rightbuttonColor='primary'
-            rightButtonLabel='Save'
-            leftbuttonColor='default'
-            leftButtonLabel='Cancel'
+            leftbuttonColor='primary'
+            leftButtonLabel='Save'
+            handleLeftButtonSelection={this.handleSaveUser}
+            rightbuttonColor='default'
+            rightButtonLabel='Cancel'
+            handleRightButtonSelection={this.handleCancel}
             isUserNameDisabled={true}
-            handleRightButtonSelection={this.handleSaveUser}
-            handleLeftButtonSelection={this.handleCancel}
           />
         </>
       )
@@ -170,13 +215,14 @@ class Admin extends Component {
               Do you want to delete this user?
               </h1>
             <UserCard user={this.state.targetUser}
-              rightbuttonColor='secondary'
-              rightButtonLabel='Delete'
-              leftbuttonColor='default'
-              leftButtonLabel='Cancel'
+              leftbuttonColor='secondary'
+              leftButtonLabel='Delete'
+              handleLeftButtonSelection={this.handleDeleteUser} 
+              rightbuttonColor='default'
+              rightButtonLabel='Cancel'
               isDisabled={false}
-              handleRightButtonSelection={this.handleDeleteUser}
-              handleLeftButtonSelection={this.handleCancel} />
+              handleRightButtonSelection={this.handleCancel} 
+            />
           </div>
         </>
       )
@@ -200,19 +246,21 @@ class Admin extends Component {
           </Grid>
 
           <Grid alignContent='center'
-            style={{ margin: 'auto', minHeight: '94vh', marginLeft: '5%' }}
+            style={{ margin: 'auto', marginLeft: '5%' }}
             container spacing={32}>
             {
               this.state.users.map((user, index) => (
-                <UserCard key={index}
-                  user={user}
-                  rightbuttonColor='primary'
-                  rightButtonLabel='Update'
-                  leftbuttonColor='secondary'
-                  leftButtonLabel='Remove'
+                <UserCard 
+                  key={index}
+                  user={user} 
+                  leftbuttonColor='primary'
+                  leftButtonLabel='Update' 
+                  handleLeftButtonSelection={this.handleUserUpdateSelection}   
+                  rightbuttonColor='secondary'
+                  rightButtonLabel='Remove'
                   isDisabled={user.username === 'admin' ? true : false}
-                  handleRightButtonSelection={this.handleUserUpdateSelection}
-                  handleLeftButtonSelection={this.handleUserDeleteSelection} />
+                  handleRightButtonSelection={this.handleUserDeleteSelection}
+                />
               ))
             }
           </Grid>

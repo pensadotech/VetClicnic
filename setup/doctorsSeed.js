@@ -2,25 +2,54 @@
 const db = require("../models")
 
 module.exports = {
-  
+
   initialize: function () {
 
     // Mongo documents array
     const doctorsSeed = [{
-        name: 'doctor name',
-        phone: '949-123-1234',
+        name: 'Dr. Malecek',
+        phone: '949-770-1808',
         mobilePhone: '949-123-4567',
-        email: 'doctor@doctor.com',
+        email: 'nicole.malecek@vca.com',
         doctorCreated: Date.now()
       },
       {
-        name: 'Bob Joe',
-        phone: '949-876-8755',
+        name: 'Dr. Ota',
+        phone: '949-770-1808',
+        mobilePhone: '714-123-4567',
+        email: 'jamie.ota@vca.com',
+        doctorCreated: Date.now()
+      },
+      {
+        name: 'Dr. Steenis',
+        phone: '949-770-1808',
+        mobilePhone: '714-123-4567',
+        email: 'jason.steenis@vca.com',
+        doctorCreated: Date.now()
+      },
+      {
+        name: 'Dr. Buehler',
+        phone: '949-770-1808',
+        mobilePhone: '714-123-4567',
+        email: 'lisa.buehler@vca.com',
+        doctorCreated: Date.now()
+      },
+      {
+        name: 'Dr. Yoo',
+        phone: '949-770-1808',
+        mobilePhone: '714-123-4567',
+        email: 'hee.yoo@vca.com',
+        doctorCreated: Date.now()
+      },
+      {
+        name: 'Dr. Pensado',
+        phone: '949-770-1808',
         mobilePhone: '714-123-4567',
         email: 'armando@pensadotech.com',
         doctorCreated: Date.now()
       }
     ]
+
     // Add to database
     db.Doctor
       .remove({})

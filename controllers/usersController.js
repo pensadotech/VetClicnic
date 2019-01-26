@@ -36,6 +36,7 @@ module.exports = {
       password: newUser.password,
       phone: newUser.phone,
       email: newUser.email,
+      isAdmin : newUser.isAdmin,
       userCreated: Date.now()
     };
     // encrypt password
@@ -58,6 +59,7 @@ module.exports = {
       password: newUser.password,
       phone: newUser.phone,
       email: newUser.email,
+      isAdmin : newUser.isAdmin,
       userCreated: Date.now()
     };
     // encrypt password
@@ -92,6 +94,7 @@ module.exports = {
       password: newUser.password,
       phone: newUser.phone,
       email: newUser.email,
+      isAdmin : newUser.isAdmin,
       userCreated: Date.now()
     };
     // encrypt password

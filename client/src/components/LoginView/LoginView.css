@@ -1,28 +1,16 @@
-.loginContainer {  
-  background-color: lightgray;
-  margin: 200px 100px 0px 100px;
-  /* Transparent background */
-  opacity: 0.9;
-}
-
-.loginTitle {
- color: blue;
- font-size: 50px;
- margin: 10px 0px 0px 30px;
-}
-
-.loginSubtitle {
-  color: gray;
-  font-size: 20px;
-  margin: 0px 0px 30px 30px
-}
-
 .logingImage {
-  width: 200px;
-  margin: 0px 20px 20px 25px;
+  /* width: 20px; */
+  margin: 0px 25px 20px 25px;
+  border: 5px solid lightgray;
 }
 
-.userError {
-  color: red;
+/* media queries .............................. */
+@media screen and (max-width: 576px) {
+  .logingImage {
+    /* width: 20px; */
+    margin: 0px 10px 10px 50px;
+    border: 5px solid lightgray;
+  }
 }
+
 

@@ -9,13 +9,16 @@ module.exports = {
     // Find-one
     db.User.findOne({ username: user.username })
       .then(dbuser => {
-        // Does password matches?
-        if (user !== null && passwordHash.verify(user.password, dbuser.password)) {
+        // Does user exist and password matches?
+        if(dbuser === null) {
+          return res.json('')
+        }
+        else if (user !== null && passwordHash.verify(user.password, dbuser.password)) {
           req.login(dbuser, () => {
             return res.json(dbuser);
           });
         } else {
-          return res.json('');
+          return res.json('')
         }
       })
       .catch(e => console.error(e));
@@ -25,7 +28,7 @@ module.exports = {
     return res.json('');
   },
   getSessionUser: function (req, res) {
-    console.log('controller-getSessionUser');
+
     let sessionUser = '';
     if (req.user !== undefined) {
       sessionUser = req.user;
@@ -33,4 +36,4 @@ module.exports = {
     return res.json(sessionUser);
   }
 
-};
+}

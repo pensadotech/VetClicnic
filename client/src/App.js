@@ -10,6 +10,7 @@ import Calc from './components/Calc'
 import Medicine from './components/Medicine'
 import Appointment from './components/Appointment'
 import Prescription from './components/Prescription'
+import AboutUs from './components/AboutUs'
 import Admin from  './components/Admin'
 
 // API bridge for express routes
@@ -51,23 +52,26 @@ class App extends Component {
     if (this.state.sessionUser === '' && (this.state.userName === '' || this.state.userPwd === '') )  {    
       this.setState({userError: 'Please provide user name and passoword'})
     } else if (this.state.sessionUser === '') {   
+
       let user = { 
         username: this.state.userName,
         password: this.state.userPwd,
         email: this.state.userEmail
-      }   
+      }  
+       
       // SIGN-IN
       APIsession.signIn(user)
-      .then( r => {
-        let sessionUser = r.data
-        if (sessionUser === '') {
-          this.setState({userError: 'Invalid user name and passoword'})
-        } else {
-          this.setState({ sessionUser : sessionUser, userName: '', userPwd: '', userEmail: '',userError: ''})  
-        }
-         
-      })
-      .catch(err => console.log(err))
+        .then( r => {
+          let sessionUser = r.data
+
+          if (sessionUser === '') {
+            this.setState({userError: 'Invalid user name orpassoword'})
+          } else {
+            this.setState({ sessionUser : sessionUser, userName: '', userPwd: '', userEmail: '',userError: ''})  
+          }
+          
+        })
+        .catch(err => console.log(err))
 
     } else {
       // SIGN OUT
@@ -103,14 +107,15 @@ class App extends Component {
                <Navbar 
                  sessionUser={this.state.sessionUser}
                  handleLogingAction={this.handleLogingAction}/>
-               <Route exact path='/' component={MainMenu} />
-               <Route path='/patients' component={Patient} />
-               <Route path='/doctors' component={Doctor} />
-               <Route path='/calc' component={Calc} />
+               <Route exact path='/' component={MainMenu} />              
+               <Route path='/patients' component={this.state.sessionUser.isAdmin ? Patient : MainMenu} />
+               <Route path='/doctors' component={this.state.sessionUser.isAdmin ? Doctor : MainMenu} />
                <Route path='/medicines' component={Medicine} />
                <Route path='/appointments' component={Appointment} />
-               <Route path='/prescriptions' component={Prescription} />
-               <Route path='/admin' component={Admin} />
+               <Route path='/prescriptions' component={this.state.sessionUser.isAdmin ? Prescription : MainMenu} />
+               <Route path='/calc' component={Calc} />         
+               <Route path='/aboutus' component={AboutUs} /> 
+               <Route path='/admin' component={this.state.sessionUser.isAdmin ? Admin : MainMenu} />           
              </div>
            </Router>             
          </>
