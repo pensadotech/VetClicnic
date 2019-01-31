@@ -109,7 +109,7 @@ class LoginView extends Component {
           <Grid container spacing={0}>       
               <Grid item>
                 <img className="logingImage imgRnd10 imageShadow imageRotate" 
-                     src="./images/IMG_9465.JPG" 
+                     src="./images/sorin3.JPG" 
                      alt="Veterinary" />
               </Grid>
               <Grid item>
