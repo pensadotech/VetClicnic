@@ -48,7 +48,8 @@ const styles = theme => ({
     display: 'flex', 
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: '50px',
+    borderRadius: '30px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
     [theme.breakpoints.down('sm')]: {
       margin: '30px 40px 0px 40px',
     },
@@ -91,13 +92,13 @@ const styles = theme => ({
     margin: '30px 35px 20px 25px',
     border: '10px solid rgb(11, 71, 201)',
     borderRadius: '30px',
-    boxShadow: '2px 2px 3px 2px gray',
+    // boxShadow: '2px 2px 3px 2px gray',
     transform: 'rotate( 3deg)'
   },
   logingBlock: {
     backgroundColor: 'rgb(231, 151, 2)',
     borderRadius: '30px',
-    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)'
+    boxShadow: '2px 2px 2px 2px rgb(82, 82, 100)'
   },
   userError : {
     color: 'red',
