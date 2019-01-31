@@ -1,16 +1,19 @@
 import axios from 'axios';
 
 export default {
-  createAppoint: function () {
-    return axios.post('/api/appointments');
+  getApointments: function () {
+    return axios.get('/api/schedules');
   },
-  updateAppoint: function () {
-    return axios.put('/api/appointments');
+  createAppoint: function (appointment) {
+    return axios.post('/api/schedules', appointment);
+  },
+  updateAppoint: function (id, appt) {
+    return axios.put('/api/schedules/' + id, appt);
   },
   deleteAppoint: function (id) {
-    return axios.delete('/api/appointments/' + id);
+    return axios.delete('/api/schedules/' + id);
   },
-  findOne: function (lname) {
-    return axios.get('/api/appointments/findone/' + lname);
+  findOne: function (title) {
+    return axios.get('/api/schedules/findone/' + title);
   }
 };

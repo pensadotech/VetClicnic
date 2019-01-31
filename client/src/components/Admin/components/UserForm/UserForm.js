@@ -6,6 +6,8 @@ import TextField from '@material-ui/core/TextField'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Checkbox from '@material-ui/core/Checkbox'
 import Button from '@material-ui/core/Button'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import PetsIcon from '@material-ui/icons/Pets'
@@ -61,6 +63,7 @@ class UserForm extends Component {
     password: '',
     phone: '',
     email: '',
+    isAdmin: false,
     userError: ''
   }
 
@@ -75,7 +78,8 @@ class UserForm extends Component {
          fullname: this.props.user.fullname,
          password: '',
          phone: this.props.user.phone,
-         email: this.props.user.email
+         email: this.props.user.email,
+         isAdmin: this.props.user.isAdmin
         })  
     }
   }
@@ -85,8 +89,12 @@ class UserForm extends Component {
     this.setState({ [name]: value })  
   }
 
+  handleCheckboxChange = (name) => event => {
+    this.setState({ [name]: event.target.checked });
+  };
+
   handleSave = () => {
-     
+      
     if (this.state.mode === 'edit') {
        // EDIT MODE: Validate
        if (this.state.username === '' || this.state.fullname === '' || this.state.email === ''   )  {    
@@ -109,8 +117,9 @@ class UserForm extends Component {
               password: this.state.password,
               phone: this.state.phone,
               email: this.state.email,
-              userCreated: Date.now(),
-              needsEcnryption: doesItNeedEncryption 
+              isAdmin: this.state.isAdmin,
+              needsEcnryption: doesItNeedEncryption,
+              userCreated: new Date()            
            }
            
            // keep original password if not encryption needed
@@ -119,7 +128,7 @@ class UserForm extends Component {
            }
 
            // send information back 
-           this.props.handleRightButtonSelection(newUserData)
+           this.props.handleLeftButtonSelection(newUserData)
        }
     } else {
         
@@ -137,10 +146,11 @@ class UserForm extends Component {
              password: this.state.password,
              phone: this.state.phone,
              email: this.state.email,
-             userCreated: Date.now(),
-             needsEcnryption: true 
+             isAdmin: this.state.isAdmin,
+             needsEcnryption: true,
+             userCreated: new Date() 
           } 
-                     
+             
           // Check if user already exist 
           APIusers.findOne(this.state.username)
             .then(res => {  
@@ -149,7 +159,7 @@ class UserForm extends Component {
                 this.setState({userError: `The username "${res.data.username}" already exist, please provide a new one`})  
               } else {
                 // send information back 
-                this.props.handleRightButtonSelection(newUserData)
+                this.props.handleLeftButtonSelection(newUserData)
               }           
            })
            .catch(err => console.log(err))          
@@ -271,22 +281,40 @@ class UserForm extends Component {
                       ),
                     }}
                   />
-              </div>                
+              </div> 
+              <div>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={this.state.isAdmin}
+                        onChange={this.handleCheckboxChange('isAdmin')}
+                        color="primary"
+                      />
+                    }
+                    label="Admin Role"
+                  />                   
+              </div>               
           </form>
          
         </CardContent>
-        <CardActions>
-            <Button size="small" variant="contained" color={this.props.rightbuttonColor} 
-                    onClick={() => this.handleSave()} >{this.props.rightButtonLabel}</Button>
-            <Button size="small" variant="contained" color={this.props.leftbuttonColor}  
-                    onClick={() => this.props.handleLeftButtonSelection(this.props.user)}>{this.props.leftButtonLabel}</Button>
+        <CardActions>          
+            <Button size="small" variant="contained" color={this.props.leftbuttonColor} 
+               onClick={() => this.handleSave()}>{this.props.leftButtonLabel}
+            </Button>
+            <Button size="small" variant="contained" color={this.props.rightbuttonColor}  
+               onClick={() => this.props.handleRightButtonSelection(this.props.user)}>
+               {this.props.rightButtonLabel}
+            </Button>
         </CardActions>    
       </Card>
 
       </>
-    )
-  }
-}
+
+    ) // return()
+
+  } // render()
+
+} // class UserForm
 
 UserForm.propTypes = {
   classes: PropTypes.object.isRequired,

@@ -12,7 +12,7 @@ router.route('/:id')
   .put(docController.update)
   .delete(docController.remove);
 
-// Matches with "/api/users/doctors/:id"
+// Matches with "/api/doctors/findome/:id"
 router.route('/findone/:id')
   .get(docController.findOne);
 

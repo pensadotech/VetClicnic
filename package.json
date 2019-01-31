@@ -9,7 +9,8 @@
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start",
     "install": "cd client && npm install",
-    "build": "cd client && npm run build"
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "keywords": [],
   "author": "Blue team",
@@ -21,15 +22,23 @@
   "dependencies": {
     "@material-ui/core": "^3.8.1",
     "@material-ui/icons": "^3.0.1",
+    "@material-ui/lab": "^3.0.0-alpha.28",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
+    "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "if-env": "^1.0.4",
+    "moment": "^2.23.0",
     "mongoose": "^5.4.1",
+    "mongoose-auto-increment-2": "^1.0.3",
+    "mongoose-double": "0.0.1",
+    "mongoose-float": "^1.0.3",
+    "nodemailer": "^5.1.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "password-hash": "^1.2.2"
+    "password-hash": "^1.2.2",
+    "react-autosuggest": "^9.4.3"
   }
 }

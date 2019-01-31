@@ -7,6 +7,7 @@ const UsersSeed = require('./usersSeed')
 const DoctorsSeed = require('./doctorsSeed')
 const PatientsSeed = require('./patientsSeed')
 const MedsSeed = require('./medsSeed')
+const AppointmentSeed = require('./appointmentsSeed')
 
 module.exports = {
     
@@ -29,6 +30,9 @@ module.exports = {
            PatientsSeed.initialize()
            // Initialize Meds
            MedsSeed.initialize()
+           // Initialize Appointments
+           AppointmentSeed.initialize()
+
          }
       })
       .catch(err => res.status(422).json(err))

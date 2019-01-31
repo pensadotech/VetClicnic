@@ -1,20 +1,19 @@
 const router = require('express').Router();
 const medsController = require('../../controllers/medicinesController');
 
-// Matches with "/api/users"
-router.route('/calc')
+// Matches with "/api/meds"
+router.route('/')
   .get(medsController.findAll)
   .post(medsController.createUpdate);
 
-// Matches with "/api/users/findone"
-router.route('/calc/findone')
-  .get(medsController.findOne);
-
-// Matches with "/api/users/:id"
-router.route('/calc/:id')
+// Matches with "/api/meds/:id"
+router.route('/:id')
   .get(medsController.findById)
   .put(medsController.update)
   .delete(medsController.remove);
 
+// Matches with "/api/meds/findone"
+router.route('/findone/:id')
+  .get(medsController.findOne);
+
 module.exports = router
-;
