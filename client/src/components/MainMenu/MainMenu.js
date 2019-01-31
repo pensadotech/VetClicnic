@@ -11,15 +11,32 @@ import ColorizeIcon from '@material-ui/icons/Colorize';
 import EventIcon from '@material-ui/icons/Event';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import GradientIcon from '@material-ui/icons/Gradient';
-import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAlt';
 
 import './MainMenu.css';
 
 const styles = {
   grow: {
     flexGrow: 1
+  },
+  cardImage : {
+    width: '230px',
+    margin: '20px 0px 0px 0px',
+    borderRadius: '30px',
+    border:'5px solid lightgray'
+  },
+  cardImage1 : {
+    width: '230px',
+    // margin: '10px 5px 20px 0px',
+    borderRadius: '30px',
+    border:'5px solid lightgray'
+  },
+  imageHolder: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center' 
   }
-};
+}
 
 class MainMenu extends Component {
   render () {
@@ -31,89 +48,108 @@ class MainMenu extends Component {
           <Grid container spacing={16}>
              
             <Grid item>           
-                <Link to='/patients' style={{ color: 'black', textDecoration: 'none' }} >
-                  <div className='menuBlock patients'>
+                <Link to='/patients' style={{ color: 'white', textDecoration: 'none' }} >
+                  <div className='menuBlock block30 blockShadow patients'>
                     <IconButton color='inherit'>
                       <PetsIcon />
-                      <Typography variant='h6' color='inherit' className={classes.grow}>
-                            Patients
-                      </Typography>
+                        <Typography variant='h5' color='inherit' className={classes.grow}>
+                              Patients
+                        </Typography>                     
                     </IconButton>
+                    <div className={classes.imageHolder}>
+                      <img className={classes.cardImage1}
+                         src="./images/patients.jpg" 
+                        alt="Veterinary" />
+                    </div>
                   </div>
                 </Link>
             </Grid>
             <Grid item>          
-                <Link to='/doctors' style={{ color: 'black', textDecoration: 'none' }}>
-                  <div className='menuBlock doctors'>
+                <Link to='/doctors' style={{ color: 'white', textDecoration: 'none' }}>
+                  <div className='menuBlock block30 blockShadow doctors'>
                     <IconButton color='inherit'>
                       <FaceIcon />
-                      <Typography variant='h6' color='inherit' className={classes.grow}>
+                      <Typography variant='h5' color='inherit' className={classes.grow}>
                             Doctors
                       </Typography>
                     </IconButton>
+                    <div className={classes.imageHolder}>
+                      <img className={classes.cardImage}
+                         src="./images/doctors.jpg" 
+                        alt="Veterinary" />
+                    </div>
                   </div>
                 </Link>             
             </Grid>
             <Grid item>            
-                <Link to='/medicines' style={{ color: 'black', textDecoration: 'none' }}>
-                  <div className='menuBlock medicines'>
+                <Link to='/medicines' style={{ color: 'white', textDecoration: 'none' }}>
+                  <div className='menuBlock block30 blockShadow medicines'>
                     <IconButton color='inherit'>
                       <ColorizeIcon />
-                      <Typography variant='h6' color='inherit' className={classes.grow}>
+                      <Typography variant='h5' color='inherit' className={classes.grow}>
                             Medicines
                       </Typography>
                     </IconButton>
+                    <div className={classes.imageHolder}>
+                      <img className={classes.cardImage}
+                         src="./images/medicines.png" 
+                        alt="Veterinary" />
+                    </div>
                   </div>
                 </Link>            
             </Grid>
             <Grid item>        
-              <Link to='/appointments' style={{ color: 'black', textDecoration: 'none' }}>
-                <div className='menuBlock appointments'>
+              <Link to='/appointments' style={{ color: 'white', textDecoration: 'none' }}>
+                <div className='menuBlock block30 blockShadow appointments'>
                   <IconButton color='inherit'>
                     <EventIcon />
-                    <Typography variant='h6' color='inherit' className={classes.grow}>
+                    <Typography variant='h5' color='inherit' className={classes.grow}>
                               Appointments
                     </Typography>
                   </IconButton>
+                  <div className={classes.imageHolder}>
+                      <img className={classes.cardImage}
+                         src="./images/appointment.jpg" 
+                        alt="Veterinary" />
                   </div>
+                </div>
               </Link>             
             </Grid>
             <Grid item>            
-              <Link to='/prescriptions' style={{ color: 'black', textDecoration: 'none' }}>
-                <div className='menuBlock prescriptions'>
+              <Link to='/prescriptions' style={{ color: 'white', textDecoration: 'none' }}>
+                <div className='menuBlock block30 blockShadow prescriptions'>
                   <IconButton color='inherit'>
                     <AssignmentIcon />
-                    <Typography variant='h6' color='inherit' className={classes.grow}>
+                    <Typography variant='h5' color='inherit' className={classes.grow}>
                            Prescriptions
                     </Typography>
                   </IconButton>
+                  <div className={classes.imageHolder}>
+                      <img className={classes.cardImage}
+                         src="./images/prescription.jpg" 
+                        alt="Veterinary" />
+                  </div>
                 </div>
               </Link>      
             </Grid>
             <Grid item>           
-              <Link to='/Calc' style={{ color: 'black', textDecoration: 'none' }}>
-                <div className='menuBlock calc'>
+              <Link to='/Calc' style={{ color: 'white', textDecoration: 'none' }}>
+                <div className='menuBlock block30 blockShadow dosage'>
                   <IconButton color='inherit'>
                     <GradientIcon />
-                    <Typography variant='h6' color='inherit' className={classes.grow}>
+                    <Typography variant='h5' color='inherit' className={classes.grow}>
                            Dosage Calculator
                     </Typography>
                   </IconButton>
+                  <div className={classes.imageHolder}>
+                      <img className={classes.cardImage}
+                         src="./images/dosages.jpg" 
+                        alt="Veterinary" />
                   </div>
+                </div>
               </Link>            
             </Grid>
-            <Grid item>           
-              <Link to='/aboutus' style={{ color: 'black', textDecoration: 'none' }}>
-                <div className='menuBlock aboutus'>
-                  <IconButton color='inherit'>
-                    <SentimentSatisfiedAltIcon />
-                    <Typography variant='h6' color='inherit' className={classes.grow}>
-                           About Us
-                    </Typography>
-                  </IconButton>
-                  </div>
-              </Link>            
-            </Grid>
+
           </Grid>
 
       </>

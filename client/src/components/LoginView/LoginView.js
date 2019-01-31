@@ -16,6 +16,12 @@ import PetsIcon from '@material-ui/icons/Pets'
 import './LoginView.css'
 
 const styles = theme => ({
+  margin: {
+    margin: theme.spacing.unit,
+  },
+  extendedIcon: {
+    marginRight: theme.spacing.unit,
+  },
   mainContainer: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -39,23 +45,25 @@ const styles = theme => ({
   },
   card: {
     minWidth: 200,
-    maxHeight: 620,
-    [theme.breakpoints.down('sm')]: {
-      margin: '30px 40px 0px 40px',
-    },
-    [theme.breakpoints.up('md')]: {
-      margin: '90px 40px 0px 40px',
-    },
-    [theme.breakpoints.up('lg')]: {
-      margin: '120px 40px 0px 40px',
-    },  
+    maxHeight: 600,
     opacity: '0.8',
     display: 'flex', 
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: '40px'
+    borderRadius: '50px',
+    [theme.breakpoints.down('sm')]: {
+      margin: '30px 40px 0px 40px',
+    },
+    [theme.breakpoints.up('md')]: {
+      margin: '120px 40px 0px 40px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      margin: '120px 40px 0px 40px',
+    }  
   },
   loginTitle:  {
+    color: 'rgb(11, 71, 201)',
+    margin: '0px 0px 10px 30px',
     [theme.breakpoints.down('sm')]: {
       fontSize: '30px',
     },
@@ -64,11 +72,11 @@ const styles = theme => ({
     },
     [theme.breakpoints.up('lg')]: {
       fontSize: '50px',
-    },
-    color: 'blue',
-    margin: '0px 0px 10px 30px',
+    }
   },
   loginSubtitle : {
+    color: 'gray',
+    margin: '0px 0px 30px 30px',
     [theme.breakpoints.down('sm')]: {
       fontSize: '15px',
     },
@@ -77,9 +85,15 @@ const styles = theme => ({
     },
     [theme.breakpoints.up('lg')]: {
       fontSize: '30px',
-    },
-    color: 'gray',
-    margin: '0px 0px 30px 30px'
+    }
+  },
+  logingImage: {
+    width: '220px',
+    margin: '0px 35px 20px 25px',
+    border: '10px solid rgb(11, 71, 201)',
+    borderRadius: '30px',
+    boxShadow: '2px 2px 3px 2px gray',
+    transform: 'rotate( 3deg)'
   },
   userError : {
     color: 'red',
@@ -108,7 +122,7 @@ class LoginView extends Component {
 
           <Grid container spacing={0}>       
               <Grid item>
-                <img className="logingImage imgRnd10 imageShadow imageRotate" 
+                <img className={classes.logingImage}
                      src="./images/sorin3.JPG" 
                      alt="Veterinary" />
               </Grid>
@@ -152,7 +166,11 @@ class LoginView extends Component {
                       }}
                     />
                     <CardActions>
-                    <Button variant="contained" color="primary" className={classes.button} onClick={this.props.handleLogingAction}>
+                    <Button variant="contained" 
+                           color="primary" 
+                           size="large"
+                           className={classes.margin}                         
+                           onClick={this.props.handleLogingAction}>
                       Login
                     </Button>
                     </CardActions> 
