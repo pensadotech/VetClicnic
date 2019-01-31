@@ -52,7 +52,7 @@ class MainMenu extends Component {
                   <div className='menuBlock block30 blockShadow patients'>
                     <IconButton color='inherit'>
                       <PetsIcon />
-                        <Typography variant='h5' color='inherit' className={classes.grow}>
+                        <Typography variant='h5' color='inherit' >
                               Patients
                         </Typography>                     
                     </IconButton>
@@ -69,7 +69,7 @@ class MainMenu extends Component {
                   <div className='menuBlock block30 blockShadow doctors'>
                     <IconButton color='inherit'>
                       <FaceIcon />
-                      <Typography variant='h5' color='inherit' className={classes.grow}>
+                      <Typography variant='h5' color='inherit' >
                             Doctors
                       </Typography>
                     </IconButton>
@@ -86,7 +86,7 @@ class MainMenu extends Component {
                   <div className='menuBlock block30 blockShadow medicines'>
                     <IconButton color='inherit'>
                       <ColorizeIcon />
-                      <Typography variant='h5' color='inherit' className={classes.grow}>
+                      <Typography variant='h5' color='inherit' >
                             Medicines
                       </Typography>
                     </IconButton>
@@ -103,7 +103,7 @@ class MainMenu extends Component {
                 <div className='menuBlock block30 blockShadow appointments'>
                   <IconButton color='inherit'>
                     <EventIcon />
-                    <Typography variant='h5' color='inherit' className={classes.grow}>
+                    <Typography variant='h5' color='inherit' >
                               Appointments
                     </Typography>
                   </IconButton>
@@ -120,7 +120,7 @@ class MainMenu extends Component {
                 <div className='menuBlock block30 blockShadow prescriptions'>
                   <IconButton color='inherit'>
                     <AssignmentIcon />
-                    <Typography variant='h5' color='inherit' className={classes.grow}>
+                    <Typography variant='h5' color='inherit' >
                            Prescriptions
                     </Typography>
                   </IconButton>
@@ -137,7 +137,7 @@ class MainMenu extends Component {
                 <div className='menuBlock block30 blockShadow dosage'>
                   <IconButton color='inherit'>
                     <GradientIcon />
-                    <Typography variant='h5' color='inherit' className={classes.grow}>
+                    <Typography variant='h5' color='inherit' >
                            Dosage Calculator
                     </Typography>
                   </IconButton>

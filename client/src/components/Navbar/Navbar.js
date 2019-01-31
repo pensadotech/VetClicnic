@@ -180,7 +180,7 @@ class Navbar extends Component {
     return(
       <>
           <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar position="static"  >
               <Toolbar>
                 <IconButton onClick={() => this.toggleDrawer(true)} 
                             className={classes.menuButton} 
