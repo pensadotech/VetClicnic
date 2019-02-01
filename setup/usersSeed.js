@@ -14,8 +14,8 @@ module.exports = {
         username: 'admin',
         password: hashedPassword,
         fullname: 'admin account',
-        phone: '949-123-1234',
-        email: 'admin@admin.com',
+        phone: '222-123-1234',
+        email: 'admin@blueanimalclinic.com',
         isAdmin : true,
         userCreated: Date.now()
       },

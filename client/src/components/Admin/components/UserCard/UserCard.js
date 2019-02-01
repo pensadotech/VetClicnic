@@ -8,25 +8,45 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Chip from '@material-ui/core/Chip';
+import Avatar from '@material-ui/core/Avatar';
 
-const styles = {
+import './UserCard.css';
+
+const styles = theme => ({
   card: {
-    minWidth: 275,
-    maxHeight: 260,
-    margin: '10px 20px 0px 20px',  
+    minWidth: 290,
+    maxHeight: 300,
+    margin: '10px 20px 0px 20px',
+    borderRadius: '30px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)'  
   },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
+  chip: {
+    margin: theme.spacing.unit,
+  },
+  btnActionLeft : {
+    margin: '0px 0px 10px 20px',
+  },
+  btnAction : {
+    margin: '0px 0px 10px 10px',
   },
   title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'blue',
+    margin: '0px 0px 2px 10px',
+  },
+  name: {
+    fontSize: 18,
+    margin: '0px 0px 5px 10px',   
+    fontWeight: 'bold'
+  },
+  info: {
     fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-}
+    margin: '0px 0px 0px 20px',
+  }
+
+})
 
 class UserCard extends Component { 
   
@@ -37,37 +57,36 @@ class UserCard extends Component {
     return (
       <Card className={classes.card}>
         <CardContent>
-          <Typography className={classes.title} color="textSecondary" gutterBottom>
-           System user
-          </Typography>
-          <Typography variant="h5" component="h2">
+          <Chip
+            avatar={<Avatar>{this.props.user.isAdmin ? "AU" : "SU"} </Avatar>}
+            label={this.props.user.isAdmin ? 'Admin user' : 'System user'} 
+            className={classes.chip}
+            color={this.props.user.isAdmin ? "secondary" : "primary"} 
+          />
+          <Typography className={classes.title}>
             {this.props.user.username}
           </Typography>
-          <Typography className={classes.pos} color="textSecondary">
+          <Typography className={classes.name} color="textPrimary">
             {this.props.user.fullname}
           </Typography>
-          <Typography component="p">
+          <Typography component="p" className={classes.info}>
             Phone:  {this.props.user.phone}
           </Typography>
-          <Typography component="p">
+          <Typography component="p" className={classes.info}>
             Email:  {this.props.user.email}
           </Typography>
-          <FormControlLabel
-              control={
-                <Checkbox
-                  disabled 
-                  checked={this.props.user.isAdmin}
-                  color="primary"
-                />
-              }
-              label="Admin Role"
-          />            
-
+         
         </CardContent>
         <CardActions>     
-          <Button size="small" variant="contained" color={this.props.leftbuttonColor} disabled={this.props.isDisabled}  
+          <Button size="small" variant="contained" 
+                  color={this.props.leftbuttonColor} 
+                  disabled={this.props.isDisabled}
+                  className={classes.btnActionLeft}  
                   onClick={() => this.props.handleLeftButtonSelection(this.props.user)}>{this.props.leftButtonLabel}</Button>
-          <Button size="small" variant="contained" color={this.props.rightbuttonColor} disabled={this.props.isDisabled}
+          <Button size="small" variant="contained" 
+                  color={this.props.rightbuttonColor} 
+                  disabled={this.props.isDisabled}
+                  className={classes.btnAction} 
                   onClick={() => this.props.handleRightButtonSelection(this.props.user)} >{this.props.rightButtonLabel}</Button>
           
         </CardActions>

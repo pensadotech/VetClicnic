@@ -14,10 +14,7 @@ import GradientIcon from '@material-ui/icons/Gradient';
 
 import './MainMenu.css';
 
-const styles = {
-  grow: {
-    flexGrow: 1
-  },
+const styles = theme => ({
   cardImage : {
     width: '230px',
     margin: '20px 0px 0px 0px',
@@ -28,7 +25,7 @@ const styles = {
     width: '230px',
     // margin: '10px 5px 20px 0px',
     borderRadius: '30px',
-    border:'5px solid lightgray'
+    border:'5px solid lightgray',
   },
   imageHolder: {
     display: 'flex',
@@ -36,7 +33,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center' 
   }
-}
+})
 
 class MainMenu extends Component {
   render () {
@@ -45,7 +42,7 @@ class MainMenu extends Component {
     return (
       <>
 
-          <Grid container spacing={16}>
+          <Grid container spacing={8}>
              
             <Grid item>           
                 <Link to='/patients' style={{ color: 'white', textDecoration: 'none' }} >

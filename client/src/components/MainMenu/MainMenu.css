@@ -3,10 +3,6 @@
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
   border-radius: 30px;
-  /* Add drop shadow */
-  -webkit-box-shadow: 5px 5px 5px 5px rgb(82, 82, 100);
-  -moz-box-shadow: 5px 5px 5px 5px rgb(82, 82, 100);
-  box-shadow: 5px 5px 5px 5px rgb(82, 82, 100);
 }
 
 .blockShadow {
@@ -17,19 +13,10 @@
 }
 
 .menuBlock {
-  /* width: 550;  */
-  /* height: 450px; */
+  /* min-width: 300px; */
+  /* min-height: 350px; */
   margin: 100px 10px 10px 20px;
 }
-
-/* media queries .............................. */
-/* @media screen and (max-width: 576px) {
-  .logingImage {
-    width: 20px;
-    margin: 0px 10px 10px 50px;
-    border: 5px solid lightgray;
-  }
-}  */
 
 .patients {
   background-color: rgb(4, 138, 4);

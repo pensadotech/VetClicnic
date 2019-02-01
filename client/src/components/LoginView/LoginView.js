@@ -33,6 +33,7 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
+    fontWeight: 'bold',
     width: 200,
   },
   dense: {
@@ -102,6 +103,8 @@ const styles = theme => ({
   },
   userError : {
     color: 'red',
+    fontSize: 20, 
+    fontWeight: 'bold'
   }
 })
 
@@ -127,8 +130,7 @@ class LoginView extends Component {
            
           <div className={classes.logingBlock}>
     
-            <Grid container spacing={0}>   
-                  
+            <Grid container spacing={0}>               
                 <Grid item>
                   <img className={classes.logingImage}
                       src="./images/sorin3.JPG" 
@@ -147,7 +149,7 @@ class LoginView extends Component {
                         margin="normal"
                         InputProps={{
                           startAdornment: (
-                            <InputAdornment position="start">
+                            <InputAdornment position="start" style={{ color: 'black'}}>
                               <AccountCircle />
                             </InputAdornment>
                           ),
@@ -167,7 +169,7 @@ class LoginView extends Component {
                         margin="normal"
                         InputProps={{
                           startAdornment: (
-                            <InputAdornment position="start">
+                            <InputAdornment position="start" style={{ color: 'black'}}>
                               <PetsIcon />
                             </InputAdornment>
                           ),
@@ -188,7 +190,6 @@ class LoginView extends Component {
               </Grid>
 
             </div>
-
           </CardContent>
       </Card> 
       </Grid>

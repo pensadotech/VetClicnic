@@ -239,8 +239,10 @@ class Admin extends Component {
               <h1 className={classes.pageHead}>System Administration</h1>
             </Grid>
             <Grid item>
-              <Fab color="secondary" aria-label="Add" className={classes.fab}>
-                <AddIcon onClick={() => this.handleUserAddSelection()} />
+              <Fab aria-label="Add" color="secondary" 
+                   onClick={() => this.handleUserAddSelection()} 
+                   className={classes.fab}>
+                <AddIcon />
               </Fab>
             </Grid>
           </Grid>
