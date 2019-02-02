@@ -6,8 +6,8 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import Chip from '@material-ui/core/Chip';
-import Avatar from '@material-ui/core/Avatar';
+import Chip from '@material-ui/core/Chip'
+import Avatar from '@material-ui/core/Avatar'
 
 const styles = theme => ({
   card: {
@@ -63,13 +63,16 @@ class UserCard extends Component {
           <Typography className={classes.title}>
             {this.props.user.username}
           </Typography>
-          <Typography className={classes.name} color="textPrimary">
+          <Typography className={classes.name} 
+                      color="textPrimary">
             {this.props.user.fullname}
           </Typography>
-          <Typography component="p" className={classes.info}>
+          <Typography component="p" 
+                className={classes.info}>
             Phone:  {this.props.user.phone}
           </Typography>
-          <Typography component="p" className={classes.info}>
+          <Typography component="p" 
+                className={classes.info}>
             Email:  {this.props.user.email}
           </Typography>
          

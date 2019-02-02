@@ -11,8 +11,6 @@ import DoctorCard from './components/DoctorCard'
 import DoctorForm from './components/DoctorForm'
 // API
 import APIdoctors from '../../utils/APIdoctor'
-// Local style
-import './Doctor.css'
 
 const styles = theme => ({
   avatar: {
@@ -21,6 +19,30 @@ const styles = theme => ({
   pageHead: {
     color: 'white',
     margin: '7px 0px 0px 20px'
+  },
+  pageHeadDelete: {
+    color: 'red',
+    fontWeight: 'bold',
+    margin: '7px 0px 0px 20px',
+    backgroundColor: 'white',
+    maxWidth: 220,
+    borderRadius: '10px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+    padding: '0px 0px 0px 10px' 
+  },
+  pageHeadUpdate: {
+    color: 'blue',
+    fontWeight: 'bold',
+    margin: '7px 0px 0px 20px',
+    backgroundColor: 'white',
+    maxWidth: 300,
+    borderRadius: '10px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+    padding: '0px 0px 0px 10px' 
+  },
+  formContainer: {
+    maxWidth: 400,
+    maxHeight: 600,
   },
   fab: {
     margin: theme.spacing.unit
@@ -156,9 +178,11 @@ class Doctor extends Component {
       return(
         <>
           <div>
-            <h1 className={classes.pageHead}>
-              Do you want to remove this Doctor?
-            </h1>
+          <div className={classes.pageHeadDelete}>
+              <h2>
+                Delete this doctor?
+              </h2>
+            </div>
             <DoctorCard 
                    doctor={this.state.targetDoctor}
                    leftbuttonColor='secondary'
@@ -180,14 +204,15 @@ class Doctor extends Component {
             <Grid container spacing={0}>
             <Grid item>
               <Avatar className={classes.avatar}>
-              <FaceIcon /> 
+                <FaceIcon /> 
               </Avatar>
             </Grid>
             <Grid item>
               <h1 className={classes.pageHead}>Doctors</h1>
             </Grid>
             <Grid item>
-              <Fab color="secondary" aria-label="Add" 
+              <Fab aria-label="Add" 
+                   color="secondary"  
                    className={classes.fab}
                    onClick={() => this.handleDoctorAddSelection()}>
                 <AddIcon />
@@ -207,7 +232,7 @@ class Doctor extends Component {
                    leftButtonLabel='Update'
                    handleLeftButtonSelection={this.handleDoctorUpdateSelection}
                    rightbuttonColor='secondary'
-                   rightButtonLabel='Remove'
+                   rightButtonLabel='Delete'
                   isDisabled={false}
                   handleRightButtonSelection={this.handleDoctorDeleteSelection}
                  />

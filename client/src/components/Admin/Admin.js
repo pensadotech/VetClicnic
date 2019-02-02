@@ -12,17 +12,14 @@ import UserForm from './components/UserForm'
 // API
 import APIusers from '../../utils/APIuser'
 import APIemails from '../../utils/APIemails'
-// Local style
-import './Admin.css'
 
 const styles = theme => ({
   avatar: {
-    margin: '10px 0px 0px 50px',
-    color: 'white',
+    margin: '10px 0px 0px 50px'
   },
   pageHead: {
-    margin: '7px 0px 0px 20px',
     color: 'white',
+    margin: '7px 0px 0px 20px',
   },
   pageHeadDelete: {
     color: 'red',
@@ -258,6 +255,7 @@ class Admin extends Component {
         </>
       )
     } else {
+
       return (
         <>
           <Grid container spacing={0}>
@@ -270,7 +268,8 @@ class Admin extends Component {
               <h1 className={classes.pageHead}>System Administration</h1>
             </Grid>
             <Grid item>
-              <Fab aria-label="Add" color="secondary" 
+              <Fab aria-label="Add" 
+                   color="secondary" 
                    onClick={() => this.handleUserAddSelection()} 
                    className={classes.fab}>
                 <AddIcon />
