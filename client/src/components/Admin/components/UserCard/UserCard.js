@@ -6,16 +6,13 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import Checkbox from '@material-ui/core/Checkbox'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Chip from '@material-ui/core/Chip';
 import Avatar from '@material-ui/core/Avatar';
-
-import './UserCard.css';
 
 const styles = theme => ({
   card: {
     minWidth: 290,
+    maxWidth: 290,
     maxHeight: 300,
     margin: '10px 20px 0px 20px',
     borderRadius: '30px',

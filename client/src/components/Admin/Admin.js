@@ -17,11 +17,36 @@ import './Admin.css'
 
 const styles = theme => ({
   avatar: {
-    margin: ' 10px 0px 0px 50px'
+    margin: '10px 0px 0px 50px',
+    color: 'white',
   },
   pageHead: {
+    margin: '7px 0px 0px 20px',
     color: 'white',
-    margin: '7px 0px 0px 20px'
+  },
+  pageHeadDelete: {
+    color: 'red',
+    fontWeight: 'bold',
+    margin: '7px 0px 0px 20px',
+    backgroundColor: 'white',
+    maxWidth: 220,
+    borderRadius: '10px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+    padding: '0px 0px 0px 10px' 
+  },
+  pageHeadUpdate: {
+    color: 'blue',
+    fontWeight: 'bold',
+    margin: '7px 0px 0px 20px',
+    backgroundColor: 'white',
+    maxWidth: 300,
+    borderRadius: '10px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+    padding: '0px 0px 0px 10px' 
+  },
+  formContainer: {
+    maxWidth: 400,
+    maxHeight: 600,
   },
   fab: {
     margin: theme.spacing.unit
@@ -172,9 +197,11 @@ class Admin extends Component {
     if (this.state.screenMode === 'add') {
       return (
         <>
-          <h1 className={classes.pageHead}>
-            Create new user
-          </h1>
+          <div className={classes.pageHeadUpdate}>
+            <h2 >
+              Add new system user
+            </h2>
+          </div>
           <UserForm 
             mode={this.state.screenMode}
             user=''
@@ -191,9 +218,11 @@ class Admin extends Component {
     } else if (this.state.screenMode === 'edit') {
       return (
         <>
-          <h1 className={classes.pageHead}>
-            Update user information
-          </h1>
+          <div className={classes.pageHeadUpdate}>
+              <h2>
+                Update user information
+              </h2>
+          </div>
           <UserForm 
             mode={this.state.screenMode}
             user={this.state.targetUser}
@@ -204,16 +233,18 @@ class Admin extends Component {
             rightButtonLabel='Cancel'
             handleRightButtonSelection={this.handleCancel}
             isUserNameDisabled={true}
-          />
+          />         
         </>
       )
     } else if (this.state.screenMode === 'delete') {
       return (
         <>
           <div>
-            <h1 className={classes.pageHead}>
-              Do you want to delete this user?
-              </h1>
+            <div className={classes.pageHeadDelete}>
+              <h2>
+                Delete this user?
+              </h2>
+            </div>
             <UserCard user={this.state.targetUser}
               leftbuttonColor='secondary'
               leftButtonLabel='Delete'
@@ -259,7 +290,7 @@ class Admin extends Component {
                   leftButtonLabel='Update' 
                   handleLeftButtonSelection={this.handleUserUpdateSelection}   
                   rightbuttonColor='secondary'
-                  rightButtonLabel='Remove'
+                  rightButtonLabel='Delete'
                   isDisabled={user.username === 'admin' ? true : false}
                   handleRightButtonSelection={this.handleUserDeleteSelection}
                 />
