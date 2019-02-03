@@ -13,37 +13,49 @@ import PhoneIcon from '@material-ui/icons/Phone'
 // API
 import APIdoctor from '../../../../utils/APIdoctor'
 
-// Local style
-import './DoctorForm.css'
-
 const styles = theme => ({
-  container: {
+  card: {
+    minWidth: 175,
+    maxWidth: 850,
+    maxHeight: 650,
+    margin: '5px 20px 0px 20px', 
+    borderRadius: '30px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',   
+  },
+  cardContent: {
+    pading: '0px 0px 0px 0px'
+  },
+  formContainer: {
     display: 'flex',
     flexWrap: 'wrap',
+  },
+  girdItem : {
+    border: 'solid 2px green',
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 250,
-  },
-  margin: {
-    margin: theme.spacing.unit,
-  },
-  card: {
-    minWidth: 175,
-    maxHeight: 620,
-    margin: '10px 20px 0px 20px',
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
+    [theme.breakpoints.down('sm')]: {
+      width: 240,
+    },
+    [theme.breakpoints.up('md')]: {
+      width: 280,
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: 300,
+    }  
   },
   title: {
     fontSize: 14,
   },
-  pos: {
-    marginBottom: 12,
+  btnActionLeft : {
+    margin: '0px 0px 10px 20px',
+  },
+  btnAction : {
+    margin: '0px 0px 10px 10px',
+  },
+  inputError : {
+    color: 'red'
   }
 })
 
@@ -142,10 +154,13 @@ class DoctorForm extends Component {
       <>
 
         <Card className={classes.card}>
-          <CardContent>
-            <p className='doctorError'>{this.state.doctorError}</p>
-            <form className={classes.container} noValidate autoComplete="off">
-              <div className='formItem'>
+          <CardContent className={classes.cardContent}>
+            <p className='doctorError'>{this.state.inputError}</p>
+            <form className={classes.formContainer} 
+                  noValidate 
+                  autoComplete="off">
+                 
+              <div >
                 <TextField
                   required
                   id="name"
@@ -168,7 +183,7 @@ class DoctorForm extends Component {
                 />
               </div>
 
-              <div className='formItem'>
+              <div>
                 <TextField
                   id="user-phone"
                   label="Office Phone :"
@@ -188,7 +203,7 @@ class DoctorForm extends Component {
                   }}
                 />
               </div>
-              <div className='formItem'>
+              <div>
                 <TextField
                   id="user-mobilePhone"
                   label="Mobile Phone :"

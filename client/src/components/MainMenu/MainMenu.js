@@ -1,38 +1,44 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import PetsIcon from '@material-ui/icons/Pets';
-import FaceIcon from '@material-ui/icons/Face';
-import ColorizeIcon from '@material-ui/icons/Colorize';
-import EventIcon from '@material-ui/icons/Event';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import GradientIcon from '@material-ui/icons/Gradient';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
+import IconButton from '@material-ui/core/IconButton'
+import PetsIcon from '@material-ui/icons/Pets'
+import FaceIcon from '@material-ui/icons/Face'
+import ColorizeIcon from '@material-ui/icons/Colorize'
+import EventIcon from '@material-ui/icons/Event'
+import AssignmentIcon from '@material-ui/icons/Assignment'
+import GradientIcon from '@material-ui/icons/Gradient'
 
-import './MainMenu.css';
+// Local styles
+import './MainMenu.css'
 
 const styles = theme => ({
-  cardImage : {
-    width: '230px',
-    margin: '20px 0px 0px 0px',
-    borderRadius: '30px',
-    border:'5px solid lightgray'
-  },
-  cardImage1 : {
-    width: '230px',
-    // margin: '10px 5px 20px 0px',
-    borderRadius: '30px',
-    border:'5px solid lightgray',
+  root: {
+    flexGrow: 1,
+    overflow: 'hidden',
+    padding: `0 ${theme.spacing.unit * 3}px`,
   },
   imageHolder: {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
     alignItems: 'center' 
-  }
+  },
+  cardImage : {
+    width: '230px',
+    margin: '20px 0px 20px 0px',
+    borderRadius: '30px',
+    border:'5px solid lightgray',
+  },
+  cardImage1 : {
+    width: '230px',
+    margin: '10px 5px 20px 0px',
+    borderRadius: '30px',
+    border:'5px solid lightgray',
+  } 
 })
 
 class MainMenu extends Component {
@@ -41,10 +47,10 @@ class MainMenu extends Component {
 
     return (
       <>
-
+         <div className={classes.root}>      
           <Grid container spacing={8}>
              
-            <Grid item>           
+            <Grid item >           
                 <Link to='/patients' style={{ color: 'white', textDecoration: 'none' }} >
                   <div className='menuBlock block30 blockShadow patients'>
                     <IconButton color='inherit'>
@@ -61,7 +67,7 @@ class MainMenu extends Component {
                   </div>
                 </Link>
             </Grid>
-            <Grid item>          
+            <Grid item >          
                 <Link to='/doctors' style={{ color: 'white', textDecoration: 'none' }}>
                   <div className='menuBlock block30 blockShadow doctors'>
                     <IconButton color='inherit'>
@@ -78,7 +84,7 @@ class MainMenu extends Component {
                   </div>
                 </Link>             
             </Grid>
-            <Grid item>            
+            <Grid item >            
                 <Link to='/medicines' style={{ color: 'white', textDecoration: 'none' }}>
                   <div className='menuBlock block30 blockShadow medicines'>
                     <IconButton color='inherit'>
@@ -95,7 +101,7 @@ class MainMenu extends Component {
                   </div>
                 </Link>            
             </Grid>
-            <Grid item>        
+            <Grid item >        
               <Link to='/appointments' style={{ color: 'white', textDecoration: 'none' }}>
                 <div className='menuBlock block30 blockShadow appointments'>
                   <IconButton color='inherit'>
@@ -112,7 +118,7 @@ class MainMenu extends Component {
                 </div>
               </Link>             
             </Grid>
-            <Grid item>            
+            <Grid item >            
               <Link to='/prescriptions' style={{ color: 'white', textDecoration: 'none' }}>
                 <div className='menuBlock block30 blockShadow prescriptions'>
                   <IconButton color='inherit'>
@@ -129,7 +135,7 @@ class MainMenu extends Component {
                 </div>
               </Link>      
             </Grid>
-            <Grid item>           
+            <Grid item >           
               <Link to='/Calc' style={{ color: 'white', textDecoration: 'none' }}>
                 <div className='menuBlock block30 blockShadow dosage'>
                   <IconButton color='inherit'>
@@ -148,9 +154,9 @@ class MainMenu extends Component {
             </Grid>
 
           </Grid>
-
+          </div>
       </>
-    );
+    )
   }
 }
 
@@ -158,4 +164,4 @@ MainMenu.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(MainMenu);
+export default withStyles(styles)(MainMenu)

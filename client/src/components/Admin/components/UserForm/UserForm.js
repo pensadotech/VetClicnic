@@ -59,7 +59,7 @@ const styles = theme => ({
   btnAction : {
     margin: '0px 0px 10px 10px',
   },
-  userError : {
+  inputError : {
     color: 'red'
   }
 })
@@ -188,7 +188,7 @@ class UserForm extends Component {
       <>
       <Card className={classes.card}>
          <CardContent className={classes.cardContent}>
-          <p className='userError'>{this.state.userError}</p>
+          <p className='userError'>{this.state.inputError}</p>
           <form className={classes.formContainer} 
                 noValidate 
                 autoComplete="off">
@@ -199,7 +199,7 @@ class UserForm extends Component {
                    container spacing={32}>
 
               <Grid item >
-                <div className={classes.formItem}>
+                <div >
                   <TextField
                       required
                       id="user-name"

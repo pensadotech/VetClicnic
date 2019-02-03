@@ -117,7 +117,7 @@ class Navbar extends Component {
                     <ColorizeIcon />
                   </div>                  
                   </ListItemIcon>
-                <ListItemText primary='Medications' />
+                <ListItemText primary='Medicines' />
               </ListItem>
            </Link>
            <Link to='/appointments' style={{ color: 'black', textDecoration: 'none' }}>
