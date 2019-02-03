@@ -76,48 +76,58 @@ class PatientCard extends Component {
           style={{ margin: 'auto', marginLeft: '5%' }}>
 
          <Grid item >
-            <Typography className={classes.title}>
+            <Typography 
+               className={classes.title}>
                 {this.props.patient.patientname}
             </Typography>
-            <Typography className={classes.name} 
-                        color="textPrimary">    
-              {this.props.patient.ownername} 
+            <Typography 
+                className={classes.info} 
+                color="textPrimary">    
+            <b>Owner:</b> {this.props.patient.ownername} 
             </Typography>
   
-            <Typography component="p"
-                className={classes.info}>    
-              Phone: {this.props.patient.phone} 
+            <Typography 
+                className={classes.info} 
+                color="textPrimary">    
+              <b>Phone:</b> {this.props.patient.phone} 
             </Typography>
-            <Typography component="p"
-                className={classes.info}>    
-              Email:   {this.props.patient.email} 
+            <Typography 
+                className={classes.info} 
+                color="textPrimary">    
+              <b>Email:</b> {this.props.patient.email} 
             </Typography>
          </Grid>
 
          <Grid item >
-            <Typography component="p"
-                className={classes.info}>
-              Species: {this.props.patient.species}
+            <Typography 
+               className={classes.info} 
+               color="textPrimary">
+              <b>Species:</b> {this.props.patient.species}
             </Typography>
-            <Typography component="p"
-              className={classes.info}>
-              Breed: {this.props.patient.breed}
+            <Typography 
+                className={classes.info} 
+                color="textPrimary">
+              <b>Breed:</b> {this.props.patient.breed}
             </Typography>
-            <Typography component="p"
-              className={classes.info}>
-              Age: {this.props.patient.age}
+            <Typography 
+               className={classes.info} 
+               color="textPrimary">
+              <b>Age (years):</b> {this.props.patient.age}
             </Typography>
-            <Typography component="p"
-                className={classes.info}>
-              Weight: {this.props.patient.weight}
+            <Typography 
+               className={classes.info} 
+               color="textPrimary">
+              <b>Weight (pounds):</b> {this.props.patient.weight}
             </Typography>
-            <Typography component="p"
-              className={classes.info}>
-              Color: {this.props.patient.color}
+            <Typography  
+                className={classes.info} 
+                color="textPrimary">
+              <b>Color:</b> {this.props.patient.color}
             </Typography>
-            <Typography component="p"
-                    className={classes.info}>
-              Chart : {this.props.patient.chartNumber} 
+            <Typography  
+                className={classes.info} 
+                color="textPrimary">
+              <b>Chart:</b> {this.props.patient.chartNumber} 
             </Typography> 
 
           </Grid>
