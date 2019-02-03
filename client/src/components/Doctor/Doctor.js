@@ -13,6 +13,11 @@ import DoctorForm from './components/DoctorForm'
 import APIdoctors from '../../utils/APIdoctor'
 
 const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    overflow: 'hidden',
+    padding: `0 ${theme.spacing.unit * 3}px`,
+  },
   avatar: {
     margin: ' 10px 0px 0px 50px'
   },
@@ -35,7 +40,7 @@ const styles = theme => ({
     fontWeight: 'bold',
     margin: '7px 0px 0px 20px',
     backgroundColor: 'white',
-    maxWidth: 300,
+    maxWidth: 350,
     borderRadius: '10px',
     boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
     padding: '0px 0px 0px 10px' 
@@ -135,9 +140,11 @@ class Doctor extends Component {
         
       return(
         <>
-          <h1 className={classes.pageHead}>
-            Add new a Doctor
-          </h1>
+         <div className={classes.pageHeadUpdate}>
+            <h2 >
+            Add new a doctor
+            </h2>
+          </div>
           <DoctorForm 
             mode={this.state.screenMode}
             doctor=''
@@ -156,9 +163,11 @@ class Doctor extends Component {
 
       return(
         <>
-          <h1 className={classes.pageHead}>
-            Update doctor information
-          </h1>
+          <div className={classes.pageHeadUpdate}>
+              <h2>
+              Update doctor information
+              </h2>
+          </div>
           <DoctorForm 
             mode={this.state.screenMode}
             doctor={this.state.targetDoctor}
@@ -201,6 +210,7 @@ class Doctor extends Component {
 
       return(
         <>
+
             <Grid container spacing={0}>
             <Grid item>
               <Avatar className={classes.avatar}>
@@ -219,10 +229,9 @@ class Doctor extends Component {
               </Fab>
             </Grid>
           </Grid>
-        
-          <Grid alignContent='center'
-            style={{ margin: 'auto',marginLeft: '5%' }}
-            container spacing={32}>
+          
+          <div className={classes.root}> 
+          <Grid container spacing={8}>
             {
               this.state.doctors.map((doctor, index) => (
                  <DoctorCard 
@@ -239,6 +248,7 @@ class Doctor extends Component {
               ))
             }
           </Grid>
+          </div>
             
         </>
       ) // return()

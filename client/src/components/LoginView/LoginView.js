@@ -116,7 +116,7 @@ class LoginView extends Component {
 
     return (
       <>
-      <Grid  className={classes.mainContainer} spacing={0}>
+      <Grid className={classes.mainContainer} >
       <Grid item>
       <Card className={classes.card}>       
         <CardContent> 

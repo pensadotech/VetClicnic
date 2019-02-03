@@ -14,9 +14,17 @@ const styles = theme => ({
     minWidth: 290,
     maxWidth: 290,
     maxHeight: 300,
-    margin: '10px 20px 0px 20px',
     borderRadius: '30px',
-    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)'  
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)' ,
+    [theme.breakpoints.down('sm')]: {
+      margin: '15px 10px 0px 20px',
+     },
+     [theme.breakpoints.up('md')]: {
+      margin: '30px 10px 0px 20px',
+     },
+     [theme.breakpoints.up('lg')]: {
+        margin: '50px 10px 0px 20px',
+     } 
   },
   chip: {
     margin: theme.spacing.unit,

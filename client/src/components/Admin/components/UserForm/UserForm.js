@@ -15,6 +15,8 @@ import MailIcon from '@material-ui/icons/MailOutline'
 import PhoneIcon from '@material-ui/icons/Phone'
 import PersonIcon from '@material-ui/icons/PermIdentity'
 import Grid from '@material-ui/core/Grid'
+import Chip from '@material-ui/core/Chip'
+import Avatar from '@material-ui/core/Avatar'
 // API
 import APIusers from '../../../../utils/APIuser'
 
@@ -23,9 +25,9 @@ const styles = theme => ({
     minWidth: 175,
     maxWidth: 850,
     maxHeight: 650,
-    margin: '5px 20px 0px 20px', 
+    margin: '0px 20px 0px 20px', 
     borderRadius: '30px',
-    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',   
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)', 
   },
   cardContent: {
     pading: '0px 0px 0px 0px'
@@ -33,9 +35,6 @@ const styles = theme => ({
   formContainer: {
     display: 'flex',
     flexWrap: 'wrap',
-  },
-  girdItem : {
-    border: 'solid 2px green',
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -77,7 +76,7 @@ class UserForm extends Component {
     phone: '',
     email: '',
     isAdmin: false,
-    userError: ''
+    inputError: ''
   }
 
   componentDidMount = () => {
@@ -111,7 +110,7 @@ class UserForm extends Component {
     if (this.state.mode === 'edit') {
        // EDIT MODE: Validate
        if (this.state.username === '' || this.state.fullname === '' || this.state.email === ''   )  {    
-          this.setState({userError: 'Please provide username, fullname, and email'}) 
+          this.setState({inputError: 'Please provide username, fullname, and email'}) 
        } else {
             
            let doesItNeedEncryption = false
@@ -147,8 +146,8 @@ class UserForm extends Component {
         
        // ADD MODE: Validate
        if (this.state.username === '' || this.state.fullname === '' || 
-           this.state.email === '' || this.state.password === ''  )  {    
-        this.setState({userError: 'Please provide username, fullname, email, and password'}) 
+           this.state.email === '' || this.state.password === ''  )  {   
+          this.setState({inputError: 'Please provide username, fullname, email, and password'}) 
        } else {
           
           // translate
@@ -188,15 +187,20 @@ class UserForm extends Component {
       <>
       <Card className={classes.card}>
          <CardContent className={classes.cardContent}>
-          <p className='userError'>{this.state.inputError}</p>
+         <Chip
+            avatar={<Avatar>{this.state.isAdmin ? "AU" : "SU"} </Avatar>}
+            label={this.state.isAdmin ? 'Admin user' : 'System user'} 
+            className={classes.chip}
+            color={this.state.isAdmin ? "secondary" : "primary"} 
+          />
+
           <form className={classes.formContainer} 
                 noValidate 
                 autoComplete="off">
-                
-             <Grid alignContent='center'
-                   container
-                   style={{ margin: 'auto', marginLeft: '5%' }}
-                   container spacing={32}>
+
+             <Grid container spacing={32}
+                   alignContent='center'
+                   style={{ margin: 'auto', marginLeft: '5%' }}>
 
               <Grid item >
                 <div >
@@ -327,6 +331,10 @@ class UserForm extends Component {
               </Grid>             
           </form>
          
+          <p className={classes.inputError}>
+               {this.state.inputError}
+          </p>
+
         </CardContent>
         <CardActions>          
             <Button size="small" 

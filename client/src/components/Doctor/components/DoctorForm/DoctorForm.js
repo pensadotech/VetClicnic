@@ -10,6 +10,10 @@ import Button from '@material-ui/core/Button'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import MailIcon from '@material-ui/icons/MailOutline'
 import PhoneIcon from '@material-ui/icons/Phone'
+import Grid from '@material-ui/core/Grid'
+import Chip from '@material-ui/core/Chip'
+import Avatar from '@material-ui/core/Avatar'
+import FaceIcon from '@material-ui/icons/Face'
 // API
 import APIdoctor from '../../../../utils/APIdoctor'
 
@@ -18,7 +22,7 @@ const styles = theme => ({
     minWidth: 175,
     maxWidth: 850,
     maxHeight: 650,
-    margin: '5px 20px 0px 20px', 
+    margin: '0px 20px 0px 20px',  
     borderRadius: '30px',
     boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',   
   },
@@ -28,9 +32,6 @@ const styles = theme => ({
   formContainer: {
     display: 'flex',
     flexWrap: 'wrap',
-  },
-  girdItem : {
-    border: 'solid 2px green',
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -69,7 +70,7 @@ class DoctorForm extends Component {
     phone: '',
     mobilePhone: '',
     email: '',
-    doctorError: ''
+    inputError: ''
   }
 
   componentDidMount = () => {
@@ -97,7 +98,7 @@ class DoctorForm extends Component {
     if (this.state.mode === 'edit') {
       // EDIT MODE: Validate
       if (this.state.name === '' || this.state.phone === '' || this.state.email === '') {
-        this.setState({ doctorError: 'Please provide name, number, and email' })
+        this.setState({ inputError: 'Please provide name, office phone number, and email' })
       } else {
 
         // translate
@@ -118,7 +119,7 @@ class DoctorForm extends Component {
 
       // ADD MODE: Validate
       if (this.state.name === '' || this.state.phone === '' || this.state.email === '') {
-        this.setState({ doctorError: 'Please provide name, number, and email' })
+        this.setState({ inputError: 'Please provide name, office phone number, and email' })
       } else {
 
         // Translation
@@ -155,11 +156,23 @@ class DoctorForm extends Component {
 
         <Card className={classes.card}>
           <CardContent className={classes.cardContent}>
-            <p className='doctorError'>{this.state.inputError}</p>
+            <Chip
+              avatar={<Avatar><FaceIcon /></Avatar>}
+              label='Doctor' 
+              className={classes.chip}
+              color= "primary"
+            />
+
             <form className={classes.formContainer} 
                   noValidate 
                   autoComplete="off">
-                 
+             
+             <Grid container spacing={32}
+                   alignContent='center'
+                   style={{ margin: 'auto', marginLeft: '5%' }}>
+
+             <Grid item >
+               
               <div >
                 <TextField
                   required
@@ -182,7 +195,9 @@ class DoctorForm extends Component {
                   }}
                 />
               </div>
-
+              </Grid>  
+              
+              <Grid item >
               <div>
                 <TextField
                   id="user-phone"
@@ -244,15 +259,28 @@ class DoctorForm extends Component {
                   }}
                 />
               </div>
+              
+              </Grid>
+              </Grid>
             </form>
+
+            <p className={classes.inputError}>
+               {this.state.inputError}
+            </p>
 
           </CardContent>
           <CardActions>
-            <Button size="small" variant="contained" color={this.props.leftbuttonColor}
+            <Button size="small" 
+              variant="contained" 
+              color={this.props.leftbuttonColor}
+              className={classes.btnActionLeft} 
               onClick={() => this.handleSave()}>
               {this.props.leftButtonLabel}
             </Button>
-            <Button size="small" variant="contained" color={this.props.rightbuttonColor}
+            <Button size="small" 
+              variant="contained" 
+              color={this.props.rightbuttonColor}
+              className={classes.btnAction}  
               onClick={() => this.props.handleRightButtonSelection(this.state.doctor)} >
               {this.props.rightButtonLabel}
             </Button>

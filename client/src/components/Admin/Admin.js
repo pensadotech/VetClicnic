@@ -14,6 +14,11 @@ import APIusers from '../../utils/APIuser'
 import APIemails from '../../utils/APIemails'
 
 const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    overflow: 'hidden',
+    padding: `0 ${theme.spacing.unit * 3}px`,
+  },
   avatar: {
     margin: '10px 0px 0px 50px'
   },
@@ -276,10 +281,9 @@ class Admin extends Component {
               </Fab>
             </Grid>
           </Grid>
-
-          <Grid alignContent='center'
-            style={{ margin: 'auto', marginLeft: '5%' }}
-            container spacing={32}>
+          
+          <div className={classes.root}> 
+          <Grid container spacing={8}>
             {
               this.state.users.map((user, index) => (
                 <UserCard 
@@ -296,6 +300,8 @@ class Admin extends Component {
               ))
             }
           </Grid>
+          </div>
+
         </>
       )
     }
