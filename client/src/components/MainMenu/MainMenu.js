@@ -48,7 +48,9 @@ class MainMenu extends Component {
     return (
       <>
          <div className={classes.root}>      
-          <Grid container spacing={8}>
+          <Grid container spacing={8}
+                alignContent='center'
+                style={{ margin: 'auto'}}>
              
             <Grid item >           
                 <Link to='/patients' style={{ color: 'white', textDecoration: 'none' }} >

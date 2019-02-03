@@ -210,7 +210,6 @@ class Doctor extends Component {
 
       return(
         <>
-
             <Grid container spacing={0}>
             <Grid item>
               <Avatar className={classes.avatar}>
@@ -231,7 +230,9 @@ class Doctor extends Component {
           </Grid>
           
           <div className={classes.root}> 
-          <Grid container spacing={8}>
+          <Grid container spacing={8}
+                alignContent='center'
+                style={{ margin: 'auto'}}>
             {
               this.state.doctors.map((doctor, index) => (
                  <DoctorCard 

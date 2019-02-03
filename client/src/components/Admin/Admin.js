@@ -283,7 +283,9 @@ class Admin extends Component {
           </Grid>
           
           <div className={classes.root}> 
-          <Grid container spacing={8}>
+          <Grid container spacing={8}
+            alignContent='center'
+            style={{ margin: 'auto'}}>
             {
               this.state.users.map((user, index) => (
                 <UserCard 
