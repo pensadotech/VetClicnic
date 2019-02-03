@@ -90,11 +90,11 @@ const styles = theme => ({
   },
   logingImage: {
     width: '220px',
-    margin: '30px 35px 20px 25px',
-    border: '10px solid rgb(11, 71, 201)',
+    margin: '30px 35px 20px 40px',
+    border: '5px solid lightgray',
     borderRadius: '30px',
     // boxShadow: '2px 2px 3px 2px gray',
-    transform: 'rotate( 3deg)'
+    // transform: 'rotate( 3deg)'
   },
   logingBlock: {
     backgroundColor: 'rgb(231, 151, 2)',

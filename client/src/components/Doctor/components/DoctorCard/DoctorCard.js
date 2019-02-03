@@ -85,13 +85,15 @@ class DoctorCard extends Component {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" 
+          <Button 
+            size="small" 
             variant="contained" 
             color={this.props.leftbuttonColor} 
             disabled={this.props.isDisabled}
             className={classes.btnActionLeft}  
             onClick={() => this.props.handleLeftButtonSelection(this.props.doctor)}>{this.props.leftButtonLabel}</Button>
-          <Button size="small" 
+          <Button 
+             size="small" 
              variant="contained" 
              color={this.props.rightbuttonColor} 
              disabled={this.props.isDisabled}

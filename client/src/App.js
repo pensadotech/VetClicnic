@@ -108,11 +108,11 @@ class App extends Component {
                  sessionUser={this.state.sessionUser}
                  handleLogingAction={this.handleLogingAction}/>
                <Route exact path='/' component={MainMenu} />              
-               <Route path='/patients' component={this.state.sessionUser.isAdmin ? Patient : MainMenu} />
-               <Route path='/doctors' component={this.state.sessionUser.isAdmin ? Doctor : MainMenu} />
+               <Route path='/patients' component={Patient } />
+               <Route path='/doctors' component={Doctor} />
                <Route path='/medicines' component={Medicine} />
                <Route path='/appointments' component={Appointment} />
-               <Route path='/prescriptions' component={this.state.sessionUser.isAdmin ? Prescription : MainMenu} />
+               <Route path='/prescriptions' component={Prescription} />
                <Route path='/calc' component={Calc} />         
                <Route path='/aboutus' component={AboutUs} /> 
                <Route path='/admin' component={this.state.sessionUser.isAdmin ? Admin : MainMenu} />           

@@ -86,16 +86,18 @@ class UserCard extends Component {
          
         </CardContent>
         <CardActions>     
-          <Button size="small" variant="contained" 
-                  color={this.props.leftbuttonColor} 
-                  disabled={this.props.isDisabled}
-                  className={classes.btnActionLeft}  
-                  onClick={() => this.props.handleLeftButtonSelection(this.props.user)}>{this.props.leftButtonLabel}</Button>
-          <Button size="small" variant="contained" 
-                  color={this.props.rightbuttonColor} 
-                  disabled={this.props.isDisabled}
-                  className={classes.btnAction} 
-                  onClick={() => this.props.handleRightButtonSelection(this.props.user)} >{this.props.rightButtonLabel}</Button>
+          <Button 
+            size="small" variant="contained" 
+            color={this.props.leftbuttonColor} 
+            disabled={this.props.isDisabled}
+            className={classes.btnActionLeft}  
+            onClick={() => this.props.handleLeftButtonSelection(this.props.user)}>{this.props.leftButtonLabel}</Button>
+          <Button 
+            size="small" variant="contained" 
+            color={this.props.rightbuttonColor} 
+            disabled={this.props.isDisabled}
+            className={classes.btnAction} 
+            onClick={() => this.props.handleRightButtonSelection(this.props.user)} >{this.props.rightButtonLabel}</Button>
           
         </CardActions>
       </Card>

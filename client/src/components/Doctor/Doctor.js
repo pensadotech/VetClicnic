@@ -11,6 +11,7 @@ import DoctorCard from './components/DoctorCard'
 import DoctorForm from './components/DoctorForm'
 // API
 import APIdoctors from '../../utils/APIdoctor'
+import APIsession from '../../utils/APIsession'
 
 const styles = theme => ({
   root: {
@@ -57,13 +58,25 @@ const styles = theme => ({
 class Doctor extends Component {
    
   state = {
+    sessionUser: '',
     doctors: [],
     screenMode: 'list',
     targetDoctor: ''
   }
   
   componentDidMount() {
-    this.loadDoctors()
+    this.loadData()    
+  }
+
+  loadData = () => {    
+    // have user logged-in
+    APIsession.getSessionUser()
+      .then(r => {  
+        let sessionUser = r.data
+        this.setState({ sessionUser : sessionUser }) 
+        this.loadDoctors()
+      })
+      .catch(err => console.log(err))
   }
 
   loadDoctors = () => {
@@ -193,15 +206,16 @@ class Doctor extends Component {
               </h2>
             </div>
             <DoctorCard 
-                   doctor={this.state.targetDoctor}
-                   leftbuttonColor='secondary'
-                   leftButtonLabel='Delete'
-                   handleLeftButtonSelection={this.handleDeleteDoctor}
-                   rightbuttonColor='default'
-                   rightButtonLabel='Cancel'
-                  isDisabled={false}
-                  handleRightButtonSelection={this.handleCancel}
-                 />   
+              doctor={this.state.targetDoctor}
+              userSession={this.state.sessionUser}
+              leftbuttonColor='secondary'
+              leftButtonLabel='Delete'
+              handleLeftButtonSelection={this.handleDeleteDoctor}
+              rightbuttonColor='default'
+              rightButtonLabel='Cancel'
+              isDisabled={false}
+              handleRightButtonSelection={this.handleCancel}
+            />   
           </div>
         </>
       ) // return
@@ -217,13 +231,17 @@ class Doctor extends Component {
               </Avatar>
             </Grid>
             <Grid item>
-              <h1 className={classes.pageHead}>Doctors</h1>
+             <h1 className={classes.pageHead}>
+                Doctors
+              </h1>
             </Grid>
             <Grid item>
-              <Fab aria-label="Add" 
-                   color="secondary"  
-                   className={classes.fab}
-                   onClick={() => this.handleDoctorAddSelection()}>
+              <Fab 
+                aria-label="Add" 
+                color="secondary"  
+                className={classes.fab}
+                disabled = {this.state.sessionUser.isAdmin ? false : true}                     
+                onClick={() => this.handleDoctorAddSelection()}>
                 <AddIcon />
               </Fab>
             </Grid>
@@ -238,13 +256,14 @@ class Doctor extends Component {
                  <DoctorCard 
                    key={index}
                    doctor={doctor}
+                   userSession={this.state.sessionUser}
                    leftbuttonColor='primary'
                    leftButtonLabel='Update'
                    handleLeftButtonSelection={this.handleDoctorUpdateSelection}
                    rightbuttonColor='secondary'
                    rightButtonLabel='Delete'
-                  isDisabled={false}
-                  handleRightButtonSelection={this.handleDoctorDeleteSelection}
+                   isDisabled={this.state.sessionUser.isAdmin ? false : true} 
+                   handleRightButtonSelection={this.handleDoctorDeleteSelection}
                  />
               ))
             }

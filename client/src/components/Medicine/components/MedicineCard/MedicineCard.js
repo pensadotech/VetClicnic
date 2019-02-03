@@ -33,18 +33,21 @@ class MedicineCard extends Component {
     if( this.props.viewThirdButton ) {
       return(
         <>
-          <Button size="small" variant="contained" color={this.props.viewButtonColor} 
-                  onClick={() => this.props.handleViewButtonSelection(this.props.med)} >{this.props.viewButtonLabel}</Button>
+          <Button 
+            size="small" 
+            variant="contained" 
+            color={this.props.viewButtonColor} 
+            onClick={() => this.props.handleViewButtonSelection(this.props.med)} >
+            {this.props.viewButtonLabel}
+          </Button>
         </> 
       )
     } else {
       
       return( 
-        <> 
-        </>
+        <>  </>
       )
     }
-
   }
 
   render() {
@@ -69,17 +72,21 @@ class MedicineCard extends Component {
       </CardContent>
       <CardActions> 
         
-        <Button size="small" variant="contained" color={this.props.leftbuttonColor} 
-                disabled={this.props.userSession.isAdmin ? false : true}  
-                onClick={() => this.props.handleLeftButtonSelection(this.props.med)}>{this.props.leftButtonLabel}</Button>  
+        <Button 
+             size="small" 
+             variant="contained" 
+             color={this.props.leftbuttonColor} 
+             disabled={this.props.userSession.isAdmin ? false : true}  
+             onClick={() => this.props.handleLeftButtonSelection(this.props.med)}>{this.props.leftButtonLabel}</Button>  
 
-        <Button size="small" variant="contained" color={this.props.rightbuttonColor} 
-                disabled={this.props.userSession.isAdmin ? false : true}
-                onClick={() => this.props.handleRightButtonSelection(this.props.med)} >{this.props.rightButtonLabel}</Button>
+        <Button 
+           size="small" 
+           variant="contained" 
+           color={this.props.rightbuttonColor} 
+           disabled={this.props.userSession.isAdmin ? false : true}
+           onClick={() => this.props.handleRightButtonSelection(this.props.med)} >{this.props.rightButtonLabel}</Button>
         
          {this.renderThirButton()}
-
-        }
              
       </CardActions>
     </Card>
