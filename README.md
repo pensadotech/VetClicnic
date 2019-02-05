@@ -15,7 +15,7 @@ The application provides functionality to add basic elements as Doctors and Pati
 The application offers a restricted login functionality implemented by using ‘passport’ and the capability to send emails for Appointments and user accounts. 
 
 
-## How does it works
+## How it works
 
 The application starts with a login view. Different than other applications that allow user to sign up, only authorized users can log into the system, as this is an internal application for the Animal clinic.  Authorized users are defined by the system administrator.
 
