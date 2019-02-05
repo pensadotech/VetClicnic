@@ -3,7 +3,7 @@
 Surgical Operation Reference and Interface Network
 Animal Clinic System
 
-_by Aja Magdaleno, Tommy Dang, James Rodgick, Eddie Kader, Daniel Border, Sam Samawi, and Armando Pensado_ 
+_by Aja Magdaleno, Tommy Dang, James Rodgick, Eddie Kader, and Armando Pensado_ 
 
 
 ## Description
