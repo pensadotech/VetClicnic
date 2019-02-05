@@ -10,14 +10,14 @@ _by Aja Magdaleno, Tommy Dang, James Rodgick, Eddie Kader, and Armando Pensado_
 
 This project is a prototype for an animal clinic system, created to demonstrate the use of Mongo DB, Express, React, and Node JS. This is an exercise that embodies a MERN single page application with React. 
 
-The application provides functionality to add basic elements as Doctors and Patients into the system, which are used to create appointments. Additionally, the system allows to enter medicines, that are used to compute the dosages for patients. 
+The application provides functionality to add basic elements like Doctors and Patients into the system, which are then used to create Appointments. Additionally, the system allows users to enter Medicines, that are used to compute the Dosages for Patients. 
 
 The application offers a restricted login functionality implemented by using ‘passport’ and the capability to send emails for Appointments and user accounts. 
 
 
 ## How it works
 
-The application starts with a login view. Different than other applications that allow user to sign up, only authorized users can log into the system, as this is an internal application for the Animal clinic.  Authorized users are defined by the system administrator.
+The application starts with a login view. Different than other applications that allow a user to sign up, only authorized users can log into the system, as this is an internal application for the Animal clinic.  Authorized users are defined by the system administrator.
 
 ![Login](./docs/Login.png)
 
@@ -34,15 +34,13 @@ The one single navigation option that is not represented by a card is the “Adm
 
 ![Admin](./docs/SysAdmin.png)
 
-The one single navigation option that is not represented by a card is the “Admin” menu option. This hidden in the drawer on purpose. It is within the admin view that the user can add or remove user, expect the built-in Admin account.
+A system user profile will have an “admin” checkbox to identify who has administrative powers. Only administrators can navigate to all options offered by the system. 
 
-A system user, aside the basic data, will have an “admin” checkbox to identify who has administration powers. Only administrators can navigate to all options offered by the system. 
+A regular user cannot add doctors, patients, and medicines, but will be able to set appointments, view medicine information, and use the dosage calculator.
 
-A regular user cannot add doctors, patients, and medicines, but will be able to set appointments, view madicne information, and use the dosage calculator.
+Adding a new user, modifying or deleting a user will trigger an email to the user’s declared email account, informing them about the activity to their account.
 
-Adding a new user, modifying or deleting a user will trigger an email to the user’s declared email account, informing them about the activity.
-
-The functionality to add Doctors and patient is similar, but with differences in the fields. The offer a card with the information associated with them. In these screens, the user can create, update, or delete them. These views offer simple CRUD functionality.
+The functionality to add Doctors and Patient is similar, but with differences in the views. The individual views show a card with the that component's information for each element. In these screens, the user can create, update, or delete them. These views offer simple CRUD functionality.
 
 ![Doctor](./docs/Doctors.png)
 
@@ -58,11 +56,11 @@ The Dosage calculator functionality will use a patient, doctor, and medicine. Th
 
 ## Who can benefit from this application
 
-This application is beneficial for NodeJS/React developer, providing a sample programming structures using JavaScript, using **Express**, **Mongo DB**, **mongoose (ODM)**, and API routes that encapsulate the logic to access the database.
+This application is beneficial for a NodeJS/React developer, providing sample programming structures using JavaScript, **Express**, **Mongo DB**, **mongoose (ODM)**, and API routes that encapsulate the logic to access the database.
 
 ## How developers can get started
 
-To start, the developer must have NodeJS and Mongo DB installed in the computer. After, that the project can be cloned and initialized.  Here are the steps for getting started.
+To start, the developer must have NodeJS and Mongo DB installed in the computer. After, that the project can be cloned and initialized.  Here are the steps for getting started:
 
 1. Install NodeJS into the computer  (https://nodejs.org/en/). Download button and run through the installation file.
 
@@ -103,10 +101,6 @@ This is a project for our personal learning process.
 
 
 ## Additional references
-
-**Buillding a MERN application** 
-
-https://github.com/pensadotech/MERN_BlankApp
 
 **Implementing security with passport**
 
