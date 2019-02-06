@@ -6,6 +6,13 @@ import Avatar from '@material-ui/core/Avatar'
 import Fab from '@material-ui/core/Fab';
 import ColorizeIcon from '@material-ui/icons/Colorize'
 import AddIcon from '@material-ui/icons/Add'
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
+import Chip from '@material-ui/core/Chip'
 // Components
 import MedCard from './components/MedicineCard'
 import MedForm from './components/MedicineForm'
@@ -17,8 +24,20 @@ import APIsession from '../../utils/APIsession'
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    overflow: 'hidden',
+    overflowX: 'auto',
     padding: `0 ${theme.spacing.unit * 3}px`,
+    // margin:'0px 10px 0px 10px',
+    borderRadius: '30px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+    [theme.breakpoints.down('sm')]: {
+      margin: '15px 5px 0px 5px',
+     },
+     [theme.breakpoints.up('md')]: {
+      margin: '20px 10px 0px 10px',
+     },
+     [theme.breakpoints.up('lg')]: {
+        margin: '20px 20px 0px 20px',
+     }
   },
   avatar: {
     margin: ' 10px 0px 0px 50px'
@@ -47,11 +66,32 @@ const styles = theme => ({
     boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
     padding: '0px 0px 0px 10px' 
   },
-
   fab: {
     margin: theme.spacing.unit
-  }
+  },
+  chip: {
+    margin: theme.spacing.unit,
+  },
+  table: {
+    minWidth: 700,
+    
+  },
+  row: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.background.default,
+    },
+  },
 })
+
+const CustomTableCell = withStyles(theme => ({
+  head: {
+    backgroundColor:  'rgb(165, 2, 143)',
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
 
 class Medicine extends Component {
    
@@ -89,7 +129,12 @@ class Medicine extends Component {
     // change screen mode to user ADD mode
     this.setState({ screenMode: 'add' })
   }
-  
+
+  handleMedSelect = (tgtMed) => {  
+    // change screen mode to user SELECT mode, and store target-med
+    this.setState({ screenMode: 'select', targetMed: tgtMed })
+  }
+
   handleMedUpdateSelection = (tgtMed) => {
     // change screen mode to user EDIT mode, and store target-med
     this.setState({ screenMode: 'edit', targetMed: tgtMed })
@@ -107,8 +152,6 @@ class Medicine extends Component {
 
   handleCreateMed =(tgtMed) => {
      
-    console.log('create-med',tgtMed)
-    
     // tst
     this.setState({screenMode: 'list',targetMed: ''}) 
 
@@ -184,7 +227,7 @@ class Medicine extends Component {
           </>
         ) // return()
 
-      } else  if (this.state.screenMode === 'edit') {
+      } else if (this.state.screenMode === 'edit') {
 
         return(
           <>
@@ -205,7 +248,7 @@ class Medicine extends Component {
           </>
         ) // return()
 
-      } else  if (this.state.screenMode === 'delete') {
+      } else if (this.state.screenMode === 'delete') {
 
         return(
           <>
@@ -231,7 +274,7 @@ class Medicine extends Component {
           </>
         ) // return
 
-      } else  if (this.state.screenMode === 'view') {
+      } else if (this.state.screenMode === 'view') {
           
         return(
           <>
@@ -248,35 +291,15 @@ class Medicine extends Component {
           </>
         ) // return()
           
-      }else {
-        
+      } else if (this.state.screenMode === 'select'){ 
         return(
           <>
-              <Grid container spacing={0}>
-              <Grid item>
-                <Avatar className={classes.avatar}>
-                <ColorizeIcon /> 
-                </Avatar>
-              </Grid>
-              <Grid item>
-                <h1 className={classes.pageHead}>Medications</h1>
-              </Grid>
-              <Grid item>
-                <Fab color="secondary" aria-label="Add" className={classes.fab} 
-                     disabled = {this.state.sessionUser.isAdmin ? false : true}
-                     onClick={() => this.handleMedAddSelection()}
-                     >
-                  <AddIcon />
-                </Fab>
-              </Grid>
-            </Grid>
-          
-            <div>
-              {
-                this.state.meds.map((med, index) => (
-                  <MedCard 
-                    key={index}
-                    med={med}
+            <h1 className={classes.pageHead}>
+              View medicine information
+            </h1>
+            <MedCard 
+                   
+                    med={this.state.targetMed}
                     userSession={this.state.sessionUser}
                     leftbuttonColor='primary'
                     leftButtonLabel='Update'
@@ -289,8 +312,95 @@ class Medicine extends Component {
                     viewButtonLabel='View'
                     handleViewButtonSelection={this.handleMedViewSelection}                  
                   />   
-                ))
-              }
+          </>
+        ) // return()
+
+      } else {
+        
+        return(
+          <>
+              <Grid container spacing={0}>
+              <Grid item>
+                <Avatar className={classes.avatar}>
+                  <ColorizeIcon /> 
+                </Avatar>
+              </Grid>
+              <Grid item>
+                <h1 className={classes.pageHead}>
+                   Medicines
+                </h1>
+              </Grid>
+              <Grid item>
+                <Fab color="secondary" aria-label="Add" className={classes.fab} 
+                     disabled = {this.state.sessionUser.isAdmin ? false : true}
+                     onClick={() => this.handleMedAddSelection()}
+                     >
+                  <AddIcon />
+                </Fab>
+              </Grid>
+            </Grid>
+          
+            <div>
+            <Paper className={classes.root}>
+              <Table className={classes.table}>
+                <TableHead>
+                  <TableRow>
+                    <CustomTableCell>Medicine</CustomTableCell>
+                    <CustomTableCell align="left">Description</CustomTableCell>
+                    <CustomTableCell align="center">Injectable</CustomTableCell>
+                    <CustomTableCell align="center">Tablet</CustomTableCell>
+                    <CustomTableCell align="center">Capsule</CustomTableCell>
+                    <CustomTableCell align="center">Suspension</CustomTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                   {
+                     this.state.meds.map((med, index) => (
+                      <TableRow className={classes.row} key={index}>
+                        <CustomTableCell component="th" scope="row">
+                        <Chip
+                          label={med.name} 
+                          className={classes.chip}
+                          onClick={() => this.handleMedSelect(med)}
+                         /> 
+                        </CustomTableCell>
+                        <CustomTableCell align="left">     
+                          {med.description}
+                        </CustomTableCell>
+                        <CustomTableCell align="center">
+                          <Chip
+                            label={med.injectable.available ? 'injectable' : '.....'} 
+                            className={classes.chip}
+                            color={med.injectable.available ? 'primary' : 'default'} 
+                          />
+                        </CustomTableCell>
+                        <CustomTableCell align="center">
+                          <Chip
+                            label={med.tablet.available ? 'tablet' : '.....'} 
+                            className={classes.chip}
+                            color={med.tablet.available ? 'primary' : 'default'} 
+                          />
+                        </CustomTableCell>
+                        <CustomTableCell align="center">
+                          <Chip
+                            label={med.capsule.available ? 'capsule' : '.....'} 
+                            className={classes.chip}
+                            color={med.capsule.available ? 'primary' : 'default'} 
+                          />
+                        </CustomTableCell>
+                        <CustomTableCell align="center">
+                          <Chip
+                            label={med.suspension.available ? 'suspension' : '.....'} 
+                            className={classes.chip}
+                            color={med.suspension.available ? 'primary' : 'default'} 
+                          />
+                        </CustomTableCell>
+                       </TableRow>
+                     ))
+                   }
+                </TableBody>
+              </Table>
+            </Paper>
             </div>
               
           </>
