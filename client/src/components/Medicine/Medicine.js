@@ -15,6 +15,11 @@ import APImeds from '../../utils/APImeds'
 import APIsession from '../../utils/APIsession'
 
 const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    overflow: 'hidden',
+    padding: `0 ${theme.spacing.unit * 3}px`,
+  },
   avatar: {
     margin: ' 10px 0px 0px 50px'
   },
@@ -22,6 +27,27 @@ const styles = theme => ({
     color: 'white',
     margin: '7px 0px 0px 20px'
   },
+  pageHeadDelete: {
+    color: 'red',
+    fontWeight: 'bold',
+    margin: '7px 0px 0px 20px',
+    backgroundColor: 'white',
+    maxWidth: 230,
+    borderRadius: '10px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+    padding: '0px 0px 0px 10px' 
+  },
+  pageHeadUpdate: {
+    color: 'blue',
+    fontWeight: 'bold',
+    margin: '7px 0px 0px 20px',
+    backgroundColor: 'white',
+    maxWidth: 325,
+    borderRadius: '10px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+    padding: '0px 0px 0px 10px' 
+  },
+
   fab: {
     margin: theme.spacing.unit
   }

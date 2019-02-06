@@ -19,33 +19,22 @@ import './PatientForm.css'
 
 const styles = theme => ({
     container: {
-        display: 'flex',
-        flexWrap: 'wrap'
+      display: 'flex',
+      flexWrap: 'wrap'
     },
     textField: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
-        width: 250,
+      marginLeft: theme.spacing.unit,
+      marginRight: theme.spacing.unit,
+      width: 250,
     },
     margin: {
-        margin: theme.spacing.unit,
+      margin: theme.spacing.unit,
     },
     card: {
-        minWidth: 175,
-        maxHeight: 620, 
-        margin: '10px 20px 0px 20px', 
-    },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
-      },
-      title: {
-        fontSize: 14,
-      },
-      pos: {
-        marginBottom: 12,
-      }
+      minWidth: 175,
+      maxHeight: 620, 
+      margin: '10px 20px 0px 20px', 
+    }
 })
 
 const speciesArr = [

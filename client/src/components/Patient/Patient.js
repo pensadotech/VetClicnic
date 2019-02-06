@@ -209,7 +209,7 @@ class Patient extends Component {
               rightbuttonColor='default'
               rightButtonLabel='Cancel'   
               handleRightButtonSelection={this.handleCancel}
-              isNameDisabled={true}
+              isNameDisabled={false}
             />
           </>
       ) // return()
