@@ -43,11 +43,6 @@ const styles = theme => ({
     color: 'blue',
     margin: '0px 0px 2px 10px',
   },
-  name: {
-    fontSize: 18,
-    margin: '0px 0px 5px 10px',   
-    fontWeight: 'bold'
-  },
   info: {
     fontSize: 14,
     margin: '0px 0px 0px 20px',
