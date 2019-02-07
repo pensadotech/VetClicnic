@@ -12,29 +12,53 @@ import PetsIcon from '@material-ui/icons/Pets'
 import MailIcon from '@material-ui/icons/MailOutline'
 import PhoneIcon from '@material-ui/icons/Phone'
 import PersonIcon from '@material-ui/icons/PermIdentity'
+import Chip from '@material-ui/core/Chip'
+import Avatar from '@material-ui/core/Avatar'
+import Grid from '@material-ui/core/Grid'
 // API
 import APIpatient from '../../../../utils/APIpatient'
-// Local style
-import './PatientForm.css'
 
 const styles = theme => ({
-    container: {
-      display: 'flex',
-      flexWrap: 'wrap'
+  card: {
+    minWidth: 175,
+    maxWidth: 850,
+    maxHeight: 950,
+    margin: '0px 20px 0px 20px',  
+    borderRadius: '30px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',    
+  },
+  cardContent: {
+    pading: '0px 0px 0px 0px'
+  },
+  formContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    [theme.breakpoints.down('sm')]: {
+      width: 240,
     },
-    textField: {
-      marginLeft: theme.spacing.unit,
-      marginRight: theme.spacing.unit,
-      width: 250,
+    [theme.breakpoints.up('md')]: {
+      width: 280,
     },
-    margin: {
-      margin: theme.spacing.unit,
-    },
-    card: {
-      minWidth: 175,
-      maxHeight: 620, 
-      margin: '10px 20px 0px 20px', 
-    }
+    [theme.breakpoints.up('lg')]: {
+      width: 300,
+    }  
+  },
+  title: {
+    fontSize: 14,
+  },
+  btnActionLeft : {
+    margin: '0px 0px 10px 20px',
+  },
+  btnAction : {
+    margin: '0px 0px 10px 10px',
+  },
+  inputError : {
+    color: 'red'
+  }
 })
 
 const speciesArr = [
@@ -56,7 +80,7 @@ class PatientForm extends Component {
         weight: 0.00,
         phone: '',
         email: '',
-        userError: '',
+        inputError: '',
 
     }
 
@@ -88,7 +112,7 @@ class PatientForm extends Component {
         if (this.state.mode === 'edit') {
           // EDIT MODE: Validate 
           if (this.state.patientname === '' || this.state.ownername === '' )  {    
-            this.setState({userError: 'Please provide patient name and owner name'}) 
+            this.setState({inputError: 'Please provide patient name and owner name'}) 
            } else {
                
               // translate
@@ -111,7 +135,7 @@ class PatientForm extends Component {
         } else {
            // ADD MODE: Validate
            if (this.state.patientname === '' || this.state.ownername === '' )  {    
-            this.setState({userError: 'Please provide patient name and owner name'}) 
+            this.setState({inputError: 'Please provide patient name and owner name'}) 
            } else {
               
               // translate
@@ -131,14 +155,13 @@ class PatientForm extends Component {
                 .then(r => {  
 
                   if(r.data !== null ) {
-                    this.setState({userError: `The patient name "${r.data.patientname}" already exist, please provide a new one`})  
+                    this.setState({inputError: `The patient name "${r.data.patientname}" already exist, please provide a new one`})  
                   } else {
                     // send information back 
                     this.props.handleLeftButtonSelection(newPatient)
                   }           
                })
-               .catch(err => console.log(err))   
-                         
+               .catch(err => console.log(err))                          
            }
         }
       }
@@ -150,9 +173,24 @@ class PatientForm extends Component {
         return(
             <>
         <Card className={classes.card}> 
-          <CardContent> 
-            <p className='userError'>{this.state.userError}</p>
-            <form className={classes.container} noValidate autoComplete="off">
+          <CardContent className={classes.cardContent}> 
+          <Chip
+              avatar={<Avatar><PetsIcon /></Avatar>}
+              label='Patient' 
+              className={classes.chip}
+              color= "primary"
+            />
+            <form className={classes.formContainer}  
+                   noValidate 
+                   autoComplete="off">
+
+             <Grid 
+               container spacing={32}
+               alignContent='center'
+              style={{ margin: 'auto', marginLeft: '5%' }}>
+               
+               <Grid item >
+               
               <div className='formItem'>
                 <TextField
                       required
@@ -196,6 +234,49 @@ class PatientForm extends Component {
                       }}
                     />   
               </div>
+              <div className='formItem'> 
+                  <TextField
+                    id="phone"
+                    label="Phone :"
+                    className={classes.textField}
+                    name='phone'
+                    type="string"
+                    autoComplete="current-phone"
+                    value={this.state.phone}
+                    onChange={this.handleInputChange}
+                    margin="normal"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <PhoneIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />                    
+              </div>
+              <div className='formItem'> 
+                  <TextField
+                    id="email"
+                    label="Email :"
+                    className={classes.textField}
+                    name='email'
+                    type="string"
+                    autoComplete="current-email"
+                    value={this.state.email}
+                    onChange={this.handleInputChange}
+                    margin="normal"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <MailIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />                    
+              </div>
+              </Grid>
+               
+              <Grid item >
               <div className='formItem'> 
                   <TextField
                     id="species"
@@ -260,54 +341,31 @@ class PatientForm extends Component {
                     margin="normal"
                   />                    
               </div>
-              <div className='formItem'> 
-                  <TextField
-                    id="phone"
-                    label="Phone :"
-                    className={classes.textField}
-                    name='phone'
-                    type="string"
-                    autoComplete="current-phone"
-                    value={this.state.phone}
-                    onChange={this.handleInputChange}
-                    margin="normal"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <PhoneIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />                    
-              </div>
-              <div className='formItem'> 
-                  <TextField
-                    id="email"
-                    label="Email :"
-                    className={classes.textField}
-                    name='email'
-                    type="string"
-                    autoComplete="current-email"
-                    value={this.state.email}
-                    onChange={this.handleInputChange}
-                    margin="normal"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <MailIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />                    
-              </div>
+
+              </Grid>
+              </Grid>
            
             </form>
-          </CardContent>
+            
+            <p className={classes.inputError}>
+               {this.state.inputError}
+            </p>
+            
+         </CardContent>
           <CardActions>
-            <Button size="small" variant="contained" color={this.props.leftbuttonColor}  
-                onClick={() => this.handleSave()}>{this.props.leftButtonLabel}
+            <Button 
+                size="small" 
+                variant="contained" 
+                color={this.props.leftbuttonColor}  
+                className={classes.btnActionLeft} 
+                onClick={() => this.handleSave()}>
+                {this.props.leftButtonLabel}
             </Button>
-            <Button size="small" variant="contained" color={this.props.rightbuttonColor} 
+            <Button 
+                size="small" 
+                ariant="contained" 
+                color={this.props.rightbuttonColor}
+                className={classes.btnAction}
                 onClick={() => this.props.handleRightButtonSelection(this.props.patientname)}>
                 {this.props.rightButtonLabel}
             </Button>

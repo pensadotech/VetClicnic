@@ -125,7 +125,7 @@ class PatientCard extends Component {
           <Button 
              size="small" 
              variant="contained" 
-             color={this.props.rightbuttonColor} 
+             color={this.props.rightbuttonColor}
              disabled={this.props.isDisabled}
              className={classes.btnAction}     
              onClick={() => this.props.handleRightButtonSelection(this.props.patient)} >

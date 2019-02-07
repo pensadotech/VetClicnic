@@ -130,11 +130,6 @@ class Medicine extends Component {
     this.setState({ screenMode: 'add' })
   }
 
-  handleMedSelect = (tgtMed) => {  
-    // change screen mode to user SELECT mode, and store target-med
-    this.setState({ screenMode: 'select', targetMed: tgtMed })
-  }
-
   handleMedUpdateSelection = (tgtMed) => {
     // change screen mode to user EDIT mode, and store target-med
     this.setState({ screenMode: 'edit', targetMed: tgtMed })
@@ -361,7 +356,7 @@ class Medicine extends Component {
                         <Chip
                           label={med.name} 
                           className={classes.chip}
-                          onClick={() => this.handleMedSelect(med)}
+                          onClick={() => this.handleMedViewSelection(med)}
                          /> 
                         </CustomTableCell>
                         <CustomTableCell align="left">     
@@ -369,28 +364,28 @@ class Medicine extends Component {
                         </CustomTableCell>
                         <CustomTableCell align="center">
                           <Chip
-                            label={med.injectable.available ? 'injectable' : '.....'} 
+                            label={med.injectable.available ? 'I' : '.'} 
                             className={classes.chip}
                             color={med.injectable.available ? 'primary' : 'default'} 
                           />
                         </CustomTableCell>
                         <CustomTableCell align="center">
                           <Chip
-                            label={med.tablet.available ? 'tablet' : '.....'} 
+                            label={med.tablet.available ? 'T' : '.'} 
                             className={classes.chip}
                             color={med.tablet.available ? 'primary' : 'default'} 
                           />
                         </CustomTableCell>
                         <CustomTableCell align="center">
                           <Chip
-                            label={med.capsule.available ? 'capsule' : '.....'} 
+                            label={med.capsule.available ? 'C' : '.'} 
                             className={classes.chip}
                             color={med.capsule.available ? 'primary' : 'default'} 
                           />
                         </CustomTableCell>
                         <CustomTableCell align="center">
                           <Chip
-                            label={med.suspension.available ? 'suspension' : '.....'} 
+                            label={med.suspension.available ? 'S' : '.'} 
                             className={classes.chip}
                             color={med.suspension.available ? 'primary' : 'default'} 
                           />

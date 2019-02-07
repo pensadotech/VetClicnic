@@ -276,7 +276,7 @@ class Patient extends Component {
               className={classes.fab}
               disabled = {this.state.sessionUser.isAdmin ? false : true} 
               onClick={() => this.handlePatientAddSelection()}>
-              <AddIcon  />
+              <AddIcon />
             </Fab>
           </Grid>
         </Grid>
