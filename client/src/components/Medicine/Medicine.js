@@ -36,7 +36,7 @@ const styles = theme => ({
       margin: '20px 10px 0px 10px',
      },
      [theme.breakpoints.up('lg')]: {
-        margin: '20px 20px 0px 20px',
+      margin: '20px 20px 0px 20px',
      }
   },
   avatar: {
@@ -69,12 +69,26 @@ const styles = theme => ({
   fab: {
     margin: theme.spacing.unit
   },
+  chipTitle: { 
+    
+    [theme.breakpoints.down('sm')]: {
+      margin: '15px 5px 0px 5px',
+      fontSize: 18,
+     },
+     [theme.breakpoints.up('md')]: {
+      margin: '20px 10px 0px 10px',
+      fontSize: 24,
+     },
+     [theme.breakpoints.up('lg')]: {
+        margin: '20px 20px 0px 20px',
+        fontSize: 32,
+     }
+  },
   chip: {
     margin: theme.spacing.unit,
   },
   table: {
-    minWidth: 700,
-    
+    minWidth: 700,   
   },
   row: {
     '&:nth-of-type(odd)': {
@@ -273,43 +287,29 @@ class Medicine extends Component {
           
         return(
           <>
-            <h1 className={classes.pageHead}>
-              View medicine information
-            </h1>
+            <div className={classes.pageHeadUpdate }>
+              <h2>
+                  Medicine information
+              </h2>
+            </div>
             <MedView 
               mode={this.state.screenMode}
               med={this.state.targetMed}
-              rightbuttonColor='primary'
-              rightButtonLabel='Return'  
-              handleRightButtonSelection={this.handleCancel} 
+              leftbuttonColor='primary'
+              leftButtonLabel='Update'
+              isLeftButtonDisabled={this.state.sessionUser.isAdmin ? false : true} 
+              handleLeftButtonSelection={this.handleMedUpdateSelection}
+              rightbuttonColor='secondary'
+              rightButtonLabel='Delete'
+              isRightButtonDisabled={this.state.sessionUser.isAdmin ? false : true}
+              handleRightButtonSelection={this.handleMedDeleteSelection}
+              thirdbuttonColor='default'
+              thirdButtonLabel='Return'
+              handleThirdButtonSelection={this.handleCancel}
             />
           </>
         ) // return()
           
-      } else if (this.state.screenMode === 'select'){ 
-        return(
-          <>
-            <h1 className={classes.pageHead}>
-              View medicine information
-            </h1>
-            <MedCard 
-                   
-                    med={this.state.targetMed}
-                    userSession={this.state.sessionUser}
-                    leftbuttonColor='primary'
-                    leftButtonLabel='Update'
-                    handleLeftButtonSelection={this.handleMedUpdateSelection}
-                    rightbuttonColor='secondary'
-                    rightButtonLabel='Remove'
-                    handleRightButtonSelection={this.handleMedDeleteSelection}
-                    viewThirdButton={true}
-                    viewButtonColor='primary'
-                    viewButtonLabel='View'
-                    handleViewButtonSelection={this.handleMedViewSelection}                  
-                  />   
-          </>
-        ) // return()
-
       } else {
         
         return(
@@ -324,7 +324,7 @@ class Medicine extends Component {
                 <h1 className={classes.pageHead}>
                    Medicines
                 </h1>
-              </Grid>
+              </Grid>  
               <Grid item>
                 <Fab color="secondary" aria-label="Add" className={classes.fab} 
                      disabled = {this.state.sessionUser.isAdmin ? false : true}
@@ -332,7 +332,14 @@ class Medicine extends Component {
                      >
                   <AddIcon />
                 </Fab>
-              </Grid>
+              </Grid> 
+              <Grid item>
+                <Chip
+                  label='controlled'
+                  className={classes.chipTitle}
+                  color='secondary'
+                /> 
+              </Grid>        
             </Grid>
           
             <div>
@@ -356,6 +363,7 @@ class Medicine extends Component {
                         <Chip
                           label={med.name} 
                           className={classes.chip}
+                          color={med.controlled ? 'secondary' : 'default'}
                           onClick={() => this.handleMedViewSelection(med)}
                          /> 
                         </CustomTableCell>

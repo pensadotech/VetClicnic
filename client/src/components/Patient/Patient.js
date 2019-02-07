@@ -241,7 +241,7 @@ class Patient extends Component {
     } else  if (this.state.screenMode === 'view') {
       return(
         <>
-          <div className={classes.pageHeadUpdate }>
+            <div className={classes.pageHeadUpdate }>
               <h2>
                 Patient information
               </h2>

@@ -68,7 +68,7 @@ class PatientCard extends Component {
          <Grid 
            container spacing={32}
            alignContent='center'
-          style={{ margin: 'auto', marginLeft: '5%' }}>
+           style={{ margin: 'auto', marginLeft: '5%' }}>
 
          <Grid item >
             <Typography 

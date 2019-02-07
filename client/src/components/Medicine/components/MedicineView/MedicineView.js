@@ -2,58 +2,56 @@ import React, { Component } from "react"
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Checkbox from '@material-ui/core/Checkbox'
+import Typography from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
+import Chip from '@material-ui/core/Chip'
+import ColorizeIcon from '@material-ui/icons/Colorize'
+import Avatar from '@material-ui/core/Avatar'
 
 const styles = theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    height: 140,
-    width: 330,
-  },
-  control: {
-    padding: theme.spacing.unit * 2,
-  },
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 250,
-  },
-  margin: {
-    margin: theme.spacing.unit,
-  },
   card: {
-    minWidth: 175,
-    margin: '10px 20px 0px 20px',  
+    minWidth: 290,
+    maxWidth: 850,
+    maxHeight: 600, 
+    borderRadius: '30px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+    [theme.breakpoints.down('sm')]: {
+      margin: '15px 10px 0px 20px',
+     },
+     [theme.breakpoints.up('md')]: {
+      margin: '30px 10px 0px 20px',
+     },
+     [theme.breakpoints.up('lg')]: {
+        margin: '50px 10px 0px 20px',
+     }
   },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
+  chip: {
+    margin: '4px 0px 2px 0px',
+  },
+  btnActionLeft : {
+    margin: '0px 0px 10px 20px',
+  },
+  btnAction : {
+    margin: '0px 0px 10px 10px',
   },
   title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'blue',
+    margin: '0px 0px 2px 0px',
+  },
+  name: {
+    fontSize: 18,
+    margin: '0px 0px 2px 0px',   
+    fontWeight: 'bold'
+  },
+  info: {
     fontSize: 14,
+    margin: '0px 0px 0px 0px',
   },
-  pos: {
-    marginBottom: 12,
-  },
-  groupField : {
-    border: '3 solid gray'
-  },
-  userError : {
-    color: 'red'
-  }
 })
 
 class MedicineForm extends Component {
@@ -94,9 +92,7 @@ class MedicineForm extends Component {
     suspensionDoseCanine: 0,
     suspensionDoseRangeCanine: [0],
     suspensionDoseFeline: 0,
-    suspensionDoseRangeFeline: [0],
-
-    userError: ''
+    suspensionDoseRangeFeline: [0]
   }
   
   componentDidMount = () => {
@@ -144,7 +140,6 @@ class MedicineForm extends Component {
   render() {
     
     const { classes } = this.props
-    const { spacing } = this.state
 
     return ( 
       <>
@@ -152,440 +147,77 @@ class MedicineForm extends Component {
           
        <Card className={classes.card}> 
        <CardContent>
-          <p className={classes.userError}>{this.state.userError}</p>
-          <Grid container className={classes.root} spacing={16}>
-            <Grid item xs={12}>
-                  <div>
-                    <h2>Medicine</h2>
-                    <form className={classes.container} noValidate autoComplete="off">
-                      <div className='formItem'>
-                        <TextField
-                              required
-                              id="med-name"
-                              label="Medication:"
-                              className={classes.textField}
-                              name='name'
-                              type="string"
-                              autoComplete="current-medname"
-                              value={this.state.name}
-                              margin="normal"
-                              disabled={true}
-                            />   
-                      </div>
-                      <div className='formItem'>
-                        <TextField
-                              required
-                              id="med-alias"
-                              label="Alias :"
-                              className={classes.textField}
-                              name='alias'
-                              type="string"
-                              autoComplete="current-alias"
-                              value={this.state.alias}
-                              margin="normal"
-                              disabled={true}
-                            />   
-                      </div>
-                      <div className='formItem'> 
-                          <TextField
-                            id="med-description"
-                            label="Description :"
-                            className={classes.textField}
-                            name='description'
-                            type="string"
-                            autoComplete="current-description"
-                            value={this.state.description}
-                            margin="normal"
-                            disabled={true}
-                          />                 
-                      </div>
-                      <div className='formItem'> 
-                              <FormControlLabel
-                                control={
-                                    <Checkbox
-                                      checked={this.state.controlled}
-                                      value="controlled"
-                                      color="primary"
-                                      disabled={true}
-                                    />
-                                  }
-                                  label="Controlled Medicine"                                
-                              />                   
-                            </div>      
-                    </form>
-                  </div>
-            </Grid>
-            <Grid item xs={12}>
-              <Grid container className={classes.demo} justify="center" spacing={Number(spacing)}>
-                   <Grid item>
-                      <Card className={classes.card}> 
-                      <CardContent>
-                          <h2>Injectable</h2>
-                          <div>
-                          <form noValidate autoComplete="off">    
-                              <div className='formItem'> 
-                                  <FormControlLabel
-                                    control={
-                                      <Checkbox
-                                        checked={this.state.injectableAvailable}
-                                        value="injectableAvailable"
-                                        color="primary"
-                                        disabled={true}
-                                      />
-                                    }
-                                    label="Available"
-                                  />                   
-                              </div>
-                              <div className='formItem'> 
-                                  <TextField
-                                    id="med-concentration"
-                                    label="Concentration :"
-                                    className={classes.textField}
-                                    name='injectableConcentration'
-                                    type="string"
-                                    autoComplete="current-Concentration"
-                                    value={this.state.injectableConcentration}
-                                    margin="normal"
-                                    disabled={true}
-                                  />          
-                              </div>
-                              <div className='formItem'> 
-                                <TextField
-                                  id="med-doseCanine"
-                                  label="Dose Canine :"
-                                  className={classes.textField}
-                                  name='injectableDoseCanine'
-                                  type="string"
-                                  autoComplete="current-DoseCanine"
-                                  value={this.state.injectableDoseCanine}
-                                  margin="normal"
-                                  disabled={true}
-                                />          
-                              </div>
-                              <div className='formItem'> 
-                                    <TextField
-                                      id="med-doseRangeCanine"
-                                      label="Dose Range Canine :"
-                                      className={classes.textField}
-                                      name='injectableDoseRangeCanine'
-                                      type="string"
-                                      autoComplete="current-doseRangeCanine"
-                                      value={this.state.injectableDoseRangeCanine}
-                                      margin="normal"
-                                      disabled={true}
-                                    />          
-                              </div>
-                              <div className='formItem'> 
-                                <TextField
-                                  id="med-doseFeline"
-                                  label="Dose Feline :"
-                                  className={classes.textField}
-                                  name='injectableDoseFeline'
-                                  type="string"
-                                  autoComplete="current-DoseFeline"
-                                  value={this.state.injectableDoseFeline}
-                                  margin="normal"
-                                  disabled={true}
-                                />          
-                              </div>
-                              <div className='formItem'> 
-                                    <TextField
-                                      id="med-doseRangeFeline"
-                                      label="Dose Range Feline :"
-                                      className={classes.textField}
-                                      name='injectableDoseRangeFeline'
-                                      type="string"
-                                      autoComplete="current-doseRangeFeline"
-                                      value={this.state.injectableDoseRangeFeline}
-                                      margin="normal"
-                                      disabled={true}
-                                    />          
-                              </div>
-                              <div className='formItem'> 
-                                    <TextField
-                                      id="med-injectableRoutes"
-                                      label="Routes :"
-                                      className={classes.textField}
-                                      name='injectableRoutes'
-                                      type="string"
-                                      autoComplete="current-injectableRoutes"
-                                      value={this.state.injectableRoutes}
-                                      margin="normal"
-                                      disabled={true}
-                                    />          
-                              </div>
-                          </form>
-                          </div>                     
-                      </CardContent>
-                      </Card> 
-                   </Grid>
-                   <Grid item>
-                      <Card className={classes.card}> 
-                      <CardContent>
-                          <h2>Tablet</h2>
-                          <div>
-                          <form noValidate autoComplete="off">  
-                            <div className='formItem'> 
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      checked={this.state.tabletAvailable}                                      value="tabletAvailable"
-                                      color="primary"
-                                      disabled={true}
-                                    />
-                                  }
-                                  label="Available"
-                                />                   
-                            </div>
-                            <div className='formItem'> 
-                              <TextField
-                                id="med-tabletSizes"
-                                label="Sizes :"
-                                className={classes.textField}
-                                name='tabletSizes'
-                                type="string"
-                                autoComplete="current-tabletSizes"
-                                value={this.state.tabletSizes}
-                                margin="normal"
-                                disabled={true}
-                              />          
-                            </div>
-                            <div className='formItem'> 
-                              <TextField
-                                id="med-tabletDoseCanine"
-                                label="Dose Canine :"
-                                className={classes.textField}
-                                name='tabletDoseCanine'
-                                type="string"
-                                autoComplete="current-tabletDoseCanine"
-                                value={this.state.tabletDoseCanine}
-                                margin="normal"
-                                disabled={true}
-                              />          
-                            </div>
-                            <div className='formItem'> 
-                              <TextField
-                                id="med-tabletDoseRangeCanine"
-                                label="Dose Range Canine :"
-                                className={classes.textField}
-                                name='tabletDoseRangeCanine'
-                                type="string"
-                                autoComplete="current-tabletDoseRangeCanine"
-                                value={this.state.tabletDoseRangeCanine}
-                                margin="normal"
-                                disabled={true}
-                              />          
-                            </div>
-                            <div className='formItem'> 
-                              <TextField
-                                id="med-tabletDoseFeline"
-                                label="Dose Feline :"
-                                className={classes.textField}
-                                name='tabletDoseFeline'
-                                type="string"
-                                autoComplete="current-tabletDoseFeline"
-                                value={this.state.tabletDoseFeline}
-                                margin="normal"
-                                disabled={true}
-                              />          
-                            </div>
-                            <div className='formItem'> 
-                              <TextField
-                                id="med-tabletDoseRangeFeline"
-                                label="Dose Range Feline :"
-                                className={classes.textField}
-                                name='tabletDoseRangeFeline'
-                                type="string"
-                                autoComplete="current-tabletDoseRangeFeline"
-                                value={this.state.tabletDoseRangeFeline}
-                                margin="normal"
-                                disabled={true}
-                              />          
-                            </div>
-                          </form>
+         <Chip
+            avatar={<Avatar><ColorizeIcon /></Avatar>}
+            label='Medicine' 
+            className={classes.chip}
+            color= "primary"
+          />
 
-                         </div>               
-                      </CardContent>
-                      </Card> 
-                   </Grid>
-                   <Grid item>
-                      <Card className={classes.card}> 
-                      <CardContent>
-                          <h2>Capsule</h2>
-                          <div>
-                          <form noValidate autoComplete="off">  
-                            <div className='formItem'> 
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      checked={this.state.capsuleAvailable}
-                                      value="capsuleAvailable"
-                                      color="primary"
-                                      disabled={true}
-                                    />
-                                  }
-                                  label="Available"
-                                />                   
-                            </div>
-                            <div className='formItem'> 
-                              <TextField
-                                id="med-capsuleSizes"
-                                label="Sizes :"
-                                className={classes.textField}
-                                name='capsuleSizes'
-                                type="string"
-                                autoComplete="current-capsuleSizes"
-                                value={this.state.capsuleSizes}
-                                margin="normal"
-                                disabled={true}
-                              />          
-                            </div>
-                            <div className='formItem'> 
-                              <TextField
-                                id="med-capsuleDoseCanine"
-                                label="Dose Canine :"
-                                className={classes.textField}
-                                name='capsuleDoseCanine'
-                                type="string"
-                                autoComplete="current-capsuleDoseCanine"
-                                value={this.state.capsuleDoseCanine}
-                                margin="normal"
-                                disabled={true}
-                              />          
-                            </div>
-                            <div className='formItem'> 
-                              <TextField
-                                id="med-capsuleDoseRangeCanine"
-                                label="Dose Range Canine :"
-                                className={classes.textField}
-                                name='capsuleDoseRangeCanine'
-                                type="string"
-                                autoComplete="current-capsuleDoseRangeCanine"
-                                value={this.state.capsuleDoseRangeCanine}
-                                margin="normal"
-                                disabled={true}
-                              />          
-                            </div>
-                            <div className='formItem'> 
-                              <TextField
-                                id="med-capsuleDoseFeline"
-                                label="Dose Feline :"
-                                className={classes.textField}
-                                name='capsuleDoseFeline'
-                                type="string"
-                                autoComplete="current-capsuleDoseFeline"
-                                value={this.state.capsuleDoseFeline}
-                                margin="normal"
-                                disabled={true}
-                              />          
-                            </div>
-                            <div className='formItem'> 
-                              <TextField
-                                id="med-capsuleDoseRangeFeline"
-                                label="Dose Range Feline :"
-                                className={classes.textField}
-                                name='capsuleDoseRangeFeline'
-                                type="string"
-                                autoComplete="current-capsuleDoseRangeFeline"
-                                value={this.state.capsuleDoseRangeFeline}
-                                margin="normal"
-                                disabled={true}
-                              />          
-                            </div>
-                          </form>
-                          
-                         </div>               
-                      </CardContent>
-                      </Card>
-                   </Grid>
-                   <Grid item>
-                      <Card className={classes.card}> 
-                      <CardContent>
-                         <h2>Suspension</h2>
-                         <div>
-                          <form noValidate autoComplete="off">  
-                            <div className='formItem'> 
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      checked={this.state.suspensionAvailable}
-                                      value="suspensionAvailable"
-                                      color="primary"
-                                      disabled={true}
-                                    />
-                                  }
-                                  label="Available"
-                                />                   
-                            </div>
-                            <div className='formItem'> 
-                              <TextField
-                                id="med-suspensionDoseCanine"
-                                label="Dose Canine :"
-                                className={classes.textField}
-                                name='suspensionDoseCanine'
-                                type="string"
-                                autoComplete="current-suspensionDoseCanine"
-                                value={this.state.suspensionDoseCanine}
-                                margin="normal"
-                                disabled={true}
-                              />          
-                            </div>
-                            <div className='formItem'> 
-                              <TextField
-                                id="med-suspensionDoseRangeCanine"
-                                label="Dose Range Canine :"
-                                className={classes.textField}
-                                name='suspensionDoseRangeCanine'
-                                type="string"
-                                autoComplete="current-suspensionDoseRangeCanine"
-                                value={this.state.suspensionDoseRangeCanine}
-                                margin="normal"
-                                disabled={true}
-                              />          
-                            </div>
-                            <div className='formItem'> 
-                              <TextField
-                                id="med-suspensionDoseFeline"
-                                label="Dose Feline :"
-                                className={classes.textField}
-                                name='suspensionDoseFeline'
-                                type="string"
-                                autoComplete="current-suspensionDoseFeline"
-                                value={this.state.suspensionDoseFeline}
-                                margin="normal"
-                                disabled={true}
-                              />          
-                            </div>
-                            <div className='formItem'> 
-                              <TextField
-                                id="med-suspensionDoseRangeFeline"
-                                label="Dose Range Feline :"
-                                className={classes.textField}
-                                name='suspensionDoseRangeFeline'
-                                type="string"
-                                autoComplete="current-suspensionDoseRangeFeline"
-                                value={this.state.suspensionDoseRangeFeline}
-                                margin="normal"
-                                disabled={true}
-                              />          
-                            </div>
-                          </form>
-                          
-                         </div> 
-                      </CardContent>
-                      </Card>
-                   </Grid>
-              </Grid>
+         <Grid 
+           container spacing={32}
+           alignContent='center'
+           style={{ margin: 'auto', marginLeft: '5%' }}>
+
+            <Grid item>
+              <Typography 
+                 className={classes.title}>
+                 {this.state.name}
+              </Typography>   
+              <Typography 
+                 className={classes.name}>
+                 {this.state.description}
+              </Typography>           
+              <Typography 
+                 className={classes.info}>
+                <b>Alias:</b> {this.state.alias}
+              </Typography> 
+
+              <Chip
+                label={this.state.controlled ? 'Controlled' : 'Not-Controlled'} 
+                className={classes.chip}
+                color={this.state.controlled ? 'secondary' : 'default'} 
+               />              
             </Grid>
+            <Grid item >
+            
+              
+            </Grid>      
           </Grid>
          
        </CardContent>
 
        <CardActions>
-            <Button size="small" variant="contained" color={this.props.rightbuttonColor} 
-                onClick={() => this.props.handleRightButtonSelection(this.props.med)}>
-                {this.props.rightButtonLabel}
+
+          <Button 
+             size="small" 
+             variant="contained" 
+             color={this.props.leftbuttonColor} 
+             disabled={this.props.isLeftButtonDisabled}
+             className={classes.btnActionLeft}  
+             onClick={() => this.props.handleLeftButtonSelection(this.props.med)}>
+             {this.props.leftButtonLabel}
+          </Button>  
+
+          <Button 
+           size="small" 
+           variant="contained" 
+           color={this.props.rightbuttonColor} 
+           disabled={this.props.isRightButtonDisabled}
+           className={classes.btnAction} 
+           onClick={() => this.props.handleRightButtonSelection(this.props.med)} >
+           {this.props.rightButtonLabel}
+          </Button>
+        
+          <Button 
+             size="small" 
+             variant="contained" 
+             color={this.props.thirdbuttonColor} 
+             className={classes.btnAction}
+             onClick={() => this.props.handleThirdButtonSelection(this.props.med)}>
+            {this.props.thirdButtonLabel}
             </Button>
+
        </CardActions>    
        </Card>
 
