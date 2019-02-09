@@ -10,11 +10,13 @@ import Button from '@material-ui/core/Button'
 import Chip from '@material-ui/core/Chip'
 import ColorizeIcon from '@material-ui/icons/Colorize'
 import Avatar from '@material-ui/core/Avatar'
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
 
 const styles = theme => ({
   card: {
     minWidth: 290,
-    maxWidth: 850,
+    maxWidth: 950,
     maxHeight: 600, 
     borderRadius: '30px',
     boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
@@ -52,12 +54,31 @@ const styles = theme => ({
     fontSize: 14,
     margin: '0px 0px 0px 0px',
   },
+  root: {
+    flexGrow: 1,
+    width: '100%',
+    backgroundColor: theme.palette.background.paper,
+  },
 })
+
+TabContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+}
+
+function TabContainer(props) {
+  return (
+    <Typography component="div" style={{ padding: 8 * 3 }}>
+      {props.children}
+    </Typography>
+  );
+}
 
 class MedicineForm extends Component {
   
   state ={
     spacing: '24',
+    tabSelection: 0,
+
     mode: '',
     med: '',
     _id : '',
@@ -137,54 +158,91 @@ class MedicineForm extends Component {
     }
   }
 
+  handleTabChange = (event,tabSelection) => {  
+    this.setState({ tabSelection });
+  }
+
   render() {
     
     const { classes } = this.props
+    const { tabSelection } = this.state
 
     return ( 
       <>
+     
+
        <div>
-          
+  
        <Card className={classes.card}> 
        <CardContent>
          <Chip
             avatar={<Avatar><ColorizeIcon /></Avatar>}
             label='Medicine' 
             className={classes.chip}
-            color= "primary"
+            color="primary"
           />
+          
+          <div className={classes.root}>
+       
+            <Tabs
+              value={tabSelection}
+              onChange={this.handleTabChange}
+              variant="scrollable"
+              scrollButtons="on"
+              indicatorColor="primary"
+              textColor="primary"
+            >
+              <Tab label="Information" icon={<ColorizeIcon />} />
+              <Tab label="Injectable"  icon={<ColorizeIcon />} />
+              <Tab label="Tablet"      icon={<ColorizeIcon />} />
+              <Tab label="Capsule"     icon={<ColorizeIcon />} />
+              <Tab label="Suspension"  icon={<ColorizeIcon />} />
+            </Tabs> 
+     
+            {tabSelection === 0 && <TabContainer>
+             <div>
+                <Grid 
+                  container spacing={32}
+                  alignContent='center'
+                  style={{ margin: 'auto', marginLeft: '5%' }}>
 
-         <Grid 
-           container spacing={32}
-           alignContent='center'
-           style={{ margin: 'auto', marginLeft: '5%' }}>
+                    <Grid item>
+                      <Typography 
+                        className={classes.title}>
+                        {this.state.name}
+                      </Typography>   
+                      <Typography 
+                        className={classes.name}>
+                        {this.state.description}
+                      </Typography>           
+                      <Typography 
+                        className={classes.info}>
+                        <b>Alias:</b> {this.state.alias}
+                      </Typography> 
 
-            <Grid item>
-              <Typography 
-                 className={classes.title}>
-                 {this.state.name}
-              </Typography>   
-              <Typography 
-                 className={classes.name}>
-                 {this.state.description}
-              </Typography>           
-              <Typography 
-                 className={classes.info}>
-                <b>Alias:</b> {this.state.alias}
-              </Typography> 
-
-              <Chip
-                label={this.state.controlled ? 'Controlled' : 'Not-Controlled'} 
-                className={classes.chip}
-                color={this.state.controlled ? 'secondary' : 'default'} 
-               />              
-            </Grid>
-            <Grid item >
+                      <Chip
+                        label={this.state.controlled ? 'Controlled' : 'Not-Controlled'} 
+                        className={classes.chip}
+                        color={this.state.controlled ? 'secondary' : 'default'} 
+                      />              
+                    </Grid>
+                    <Grid item >
+    
+                    </Grid>      
+                  </Grid>
+             </div> 
+            </TabContainer>}
+            {tabSelection === 1 && <TabContainer>
+              Injectable </TabContainer>}
+            {tabSelection === 2 && <TabContainer>
+              Tablet</TabContainer>}
+            {tabSelection === 3 && <TabContainer>
+              Capsule</TabContainer>}
+            {tabSelection === 4 && <TabContainer>
+              Suspension</TabContainer>}
             
-              
-            </Grid>      
-          </Grid>
-         
+          </div>
+    
        </CardContent>
 
        <CardActions>
