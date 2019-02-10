@@ -51,7 +51,7 @@ const styles = theme => ({
     fontWeight: 'bold',
     margin: '7px 0px 0px 20px',
     backgroundColor: 'white',
-    maxWidth: 230,
+    maxWidth: 250,
     borderRadius: '10px',
     boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
     padding: '0px 0px 0px 10px' 
@@ -206,6 +206,13 @@ class Medicine extends Component {
     // reload the data
     this.loadMeds()
     // Just reset selected user and change screen mode to list
+    this.setState({ screenMode: 'view'})
+  }
+
+  handleReturn = (tgtMed) => {
+    // reload the data
+    this.loadMeds()
+    // Just reset selected user and change screen mode to list
     this.setState({ screenMode: 'list', targetMed: '' })
   }
 
@@ -262,9 +269,11 @@ class Medicine extends Component {
         return(
           <>
             <div>
-              <h1 className={classes.pageHead}>
-                Do you want to delete this Medicine?
-              </h1>
+              <div className={classes.pageHeadDelete}>
+                <h2>
+                Delete this Medicine?
+                </h2>
+              </div>
               <MedCard 
                     med={this.state.targetMed}
                     userSession={this.state.sessionUser}
@@ -274,10 +283,7 @@ class Medicine extends Component {
                     rightbuttonColor='default'
                     rightButtonLabel='Cancel'
                     handleRightButtonSelection={this.handleCancel}
-                    viewThirdButton={false}
-                    viewButtonColor='primary'
-                    viewButtonLabel='View'
-                    handleViewButtonSelection={this.handleMedViewSelection}   
+    
                   />   
             </div>
           </>
@@ -305,7 +311,7 @@ class Medicine extends Component {
               handleRightButtonSelection={this.handleMedDeleteSelection}
               thirdbuttonColor='default'
               thirdButtonLabel='Return'
-              handleThirdButtonSelection={this.handleCancel}
+              handleThirdButtonSelection={this.handleReturn}
             />
           </>
         ) // return()

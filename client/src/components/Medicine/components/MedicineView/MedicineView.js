@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid';
+import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
@@ -90,7 +90,6 @@ class MedicineForm extends Component {
     spacing: '24',
     tabSelection: 0,
 
-    mode: '',
     med: '',
     _id : '',
     name: '',
@@ -131,7 +130,6 @@ class MedicineForm extends Component {
 
     if(this.props.med !== '') {
       this.setState({
-        mode: this.props.mode,
         med: this.props.med,
          _id: this.props.med._id, 
          name: this.props.med.name,
@@ -199,8 +197,6 @@ class MedicineForm extends Component {
     
     const { classes } = this.props
     
-    console.log('range:',this.props.med.injectable.doseRangeCanine)
-
     if (tabNum === 0) {
       return(
         <>
@@ -458,7 +454,7 @@ class MedicineForm extends Component {
                       {this.state.description}
                     </Typography>           
                     <Typography 
-                      className={classes.info}>
+                      className={classes.name}>
                       <b>Alias:</b> {this.state.alias}
                     </Typography> 
       
