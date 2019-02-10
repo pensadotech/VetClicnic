@@ -8,16 +8,16 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Chip from '@material-ui/core/Chip'
-import ColorizeIcon from '@material-ui/icons/Colorize'
 import Avatar from '@material-ui/core/Avatar'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
+import ColorizeIcon from '@material-ui/icons/Colorize'
 
 const styles = theme => ({
   card: {
     minWidth: 290,
     maxWidth: 950,
-    maxHeight: 600, 
+    maxHeight: 800, 
     borderRadius: '30px',
     boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
     [theme.breakpoints.down('sm')]: {
@@ -50,15 +50,26 @@ const styles = theme => ({
     margin: '0px 0px 2px 0px',   
     fontWeight: 'bold'
   },
-  info: {
+  infoLabel: {
     fontSize: 14,
-    margin: '0px 0px 0px 0px',
+    margin: '5px 0px 0px 15px',
+  },
+  info: {
+    fontSize: 18,
+    margin: '5px 0px 0px 25px',
+    fontWeight: 'bold'
   },
   root: {
     flexGrow: 1,
     width: '100%',
     backgroundColor: theme.palette.background.paper,
+    margin:'5px 0px 0px 20px'
   },
+  tabBody : {
+    flexGrow: 1,
+    width: '100%',
+    backgroundColor: theme.palette.background.paper
+  }
 })
 
 TabContainer.propTypes = {
@@ -117,6 +128,7 @@ class MedicineForm extends Component {
   }
   
   componentDidMount = () => {
+
     if(this.props.med !== '') {
       this.setState({
         mode: this.props.mode,
@@ -130,36 +142,286 @@ class MedicineForm extends Component {
          injectableAvailable : this.props.med.injectable.available,
          injectableConcentration : this.props.med.injectable.concentration,
          injectableDoseCanine : this.props.med.injectable.doseCanine,
-         injectableDoseRangeCanine : this.props.med.injectable.doseRangeCanine,
+         injectableDoseRangeCanine : this.translateArrayToList(this.props.med.injectable.doseRangeCanine),
          injectableDoseFeline : this.props.med.injectable.doseFeline,
-         injectableDoseRangeFeline : this.props.med.injectable.doseRangeFeline,
-         injectableRoutes : this.props.med.injectable.routes,
+         injectableDoseRangeFeline : this.translateArrayToList(this.props.med.injectable.doseRangeFeline),
+         injectableRoutes : this.translateArrayToList(this.props.med.injectable.routes),
          
          tabletAvailable : this.props.med.tablet.available,
-         tabletSizes : this.props.med.tablet.tabletSizes,
+         tabletSizes : this.translateArrayToList(this.props.med.tablet.tabletSizes),
          tabletDoseCanine : this.props.med.tablet.doseCanine,
-         tabletDoseRangeCanine : this.props.med.tablet.doseRangeCanine,
+         tabletDoseRangeCanine : this.translateArrayToList(this.props.med.tablet.doseRangeCanine),
          tabletDoseFeline : this.props.med.tablet.doseFeline,
-         tabletDoseRangeFeline : this.props.med.tablet.doseRangeFeline,
+         tabletDoseRangeFeline : this.translateArrayToList(this.props.med.tablet.doseRangeFeline),
 
          capsuleAvailable : this.props.med.capsule.available,
-         capsuleSizes : this.props.med.capsule.capsuleSizes,
+         capsuleSizes : this.translateArrayToList(this.props.med.capsule.capsuleSizes),
          capsuleDoseCanine : this.props.med.capsule.doseCanine,
-         capsuleDoseRangeCanine: this.props.med.capsule.doseRangeCanine,
+         capsuleDoseRangeCanine: this.translateArrayToList(this.props.med.capsule.doseRangeCanine),
          capsuleDoseFeline: this.props.med.capsule.doseFeline,
          capsuleDoseRangeFeline: this.props.med.capsule.doseRangeFeline,
           
          suspensionAvailable : this.props.med.suspension.available,
          suspensionDoseCanine: this.props.med.suspension.doseCanine,
-         suspensionDoseRangeCanine: this.props.med.suspension.doseRangeCanine,
+         suspensionDoseRangeCanine: this.translateArrayToList(this.props.med.suspension.doseRangeCanine),
          suspensionDoseFeline: this.props.med.suspension.doseFeline,
-         suspensionDoseRangeFeline: this.props.med.suspension.doseRangeFeline
+         suspensionDoseRangeFeline: this.translateArrayToList(this.props.med.suspension.doseRangeFeline)
       })
+      
     }
+  }
+
+  translateArrayToList = (tgtObj) => {
+   
+    let stringList = ''
+    
+    if (Array.isArray(tgtObj) && tgtObj.length > 0) {
+  
+      for(let i = 0; i < tgtObj.length; i++)
+      {
+        let element = tgtObj[i]
+        if(stringList === '') {
+          stringList = element.toString()
+        } else {
+          stringList += ',' + element.toString()
+        }
+      }    
+    }
+  
+    return stringList
   }
 
   handleTabChange = (event,tabSelection) => {  
     this.setState({ tabSelection });
+  }
+
+  renderTab(tabNum) {
+    
+    const { classes } = this.props
+    
+    console.log('range:',this.props.med.injectable.doseRangeCanine)
+
+    if (tabNum === 0) {
+      return(
+        <>
+          <div className={classes.tabBody}>
+            <Grid container spacing={8}>
+              <Grid item>
+                <div>
+                <Chip className={classes.chip} color='primary'
+                      label='Injectable' />   
+                </div>
+                <div>              
+                <Chip className={classes.chip} color='default'
+                      label={this.state.injectableAvailable ? 'Available' : 'Not-Available'} />  
+                </div>          
+              </Grid>
+              <Grid item>
+                <Typography className={classes.infoLabel} color="textPrimary">    
+                  Concentration:
+                </Typography>
+                <Typography className={classes.info} color="textPrimary">    
+                   {this.state.injectableConcentration} 
+                </Typography>
+                <Typography className={classes.infoLabel} color="textPrimary">    
+                  Routes:
+                </Typography>
+                <Typography className={classes.info} color="textPrimary">    
+                  {this.state.injectableRoutes} 
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography className={classes.infoLabel} color="textPrimary">    
+                   Dose Canine: 
+                </Typography>
+                <Typography className={classes.info} color="textPrimary">    
+                   {this.state.injectableDoseCanine} 
+                </Typography>
+                <Typography className={classes.infoLabel} color="textPrimary">    
+                  Dose Range Canine:
+                </Typography>
+               <Typography className={classes.info} color="textPrimary">    
+                  {this.state.injectableDoseRangeCanine} 
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography className={classes.infoLabel} color="textPrimary">    
+                  Dose Feline:
+                </Typography>
+                <Typography className={classes.info} color="textPrimary">    
+                   {this.state.injectableDoseFeline} 
+                </Typography>
+                <Typography className={classes.infoLabel} color="textPrimary">    
+                  Dose Range Feline:
+                </Typography>
+                <Typography className={classes.info} color="textPrimary">    
+                  {this.state.injectableDoseRangeFeline} 
+                </Typography>
+              </Grid>
+            </Grid>
+          </div>
+        </>
+        ) // return
+    } else if (tabNum === 1) {
+      return(
+        <>
+          <div className={classes.tabBody}>
+            <Grid container spacing={8}>
+              <Grid item>
+              <div>
+                <Chip className={classes.chip} color='primary'
+                      label='Tablet'/>   
+                </div>
+                <div>              
+                <Chip className={classes.chip} color='default'
+                  label={this.state.tabletAvailable ? 'Available' : 'Not-Available'} />  
+                </div>     
+              </Grid>
+              <Grid item>
+                <Typography className={classes.infoLabel} color="textPrimary">    
+                  Sizes:
+                </Typography>
+                <Typography className={classes.info} color="textPrimary">    
+                  {this.state.tabletSizes} 
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography className={classes.infoLabel} color="textPrimary">    
+                  Dose Canine:
+                </Typography>
+                <Typography className={classes.info} color="textPrimary">    
+                  {this.state.tabletDoseCanine} 
+                </Typography>
+                <Typography className={classes.infoLabel} color="textPrimary">    
+                   Dose Range Canine: 
+                </Typography>
+                <Typography className={classes.info} color="textPrimary">    
+                   {this.state.tabletDoseRangeCanine} 
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography className={classes.infoLabel} color="textPrimary">    
+                   Dose Feline:
+                </Typography>
+                <Typography className={classes.info} color="textPrimary">    
+                   {this.state.tabletDoseFeline} 
+                </Typography>
+                <Typography className={classes.infoLabel} color="textPrimary">    
+                  Dose Range Feline:
+                </Typography>
+                <Typography className={classes.info} color="textPrimary">    
+                  {this.state.tabletDoseRangeFeline} 
+                </Typography>
+              </Grid>
+            </Grid>
+          </div>
+        </>
+        ) // return
+    } else if (tabNum === 2) {
+      return(
+        <>
+          <div className={classes.tabBody}>
+            <Grid container spacing={8}>
+              <Grid item>
+              <div>
+                <Chip className={classes.chip}  color='primary'
+                      label='Capsule' />   
+                </div>
+                <div>              
+                <Chip className={classes.chip} color='default'
+                  label={this.state.capsuleAvailable ? 'Available' : 'Not-Available'} />  
+                </div>     
+              </Grid>
+              <Grid item>
+                <Typography className={classes.infoLabel} color="textPrimary">    
+                  Sizes:
+                </Typography>
+                <Typography className={classes.info} color="textPrimary">    
+                  {this.state.capsuleSizes} 
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography className={classes.infoLabel} color="textPrimary">    
+                  Dose Canine: 
+                </Typography>
+                <Typography className={classes.info} color="textPrimary">    
+                  {this.state.capsuleDoseCanine} 
+                </Typography>
+                <Typography className={classes.infoLabel} color="textPrimary">    
+                  Dose Range Canine: 
+                </Typography>
+                <Typography className={classes.info} color="textPrimary">    
+                   {this.state.capsuleDoseRangeCanine} 
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography className={classes.infoLabel} color="textPrimary">    
+                  Dose Feline: 
+                </Typography>
+                <Typography className={classes.info} color="textPrimary">    
+                  {this.state.capsuleDoseFeline} 
+                </Typography>
+                <Typography className={classes.infoLabel} color="textPrimary">    
+                  Dose Range Feline:
+                </Typography>
+                <Typography className={classes.info} color="textPrimary">    
+                  {this.state.capsuleDoseRangeFeline} 
+                </Typography>
+              </Grid>
+            </Grid>
+          </div>
+        </>
+        ) // return
+    }  else if (tabNum === 3) {
+      return(
+        <>
+          <div className={classes.tabBody}>
+            <Grid container spacing={8}>
+              <Grid item>
+                <div>
+                <Chip className={classes.chip}  color='primary'
+                      label='Suspension' />   
+                </div>
+                <div>              
+                <Chip className={classes.chip} color='default'
+                      label={this.state.suspensionAvailable ? 'Available' : 'Not-Available'} />  
+                </div>     
+              </Grid>
+              <Grid item>
+                <Typography className={classes.infoLabel} color="textPrimary">    
+                  Dose Canine:
+                </Typography>
+                <Typography className={classes.info} color="textPrimary">    
+                   {this.state.suspensionDoseCanine} 
+                </Typography>
+
+                <Typography className={classes.infoLabel} color="textPrimary">    
+                  Dose Range Canine:
+                </Typography>
+                <Typography className={classes.info} color="textPrimary">    
+                  {this.state.suspensionDoseRangeCanine} 
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography className={classes.infoLabel} color="textPrimary">    
+                  Dose Feline:
+                </Typography>
+                <Typography className={classes.info} color="textPrimary">    
+                  {this.state.suspensionDoseFeline} 
+                </Typography>
+                <Typography className={classes.infoLabel} color="textPrimary">    
+                  Dose Range Feline:
+                </Typography>
+                <Typography className={classes.info} color="textPrimary">    
+                   {this.state.suspensionDoseRangeFeline} 
+                </Typography>
+              </Grid>
+            </Grid>
+          </div>
+        </>
+        ) // return
+    } 
+
   }
 
   render() {
@@ -169,12 +431,10 @@ class MedicineForm extends Component {
 
     return ( 
       <>
-     
-
        <div>
-  
        <Card className={classes.card}> 
        <CardContent>
+
          <Chip
             avatar={<Avatar><ColorizeIcon /></Avatar>}
             label='Medicine' 
@@ -182,6 +442,38 @@ class MedicineForm extends Component {
             color="primary"
           />
           
+          <div>
+              <Grid 
+                container spacing={32}
+                alignContent='center'
+                style={{ margin: 'auto', marginLeft: '5%' }}>
+
+                  <Grid item>
+                    <Typography 
+                      className={classes.title}>
+                      {this.state.name}
+                    </Typography>   
+                    <Typography 
+                      className={classes.name}>
+                      {this.state.description}
+                    </Typography>           
+                    <Typography 
+                      className={classes.info}>
+                      <b>Alias:</b> {this.state.alias}
+                    </Typography> 
+      
+                  </Grid>
+                  <Grid item >
+                  <Chip
+                      label={this.state.controlled ? 'Controlled' : 'Not-Controlled'} 
+                      className={classes.chip}
+                      color={this.state.controlled ? 'secondary' : 'default'} 
+                    />     
+  
+                  </Grid>      
+                </Grid>
+             </div> 
+
           <div className={classes.root}>
        
             <Tabs
@@ -192,61 +484,22 @@ class MedicineForm extends Component {
               indicatorColor="primary"
               textColor="primary"
             >
-              <Tab label="Information" icon={<ColorizeIcon />} />
-              <Tab label="Injectable"  icon={<ColorizeIcon />} />
-              <Tab label="Tablet"      icon={<ColorizeIcon />} />
-              <Tab label="Capsule"     icon={<ColorizeIcon />} />
-              <Tab label="Suspension"  icon={<ColorizeIcon />} />
+              <Tab label="Injectable" />
+              <Tab label="Tablet"     />
+              <Tab label="Capsule"    />
+              <Tab label="Suspension" />
             </Tabs> 
      
-            {tabSelection === 0 && <TabContainer>
-             <div>
-                <Grid 
-                  container spacing={32}
-                  alignContent='center'
-                  style={{ margin: 'auto', marginLeft: '5%' }}>
-
-                    <Grid item>
-                      <Typography 
-                        className={classes.title}>
-                        {this.state.name}
-                      </Typography>   
-                      <Typography 
-                        className={classes.name}>
-                        {this.state.description}
-                      </Typography>           
-                      <Typography 
-                        className={classes.info}>
-                        <b>Alias:</b> {this.state.alias}
-                      </Typography> 
-
-                      <Chip
-                        label={this.state.controlled ? 'Controlled' : 'Not-Controlled'} 
-                        className={classes.chip}
-                        color={this.state.controlled ? 'secondary' : 'default'} 
-                      />              
-                    </Grid>
-                    <Grid item >
-    
-                    </Grid>      
-                  </Grid>
-             </div> 
-            </TabContainer>}
-            {tabSelection === 1 && <TabContainer>
-              Injectable </TabContainer>}
-            {tabSelection === 2 && <TabContainer>
-              Tablet</TabContainer>}
-            {tabSelection === 3 && <TabContainer>
-              Capsule</TabContainer>}
-            {tabSelection === 4 && <TabContainer>
-              Suspension</TabContainer>}
+            {tabSelection === 0 && <TabContainer>{this.renderTab(0)}</TabContainer>}
+            {tabSelection === 1 && <TabContainer>{this.renderTab(1)}</TabContainer>}
+            {tabSelection === 2 && <TabContainer>{this.renderTab(2)}</TabContainer>}
+            {tabSelection === 3 && <TabContainer>{this.renderTab(3)}</TabContainer>}
             
           </div>
     
        </CardContent>
 
        <CardActions>
-
           <Button 
              size="small" 
              variant="contained" 
@@ -278,7 +531,6 @@ class MedicineForm extends Component {
 
        </CardActions>    
        </Card>
-
        </div>
      </>
 
