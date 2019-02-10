@@ -159,7 +159,7 @@ class MedicineForm extends Component {
          capsuleDoseCanine : this.props.med.capsule.doseCanine,
          capsuleDoseRangeCanine: this.translateArrayToList(this.props.med.capsule.doseRangeCanine),
          capsuleDoseFeline: this.props.med.capsule.doseFeline,
-         capsuleDoseRangeFeline: this.props.med.capsule.doseRangeFeline,
+         capsuleDoseRangeFeline: this.translateArrayToList(this.props.med.capsule.doseRangeFeline),
           
          suspensionAvailable : this.props.med.suspension.available,
          suspensionDoseCanine: this.props.med.suspension.doseCanine,
