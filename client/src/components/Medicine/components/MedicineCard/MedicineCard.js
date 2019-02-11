@@ -76,37 +76,37 @@ class MedicineCard extends Component {
             color="primary"
           />
 
-<div>
-              <Grid 
-                container spacing={32}
-                alignContent='center'
-                style={{ margin: 'auto', marginLeft: '5%' }}>
+          <div>
+            <Grid 
+              container spacing={32}
+              alignContent='center'
+              style={{ margin: 'auto', marginLeft: '5%' }}>
 
-                  <Grid item>
-                    <Typography 
-                      className={classes.title}>
-                      {this.props.med.name}
-                    </Typography>   
-                    <Typography 
-                      className={classes.name}>
-                      {this.props.med.description}
-                    </Typography>           
-                    <Typography 
-                      className={classes.name}>
-                      <b>Alias:</b> {this.props.med.alias}
-                    </Typography> 
-      
-                  </Grid>
-                  <Grid item >
-                  <Chip
-                      label={this.props.med.controlled ? 'Controlled' : 'Not-Controlled'} 
-                      className={classes.chip}
-                      color={this.props.med.controlled ? 'secondary' : 'default'} 
-                    />     
-  
-                  </Grid>      
+                <Grid item>
+                  <Typography 
+                    className={classes.title}>
+                    {this.props.med.name}
+                  </Typography>   
+                  <Typography 
+                    className={classes.name}>
+                    {this.props.med.description}
+                  </Typography>           
+                  <Typography 
+                    className={classes.name}>
+                    <b>Alias:</b> {this.props.med.alias}
+                  </Typography> 
+    
                 </Grid>
-             </div> 
+                <Grid item >
+                <Chip
+                    label={this.props.med.controlled ? 'Controlled' : 'Not-Controlled'} 
+                    className={classes.chip}
+                    color={this.props.med.controlled ? 'secondary' : 'default'} 
+                  />     
+
+                </Grid>      
+              </Grid>
+          </div> 
 
       </CardContent>
       <CardActions> 

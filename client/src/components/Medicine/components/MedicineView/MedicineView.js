@@ -16,7 +16,7 @@ import ColorizeIcon from '@material-ui/icons/Colorize'
 const styles = theme => ({
   card: {
     minWidth: 290,
-    maxWidth: 950,
+    maxWidth: 850,
     maxHeight: 800, 
     borderRadius: '30px',
     boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
@@ -46,9 +46,8 @@ const styles = theme => ({
     margin: '0px 0px 2px 0px',
   },
   name: {
-    fontSize: 18,
-    margin: '0px 0px 2px 0px',   
-    fontWeight: 'bold'
+    fontSize:18,
+    margin: '0px 10px 2px 0px',
   },
   infoLabel: {
     fontSize: 14,
@@ -87,7 +86,7 @@ function TabContainer(props) {
 class MedicineForm extends Component {
   
   state ={
-    spacing: '24',
+   
     tabSelection: 0,
 
     med: '',
@@ -445,28 +444,21 @@ class MedicineForm extends Component {
                 style={{ margin: 'auto', marginLeft: '5%' }}>
 
                   <Grid item>
-                    <Typography 
-                      className={classes.title}>
+                    <Typography className={classes.title}>
                       {this.state.name}
-                    </Typography>   
-                    <Typography 
-                      className={classes.name}>
-                      {this.state.description}
-                    </Typography>           
-                    <Typography 
-                      className={classes.name}>
-                      <b>Alias:</b> {this.state.alias}
-                    </Typography> 
-      
-                  </Grid>
-                  <Grid item >
-                  <Chip
+                    </Typography>                  
+                    <Typography className={classes.name}>
+                      Description: <b>{this.state.description}</b> 
+                    </Typography>  
+                    <Typography className={classes.name}>
+                      Alias: <b>{this.state.alias}</b>
+                    </Typography>  
+                    <Chip
                       label={this.state.controlled ? 'Controlled' : 'Not-Controlled'} 
                       className={classes.chip}
                       color={this.state.controlled ? 'secondary' : 'default'} 
-                    />     
-  
-                  </Grid>      
+                     />                      
+                  </Grid>     
                 </Grid>
              </div> 
 

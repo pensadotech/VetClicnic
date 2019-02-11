@@ -61,7 +61,7 @@ const styles = theme => ({
     fontWeight: 'bold',
     margin: '7px 0px 0px 20px',
     backgroundColor: 'white',
-    maxWidth: 325,
+    maxWidth: 350,
     borderRadius: '10px',
     boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
     padding: '0px 0px 0px 10px' 
@@ -69,19 +69,18 @@ const styles = theme => ({
   fab: {
     margin: theme.spacing.unit
   },
-  chipTitle: { 
-    
+  chipTitle: {   
     [theme.breakpoints.down('sm')]: {
-      margin: '15px 5px 0px 5px',
-      fontSize: 18,
+      margin: '2px 5px 0px 5px',
+      fontSize: 14,
      },
      [theme.breakpoints.up('md')]: {
-      margin: '20px 10px 0px 10px',
-      fontSize: 24,
+      margin: '7px 10px 0px 10px',
+      fontSize: 20,
      },
      [theme.breakpoints.up('lg')]: {
-        margin: '20px 20px 0px 20px',
-        fontSize: 32,
+        margin: '10px 20px 0px 20px',
+        fontSize: 24,
      }
   },
   chip: {
@@ -247,9 +246,11 @@ class Medicine extends Component {
 
         return(
           <>
-            <h1 className={classes.pageHead}>
+            <div className={classes.pageHeadUpdate}>
+              <h2>
               Update medicine information
-            </h1>
+              </h2>
+            </div>
             <MedForm 
               mode={this.state.screenMode}
               med={this.state.targetMed}
@@ -259,7 +260,6 @@ class Medicine extends Component {
               rightbuttonColor='default'
               rightButtonLabel='Cancel'   
               handleRightButtonSelection={this.handleCancel}
-              isNameDisabled={false}
             />
           </>
         ) // return()
@@ -338,16 +338,15 @@ class Medicine extends Component {
                      >
                   <AddIcon />
                 </Fab>
-              </Grid> 
-              <Grid item>
-                <Chip
-                  label='controlled'
-                  className={classes.chipTitle}
-                  color='secondary'
-                /> 
-              </Grid>        
+              </Grid>      
             </Grid>
-          
+
+            <Chip
+              label='controlled'
+              className={classes.chipTitle}
+              color='secondary'
+            /> 
+     
             <div>
             <Paper className={classes.root}>
               <Table className={classes.table}>
