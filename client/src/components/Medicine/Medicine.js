@@ -248,7 +248,7 @@ class Medicine extends Component {
               handleLeftButtonSelection={this.handleCreateMed}
               rightbuttonColor='default'
               rightButtonLabel='Cancel'   
-              handleRightButtonSelection={this.handleCancel}
+              handleRightButtonSelection={this.handleReturn}
               isNameDisabled={false}
             />
           </>
