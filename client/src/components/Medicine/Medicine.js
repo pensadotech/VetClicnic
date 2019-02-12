@@ -175,10 +175,8 @@ class Medicine extends Component {
   }
 
   handleSaveMed = (tgtMed) => {
-     
-    console.log('save-med',tgtMed)
 
-    // Save updated user data    
+    //Save updated user data    
     APImeds.updateMed(tgtMed._id, tgtMed)
       .then(r => {  
         // Restore main view

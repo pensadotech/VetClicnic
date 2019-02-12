@@ -63,12 +63,13 @@ module.exports = {
   },
   update: function (req, res) {
     // body has the user
-    let medsData = req.body;
-    // Update
+    let medsData = req.body
+
+    //Update
     db.Meds
       .findOneAndUpdate({ _id: req.params.id }, medsData)
       .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+      .catch(err => res.status(422).json(err))
   },
   remove: function (req, res) {
     db.Meds

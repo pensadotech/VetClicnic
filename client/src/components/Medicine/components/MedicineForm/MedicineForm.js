@@ -21,8 +21,8 @@ import APImeds from '../../../../utils/APImeds'
 const styles = theme => ({
   card: {
     minWidth: 290,
-    maxWidth: 950,
-    maxHeight: 800, 
+    maxWidth: 1100,
+    // maxHeight: 1000, 
     borderRadius: '30px',
     boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
     [theme.breakpoints.down('sm')]: {
@@ -36,7 +36,7 @@ const styles = theme => ({
      }
   },
   chip: {
-    margin: '4px 0px 2px 0px',
+    margin: '4px 20px 0px 0px',
   },
   btnActionLeft : {
     margin: '0px 0px 10px 20px',
@@ -85,6 +85,13 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     width: 350,
   },
+  inlineBlock : {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center' 
+  }
+  
 })
 
 TabContainer.propTypes = {
@@ -104,7 +111,8 @@ class MedicineForm extends Component {
   state ={
  
     tabSelection: 0,
-
+    
+    mode: '',
     med: '',
     _id : '',
     name: '',
@@ -145,6 +153,7 @@ class MedicineForm extends Component {
 
     if(this.props.med !== '') {
       this.setState({
+        mode: this.props.mode,
         med: this.props.med,
          _id: this.props.med._id, 
          name: this.props.med.name,
@@ -224,10 +233,10 @@ class MedicineForm extends Component {
 
     let injectableObj = {
       available: this.state.injectableAvailable,
-      concentration: this.state.injectableConcentration,
-      doseCanine: this.state.injectableDoseCanine,
+      concentration: parseFloat(this.state.injectableConcentration),
+      doseCanine: parseFloat(this.state.injectableDoseCanine),
       doseRangeCanine: injectableDoseRangeCanine,
-      doseFeline:this.state.injectableDoseFeline,
+      doseFeline: parseFloat(this.state.injectableDoseFeline),
       doseRangeFeline: injectableDoseRangeFeline,
       routes: this.state.injectableRoutes
     }
@@ -237,16 +246,16 @@ class MedicineForm extends Component {
 
   getTabletObj = () => {
          
-    let tabletSizes = this.translateObjectToArray(this.state.tabletSizes,'number')
+    let tabletSizes = this.translateObjectToArray(this.state.tabletSizes,'float')
     let tabletDoseRangeCanine = this.translateObjectToArray(this.state.tabletDoseRangeCanine,'float')
     let tabletDoseRangeFeline = this.translateObjectToArray(this.state.tabletDoseRangeFeline,'float')
 
     let tabletObj = {
       available: this.state.tabletAvailable,
       tabletSizes: tabletSizes,
-      doseCanine: this.state.tabletDoseCanine,
+      doseCanine: parseFloat(this.state.tabletDoseCanine),
       doseRangeCanine: tabletDoseRangeCanine,
-      doseFeline: this.state.tabletDoseFeline,
+      doseFeline: parseFloat(this.state.tabletDoseFeline),
       doseRangeFeline: tabletDoseRangeFeline
     }
 
@@ -255,16 +264,16 @@ class MedicineForm extends Component {
 
   getCapsuleObj = () => {
      
-    let capsuleSizes = this.translateObjectToArray(this.state.capsuleSizes,'number')
+    let capsuleSizes = this.translateObjectToArray(this.state.capsuleSizes,'float')
     let capsuleDoseRangeCanine = this.translateObjectToArray(this.state.capsuleDoseRangeCanine,'float')
     let capsuleDoseRangeFeline = this.translateObjectToArray(this.state.capsuleDoseRangeFeline,'float')
 
     let capsuleObj = {
       available: this.state.capsuleAvailable,
       capsuleSizes: capsuleSizes,
-      doseCanine: this.state.capsuleDoseCanine,
+      doseCanine:  parseFloat(this.state.capsuleDoseCanine),
       doseRangeCanine: capsuleDoseRangeCanine,
-      doseFeline: this.state.capsuleDoseFeline,
+      doseFeline:  parseFloat(this.state.capsuleDoseFeline),
       doseRangeFeline: capsuleDoseRangeFeline
     }
 
@@ -279,9 +288,9 @@ class MedicineForm extends Component {
 
     let suspensionObj = {
       available: this.state.suspensionAvailable,
-      doseCanine: this.state.suspensionDoseCanine,
+      doseCanine: parseFloat(this.state.suspensionDoseCanine),
       doseRangeCanine: suspensionDoseRangeCanine,
-      doseFeline: this.state.suspensionDoseFeline,
+      doseFeline: parseFloat(this.state.suspensionDoseFeline),
       doseRangeFeline: suspensionDoseRangeFeline
     }
 
@@ -290,9 +299,6 @@ class MedicineForm extends Component {
 
   translateObjectToArray = (tgtObj, convertToType = 'string') => {
     
-    console.log('tgtObj',tgtObj)
-    console.log('isArray',Array.isArray(tgtObj))
-
     let resArray = ['']
     let finalArray = [''] 
   
@@ -313,13 +319,12 @@ class MedicineForm extends Component {
     } else {
       finalArray = resArray
     }
-
-    console.log('finalArray',finalArray)
   
     return finalArray
   }
 
   handleSave = () => {
+
     if (this.state.mode === 'edit') {
       // EDIT MODE: Validate 
       if (this.state.name === '' || this.state.description === '' )  {    
@@ -343,7 +348,7 @@ class MedicineForm extends Component {
             capsule: capsuleObj,
             suspension : suspensionObj
           }
-
+           
           // send information back 
           this.props.handleLeftButtonSelection(newMed)
        }
@@ -403,56 +408,118 @@ class MedicineForm extends Component {
           <div className={classes.tabBody}>
             <Grid container spacing={8}>
               <Grid item>
-                <div>
-                <Chip className={classes.chip} color='primary'
-                      label='Injectable' />   
-                </div>
-                <div>              
-                <Chip className={classes.chip} color='default'
-                      label={this.state.injectableAvailable ? 'Available' : 'Not-Available'} />  
-                </div>          
+                <div className={classes.inlineBlock}>
+                  <Chip className={classes.chip} color='primary'
+                        label='Injectable' />
+                  <form className={classes.container} noValidate autoComplete="off">
+                  <div className='formItem'> 
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={this.state.injectableAvailable}
+                            onChange={this.handleCheckboxChange('injectableAvailable')}
+                            value="injectableAvailable"
+                            color="secondary"
+                          />
+                        }
+                        label="Available"
+                      />                   
+                  </div>                 
+                </form>   
+                </div>                     
+              </Grid>
+            </Grid>
+
+            <Grid container spacing={8}>
+              <Grid item>
+                <form className={classes.container} noValidate autoComplete="off">
+                <div className='formItem'> 
+                      <TextField
+                        id="med-concentration"
+                        label="Concentration :"
+                        className={classes.textField}
+                        name='injectableConcentration'
+                        type="string"
+                        autoComplete="current-Concentration"
+                        value={this.state.injectableConcentration}
+                        onChange={this.handleInputChange}
+                        margin="normal"
+                      />          
+                   </div>
+                   <div className='formItem'> 
+                      <TextField
+                        id="med-injectableRoutes"
+                        label="Routes :"
+                        className={classes.textField}
+                        name='injectableRoutes'
+                        type="string"
+                        autoComplete="current-injectableRoutes"
+                        value={this.state.injectableRoutes}
+                        onChange={this.handleInputChange}
+                        margin="normal"
+                      />          
+                   </div>
+                </form>
               </Grid>
               <Grid item>
-                <Typography className={classes.infoLabel} color="textPrimary">    
-                  Concentration:
-                </Typography>
-                <Typography className={classes.info} color="textPrimary">    
-                   {this.state.injectableConcentration} 
-                </Typography>
-                <Typography className={classes.infoLabel} color="textPrimary">    
-                  Routes:
-                </Typography>
-                <Typography className={classes.info} color="textPrimary">    
-                  {this.state.injectableRoutes} 
-                </Typography>
+                <form className={classes.container} noValidate autoComplete="off">
+                  <div className='formItem'> 
+                      <TextField
+                        id="med-doseCanine"
+                        label="Dose Canine :"
+                        className={classes.textField}
+                        name='injectableDoseCanine'
+                        type="string"
+                        autoComplete="current-DoseCanine"
+                        value={this.state.injectableDoseCanine}
+                        onChange={this.handleInputChange}
+                        margin="normal"
+                      /> 
+                   </div>   
+                   <div className='formItem'> 
+                      <TextField
+                        id="med-doseRangeCanine"
+                        label="Dose Range Canine :"
+                        className={classes.textField}
+                        name='injectableDoseRangeCanine'
+                        type="string"
+                        autoComplete="current-doseRangeCanine"
+                        value={this.state.injectableDoseRangeCanine}
+                        onChange={this.handleInputChange}
+                        margin="normal"
+                      />          
+                   </div>
+                </form>
               </Grid>
               <Grid item>
-                <Typography className={classes.infoLabel} color="textPrimary">    
-                   Dose Canine: 
-                </Typography>
-                <Typography className={classes.info} color="textPrimary">    
-                   {this.state.injectableDoseCanine} 
-                </Typography>
-                <Typography className={classes.infoLabel} color="textPrimary">    
-                  Dose Range Canine:
-                </Typography>
-               <Typography className={classes.info} color="textPrimary">    
-                  {this.state.injectableDoseRangeCanine} 
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography className={classes.infoLabel} color="textPrimary">    
-                  Dose Feline:
-                </Typography>
-                <Typography className={classes.info} color="textPrimary">    
-                   {this.state.injectableDoseFeline} 
-                </Typography>
-                <Typography className={classes.infoLabel} color="textPrimary">    
-                  Dose Range Feline:
-                </Typography>
-                <Typography className={classes.info} color="textPrimary">    
-                  {this.state.injectableDoseRangeFeline} 
-                </Typography>
+                <form className={classes.container} noValidate autoComplete="off">
+                   <div className='formItem'> 
+                      <TextField
+                        id="med-doseFeline"
+                        label="Dose Feline :"
+                        className={classes.textField}
+                        name='injectableDoseFeline'
+                        type="string"
+                        autoComplete="current-DoseFeline"
+                        value={this.state.injectableDoseFeline}
+                        onChange={this.handleInputChange}
+                        margin="normal"
+                      />          
+                    </div>
+                    <div className='formItem'> 
+                          <TextField
+                            id="med-injectableRoutes"
+                            label="Routes :"
+                            className={classes.textField}
+                            name='injectableRoutes'
+                            type="string"
+                            autoComplete="current-injectableRoutes"
+                            value={this.state.injectableRoutes}
+                            onChange={this.handleInputChange}
+                            margin="normal"
+                          />          
+                    </div>
+                </form>
               </Grid>
             </Grid>
           </div>
@@ -464,50 +531,105 @@ class MedicineForm extends Component {
           <div className={classes.tabBody}>
             <Grid container spacing={8}>
               <Grid item>
-              <div>
+               <div className={classes.inlineBlock}>
                 <Chip className={classes.chip} color='primary'
-                      label='Tablet'/>   
-                </div>
-                <div>              
-                <Chip className={classes.chip} color='default'
-                  label={this.state.tabletAvailable ? 'Available' : 'Not-Available'} />  
-                </div>     
+                      label='Tablet'/>      
+                <form className={classes.container} noValidate autoComplete="off">
+                  <div className='formItem'> 
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={this.state.tabletAvailable}
+                              onChange={this.handleCheckboxChange('tabletAvailable')}
+                              value="tabletAvailable"
+                              color="secondary"
+                            />
+                          }
+                          label="Available"
+                        />                   
+                    </div>
+                </form> 
+               </div>   
+              </Grid>
+            </Grid>
+
+            <Grid container spacing={8}>      
+              <Grid item>
+               <form className={classes.container} noValidate autoComplete="off">
+                  <div className='formItem'> 
+                    <TextField
+                      id="med-tabletSizes"
+                      label="Sizes :"
+                      className={classes.textField}
+                      name='tabletSizes'
+                      type="string"
+                      autoComplete="current-tabletSizes"
+                      value={this.state.tabletSizes}
+                      onChange={this.handleInputChange}
+                      margin="normal"
+                    />          
+                  </div>
+               </form>
               </Grid>
               <Grid item>
-                <Typography className={classes.infoLabel} color="textPrimary">    
-                  Sizes:
-                </Typography>
-                <Typography className={classes.info} color="textPrimary">    
-                  {this.state.tabletSizes} 
-                </Typography>
+               <form className={classes.container} noValidate autoComplete="off"> 
+                 <div className='formItem'> 
+                    <TextField
+                      id="med-tabletDoseCanine"
+                      label="Dose Canine :"
+                      className={classes.textField}
+                      name='tabletDoseCanine'
+                      type="string"
+                      autoComplete="current-tabletDoseCanine"
+                      value={this.state.tabletDoseCanine}
+                      onChange={this.handleInputChange}
+                      margin="normal"
+                    />          
+                  </div>
+                  <div className='formItem'> 
+                    <TextField
+                      id="med-tabletDoseRangeCanine"
+                      label="Dose Range Canine :"
+                      className={classes.textField}
+                      name='tabletDoseRangeCanine'
+                      type="string"
+                      autoComplete="current-tabletDoseRangeCanine"
+                      value={this.state.tabletDoseRangeCanine}
+                      onChange={this.handleInputChange}
+                      margin="normal"
+                    />          
+                  </div>
+               </form>
               </Grid>
               <Grid item>
-                <Typography className={classes.infoLabel} color="textPrimary">    
-                  Dose Canine:
-                </Typography>
-                <Typography className={classes.info} color="textPrimary">    
-                  {this.state.tabletDoseCanine} 
-                </Typography>
-                <Typography className={classes.infoLabel} color="textPrimary">    
-                   Dose Range Canine: 
-                </Typography>
-                <Typography className={classes.info} color="textPrimary">    
-                   {this.state.tabletDoseRangeCanine} 
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography className={classes.infoLabel} color="textPrimary">    
-                   Dose Feline:
-                </Typography>
-                <Typography className={classes.info} color="textPrimary">    
-                   {this.state.tabletDoseFeline} 
-                </Typography>
-                <Typography className={classes.infoLabel} color="textPrimary">    
-                  Dose Range Feline:
-                </Typography>
-                <Typography className={classes.info} color="textPrimary">    
-                  {this.state.tabletDoseRangeFeline} 
-                </Typography>
+               <form className={classes.container} noValidate autoComplete="off"> 
+                  <div className='formItem'> 
+                      <TextField
+                        id="med-tabletDoseFeline"
+                        label="Dose Feline :"
+                        className={classes.textField}
+                        name='tabletDoseFeline'
+                        type="string"
+                        autoComplete="current-tabletDoseFeline"
+                        value={this.state.tabletDoseFeline}
+                        onChange={this.handleInputChange}
+                        margin="normal"
+                      />          
+                  </div>
+                  <div className='formItem'> 
+                      <TextField
+                        id="med-tabletDoseRangeFeline"
+                        label="Dose Range Feline :"
+                        className={classes.textField}
+                        name='tabletDoseRangeFeline'
+                        type="string"
+                        autoComplete="current-tabletDoseRangeFeline"
+                        value={this.state.tabletDoseRangeFeline}
+                        onChange={this.handleInputChange}
+                        margin="normal"
+                      />          
+                  </div>
+               </form>
               </Grid>
             </Grid>
           </div>
@@ -519,50 +641,105 @@ class MedicineForm extends Component {
           <div className={classes.tabBody}>
             <Grid container spacing={8}>
               <Grid item>
-              <div>
+               <div className={classes.inlineBlock}>
                 <Chip className={classes.chip}  color='primary'
-                      label='Capsule' />   
-                </div>
-                <div>              
-                <Chip className={classes.chip} color='default'
-                  label={this.state.capsuleAvailable ? 'Available' : 'Not-Available'} />  
-                </div>     
+                      label='Capsule' />                 
+                <form className={classes.container} noValidate autoComplete="off"> 
+                  <div className='formItem'> 
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={this.state.capsuleAvailable}
+                              onChange={this.handleCheckboxChange('capsuleAvailable')}
+                              value="capsuleAvailable"
+                              color="secondary"
+                            />
+                          }
+                          label="Available"
+                        />                   
+                  </div>
+                </form> 
+               </div>   
+              </Grid>
+            </Grid>
+
+            <Grid container spacing={8}>
+              <Grid item>
+                <form className={classes.container} noValidate autoComplete="off">                 
+                  <div className='formItem'> 
+                    <TextField
+                      id="med-capsuleSizes"
+                      label="Sizes :"
+                      className={classes.textField}
+                      name='capsuleSizes'
+                      type="string"
+                      autoComplete="current-capsuleSizes"
+                      value={this.state.capsuleSizes}
+                      onChange={this.handleInputChange}
+                      margin="normal"
+                    />          
+                  </div>
+                </form> 
               </Grid>
               <Grid item>
-                <Typography className={classes.infoLabel} color="textPrimary">    
-                  Sizes:
-                </Typography>
-                <Typography className={classes.info} color="textPrimary">    
-                  {this.state.capsuleSizes} 
-                </Typography>
+                <form className={classes.container} noValidate autoComplete="off"> 
+                  <div className='formItem'> 
+                      <TextField
+                        id="med-capsuleDoseCanine"
+                        label="Dose Canine :"
+                        className={classes.textField}
+                        name='capsuleDoseCanine'
+                        type="string"
+                        autoComplete="current-capsuleDoseCanine"
+                        value={this.state.capsuleDoseCanine}
+                        onChange={this.handleInputChange}
+                        margin="normal"
+                      />          
+                  </div>
+                  <div className='formItem'> 
+                    <TextField
+                      id="med-capsuleDoseRangeCanine"
+                      label="Dose Range Canine :"
+                      className={classes.textField}
+                      name='capsuleDoseRangeCanine'
+                      type="string"
+                      autoComplete="current-capsuleDoseRangeCanine"
+                      value={this.state.capsuleDoseRangeCanine}
+                      onChange={this.handleInputChange}
+                      margin="normal"
+                    />          
+                  </div>
+                </form>
               </Grid>
               <Grid item>
-                <Typography className={classes.infoLabel} color="textPrimary">    
-                  Dose Canine: 
-                </Typography>
-                <Typography className={classes.info} color="textPrimary">    
-                  {this.state.capsuleDoseCanine} 
-                </Typography>
-                <Typography className={classes.infoLabel} color="textPrimary">    
-                  Dose Range Canine: 
-                </Typography>
-                <Typography className={classes.info} color="textPrimary">    
-                   {this.state.capsuleDoseRangeCanine} 
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography className={classes.infoLabel} color="textPrimary">    
-                  Dose Feline: 
-                </Typography>
-                <Typography className={classes.info} color="textPrimary">    
-                  {this.state.capsuleDoseFeline} 
-                </Typography>
-                <Typography className={classes.infoLabel} color="textPrimary">    
-                  Dose Range Feline:
-                </Typography>
-                <Typography className={classes.info} color="textPrimary">    
-                  {this.state.capsuleDoseRangeFeline} 
-                </Typography>
+                <form className={classes.container} noValidate autoComplete="off"> 
+                  <div className='formItem'> 
+                    <TextField
+                      id="med-capsuleDoseFeline"
+                      label="Dose Feline :"
+                      className={classes.textField}
+                      name='capsuleDoseFeline'
+                      type="string"
+                      autoComplete="current-capsuleDoseFeline"
+                      value={this.state.capsuleDoseFeline}
+                      onChange={this.handleInputChange}
+                      margin="normal"
+                    />          
+                  </div>
+                  <div className='formItem'> 
+                    <TextField
+                      id="med-capsuleDoseRangeFeline"
+                      label="Dose Range Feline :"
+                      className={classes.textField}
+                      name='capsuleDoseRangeFeline'
+                      type="string"
+                      autoComplete="current-capsuleDoseRangeFeline"
+                      value={this.state.capsuleDoseRangeFeline}
+                      onChange={this.handleInputChange}
+                      margin="normal"
+                    />          
+                  </div>
+                </form>
               </Grid>
             </Grid>
           </div>
@@ -574,50 +751,94 @@ class MedicineForm extends Component {
           <div className={classes.tabBody}>
             <Grid container spacing={8}>
               <Grid item>
-                <div>
-                <Chip className={classes.chip}  color='primary'
-                      label='Suspension' />   
-                </div>
-                <div>              
-                <Chip className={classes.chip} color='default'
-                      label={this.state.suspensionAvailable ? 'Available' : 'Not-Available'} />  
-                </div>     
+                <div className={classes.inlineBlock}>
+                  <Chip className={classes.chip}  color='primary'
+                        label='Suspension' />               
+                  <form className={classes.container} noValidate autoComplete="off"> 
+                    <div className='formItem'> 
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={this.state.suspensionAvailable}
+                                onChange={this.handleCheckboxChange('suspensionAvailable')}
+                                value="suspensionAvailable"
+                                color="secondary"
+                              />
+                            }
+                            label="Available"
+                          />                   
+                      </div>
+                  </form>  
+                </div> 
               </Grid>
-              <Grid item>
-                <Typography className={classes.infoLabel} color="textPrimary">    
-                  Dose Canine:
-                </Typography>
-                <Typography className={classes.info} color="textPrimary">    
-                   {this.state.suspensionDoseCanine} 
-                </Typography>
+            </Grid>
 
-                <Typography className={classes.infoLabel} color="textPrimary">    
-                  Dose Range Canine:
-                </Typography>
-                <Typography className={classes.info} color="textPrimary">    
-                  {this.state.suspensionDoseRangeCanine} 
-                </Typography>
+            <Grid container spacing={8}>
+              <Grid item>
+                <form className={classes.container} noValidate autoComplete="off">
+                 <div className='formItem'> 
+                    <TextField
+                      id="med-suspensionDoseCanine"
+                      label="Dose Canine :"
+                      className={classes.textField}
+                      name='suspensionDoseCanine'
+                      type="string"
+                      autoComplete="current-suspensionDoseCanine"
+                      value={this.state.suspensionDoseCanine}
+                      onChange={this.handleInputChange}
+                      margin="normal"
+                    />          
+                  </div>
+                  <div className='formItem'> 
+                      <TextField
+                        id="med-suspensionDoseRangeCanine"
+                        label="Dose Range Canine :"
+                        className={classes.textField}
+                        name='suspensionDoseRangeCanine'
+                        type="string"
+                        autoComplete="current-suspensionDoseRangeCanine"
+                        value={this.state.suspensionDoseRangeCanine}
+                        onChange={this.handleInputChange}
+                        margin="normal"
+                      />          
+                    </div>
+                </form>
               </Grid>
               <Grid item>
-                <Typography className={classes.infoLabel} color="textPrimary">    
-                  Dose Feline:
-                </Typography>
-                <Typography className={classes.info} color="textPrimary">    
-                  {this.state.suspensionDoseFeline} 
-                </Typography>
-                <Typography className={classes.infoLabel} color="textPrimary">    
-                  Dose Range Feline:
-                </Typography>
-                <Typography className={classes.info} color="textPrimary">    
-                   {this.state.suspensionDoseRangeFeline} 
-                </Typography>
+                <form className={classes.container} noValidate autoComplete="off">
+                <div className='formItem'> 
+                    <TextField
+                      id="med-suspensionDoseFeline"
+                      label="Dose Feline :"
+                      className={classes.textField}
+                      name='suspensionDoseFeline'
+                      type="string"
+                      autoComplete="current-suspensionDoseFeline"
+                      value={this.state.suspensionDoseFeline}
+                      onChange={this.handleInputChange}
+                      margin="normal"
+                    />          
+                  </div>
+                  <div className='formItem'> 
+                    <TextField
+                      id="med-suspensionDoseRangeFeline"
+                      label="Dose Range Feline :"
+                      className={classes.textField}
+                      name='suspensionDoseRangeFeline'
+                      type="string"
+                      autoComplete="current-suspensionDoseRangeFeline"
+                      value={this.state.suspensionDoseRangeFeline}
+                      onChange={this.handleInputChange}
+                      margin="normal"
+                    />          
+                  </div>
+                </form>
               </Grid>
             </Grid>
           </div>
         </>
         ) // return
     } 
-
   }
 
   render() {
@@ -675,9 +896,7 @@ class MedicineForm extends Component {
                             margin="normal"
                           />                 
                       </div>
-                      
-                      
-                      
+                                 
                     </form>
                   </Grid>
                   <Grid item >
@@ -695,8 +914,7 @@ class MedicineForm extends Component {
                             onChange={this.handleInputChange}
                             margin="normal"
                           />   
-                    </div>  
-                            
+                    </div>                         
                     <div className='formItem'> 
                       <FormControlLabel
                         control={
@@ -748,7 +966,7 @@ class MedicineForm extends Component {
              color={this.props.leftbuttonColor} 
              disabled={this.props.isLeftButtonDisabled}
              className={classes.btnActionLeft}  
-             onClick={() => this.props.handleLeftButtonSelection(this.props.med)}>
+             onClick={() => this.handleSave()}>
              {this.props.leftButtonLabel}
           </Button>  
 

@@ -88,7 +88,7 @@ class MedicineForm extends Component {
   state ={
    
     tabSelection: 0,
-
+    
     med: '',
     _id : '',
     name: '',
@@ -207,7 +207,8 @@ class MedicineForm extends Component {
                       label='Injectable' />   
                 </div>
                 <div>              
-                <Chip className={classes.chip} color='default'
+                <Chip className={classes.chip} 
+                      color={this.state.injectableAvailable ? 'secondary' : 'default'}
                       label={this.state.injectableAvailable ? 'Available' : 'Not-Available'} />  
                 </div>          
               </Grid>
@@ -268,7 +269,8 @@ class MedicineForm extends Component {
                       label='Tablet'/>   
                 </div>
                 <div>              
-                <Chip className={classes.chip} color='default'
+                <Chip className={classes.chip} 
+                  color={this.state.tabletAvailable ? 'secondary' : 'default'}
                   label={this.state.tabletAvailable ? 'Available' : 'Not-Available'} />  
                 </div>     
               </Grid>
@@ -323,7 +325,8 @@ class MedicineForm extends Component {
                       label='Capsule' />   
                 </div>
                 <div>              
-                <Chip className={classes.chip} color='default'
+                <Chip className={classes.chip} 
+                  color={this.state.capsuleAvailable ? 'secondary' : 'default'}
                   label={this.state.capsuleAvailable ? 'Available' : 'Not-Available'} />  
                 </div>     
               </Grid>
@@ -378,7 +381,8 @@ class MedicineForm extends Component {
                       label='Suspension' />   
                 </div>
                 <div>              
-                <Chip className={classes.chip} color='default'
+                <Chip className={classes.chip} 
+                      color={this.state.suspensionAvailable ? 'secondary' : 'default'}
                       label={this.state.suspensionAvailable ? 'Available' : 'Not-Available'} />  
                 </div>     
               </Grid>
