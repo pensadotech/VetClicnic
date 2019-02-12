@@ -120,23 +120,6 @@ class MainMenu extends Component {
                 </div>
               </Link>             
             </Grid>
-            <Grid item >            
-              <Link to='/prescriptions' style={{ color: 'white', textDecoration: 'none' }}>
-                <div className='menuBlock block30 blockShadow prescriptions'>
-                  <IconButton color='inherit'>
-                    <AssignmentIcon />
-                    <Typography variant='h5' color='inherit' >
-                           Prescriptions
-                    </Typography>
-                  </IconButton>
-                  <div className={classes.imageHolder}>
-                      <img className={classes.cardImage}
-                         src="./images/prescription.jpg" 
-                        alt="Veterinary" />
-                  </div>
-                </div>
-              </Link>      
-            </Grid>
             <Grid item >           
               <Link to='/Calc' style={{ color: 'white', textDecoration: 'none' }}>
                 <div className='menuBlock block30 blockShadow dosage'>

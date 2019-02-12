@@ -130,16 +130,6 @@ class Navbar extends Component {
                 <ListItemText primary='Appointments' />
               </ListItem>
            </Link>
-           <Link to='/prescriptions' style={{ color: 'black', textDecoration: 'none' }}>
-              <ListItem button key='Prescriptions'>
-                <ListItemIcon> 
-                   <div>
-                     <AssignmentIcon />
-                   </div>                
-                </ListItemIcon>
-                <ListItemText primary='Prescriptions' />
-              </ListItem>
-           </Link>
            <Link to='/calc' style={{ color: 'black', textDecoration: 'none' }}>
               <ListItem button key='Calculator'>
                 <ListItemIcon>

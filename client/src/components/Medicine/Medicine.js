@@ -40,11 +40,26 @@ const styles = theme => ({
      }
   },
   avatar: {
-    margin: ' 10px 0px 0px 50px'
+    margin: ' 10px 0px 7px 40px',
+  },
+  fab: {
+    margin: theme.spacing.unit,
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+  },
+  pageHeadContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center' ,
+    color: 'white',
+    margin: '7px 0px 7px 20px',
+    // backgroundColor: 'rgb(165, 2, 143)',
+    borderRadius: '10px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
   },
   pageHead: {
     color: 'white',
-    margin: '7px 0px 0px 20px'
+    margin: '7px 50px 7px 20px',
   },
   pageHeadDelete: {
     color: 'red',
@@ -65,9 +80,6 @@ const styles = theme => ({
     borderRadius: '10px',
     boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
     padding: '0px 0px 0px 10px' 
-  },
-  fab: {
-    margin: theme.spacing.unit
   },
   chipTitle: {   
     [theme.breakpoints.down('sm')]: {
@@ -98,7 +110,7 @@ const styles = theme => ({
 
 const CustomTableCell = withStyles(theme => ({
   head: {
-    backgroundColor:  'rgb(165, 2, 143)',
+    backgroundColor: 'rgb(68, 1, 59)',
     color: theme.palette.common.white,
   },
   body: {
@@ -223,9 +235,11 @@ class Medicine extends Component {
           
         return(
           <>
-            <h1 className={classes.pageHead}>
+            <div className={classes.pageHeadUpdate}>
+              <h2>
               Add new medicine
-            </h1>
+              </h2>
+            </div>
             <MedForm 
               mode={this.state.screenMode}
               med=''
@@ -319,22 +333,26 @@ class Medicine extends Component {
         return(
           <>
               <Grid container spacing={0}>
+              <div className={classes.pageHeadContainer}>
               <Grid item>
                 <Avatar className={classes.avatar}>
                   <ColorizeIcon /> 
                 </Avatar>
               </Grid>
               <Grid item>
-                <h1 className={classes.pageHead}>
+                <h2 className={classes.pageHead}>
                    Medicines
-                </h1>
-              </Grid>  
+                </h2>
+              </Grid>
+              </div>    
               <Grid item>
-                <Fab color="secondary" aria-label="Add" className={classes.fab} 
-                     disabled = {this.state.sessionUser.isAdmin ? false : true}
-                     onClick={() => this.handleMedAddSelection()}
-                     >
-                  <AddIcon />
+                <Fab 
+                 aria-label="Add"
+                 color="secondary"  
+                 className={classes.fab} 
+                 disabled = {this.state.sessionUser.isAdmin ? false : true}
+                 onClick={() => this.handleMedAddSelection()}>
+                 <AddIcon />
                 </Fab>
               </Grid>      
             </Grid>

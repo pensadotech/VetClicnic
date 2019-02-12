@@ -21,11 +21,26 @@ const styles = theme => ({
     padding: `0 ${theme.spacing.unit * 3}px`,
   },
   avatar: {
-    margin: ' 10px 0px 0px 50px'
+    margin: ' 10px 0px 7px 40px',
+  },
+  fab: {
+    margin: theme.spacing.unit,
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+  },
+  pageHeadContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center' ,
+    color: 'white',
+    margin: '7px 0px 7px 20px',
+    // backgroundColor: 'rgb(4, 138, 4)',
+    borderRadius: '10px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
   },
   pageHead: {
     color: 'white',
-    margin: '7px 0px 0px 20px'
+    margin: '7px 50px 7px 20px',
   },
   pageHeadDelete: {
     color: 'red',
@@ -51,9 +66,7 @@ const styles = theme => ({
     maxWidth: 400,
     maxHeight: 600,
   },
-  fab: {
-    margin: theme.spacing.unit
-  }
+ 
 }) 
 
 class Patient extends Component {
@@ -261,25 +274,29 @@ class Patient extends Component {
       return(
         <>
           <Grid container spacing={0}>
-          <Grid item>
-            <Avatar className={classes.avatar}>
-              <PetsIcon /> 
-            </Avatar>
+          <div className={classes.pageHeadContainer}>
+            <Grid item>
+              <Avatar className={classes.avatar}>
+                <PetsIcon /> 
+              </Avatar>          
+            </Grid>
+            <Grid item>            
+              <h2 className={classes.pageHead}>
+                Patients
+              </h2>                 
+            </Grid>             
+            </div>  
+            <Grid item>
+              <Fab 
+                aria-label="Add" 
+                color="secondary" 
+                className={classes.fab}
+                disabled = {this.state.sessionUser.isAdmin ? false : true} 
+                onClick={() => this.handlePatientAddSelection()}>
+                <AddIcon />
+              </Fab>
+            </Grid>    
           </Grid>
-          <Grid item>
-            <h1 className={classes.pageHead}>Patients</h1>
-          </Grid>
-          <Grid item>
-            <Fab 
-              aria-label="Add" 
-              color="secondary" 
-              className={classes.fab}
-              disabled = {this.state.sessionUser.isAdmin ? false : true} 
-              onClick={() => this.handlePatientAddSelection()}>
-              <AddIcon />
-            </Fab>
-          </Grid>
-        </Grid>
         
         <div className={classes.root}> 
         <Grid container spacing={8}

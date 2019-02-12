@@ -19,11 +19,26 @@ import APIemails from '../../utils/APIemails'
 const styles = theme => ({
  
   avatar: {
-    margin: ' 10px 0px 0px 50px'
+    margin: ' 10px 0px 7px 40px',
+  },
+  fab: {
+    margin: theme.spacing.unit,
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+  },
+  pageHeadContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center' ,
+    color: 'white',
+    margin: '7px 0px 7px 20px',
+    // backgroundColor: 'rgb(4, 138, 4)',
+    borderRadius: '10px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
   },
   pageHead: {
     color: 'white',
-    margin: '7px 0px 0px 20px'
+    margin: '7px 50px 7px 20px',
   },
   card: {
     minWidth: 275,
@@ -40,9 +55,6 @@ const styles = theme => ({
   },
   pos: {
     marginBottom: 12,
-  },
-  fab: {
-    margin: theme.spacing.unit,
   },
   extendedIcon: {
     marginRight: theme.spacing.unit,
@@ -339,22 +351,28 @@ class Appointment extends Component {
       )
 
     } else {
-        return(
-          
+
+      return(      
         <>
           <Grid container spacing={0}>
+           <div className={classes.pageHeadContainer}>
             <Grid item>
               <Avatar className={classes.avatar}>
                 <EventIcon />
               </Avatar>
             </Grid>
             <Grid item>
-              <h1 className={classes.pageHead}>Appointments</h1>
+              <h2 className={classes.pageHead}>
+               Appointments
+              </h2>
             </Grid>
+            </div> 
             <Grid item>
-              <Fab color="secondary" aria-label="Add" 
-                  className={classes.fab}
-                  onClick={() => this.handleAppointAddSelection()}>
+              <Fab 
+                aria-label="Add"
+                color="secondary"  
+                className={classes.fab}
+                onClick={() => this.handleAppointAddSelection()}>
                 <AddIcon />
               </Fab>
             </Grid>
