@@ -32,7 +32,7 @@ const styles = theme => ({
       margin: '30px 10px 0px 20px',
      },
      [theme.breakpoints.up('lg')]: {
-        margin: '50px 10px 0px 20px',
+       margin: '50px 10px 0px 20px',
      }
   },
   chip: {

@@ -1,55 +1,59 @@
 import React, { Component } from "react"
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import TextField from '@material-ui/core/TextField'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
+import Chip from '@material-ui/core/Chip'
+import Avatar from '@material-ui/core/Avatar'
 import EventIcon from '@material-ui/icons/Event'
 import Moment from 'moment'
 // conponents
 import AppointItemSelect from "../AppointItemSelect"
-// Local style
-import './AppointForm.css'
-
 
 const styles = theme => ({
-  container: {
+  card: {
+    minWidth: 175,
+    maxWidth: 850,
+    maxHeight: 650,
+    margin: '0px 20px 0px 20px',  
+    borderRadius: '30px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',   
+  },
+  cardContent: {
+    pading: '0px 0px 0px 0px'
+  },
+  formContainer: {
     display: 'flex',
     flexWrap: 'wrap',
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 250
-  },
-  datetimeField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 300
-  },
-  margin: {
-    margin: theme.spacing.unit,
-  },
-  card: {
-    minWidth: 175,
-    maxHeight: 620,
-    margin: '10px 20px 0px 20px',  
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
+    [theme.breakpoints.down('sm')]: {
+      width: 240,
+    },
+    [theme.breakpoints.up('md')]: {
+      width: 280,
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: 300,
+    }  
   },
   title: {
     fontSize: 14,
   },
-  pos: {
-    marginBottom: 12,
+  btnActionLeft : {
+    margin: '0px 0px 10px 20px',
   },
-  apntError : {
+  btnAction : {
+    margin: '0px 0px 10px 10px',
+  },
+  inputError : {
     color: 'red'
   }
 })
@@ -86,7 +90,6 @@ class AppointForm extends Component {
     }
     
   }
-  
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -128,8 +131,6 @@ class AppointForm extends Component {
        // EDIT MODE: Validate
        if (this.state.title === '' || this.state.description === '' || this.state.appointmentDate === '')  {   
         this.setState({appointmentError: 'Please provide title, description, appointment date and time.'}) 
-       } else if(new Date(this.state.appointmentDate) < this.state.currentDate ) {
-        this.setState({appointmentError: 'The appointment cannot be in the past!'}) 
        } else {    
 
           // retreive the selected doctor in the screen
@@ -156,8 +157,6 @@ class AppointForm extends Component {
        // ADD MODE: Validate
        if (this.state.title === '' || this.state.description === '' || this.state.appointmentDate === '')  {   
          this.setState({appointmentError: 'Please provide title, description, and appointment date-time.'}) 
-       } else if(new Date(this.state.appointmentDate) < this.state.currentDate ) {
-         this.setState({appointmentError: 'The appointment cannot be in the past!'}) 
        } else {  
          
           // retreive the selected doctor in the screen
@@ -189,38 +188,24 @@ class AppointForm extends Component {
 
         <>
         <Card className={classes.card}>
-           <CardContent>
-            <p className={classes.apntError}>{this.state.appointmentError}</p>
-            <form className={classes.container} noValidate autoComplete="off">
-                <div className='formItem'>
-                   <TextField
-                      required
-                      id="apnt-title"
-                      label="Title :"
-                      className={classes.textField}
-                      name='title'
-                      type="string"
-                      // autoComplete="current-username"
-                      value={this.state.title}
-                      onChange={this.handleInputChange}
-                      margin="normal"
-                    />   
-                </div>
-                <div className='formItem'> 
-                    <TextField
-                      required
-                      id="apnt-description"
-                      label="Description :"
-                      className={classes.textField}
-                      name='description'
-                      type="string"
-                      // autoComplete="current-fullname"
-                      value={this.state.description}
-                      onChange={this.handleInputChange}
-                      margin="normal"
-                    />                 
-                </div>  
-                <div className='formItem'> 
+           <CardContent className={classes.cardContent}>
+           <Chip
+              avatar={<Avatar><EventIcon /></Avatar>}
+              label='Appointment' 
+              className={classes.chip}
+              color= "primary"
+            />
+
+            <form className={classes.formContainer} 
+                  noValidate 
+                  autoComplete="off">
+
+                 <Grid container spacing={32}
+                   alignContent='center'
+                   style={{ margin: 'auto', marginLeft: '5%' }}>
+                  
+                  <Grid item >
+                  <div> 
                     <TextField
                       required
                       id="appnt-date"
@@ -239,32 +224,79 @@ class AppointForm extends Component {
                         ),
                       }}
                     />                 
-                </div>              
-                <div className='formItem'>
-                  <AppointItemSelect 
-                    mainLabel='Doctor'
-                    table="doctor"
-                    itemArr={this.props.doctors}
-                    selectedfieldName='selectedDoctorName'
-                    selectedName={this.state.selectedDoctorName}
-                    handleSelection={this.handleDropSelection}/>
-                </div>
-                <div className='formItem'>
-                  <AppointItemSelect
-                    mainLabel='Patient'
-                    table="patient"
-                    itemArr={this.props.patients}
-                    selectedfieldName='selectedPatientName'
-                    selectedName={this.state.selectedPatientName}
-                    handleSelection={this.handleDropSelection} />
-                </div>
+                  </div>     
+                  <div >
+                   <TextField
+                      required
+                      id="apnt-title"
+                      label="Title :"
+                      className={classes.textField}
+                      name='title'
+                      type="string"
+                      // autoComplete="current-username"
+                      value={this.state.title}
+                      onChange={this.handleInputChange}
+                      margin="normal"
+                    />   
+                   </div>
+                  </Grid>
+                  
+                  <Grid item >
+                    <div> 
+                      <TextField
+                        required
+                        id="apnt-description"
+                        label="task :"
+                        className={classes.textField}
+                        name='description'
+                        type="string"
+                        // autoComplete="current-fullname"
+                        value={this.state.description}
+                        onChange={this.handleInputChange}
+                        margin="normal"
+                      />                 
+                    </div>  
+                    <div className='formItem'>
+                      <AppointItemSelect 
+                        mainLabel='Doctor'
+                        table="doctor"
+                        itemArr={this.props.doctors}
+                        selectedfieldName='selectedDoctorName'
+                        selectedName={this.state.selectedDoctorName}
+                        handleSelection={this.handleDropSelection}/>
+                    </div>
+                    <div className='formItem'>
+                      <AppointItemSelect
+                        mainLabel='Patient'
+                        table="patient"
+                        itemArr={this.props.patients}
+                        selectedfieldName='selectedPatientName'
+                        selectedName={this.state.selectedPatientName}
+                        handleSelection={this.handleDropSelection} />
+                    </div>
+                  </Grid>
+                </Grid>
             </form>
+
+            <p className={classes.apntError}>
+              {this.state.appointmentError}
+           </p>
+
           </CardContent>
           <CardActions>          
-              <Button size="small" variant="contained" color={this.props.leftbuttonColor} 
-                 onClick={() => this.handleSave()}>{this.props.leftButtonLabel}
+              <Button 
+                 size="small" 
+                 variant="contained" 
+                 color={this.props.leftbuttonColor} 
+                 className={classes.btnActionLeft} 
+                 onClick={() => this.handleSave()}>
+                  {this.props.leftButtonLabel}
               </Button>
-              <Button size="small" variant="contained" color={this.props.rightbuttonColor}  
+              <Button 
+                 size="small" 
+                 variant="contained" 
+                 color={this.props.rightbuttonColor} 
+                 className={classes.btnAction}  
                  onClick={() => this.props.handleRightButtonSelection(this.props.apnt)}>
                  {this.props.rightButtonLabel}
               </Button>

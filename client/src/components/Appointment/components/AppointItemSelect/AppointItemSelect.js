@@ -48,15 +48,15 @@ class SimpleSelect extends Component {
             name={this.props.selectedfieldName} 
             input={<Input name="select" id="item-selection"/>}        
           >
-            {
+            {            
               this.props.itemArr.map((item, index) => (
                 <option 
                    key={index}
                    value={this.props.table === 'patient' ? item.patientname : item.name}>
                      {this.props.table === 'patient' ? item.patientname : item.name}
                 </option>  
-             ))
-            }    
+             ))          
+            }  
           </Select>
           <FormHelperText>Select a {this.props.mainLabel}</FormHelperText>
         </FormControl>

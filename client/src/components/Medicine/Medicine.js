@@ -84,15 +84,15 @@ const styles = theme => ({
   chipTitle: {   
     [theme.breakpoints.down('sm')]: {
       margin: '2px 5px 0px 5px',
-      fontSize: 14,
+      fontSize: 12,
      },
      [theme.breakpoints.up('md')]: {
       margin: '7px 10px 0px 10px',
-      fontSize: 20,
+      fontSize: 14,
      },
      [theme.breakpoints.up('lg')]: {
         margin: '10px 20px 0px 20px',
-        fontSize: 24,
+        fontSize: 14,
      }
   },
   chip: {
