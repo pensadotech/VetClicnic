@@ -20,12 +20,12 @@ const styles = theme => ({
      [theme.breakpoints.up('md')]: {
       width:  '45px',
       height: '45px',
-      margin: '20px 0px 0px 20px',
+      margin: '15px 0px 0px 20px',
      },
      [theme.breakpoints.up('lg')]: {
       width:  '45px',
       height: '45px',
-      margin: '30px 0px 0px 30px',
+      margin: '20px 0px 0px 30px',
      }    
   },
 })
@@ -163,7 +163,7 @@ class Calendar extends Component {
   }
   
   doesTheDayhasAppointments = (aptmArr,tgtDay) => {   
-    const dateFormat = "D"   
+    const dateFormat = "D M YYYY" 
     for(let i = 0; i < aptmArr.length; i++) {
        let day = aptmArr[i].date
        if( dateFns.format(day, dateFormat) === dateFns.format(tgtDay, dateFormat)) {
@@ -179,15 +179,17 @@ class Calendar extends Component {
   }
   
   nextMonth = () => {
-    this.setState({currentMonth: dateFns.addMonths(this.state.currentMonth, 1)})
+    let nextMonth = dateFns.addMonths(this.state.currentMonth, 1)
+    this.setState({currentMonth: nextMonth})
     // load appointmenst for the month
-    this.loadData(this.state.currentMonth) 
+    this.loadAppointData(nextMonth) 
   }
   
   prevMonth = () => {
-    this.setState({currentMonth: dateFns.subMonths(this.state.currentMonth, 1)})
+    let prevMonth = dateFns.subMonths(this.state.currentMonth, 1)
+    this.setState({currentMonth: prevMonth})
     // load appointmenst for the month
-    this.loadData(this.state.currentMonth) 
+    this.loadAppointData(prevMonth)
   }
 
   render() {

@@ -1,7 +1,7 @@
 # SORIN
 
 Surgical Operation Reference and Interface Network
-Animal Clinic System
+Animal Clinic System (Prototype)
 
 _by Aja Magdaleno, Tommy Dang, James Rodgick, Eddie Kader, Daniel Border, Sam Samawi, and Armando Pensado_ 
 
@@ -12,7 +12,7 @@ This project is a prototype for an animal clinic system, created to demonstrate 
 
 The application provides functionality to add basic elements as Doctors, Patients, and medicines, which are used to create appointments or calculate medicine dosage for patients.
 
-In addition, the application offers a restricted login functionality and the capability to send emails for Appointments and user accounts.
+In addition, the application offers a restricted login functionality.Users defined as 'admin' will have full funcitonality, and regular users will be able to view data, but cannot create key information.
 
 The application uses key **npm** components such as: _mongoose, react-dom, axios, nodemailer, password-hash, moment/react-moment_. 
 
