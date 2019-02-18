@@ -2,39 +2,74 @@ import React, { Component } from "react"
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
 import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
 import EmailIcon from '@material-ui/icons/Email';
-import HighlightIcon from '@material-ui/icons/Highlight';
+// import HighlightIcon from '@material-ui/icons/Highlight';
+import HighlightIcon from '@material-ui/icons/Usb';
 import Grid from '@material-ui/core/Grid';
-
+import Chip from '@material-ui/core/Chip'
+import PersonIcon from '@material-ui/icons/Person'
 
 const styles = theme => ({
   card: {
-    width: '275px',
-    height: '550px',
-    margin: '1rem',
-    backgroundColor: 'darkgrey',
+    minWidth: 290,
+    maxWidth: 390,
+    maxHeight: 600, 
+    minHeight: 270, 
+    backgroundColor: 'lightgrey',
+    borderRadius: '30px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+    [theme.breakpoints.down('sm')]: {
+      margin: '15px 10px 0px 20px',
+     },
+     [theme.breakpoints.up('md')]: {
+      margin: '30px 10px 0px 20px',
+     },
+     [theme.breakpoints.up('lg')]: {
+        margin: '50px 10px 0px 20px',
+     }
   },
+  chip: {
+    margin: theme.spacing.unit,
+    fontSize: 20,
+  },
+  media: {
+    width: '120px',
+    height: '120px',
+    paddingTop: '80.25%', // 16:9
+    // margin: '30px 35px 20px 40px',
+    border: '5px solid lightgray',
+    borderRadius: '90px',
+  },
+  
+  bigAvatar: {
+    margin: 10,
+    width: 90,
+    height: 90,
+  },
+
   container: {
     display: 'flex',
     flexWrap: 'wrap',
   }, 
-  media: {
-    height: '3rem',
-    paddingTop: '56.25%', // 16:9
-    margin: '1rem',
-  },
-  avatar: {
-    backgroundColor: 'blueviolet',
-  },
+ 
   title: {
-    fontSize: '1rem',
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'blue',
+    margin: '0px 0px 2px 10px',
+  },
+  name: {
+    fontSize: 18,
+    margin: '0px 0px 5px 10px',   
+    fontWeight: 'bold'
+  },
+  info: {
+    fontSize: 14,
+    margin: '0px 0px 0px 20px',
   }
 });
 
@@ -44,53 +79,56 @@ class AboutUsCard extends Component {
     const { classes } = this.props;
 
     return (
-    <Grid > 
-      <Grid container item>
+      <>     
       <Card className={classes.card}>
-        <CardHeader classes={{
-        title: classes.title
-      }}
-          avatar={
-            <Avatar aria-label="Developer" 
-            className={classes.avatar}
-            >
-              BLUe
-            </Avatar>
-          }
-          title={this.props.developername} 
-        />
-        <CardMedia
-         className={classes.media}
-          image={this.props.image} 
-        />
         <CardContent>
-          <Typography component="p">
-            Skills: {this.props.skills}
-          </Typography>
-          <br/>
-          <Typography component="p">
-            Hobbies: {this.props.hobbies}
-          </Typography>
-        </CardContent>
-        <CardActions>
-        <Typography component="p">
-            <Icon aria-label="Contact">
-                <EmailIcon />
-            </Icon>
-            Email: {this.props.email}      
-        </Typography>
-        <br/>
-        </CardActions>
-        <Typography> 
-            <Icon aria-label="GitHub">
-                <HighlightIcon />
-            </Icon>
-            Github: {this.props.github}
-        </Typography>
+          <Chip
+            avatar={<Avatar><PersonIcon/></Avatar>}
+            label={this.props.developername}  
+            className={classes.chip}
+            color= "primary"
+          />
+         
+         <Grid container spacing={0}>               
+            <Grid item>
+            <Grid container spacing={0}> 
+               <Grid item>
+                  <Avatar 
+                  alt={this.props.developername} 
+                  src={this.props.image} 
+                  className={classes.bigAvatar} />
+               </Grid>
+               <Grid item>
+                  <Typography component="p">
+                    <Icon aria-label="Contact">
+                      <EmailIcon />
+                    </Icon>
+                       {this.props.email}      
+                  </Typography>
+                  <Typography> 
+                    <Icon aria-label="GitHub">
+                        <HighlightIcon />
+                     </Icon>
+                    {this.props.github}
+                    </Typography>
+               </Grid>
+            </Grid>           
+              <Typography component="p">
+                Skills: {this.props.skills}
+              </Typography>
+              <Typography component="p">
+                Hobbies: {this.props.hobbies}
+              </Typography>     
+            </Grid>
+            <Grid item>
+              
+            </Grid>     
+
+         </Grid>
+        </CardContent> 
       </Card>
-      </Grid>
-    </Grid>  
-    );
+    </>
+    )
   }
 }
 

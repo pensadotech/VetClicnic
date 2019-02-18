@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
+import Avatar from '@material-ui/core/Avatar'
+import GroupIcon from '@material-ui/icons/Group'
 // Components
 import AboutUsCard from './components/AboutUsCard'
 
@@ -10,63 +12,55 @@ import AboutUsCard from './components/AboutUsCard'
 //import APIaboutus from '../../utils/APIaboutus'
 
 // Local style
-import './AboutUs.css'
+// import './AboutUs.css'
 
-const styles = theme => ({ 
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',   
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    overflow: 'hidden',
+    padding: `0 ${theme.spacing.unit * 3}px`,
+  },
+  avatar: {
+    margin: ' 10px 0px 7px 40px',
+  },
+  pageHeadContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: 'white',
+    margin: '7px 0px 7px 20px',
+    // backgroundColor: 'rgb(11, 71, 201)',
+    borderRadius: '10px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+  },
+  pageHead: {
+    color: 'white',
+    margin: '7px 50px 7px 20px',
+  },
+  aboutSubtitle: {
+    maxWidth: 490,
+    color: 'blueviolet',
+    backgroundColor: 'white',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: '5px 10px 0px 0px',
+    // marginLeft: '1.5rem',
+    borderRadius: '30px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1rem',
     },
-    avatar: {
-        backgroundColor: 'blueviolet',
-      },
-    container: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      backgroundColor: 'white',
-      margin: '1rem',
-      opacity: '0.88',
-      
-      [theme.breakpoints.down('sm')]: {
-        margin: '1 rem',
-      },
-      [theme.breakpoints.up('md')]: {
-        margin: '2rem',
-      },
-      [theme.breakpoints.up('lg')]: {
-        margin: '3 rem',
-      },  
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderRadius: '40px'
+    [theme.breakpoints.up('md')]: {
+      fontSize: '1.5rem',
     },
-    aboutTitle:  {
-      [theme.breakpoints.down('sm')]: {
-        fontSize: '1.5rem',
-      },
-      [theme.breakpoints.up('md')]: {
-        fontSize: '2rem',
-      },
-      [theme.breakpoints.up('lg')]: {
-        fontSize: '2rem',
-      },
-      color: 'blue',
-      margin: '0px 0px 10px 30px',
+    [theme.breakpoints.up('lg')]: {
+      fontSize: '1.5rem',
     },
-    aboutSubtitle : {
-      [theme.breakpoints.down('sm')]: {
-        fontSize: '1rem',
-      },
-      [theme.breakpoints.up('md')]: {
-        fontSize: '1.5rem',
-      },
-      [theme.breakpoints.up('lg')]: {
-        fontSize: '1.5rem',
-      },
-      color: 'blueviolet',
-      marginLeft: '1.5rem',
-    },
-  })
+  },
+})
 
 let developerArr = [
     { 
@@ -134,36 +128,46 @@ class AboutUs extends Component {
       const { classes } = this.props;
   
       return (
-        <>
-        <Grid container className={classes.root} spacing={16}>
-         
-        <Grid className={classes.container}>       
-          <Grid >
+        <>     
+          <Grid container spacing={0}>
+            <div className={classes.pageHeadContainer}>
             <Grid item>
-            <Typography className={classes.aboutTitle}>
-                Meet The Developers
-            </Typography>
-            </Grid> 
-            <Grid item >
-            <Typography className={classes.aboutSubtitle} >
+              <Avatar className={classes.avatar}>
+                <GroupIcon /> 
+              </Avatar>
+            </Grid>
+            <Grid item>
+             <h2 className={classes.pageHead}>
+               Developers 
+             </h2>
+            </Grid>          
+            <Grid item>
+              
+            </Grid>   
+            </div> 
+          </Grid>
+        
+          <div className={classes.root}> 
+            
+            <Typography 
+                className={classes.aboutSubtitle} >
                 BLUe!Team Design and Development
             </Typography>  
-            </Grid > 
-                <Grid container
-                style={{ margin: 'auto',marginLeft: '3%' }}>       
-                    {developerArr.map((e,index) => (
-                        <Grid item key={index}>
-                            <AboutUsCard {...e} />
-                        </Grid>   
-                    ) 
-                     )}
-                </Grid>
 
+            <Grid container spacing={8}
+                 alignContent='center'
+                 style={{ margin: 'auto',marginLeft: '3%' }}>                    
+              {
+                developerArr.map((e,index) => (
+                  <Grid item key={index}>
+                     <AboutUsCard {...e} />
+                  </Grid>   
+                ))
+              }
             </Grid>
-        </Grid> 
-       
-        </Grid>
-  
+
+            
+          </div>
         </>
       )
     }

@@ -61,11 +61,6 @@ const styles = theme => ({
     boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
     padding: '0px 0px 0px 10px' 
   },
-  formContainer: {
-    maxWidth: 400,
-    maxHeight: 600,
-  },
-  
 })
 
 class Doctor extends Component {

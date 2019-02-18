@@ -20,7 +20,7 @@ module.exports = {
       query = { date : {"$gte": startDate, "$lt": endDate}} 
     }
     
-    // Month: if a selected date was sent, adjust query to target specific month
+    // MONTH: if a selected date was sent, adjust query to target specific month
     if (req.query.selectedMonth) {
       selectedDate = new Date(req.query.selectedMonth)
       startDate = moment(selectedDate).startOf('month').toDate()
