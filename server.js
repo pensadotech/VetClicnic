@@ -50,4 +50,3 @@ app.listen(PORT, function () {
 
 // Initialize database
 setupApp.Initialize()
-

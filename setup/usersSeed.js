@@ -1,17 +1,19 @@
 // Initialize users
 const db = require("../models")
 const passwordHash = require('password-hash')
+require("dotenv").config()
+const sysKeys = require('../syskeys')
 
 module.exports = {
   
   initialize: function () {
-
-    // hash initial password
-    let hashedPassword = passwordHash.generate('admin')
+    
+    let adminUser = sysKeys.adminKeys.user
+    let hashedPassword = passwordHash.generate(sysKeys.adminKeys.pwd)
 
     // Mongo documents array
     const usersSeed = [{
-        username: 'admin',
+        username: adminUser,
         password: hashedPassword,
         fullname: 'admin account',
         phone: '222-123-1234',
@@ -24,7 +26,7 @@ module.exports = {
         password: hashedPassword,
         fullname: 'Armando Pensado',
         phone: '949-876-8755',
-        email: 'armando@pensadotech.com',
+        email: 'apensado@hotmail.com',
         isAdmin : false,
         userCreated: Date.now()
       }
