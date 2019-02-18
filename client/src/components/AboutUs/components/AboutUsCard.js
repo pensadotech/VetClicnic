@@ -16,9 +16,9 @@ import PersonIcon from '@material-ui/icons/Person'
 const styles = theme => ({
   card: {
     minWidth: 290,
-    maxWidth: 390,
-    maxHeight: 600, 
-    minHeight: 270, 
+    maxWidth: 400,
+    maxHeight: 700, 
+    minHeight: 260, 
     backgroundColor: 'lightgrey',
     borderRadius: '30px',
     boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
@@ -77,6 +77,10 @@ class AboutUsCard extends Component {
 
   render() {
     const { classes } = this.props;
+    
+    let mailTo = 'mailto:' 
+               + this.props.email
+               + '?Subject=Information request'
 
     return (
       <>     
@@ -103,20 +107,28 @@ class AboutUsCard extends Component {
                     <Icon aria-label="Contact">
                       <EmailIcon />
                     </Icon>
-                       {this.props.email}      
+                    <a href={mailTo}
+                      target="_top">
+                      {this.props.email}
+                    </a>   
                   </Typography>
                   <Typography> 
                     <Icon aria-label="GitHub">
                         <HighlightIcon />
                      </Icon>
-                    {this.props.github}
+                     <a target="_blank" 
+                       href={this.props.github}>
+                      {this.props.github}
+                     </a>
                     </Typography>
                </Grid>
             </Grid>           
-              <Typography component="p">
-                Skills: {this.props.skills}
+              <Typography component="p"
+                 className={classes.info}>
+                Skills: <b>{this.props.skills}</b>
               </Typography>
-              <Typography component="p">
+              <Typography component="p"
+                 className={classes.info}>
                 Hobbies: {this.props.hobbies}
               </Typography>     
             </Grid>

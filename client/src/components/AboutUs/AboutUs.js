@@ -66,7 +66,7 @@ let developerArr = [
     { 
     developername: 'Aja Magdaleno',
     image: '/images/AjaMagdaleno.JPG',
-    skills: 'CSS, Javascript, SQL, MongoDB, Express, React, Node',
+    skills: 'Full stack web developer',
     hobbies: 'Hiking, Reading, Learning',
     email: "aja.magdaleno@gmail.com" ,
     github: 'https://github.com/AjaMag'
@@ -74,8 +74,8 @@ let developerArr = [
     { 
     developername: 'Armando Pensado',
     image: '/images/ArmandoPensado.JPG',
-    skills: 'Software, electronics, walking dogs',
-    hobbies: 'Hiking, Guitar, Reading',
+    skills: 'Full stack web developer',
+    hobbies: 'Hiking, Guitar, Reading, Electronics',
     email: 'armando@pensadotech.com',
     github: 'https://github.com/pensadotech'
     },
@@ -83,14 +83,14 @@ let developerArr = [
     developername: 'James Rodgick',
     image: './images/JamesRodgick.JPG',
     hobbies: 'Movies, Video Games, Computers, Guitar, Card Games',
-    skills: 'Making Internet Site Pages, Animal Science',
+    skills: 'Full stack web developer',
     email: 'rodgick@yahoo.com',
     github: 'https://github.com/Voriah'
     },
     {
     developername: 'Tommy Dang',
     image: './images/TommyDang.JPG',
-    skills: 'Javascript, SQL',
+    skills: 'Full stack web developer',
     hobbies: 'Jogging, Eating & Sleeping',
     email: 'ledangt310@live.com',
     github: 'https://github.com/TL-Dang',
@@ -98,7 +98,7 @@ let developerArr = [
     {
     developername: 'Eddie Kader',
     image: './images/EddieKader.JPG',
-    skills: 'Making eggs, coding(somewhat), plotting, reading',
+    skills: 'Full stack web developer',
     hobbies: 'Eating, Gym, Hanging out, Video Games',
     email: 'Eddie.kader@gmail.com',
     github: 'https://github.com/eddiek123',
@@ -106,7 +106,7 @@ let developerArr = [
     {
     developername: 'Sam Awi',
     image: './images/SamAwi.JPG',
-    skills: 'Professional Chef, Entrepreneur, Restaurant Management',
+    skills: 'Full stack web developer',
     hobbies: 'Learning to code, drinking good beer, making money',
     email: 'ossamawi@gmail.com',
     github: 'https://github.com/newcoder2019'
