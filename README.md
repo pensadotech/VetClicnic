@@ -61,7 +61,7 @@ The system offers the possibility to add medicines into the system. Aside from n
 
 The medicines view offers a table that allows the user to visualize the available options. By selecting the medicine name in the table, a view will offer details on the medicine. From there only user with admin rights can add, update, or delete medicines from the system.
 
-![appointment](./docs/Medicinespng)
+![appointment](./docs/Medicines.png)
 
 ![appointment](./docs/MedicineDetails.png)
 
