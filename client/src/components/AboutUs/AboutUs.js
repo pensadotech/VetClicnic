@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
+import Avatar from '@material-ui/core/Avatar'
+import GroupIcon from '@material-ui/icons/Group'
 // Components
 import AboutUsCard from './components/AboutUsCard'
 
@@ -10,69 +12,61 @@ import AboutUsCard from './components/AboutUsCard'
 //import APIaboutus from '../../utils/APIaboutus'
 
 // Local style
-import './AboutUs.css'
+// import './AboutUs.css'
 
-const styles = theme => ({ 
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',   
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    overflow: 'hidden',
+    padding: `0 ${theme.spacing.unit * 3}px`,
+  },
+  avatar: {
+    margin: ' 10px 0px 7px 40px',
+  },
+  pageHeadContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: 'white',
+    margin: '7px 0px 7px 20px',
+    // backgroundColor: 'rgb(11, 71, 201)',
+    borderRadius: '10px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+  },
+  pageHead: {
+    color: 'white',
+    margin: '7px 50px 7px 20px',
+  },
+  aboutSubtitle: {
+    maxWidth: 490,
+    color: 'blueviolet',
+    backgroundColor: 'white',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: '5px 10px 0px 0px',
+    // marginLeft: '1.5rem',
+    borderRadius: '30px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1rem',
     },
-    avatar: {
-        backgroundColor: 'blueviolet',
-      },
-    container: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      backgroundColor: 'white',
-      margin: '1rem',
-      opacity: '0.88',
-      
-      [theme.breakpoints.down('sm')]: {
-        margin: '1 rem',
-      },
-      [theme.breakpoints.up('md')]: {
-        margin: '2rem',
-      },
-      [theme.breakpoints.up('lg')]: {
-        margin: '3 rem',
-      },  
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderRadius: '40px'
+    [theme.breakpoints.up('md')]: {
+      fontSize: '1.5rem',
     },
-    aboutTitle:  {
-      [theme.breakpoints.down('sm')]: {
-        fontSize: '1.5rem',
-      },
-      [theme.breakpoints.up('md')]: {
-        fontSize: '2rem',
-      },
-      [theme.breakpoints.up('lg')]: {
-        fontSize: '2rem',
-      },
-      color: 'blue',
-      margin: '0px 0px 10px 30px',
+    [theme.breakpoints.up('lg')]: {
+      fontSize: '1.5rem',
     },
-    aboutSubtitle : {
-      [theme.breakpoints.down('sm')]: {
-        fontSize: '1rem',
-      },
-      [theme.breakpoints.up('md')]: {
-        fontSize: '1.5rem',
-      },
-      [theme.breakpoints.up('lg')]: {
-        fontSize: '1.5rem',
-      },
-      color: 'blueviolet',
-      marginLeft: '1.5rem',
-    },
-  })
+  },
+})
 
 let developerArr = [
     { 
     developername: 'Aja Magdaleno',
     image: '/images/AjaMagdaleno.JPG',
-    skills: 'CSS, Javascript, SQL, MongoDB, Express, React, Node',
+    skills: 'Full stack web developer',
     hobbies: 'Hiking, Reading, Learning',
     email: "aja.magdaleno@gmail.com" ,
     github: 'https://github.com/AjaMag'
@@ -80,8 +74,8 @@ let developerArr = [
     { 
     developername: 'Armando Pensado',
     image: '/images/ArmandoPensado.JPG',
-    skills: 'Software, electronics, walking dogs',
-    hobbies: 'Hiking, Guitar, Reading',
+    skills: 'Full stack web developer',
+    hobbies: 'Hiking, Guitar, Reading, Electronics',
     email: 'armando@pensadotech.com',
     github: 'https://github.com/pensadotech'
     },
@@ -89,14 +83,14 @@ let developerArr = [
     developername: 'James Rodgick',
     image: './images/JamesRodgick.JPG',
     hobbies: 'Movies, Video Games, Computers, Guitar, Card Games',
-    skills: 'Making Internet Site Pages, Animal Science',
+    skills: 'Full stack web developer',
     email: 'rodgick@yahoo.com',
     github: 'https://github.com/Voriah'
     },
     {
     developername: 'Tommy Dang',
     image: './images/TommyDang.JPG',
-    skills: 'Javascript, SQL',
+    skills: 'Full stack web developer',
     hobbies: 'Jogging, Eating & Sleeping',
     email: 'ledangt310@live.com',
     github: 'https://github.com/TL-Dang',
@@ -104,7 +98,7 @@ let developerArr = [
     {
     developername: 'Eddie Kader',
     image: './images/EddieKader.JPG',
-    skills: 'Making eggs, coding(somewhat), plotting, reading',
+    skills: 'Full stack web developer',
     hobbies: 'Eating, Gym, Hanging out, Video Games',
     email: 'Eddie.kader@gmail.com',
     github: 'https://github.com/eddiek123',
@@ -112,7 +106,7 @@ let developerArr = [
     {
     developername: 'Sam Awi',
     image: './images/SamAwi.JPG',
-    skills: 'Professional Chef, Entrepreneur, Restaurant Management',
+    skills: 'Full stack web developer',
     hobbies: 'Learning to code, drinking good beer, making money',
     email: 'ossamawi@gmail.com',
     github: 'https://github.com/newcoder2019'
@@ -134,36 +128,46 @@ class AboutUs extends Component {
       const { classes } = this.props;
   
       return (
-        <>
-        <Grid container className={classes.root} spacing={16}>
-         
-        <Grid className={classes.container}>       
-          <Grid >
+        <>     
+          <Grid container spacing={0}>
+            <div className={classes.pageHeadContainer}>
             <Grid item>
-            <Typography className={classes.aboutTitle}>
-                Meet The Developers
-            </Typography>
-            </Grid> 
-            <Grid item >
-            <Typography className={classes.aboutSubtitle} >
+              <Avatar className={classes.avatar}>
+                <GroupIcon /> 
+              </Avatar>
+            </Grid>
+            <Grid item>
+             <h2 className={classes.pageHead}>
+               Developers 
+             </h2>
+            </Grid>          
+            <Grid item>
+              
+            </Grid>   
+            </div> 
+          </Grid>
+        
+          <div className={classes.root}> 
+            
+            <Typography 
+                className={classes.aboutSubtitle} >
                 BLUe!Team Design and Development
             </Typography>  
-            </Grid > 
-                <Grid container
-                style={{ margin: 'auto',marginLeft: '3%' }}>       
-                    {developerArr.map((e,index) => (
-                        <Grid item key={index}>
-                            <AboutUsCard {...e} />
-                        </Grid>   
-                    ) 
-                     )}
-                </Grid>
 
+            <Grid container spacing={8}
+                 alignContent='center'
+                 style={{ margin: 'auto',marginLeft: '3%' }}>                    
+              {
+                developerArr.map((e,index) => (
+                  <Grid item key={index}>
+                     <AboutUsCard {...e} />
+                  </Grid>   
+                ))
+              }
             </Grid>
-        </Grid> 
-       
-        </Grid>
-  
+
+            
+          </div>
         </>
       )
     }

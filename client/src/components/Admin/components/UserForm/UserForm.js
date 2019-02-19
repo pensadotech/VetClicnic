@@ -14,40 +14,52 @@ import PetsIcon from '@material-ui/icons/Pets'
 import MailIcon from '@material-ui/icons/MailOutline'
 import PhoneIcon from '@material-ui/icons/Phone'
 import PersonIcon from '@material-ui/icons/PermIdentity'
+import Grid from '@material-ui/core/Grid'
+import Chip from '@material-ui/core/Chip'
+import Avatar from '@material-ui/core/Avatar'
 // API
 import APIusers from '../../../../utils/APIuser'
 
-// Local style
-import './UserFrom.css'
-
 const styles = theme => ({
-  container: {
+  card: {
+    minWidth: 175,
+    maxWidth: 850,
+    maxHeight: 650,
+    margin: '0px 20px 0px 20px', 
+    borderRadius: '30px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)', 
+  },
+  cardContent: {
+    pading: '0px 0px 0px 0px'
+  },
+  formContainer: {
     display: 'flex',
     flexWrap: 'wrap',
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 250,
-  },
-  margin: {
-    margin: theme.spacing.unit,
-  },
-  card: {
-    minWidth: 175,
-    maxHeight: 620,
-    margin: '10px 20px 0px 20px',  
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
+    [theme.breakpoints.down('sm')]: {
+      width: 240,
+    },
+    [theme.breakpoints.up('md')]: {
+      width: 280,
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: 300,
+    }  
   },
   title: {
     fontSize: 14,
   },
-  pos: {
-    marginBottom: 12,
+  btnActionLeft : {
+    margin: '0px 0px 10px 20px',
+  },
+  btnAction : {
+    margin: '0px 0px 10px 10px',
+  },
+  inputError : {
+    color: 'red'
   }
 })
 
@@ -64,7 +76,7 @@ class UserForm extends Component {
     phone: '',
     email: '',
     isAdmin: false,
-    userError: ''
+    inputError: ''
   }
 
   componentDidMount = () => {
@@ -98,7 +110,7 @@ class UserForm extends Component {
     if (this.state.mode === 'edit') {
        // EDIT MODE: Validate
        if (this.state.username === '' || this.state.fullname === '' || this.state.email === ''   )  {    
-          this.setState({userError: 'Please provide username, fullname, and email'}) 
+          this.setState({inputError: 'Please provide username, fullname, and email'}) 
        } else {
             
            let doesItNeedEncryption = false
@@ -134,8 +146,8 @@ class UserForm extends Component {
         
        // ADD MODE: Validate
        if (this.state.username === '' || this.state.fullname === '' || 
-           this.state.email === '' || this.state.password === ''  )  {    
-        this.setState({userError: 'Please provide username, fullname, email, and password'}) 
+           this.state.email === '' || this.state.password === ''  )  {   
+          this.setState({inputError: 'Please provide username, fullname, email, and password'}) 
        } else {
           
           // translate
@@ -174,136 +186,169 @@ class UserForm extends Component {
     return ( 
       <>
       <Card className={classes.card}>
-         <CardContent>
-          <p className='userError'>{this.state.userError}</p>
-          <form className={classes.container} noValidate autoComplete="off">
-              <div className='formItem'>
-                 <TextField
-                    required
-                    id="user-name"
-                    label="Username :"
-                    className={classes.textField}
-                    name='username'
-                    type="string"
-                    autoComplete="current-username"
-                    value={this.state.username}
-                    onChange={this.handleInputChange}
-                    margin="normal"
-                    disabled={this.props.isUserNameDisabled}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                           <AccountCircle />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />   
-              </div>
-              <div className='formItem'> 
+         <CardContent className={classes.cardContent}>
+         <Chip
+            avatar={<Avatar>{this.state.isAdmin ? "AU" : "SU"} </Avatar>}
+            label={this.state.isAdmin ? 'Admin user' : 'System user'} 
+            className={classes.chip}
+            color={this.state.isAdmin ? "secondary" : "primary"} 
+          />
+
+          <form className={classes.formContainer} 
+                noValidate 
+                autoComplete="off">
+
+             <Grid container spacing={32}
+                   alignContent='center'
+                   style={{ margin: 'auto', marginLeft: '5%' }}>
+
+              <Grid item >
+                <div >
                   <TextField
-                    required
-                    id="user-fullname"
-                    label="Fullname :"
-                    className={classes.textField}
-                    name='fullname'
-                    type="string"
-                    autoComplete="current-fullname"
-                    value={this.state.fullname}
-                    onChange={this.handleInputChange}
-                    margin="normal"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                           <PersonIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />                 
-              </div>
-              <div className='formItem'> 
+                      required
+                      id="user-name"
+                      label="Username :"
+                      className={classes.textField}
+                      name='username'
+                      type="string"
+                      autoComplete="current-username"
+                      value={this.state.username}
+                      onChange={this.handleInputChange}
+                      margin="normal"
+                      disabled={this.props.isUserNameDisabled}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <AccountCircle />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />   
+                </div>
+                <div > 
+                    <TextField
+                      required
+                      id="user-fullname"
+                      label="Fullname :"
+                      className={classes.textField}
+                      name='fullname'
+                      type="string"
+                      autoComplete="current-fullname"
+                      value={this.state.fullname}
+                      onChange={this.handleInputChange}
+                      margin="normal"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <PersonIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />                 
+                </div>
+                <div>
+                    <FormControlLabel
+                      label="System Admin"
+                      control={
+                        <Checkbox
+                          checked={this.state.isAdmin}
+                          onChange={this.handleCheckboxChange('isAdmin')}
+                          color="primary"
+                        />
+                      } 
+                    />                   
+                </div> 
+             
+              </Grid>
+
+              <Grid item>
+
+                <div > 
+                    <TextField
+                      id="user-phone"
+                      label="Phone :"
+                      className={classes.textField}
+                      name='phone'
+                      type="string"
+                      autoComplete="current-phone"
+                      value={this.state.phone}
+                      onChange={this.handleInputChange}
+                      margin="normal"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <PhoneIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />                    
+                </div>
+                <div > 
+                    <TextField
+                      required
+                      id="user-email"
+                      label="Email: "
+                      className={classes.textField}
+                      name='email'
+                      type="email"
+                      autoComplete="current-email"
+                      value={this.state.email}
+                      onChange={this.handleInputChange}
+                      margin="normal"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <MailIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />                  
+                </div>
+                <div>
                   <TextField
-                    id="user-phone"
-                    label="Phone :"
-                    className={classes.textField}
-                    name='phone'
-                    type="string"
-                    autoComplete="current-phone"
-                    value={this.state.phone}
-                    onChange={this.handleInputChange}
-                    margin="normal"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                           <PhoneIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />                    
-              </div>
-              <div className='formItem'> 
-                  <TextField
-                    required
-                    id="user-email"
-                    label="Email: "
-                    className={classes.textField}
-                    name='email'
-                    type="email"
-                    autoComplete="current-email"
-                    value={this.state.email}
-                    onChange={this.handleInputChange}
-                    margin="normal"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <MailIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />                  
-              </div>
-              <div>
-                 <TextField
-                    required
-                    id="standard-password-input"
-                    label="Password"
-                    className={classes.textField}
-                    name='password'
-                    type="password"
-                    autoComplete="current-password"
-                    value={this.password}
-                    onChange={this.handleInputChange}
-                    margin="normal"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <PetsIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-              </div> 
-              <div>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={this.state.isAdmin}
-                        onChange={this.handleCheckboxChange('isAdmin')}
-                        color="primary"
-                      />
-                    }
-                    label="Admin Role"
-                  />                   
-              </div>               
+                      required
+                      id="standard-password-input"
+                      label="Password"
+                      className={classes.textField}
+                      name='password'
+                      type="password"
+                      autoComplete="current-password"
+                      value={this.password}
+                      onChange={this.handleInputChange}
+                      margin="normal"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <PetsIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                </div> 
+               
+
+                </Grid>
+              </Grid>             
           </form>
          
+          <p className={classes.inputError}>
+               {this.state.inputError}
+          </p>
+
         </CardContent>
         <CardActions>          
-            <Button size="small" variant="contained" color={this.props.leftbuttonColor} 
-               onClick={() => this.handleSave()}>{this.props.leftButtonLabel}
+            <Button size="small" 
+              variant="contained" 
+              color={this.props.leftbuttonColor} 
+              className={classes.btnActionLeft} 
+              onClick={() => this.handleSave()}>{this.props.leftButtonLabel}
             </Button>
-            <Button size="small" variant="contained" color={this.props.rightbuttonColor}  
-               onClick={() => this.props.handleRightButtonSelection(this.props.user)}>
-               {this.props.rightButtonLabel}
+            <Button size="small" 
+              variant="contained" 
+              color={this.props.rightbuttonColor}
+              className={classes.btnAction}   
+              onClick={() => this.props.handleRightButtonSelection(this.props.user)}>
+              {this.props.rightButtonLabel}
             </Button>
         </CardActions>    
       </Card>

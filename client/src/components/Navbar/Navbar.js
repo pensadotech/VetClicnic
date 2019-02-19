@@ -117,7 +117,7 @@ class Navbar extends Component {
                     <ColorizeIcon />
                   </div>                  
                   </ListItemIcon>
-                <ListItemText primary='Medications' />
+                <ListItemText primary='Medicines' />
               </ListItem>
            </Link>
            <Link to='/appointments' style={{ color: 'black', textDecoration: 'none' }}>
@@ -128,16 +128,6 @@ class Navbar extends Component {
                   </div> 
                 </ListItemIcon>
                 <ListItemText primary='Appointments' />
-              </ListItem>
-           </Link>
-           <Link to='/prescriptions' style={{ color: 'black', textDecoration: 'none' }}>
-              <ListItem button key='Prescriptions'>
-                <ListItemIcon> 
-                   <div>
-                     <AssignmentIcon />
-                   </div>                
-                </ListItemIcon>
-                <ListItemText primary='Prescriptions' />
               </ListItem>
            </Link>
            <Link to='/calc' style={{ color: 'black', textDecoration: 'none' }}>
@@ -180,7 +170,7 @@ class Navbar extends Component {
     return(
       <>
           <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar position="static"  >
               <Toolbar>
                 <IconButton onClick={() => this.toggleDrawer(true)} 
                             className={classes.menuButton} 

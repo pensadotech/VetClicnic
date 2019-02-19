@@ -5,27 +5,67 @@ import Grid from '@material-ui/core/Grid'
 import Avatar from '@material-ui/core/Avatar'
 import SettingsIcon from '@material-ui/icons/Settings'
 import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
+import AddIcon from '@material-ui/icons/Add'
 // Components
 import UserCard from './components/UserCard'
 import UserForm from './components/UserForm'
 // API
 import APIusers from '../../utils/APIuser'
 import APIemails from '../../utils/APIemails'
-// Local style
-import './Admin.css'
 
 const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    overflow: 'hidden',
+    padding: `0 ${theme.spacing.unit * 3}px`,
+  },
   avatar: {
-    margin: ' 10px 0px 0px 50px'
+    margin: ' 10px 0px 7px 40px',
+  },
+  fab: {
+    margin: theme.spacing.unit,
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+  },
+  pageHeadContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center' ,
+    color: 'white',
+    margin: '7px 0px 7px 20px',
+    // backgroundColor: 'rgb(4, 138, 4)',
+    borderRadius: '10px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
   },
   pageHead: {
     color: 'white',
-    margin: '7px 0px 0px 20px'
+    margin: '7px 50px 7px 20px',
   },
-  fab: {
-    margin: theme.spacing.unit
-  }
+  pageHeadDelete: {
+    color: 'red',
+    fontWeight: 'bold',
+    margin: '7px 0px 0px 20px',
+    backgroundColor: 'white',
+    maxWidth: 220,
+    borderRadius: '10px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+    padding: '0px 0px 0px 10px' 
+  },
+  pageHeadUpdate: {
+    color: 'blue',
+    fontWeight: 'bold',
+    margin: '7px 0px 0px 20px',
+    backgroundColor: 'white',
+    maxWidth: 300,
+    borderRadius: '10px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+    padding: '0px 0px 0px 10px' 
+  },
+  formContainer: {
+    maxWidth: 400,
+    maxHeight: 600,
+  },
+  
 })
 
 class Admin extends Component {
@@ -172,9 +212,11 @@ class Admin extends Component {
     if (this.state.screenMode === 'add') {
       return (
         <>
-          <h1 className={classes.pageHead}>
-            Create new user
-          </h1>
+          <div className={classes.pageHeadUpdate}>
+            <h2 >
+              Add new system user
+            </h2>
+          </div>
           <UserForm 
             mode={this.state.screenMode}
             user=''
@@ -191,9 +233,11 @@ class Admin extends Component {
     } else if (this.state.screenMode === 'edit') {
       return (
         <>
-          <h1 className={classes.pageHead}>
-            Update user information
-          </h1>
+          <div className={classes.pageHeadUpdate}>
+              <h2>
+                Update user information
+              </h2>
+          </div>
           <UserForm 
             mode={this.state.screenMode}
             user={this.state.targetUser}
@@ -204,16 +248,18 @@ class Admin extends Component {
             rightButtonLabel='Cancel'
             handleRightButtonSelection={this.handleCancel}
             isUserNameDisabled={true}
-          />
+          />         
         </>
       )
     } else if (this.state.screenMode === 'delete') {
       return (
         <>
           <div>
-            <h1 className={classes.pageHead}>
-              Do you want to delete this user?
-              </h1>
+            <div className={classes.pageHeadDelete}>
+              <h2>
+                Delete this user?
+              </h2>
+            </div>
             <UserCard user={this.state.targetUser}
               leftbuttonColor='secondary'
               leftButtonLabel='Delete'
@@ -227,27 +273,37 @@ class Admin extends Component {
         </>
       )
     } else {
+
       return (
         <>
           <Grid container spacing={0}>
+          <div className={classes.pageHeadContainer}>
             <Grid item>
               <Avatar className={classes.avatar}>
                 <SettingsIcon />
               </Avatar>
             </Grid>
             <Grid item>
-              <h1 className={classes.pageHead}>System Administration</h1>
+              <h2 className={classes.pageHead}>
+                System Administration
+              </h2>
             </Grid>
+            </div>  
             <Grid item>
-              <Fab color="secondary" aria-label="Add" className={classes.fab}>
-                <AddIcon onClick={() => this.handleUserAddSelection()} />
+              <Fab 
+                 aria-label="Add" 
+                 color="secondary" 
+                 onClick={() => this.handleUserAddSelection()} 
+                 className={classes.fab}>
+                <AddIcon />
               </Fab>
             </Grid>
           </Grid>
-
-          <Grid alignContent='center'
-            style={{ margin: 'auto', marginLeft: '5%' }}
-            container spacing={32}>
+          
+          <div className={classes.root}> 
+          <Grid container spacing={8}
+            alignContent='center'
+            style={{ margin: 'auto'}}>
             {
               this.state.users.map((user, index) => (
                 <UserCard 
@@ -257,13 +313,15 @@ class Admin extends Component {
                   leftButtonLabel='Update' 
                   handleLeftButtonSelection={this.handleUserUpdateSelection}   
                   rightbuttonColor='secondary'
-                  rightButtonLabel='Remove'
+                  rightButtonLabel='Delete'
                   isDisabled={user.username === 'admin' ? true : false}
                   handleRightButtonSelection={this.handleUserDeleteSelection}
                 />
               ))
             }
           </Grid>
+          </div>
+
         </>
       )
     }

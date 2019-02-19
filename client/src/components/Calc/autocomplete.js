@@ -89,7 +89,6 @@ APImeds.getMeds()
   })
   .catch(err => console.log(err))
 
-
 suggestions.map(suggestion => ({
   value: suggestion.label,
   label: suggestion.label,
@@ -115,6 +114,15 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     height: 250,
+    [theme.breakpoints.down('sm')]: {
+      margin:'1px 2px 1px 2px',
+     },
+     [theme.breakpoints.up('md')]: {
+      margin:'10px 10px 10px 10px',
+     },
+     [theme.breakpoints.up('lg')]: {
+      margin:'10px 20px 10px 20px',
+     }
   },
   button: {
     margin: theme.spacing.unit,
@@ -151,11 +159,12 @@ const styles = theme => ({
     fontSize: 16,
   },
   paper: {
-    position: 'absolute',
+    // position: 'absolute',
     zIndex: 1,
     margin: theme.spacing.unit * 2,
-    left: 0,
+    left:0,
     right: 0,
+    border: '2px solid gray'
   },
   divider: {
     height: theme.spacing.unit * 5,
@@ -589,23 +598,27 @@ class IntegrationReactSelect extends React.Component {
               </Grid>
             </Grid>
           </NoSsr>
-          <Button variant="contained" color="primary" onClick={() => { this.chooseCalc(this.state.chosen.label, this.state.medication, this.state.patient) }} className={classes.button}>
+          <Button 
+            variant="contained" 
+            color="primary" 
+            className={classes.button}
+            onClick={() => { this.chooseCalc(this.state.chosen.label, this.state.medication, this.state.patient) }} >
             Calculate
-      </Button>
+          </Button>
         </Paper>
         <br />
         <Grid container spacing={24}>
-
           <Grid item xs={2}></Grid>
           <Grid item xs={3}>
-          {this.state.patient !== null? <><PatientCard patient={this.state.patient} /> </> : null}
-            
+            {this.state.patient !== null? <><PatientCard patient={this.state.patient} /> </> : null}         
           </Grid>
-          <Grid item xs={2}></Grid>
+          <Grid item xs={2}>
+          </Grid>
           <Grid item xs={3}>
             {this.renderSig(this.state.chosen.label)}
           </Grid>
-          <Grid item xs={2}></Grid>
+          <Grid item xs={2}>
+          </Grid>
         </Grid>
       </div>
     );

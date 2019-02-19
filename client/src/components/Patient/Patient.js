@@ -6,37 +6,93 @@ import Avatar from '@material-ui/core/Avatar'
 import Fab from '@material-ui/core/Fab';
 import PetsIcon from '@material-ui/icons/Pets'
 import AddIcon from '@material-ui/icons/Add'
-// API bridge for express routes
-import APIpatient from '../../utils/APIpatient'
 //Components
 import PatientCard from './components/PatientCard'
 import PatientForm from './components/PatientForm'
+import PatientView from './components/PatientView'
+// API bridge for express routes
+import APIpatient from '../../utils/APIpatient'
+import APIsession from '../../utils/APIsession'
 
 const styles = theme => ({
-    avatar: {
-      margin: ' 10px 0px 0px 50px'
-    },
-    pageHead : {
-      color:'white',
-      margin: '7px 0px 0px 20px'
-    },
-    fab: {
-      margin: theme.spacing.unit
-    }
-  }) 
+  root: {
+    flexGrow: 1,
+    overflow: 'hidden',
+    padding: `0 ${theme.spacing.unit * 3}px`,
+  },
+  avatar: {
+    margin: ' 10px 0px 7px 40px',
+  },
+  fab: {
+    margin: theme.spacing.unit,
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+  },
+  pageHeadContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center' ,
+    color: 'white',
+    margin: '7px 0px 7px 20px',
+    // backgroundColor: 'rgb(4, 138, 4)',
+    borderRadius: '10px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+  },
+  pageHead: {
+    color: 'white',
+    margin: '7px 50px 7px 20px',
+  },
+  pageHeadDelete: {
+    color: 'red',
+    fontWeight: 'bold',
+    margin: '7px 0px 0px 20px',
+    backgroundColor: 'white',
+    maxWidth: 230,
+    borderRadius: '10px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+    padding: '0px 0px 0px 10px' 
+  },
+  pageHeadUpdate: {
+    color: 'blue',
+    fontWeight: 'bold',
+    margin: '7px 0px 0px 20px',
+    backgroundColor: 'white',
+    maxWidth: 325,
+    borderRadius: '10px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+    padding: '0px 0px 0px 10px' 
+  },
+  formContainer: {
+    maxWidth: 400,
+    maxHeight: 600,
+  },
+ 
+}) 
 
 class Patient extends Component {
 
   state = {
+    sessionUser: '',
     patients: [],
     screenMode: 'list',
     targetPatient: ''
   }
    
   componentDidMount() {
-    this.loadPatients()
+    this.loadData()    
   }
   
+  loadData = () => {    
+    // have user logged-in
+    APIsession.getSessionUser()
+      .then(r => {  
+        let sessionUser = r.data
+        this.setState({ sessionUser : sessionUser }) 
+        this.loadPatients()
+      })
+      .catch(err => console.log(err))
+  }
+
   loadPatients = () => {
     APIpatient.getPatients()
     .then( r => {
@@ -58,6 +114,11 @@ class Patient extends Component {
   handlePatientDeleteSelection = (tgtPat) => {
     //changes the screen mode to DELETE Patient, and store target-patient
     this.setState( {screenMode: 'delete', targetPatient: tgtPat})
+  }
+
+  handlePatientViewSelection = (tgtPat) => {
+    // Change screen mode to User DELETE mode, and store target-med
+    this.setState({ screenMode: 'view', targetPatient: tgtPat })
   }
 
   handleCreatePatient = (tgtPat) => {
@@ -117,7 +178,6 @@ class Patient extends Component {
       })
    }
 
-
   renderView = () => {
     const { classes } = this.props
 
@@ -125,9 +185,11 @@ class Patient extends Component {
 
       return(
         <>
-        <h1 className={classes.pageHead}>
-          Add new patient
-        </h1>
+        <div className={classes.pageHeadUpdate}>
+            <h2 >
+            Add new patient
+            </h2>
+          </div>
         <PatientForm 
           mode={this.state.screenMode}
           patient=''
@@ -146,9 +208,11 @@ class Patient extends Component {
 
         return(
           <>
-            <h1 className={classes.pageHead}>
+            <div className={classes.pageHeadUpdate}>
+              <h2>
               Update patient information
-            </h1>
+              </h2>
+            </div>
             <PatientForm 
               mode={this.state.screenMode}
               patient={this.state.targetPatient}
@@ -158,7 +222,7 @@ class Patient extends Component {
               rightbuttonColor='default'
               rightButtonLabel='Cancel'   
               handleRightButtonSelection={this.handleCancel}
-              isNameDisabled={true}
+              isNameDisabled={false}
             />
           </>
       ) // return()
@@ -168,9 +232,11 @@ class Patient extends Component {
       return(
         <>
           <div>
-            <h1 className={classes.pageHead}>
-              Do you want to delete this patient?
-            </h1>
+            <div className={classes.pageHeadDelete}>
+              <h2>
+                Delete this patient?
+              </h2>
+            </div>
             <PatientCard
                    patient={this.state.targetPatient}
                    leftbuttonColor='secondary'
@@ -185,31 +251,57 @@ class Patient extends Component {
         </>
       ) //return
     
+    } else  if (this.state.screenMode === 'view') {
+      return(
+        <>
+            <div className={classes.pageHeadUpdate }>
+              <h2>
+                Patient information
+              </h2>
+            </div>
+            <PatientView 
+              mode={this.state.screenMode}
+              patient={this.state.targetPatient}
+              rightbuttonColor='primary'
+              rightButtonLabel='Return'  
+              handleRightButtonSelection={this.handleCancel} 
+            />
+         
+        </>
+      ) // return()
     } else {
 
       return(
         <>
           <Grid container spacing={0}>
-          <Grid item>
-            <Avatar className={classes.avatar}>
-            <PetsIcon /> 
-            </Avatar>
+          <div className={classes.pageHeadContainer}>
+            <Grid item>
+              <Avatar className={classes.avatar}>
+                <PetsIcon /> 
+              </Avatar>          
+            </Grid>
+            <Grid item>            
+              <h2 className={classes.pageHead}>
+                Patients
+              </h2>                 
+            </Grid>             
+            </div>  
+            <Grid item>
+              <Fab 
+                aria-label="Add" 
+                color="secondary" 
+                className={classes.fab}
+                disabled = {this.state.sessionUser.isAdmin ? false : true} 
+                onClick={() => this.handlePatientAddSelection()}>
+                <AddIcon />
+              </Fab>
+            </Grid>    
           </Grid>
-          <Grid item>
-            <h1 className={classes.pageHead}>Patients</h1>
-          </Grid>
-          <Grid item>
-            <Fab color="secondary" aria-label="Add" 
-                 className={classes.fab}
-                 onClick={() => this.handlePatientAddSelection()}>
-              <AddIcon  />
-            </Fab>
-          </Grid>
-        </Grid>
-
-        <Grid alignContent='center'
-              style={{ margin: 'auto', marginLeft: '5%' }}
-              container spacing={32}>
+        
+        <div className={classes.root}> 
+        <Grid container spacing={8}
+                alignContent='center'
+                style={{ margin: 'auto'}}>
             {
               this.state.patients.map((patient, index) => (
                  <PatientCard
@@ -220,13 +312,18 @@ class Patient extends Component {
                    handleLeftButtonSelection={this.handlePatientUpdateSelection}
                    rightbuttonColor='secondary'
                    rightButtonLabel='Remove'
-                  isDisabled={false}
-                  handleRightButtonSelection={this.handlePatientDeleteSelection}
+                   isDisabled={this.state.sessionUser.isAdmin ? false : true} 
+                   handleRightButtonSelection={this.handlePatientDeleteSelection}
+                   viewThirdButton={true}
+                   viewButtonColor={this.state.sessionUser.isAdmin ? 'default' : 'primary'} 
+                   viewButtonLabel='View'
+                   handleViewButtonSelection={this.handlePatientViewSelection}   
                  />   
               ))
             }
           </Grid>
-            
+          </div>
+
         </>
       ) //return()
     

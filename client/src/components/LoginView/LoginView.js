@@ -12,23 +12,28 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import PetsIcon from '@material-ui/icons/Pets'
 
-// local style
-import './LoginView.css'
-
 const styles = theme => ({
+  margin: {
+    margin: theme.spacing.unit,
+  },
+  extendedIcon: {
+    marginRight: theme.spacing.unit,
+  },
   mainContainer: {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
     alignItems: 'center' 
   },
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
+  formContainer: {
+    // display: 'flex',
+    // flexWrap: 'wrap',
+    margin: '20px 20px 0px 20px', 
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
+    fontWeight: 'bold',
     width: 200,
   },
   dense: {
@@ -39,36 +44,40 @@ const styles = theme => ({
   },
   card: {
     minWidth: 200,
-    maxHeight: 620,
+    maxHeight: 600,
+    opacity: '0.9',
+    display: 'flex', 
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: '30px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
     [theme.breakpoints.down('sm')]: {
       margin: '30px 40px 0px 40px',
     },
     [theme.breakpoints.up('md')]: {
-      margin: '90px 40px 0px 40px',
+      margin: '120px 40px 0px 40px',
     },
     [theme.breakpoints.up('lg')]: {
       margin: '120px 40px 0px 40px',
-    },  
-    opacity: '0.8',
-    display: 'flex', 
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: '40px'
+    }  
   },
   loginTitle:  {
+    color: 'rgb(11, 71, 201)',
+    margin: '0px 0px 0px 30px',
+    fontWeight: 'bolder',
     [theme.breakpoints.down('sm')]: {
       fontSize: '30px',
     },
     [theme.breakpoints.up('md')]: {
-      fontSize: '40px',
+      fontSize: '40px',    
     },
     [theme.breakpoints.up('lg')]: {
       fontSize: '50px',
-    },
-    color: 'blue',
-    margin: '0px 0px 10px 30px',
+    }
   },
   loginSubtitle : {
+    color: 'gray',
+    margin: '0px 0px 5px 30px',
     [theme.breakpoints.down('sm')]: {
       fontSize: '15px',
     },
@@ -77,12 +86,25 @@ const styles = theme => ({
     },
     [theme.breakpoints.up('lg')]: {
       fontSize: '30px',
-    },
-    color: 'gray',
-    margin: '0px 0px 30px 30px'
+    }
+  },
+  logingImage: {
+    width: '220px',
+    margin: '30px 35px 20px 40px',
+    border: '5px solid lightgray',
+    borderRadius: '30px',
+    // boxShadow: '2px 2px 3px 2px gray',
+    // transform: 'rotate( 3deg)'
+  },
+  logingBlock: {
+    backgroundColor: 'rgb(231, 151, 2)',
+    borderRadius: '30px',
+    boxShadow: '2px 2px 2px 2px rgb(82, 82, 100)'
   },
   userError : {
     color: 'red',
+    fontSize: 20, 
+    fontWeight: 'bold'
   }
 })
 
@@ -94,73 +116,80 @@ class LoginView extends Component {
 
     return (
       <>
-      <Grid  className={classes.mainContainer} spacing={0}>
+      <Grid className={classes.mainContainer} >
       <Grid item>
       <Card className={classes.card}>       
         <CardContent> 
-          
+           
          <Typography className={classes.loginTitle}>
               SORIN
           </Typography>
           <Typography className={classes.loginSubtitle}>
               Surgical Operation Reference and Interface Network
           </Typography>
-
-          <Grid container spacing={0}>       
-              <Grid item>
-                <img className="logingImage imgRnd10 imageShadow imageRotate" 
-                     src="./images/IMG_9465.JPG" 
-                     alt="Veterinary" />
+           
+          <div className={classes.logingBlock}>
+    
+            <Grid container spacing={0}>               
+                <Grid item>
+                  <img className={classes.logingImage}
+                      src="./images/sorin3.JPG" 
+                      alt="Veterinary" />
+                </Grid>
+                <Grid item>
+                  <form className={classes.formContainer} noValidate autoComplete="off">
+                      <TextField
+                        required
+                        id="standard-name"
+                        label="User Name"
+                        className={classes.textField}
+                        name='userName'
+                        value={this.userName}
+                        onChange={this.props.handleInputChange}
+                        margin="normal"
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start" style={{ color: 'black'}}>
+                              <AccountCircle />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+        
+                      <TextField
+                        required
+                        id="standard-password-input"
+                        label="Password"
+                        className={classes.textField}
+                        name='userPwd'
+                        type="password"
+                        autoComplete="current-password"
+                        value={this.userPwd}
+                        onChange={this.props.handleInputChange}
+                        margin="normal"
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start" style={{ color: 'black'}}>
+                              <PetsIcon />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                      <CardActions>
+                      <Button variant="contained" 
+                            color="primary" 
+                            size="large"
+                            className={classes.margin}                         
+                            onClick={this.props.handleLogingAction}>
+                        Login
+                      </Button>
+                      </CardActions> 
+                    </form>
+                    <p className={classes.userError}>{this.props.userError}</p>
+                </Grid> 
               </Grid>
-              <Grid item>
-                <form className={classes.container} noValidate autoComplete="off">
-                    <TextField
-                      required
-                      id="standard-name"
-                      label="User Name"
-                      className={classes.textField}
-                      name='userName'
-                      value={this.userName}
-                      onChange={this.props.handleInputChange}
-                      margin="normal"
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <AccountCircle />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-      
-                    <TextField
-                      required
-                      id="standard-password-input"
-                      label="Password"
-                      className={classes.textField}
-                      name='userPwd'
-                      type="password"
-                      autoComplete="current-password"
-                      value={this.userPwd}
-                      onChange={this.props.handleInputChange}
-                      margin="normal"
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <PetsIcon />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                    <CardActions>
-                    <Button variant="contained" color="primary" className={classes.button} onClick={this.props.handleLogingAction}>
-                      Login
-                    </Button>
-                    </CardActions> 
-                  </form>
-                  <p className={classes.userError}>{this.props.userError}</p>
-              </Grid>       
-            </Grid>
 
+            </div>
           </CardContent>
       </Card> 
       </Grid>

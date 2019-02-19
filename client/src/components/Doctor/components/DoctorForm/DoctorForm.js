@@ -10,40 +10,53 @@ import Button from '@material-ui/core/Button'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import MailIcon from '@material-ui/icons/MailOutline'
 import PhoneIcon from '@material-ui/icons/Phone'
+import Grid from '@material-ui/core/Grid'
+import Chip from '@material-ui/core/Chip'
+import Avatar from '@material-ui/core/Avatar'
+import FaceIcon from '@material-ui/icons/Face'
 // API
 import APIdoctor from '../../../../utils/APIdoctor'
 
-// Local style
-import './DoctorForm.css'
-
 const styles = theme => ({
-  container: {
+  card: {
+    minWidth: 175,
+    maxWidth: 850,
+    maxHeight: 650,
+    margin: '0px 20px 0px 20px',  
+    borderRadius: '30px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',   
+  },
+  cardContent: {
+    pading: '0px 0px 0px 0px'
+  },
+  formContainer: {
     display: 'flex',
     flexWrap: 'wrap',
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 250,
-  },
-  margin: {
-    margin: theme.spacing.unit,
-  },
-  card: {
-    minWidth: 175,
-    maxHeight: 620,
-    margin: '10px 20px 0px 20px',
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
+    [theme.breakpoints.down('sm')]: {
+      width: 240,
+    },
+    [theme.breakpoints.up('md')]: {
+      width: 280,
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: 300,
+    }  
   },
   title: {
     fontSize: 14,
   },
-  pos: {
-    marginBottom: 12,
+  btnActionLeft : {
+    margin: '0px 0px 10px 20px',
+  },
+  btnAction : {
+    margin: '0px 0px 10px 10px',
+  },
+  inputError : {
+    color: 'red'
   }
 })
 
@@ -57,7 +70,7 @@ class DoctorForm extends Component {
     phone: '',
     mobilePhone: '',
     email: '',
-    doctorError: ''
+    inputError: ''
   }
 
   componentDidMount = () => {
@@ -85,7 +98,7 @@ class DoctorForm extends Component {
     if (this.state.mode === 'edit') {
       // EDIT MODE: Validate
       if (this.state.name === '' || this.state.phone === '' || this.state.email === '') {
-        this.setState({ doctorError: 'Please provide name, number, and email' })
+        this.setState({ inputError: 'Please provide name, office phone number, and email' })
       } else {
 
         // translate
@@ -106,7 +119,7 @@ class DoctorForm extends Component {
 
       // ADD MODE: Validate
       if (this.state.name === '' || this.state.phone === '' || this.state.email === '') {
-        this.setState({ doctorError: 'Please provide name, number, and email' })
+        this.setState({ inputError: 'Please provide name, office phone number, and email' })
       } else {
 
         // Translation
@@ -142,10 +155,25 @@ class DoctorForm extends Component {
       <>
 
         <Card className={classes.card}>
-          <CardContent>
-            <p className='doctorError'>{this.state.doctorError}</p>
-            <form className={classes.container} noValidate autoComplete="off">
-              <div className='formItem'>
+          <CardContent className={classes.cardContent}>
+            <Chip
+              avatar={<Avatar><FaceIcon /></Avatar>}
+              label='Doctor' 
+              className={classes.chip}
+              color= "primary"
+            />
+
+            <form className={classes.formContainer} 
+                  noValidate 
+                  autoComplete="off">
+             
+             <Grid container spacing={32}
+                   alignContent='center'
+                   style={{ margin: 'auto', marginLeft: '5%' }}>
+
+             <Grid item >
+               
+              <div >
                 <TextField
                   required
                   id="name"
@@ -167,8 +195,10 @@ class DoctorForm extends Component {
                   }}
                 />
               </div>
-
-              <div className='formItem'>
+              </Grid>  
+              
+              <Grid item >
+              <div>
                 <TextField
                   id="user-phone"
                   label="Office Phone :"
@@ -188,7 +218,7 @@ class DoctorForm extends Component {
                   }}
                 />
               </div>
-              <div className='formItem'>
+              <div>
                 <TextField
                   id="user-mobilePhone"
                   label="Mobile Phone :"
@@ -229,15 +259,28 @@ class DoctorForm extends Component {
                   }}
                 />
               </div>
+              
+              </Grid>
+              </Grid>
             </form>
+
+            <p className={classes.inputError}>
+               {this.state.inputError}
+            </p>
 
           </CardContent>
           <CardActions>
-            <Button size="small" variant="contained" color={this.props.leftbuttonColor}
+            <Button size="small" 
+              variant="contained" 
+              color={this.props.leftbuttonColor}
+              className={classes.btnActionLeft} 
               onClick={() => this.handleSave()}>
               {this.props.leftButtonLabel}
             </Button>
-            <Button size="small" variant="contained" color={this.props.rightbuttonColor}
+            <Button size="small" 
+              variant="contained" 
+              color={this.props.rightbuttonColor}
+              className={classes.btnAction}  
               onClick={() => this.props.handleRightButtonSelection(this.state.doctor)} >
               {this.props.rightButtonLabel}
             </Button>

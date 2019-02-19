@@ -8,6 +8,8 @@ import Fab from '@material-ui/core/Fab'
 import AddIcon from '@material-ui/icons/Add'
 import Moment from 'moment'
 // Components
+import Calendar from './components/Calendar'
+import CalendarDay from './components/CalendarDay'
 import AppointCard from './components/AppointCard'
 import AppointForm from './components/AppointForm'
 // API
@@ -19,30 +21,52 @@ import APIemails from '../../utils/APIemails'
 const styles = theme => ({
  
   avatar: {
-    margin: ' 10px 0px 0px 50px'
+    margin: ' 10px 0px 7px 40px',
+  },
+  fab: {
+    margin: theme.spacing.unit,
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+  },
+  pageHeadContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center' ,
+    color: 'white',
+    margin: '7px 0px 7px 20px',
+    // backgroundColor: 'rgb(4, 138, 4)',
+    borderRadius: '10px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
   },
   pageHead: {
     color: 'white',
-    margin: '7px 0px 0px 20px'
+    margin: '7px 50px 7px 20px',
   },
-  card: {
-    minWidth: 275,
-    maxHeight: 220,
-    margin: '10px 20px 0px 20px',
+  pageHeadDelete: {
+    color: 'red',
+    fontWeight: 'bold',
+    margin: '7px 0px 0px 20px',
+    backgroundColor: 'white',
+    maxWidth: 350,
+    borderRadius: '10px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+    padding: '0px 0px 0px 10px' 
   },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
+  pageHeadUpdate: {
+    color: 'blue',
+    fontWeight: 'bold',
+    margin: '7px 0px 0px 20px',
+    backgroundColor: 'white',
+    maxWidth: 450,
+    borderRadius: '10px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+    padding: '0px 0px 0px 10px' 
   },
   title: {
     fontSize: 14,
   },
   pos: {
     marginBottom: 12,
-  },
-  fab: {
-    margin: theme.spacing.unit,
   },
   extendedIcon: {
     marginRight: theme.spacing.unit,
@@ -55,23 +79,15 @@ class Appointment extends Component {
     aptments: [],
     patients: [],
     doctors: [],
-    screenMode: 'list',
+    screenMode: 'calendar',
+    selectedDate: new Date(),
     targetAppoint: ''
   }
   
   componentDidMount() {
-    this.loadAppointData()
     this.loadDoctorData()
   } 
-
-  loadAppointData = () => {
-    APIappointment.getApointments()
-    .then(res => {
-      this.setState({ aptments: res.data })   
-    })
-    .catch(err => console.log(err))
-  }
-
+  
   loadDoctorData = () => {
     APIdoctor.getDoctors()
       .then(res => {
@@ -104,6 +120,14 @@ class Appointment extends Component {
     this.setState({ screenMode: 'delete', targetAppoint: tgtApnt })
   }
 
+  handleDaySelection = (selectedDate) => {
+    // Change mode to date list
+    this.setState({ 
+        screenMode: 'list', 
+        selectedDate : selectedDate,
+        targetAppoint: '' })
+  }
+
   getEmailRecipients =(tgtApnt) =>{
      
     let emailrecipients = ''
@@ -125,12 +149,9 @@ class Appointment extends Component {
   }
 
   handleCreateAppt = (tgtApnt) => {
-
     // create new user
     APIappointment.createAppoint(tgtApnt)
       .then(r => {
-        // reload the data
-        this.loadAppointData()
         // Restore main view
         this.setState({
           screenMode: 'list',
@@ -174,8 +195,6 @@ class Appointment extends Component {
     // Save updated user data    
     APIappointment.updateAppoint(tgtApnt._id, tgtApnt)
       .then(r => {
-        // reload the data
-        this.loadAppointData()
         // Restore main view
         this.setState({
           screenMode: 'list',
@@ -262,9 +281,11 @@ class Appointment extends Component {
 
   handleCancel = (tgtAppt) => {
     // Just reset selected appt and change screen mode to list
-    this.setState({ screenMode: 'list', targetAppoint: '' })
-    // reload the data
-    this.loadAppointData()    
+    this.setState({ screenMode: 'list', targetAppoint: '' })   
+  }
+
+  handleReturn = () => {
+    this.setState({ screenMode: 'calendar'})   
   }
 
   renderView = () => {
@@ -275,9 +296,11 @@ class Appointment extends Component {
 
         return (
           <>
-          <h1 className={classes.pageHead}>
-            Create new appointment
-          </h1>
+          <div className={classes.pageHeadUpdate}>
+              <h2>
+              Add new appointment
+              </h2>
+          </div>
           <AppointForm 
             mode={this.state.screenMode}
             appoint=''
@@ -298,9 +321,11 @@ class Appointment extends Component {
 
         return (
           <>
-          <h1 className={classes.pageHead}>
-            Update Current Appointment
-          </h1>
+          <div className={classes.pageHeadUpdate}>
+            <h2>
+              Update Appointment information
+            </h2>
+          </div>
           <AppointForm 
             mode={this.state.screenMode}
             appoint={this.state.targetAppoint}
@@ -321,10 +346,13 @@ class Appointment extends Component {
 
       return (
         <>
+          
           <div>
-            <h1 className={classes.pageHead}>
-              Do you want to delete this appointment?
-              </h1>
+              <div className={classes.pageHeadDelete}>
+                <h2>
+                Delete this appointment?
+                </h2>
+              </div>
             <AppointCard appt={this.state.targetAppoint}
               leftbuttonColor='secondary'
               leftButtonLabel='Delete'
@@ -338,48 +366,85 @@ class Appointment extends Component {
         </>
       )
 
-    } else {
-        return(
-          
+    } else if (this.state.screenMode === 'list') { 
+       
+      return (
         <>
-          <Grid container spacing={0}>
+        <Grid container spacing={0}>
+           <div className={classes.pageHeadContainer}>
             <Grid item>
               <Avatar className={classes.avatar}>
                 <EventIcon />
               </Avatar>
             </Grid>
             <Grid item>
-              <h1 className={classes.pageHead}>Appointments</h1>
+              <h2 className={classes.pageHead}>
+               Appointments
+              </h2>
             </Grid>
+            </div> 
             <Grid item>
-              <Fab color="secondary" aria-label="Add" 
-                  className={classes.fab}
-                  onClick={() => this.handleAppointAddSelection()}>
+              <Fab 
+                aria-label="Add"
+                color="secondary"  
+                className={classes.fab}
+                onClick={() => this.handleAppointAddSelection()}>
                 <AddIcon />
               </Fab>
             </Grid>
           </Grid>
 
-          <Grid alignContent='center'
-            style={{ margin: 'auto', marginLeft: '5%' }}
-            container spacing={32}>
-            {
-              this.state.aptments.map((appt, index) => (
-                <AppointCard key={index}
-                  appt={appt} 
-                  leftbuttonColor='primary'
-                  leftButtonLabel='Update' 
-                  handleLeftButtonSelection={this.handleAppointUpdateSelection}  
-                  rightbuttonColor='secondary'
-                  rightButtonLabel='Remove' 
-                  handleRightButtonSelection={this.handleAppointDeleteSelection}
-                  isDisabled={false}
-                />
-              ))
-            }
+           <CalendarDay 
+           selectedDate={this.state.selectedDate} 
+           returnbuttonColor='default'
+           returnButtonLabel='Return to calendar' 
+           handleReturnButton={this.handleReturn} 
+           leftbuttonColor='primary'
+           leftButtonLabel='Update' 
+           handleLeftButtonSelection={this.handleAppointUpdateSelection}  
+           rightbuttonColor='secondary'
+           rightButtonLabel='Remove' 
+           handleRightButtonSelection={this.handleAppointDeleteSelection}         
+           />
+        </>
+      )
+
+    }else {
+
+      return(      
+        <>
+          <Grid container spacing={0}>
+           <div className={classes.pageHeadContainer}>
+            <Grid item>
+              <Avatar className={classes.avatar}>
+                <EventIcon />
+              </Avatar>
+            </Grid>
+            <Grid item>
+              <h2 className={classes.pageHead}>
+               Appointments
+              </h2>
+            </Grid>
+            </div> 
+            <Grid item>
+              <Fab 
+                aria-label="Add"
+                color="secondary"  
+                className={classes.fab}
+                onClick={() => this.handleAppointAddSelection()}>
+                <AddIcon />
+              </Fab>
+            </Grid>
           </Grid>
 
-          
+          <div className="calendarContainer">
+            <main>
+              <Calendar 
+                handleDaySelection={this.handleDaySelection} 
+              />
+            </main>
+          </div>
+
         </>
     )
   }

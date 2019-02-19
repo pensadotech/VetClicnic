@@ -11,32 +11,80 @@ import DoctorCard from './components/DoctorCard'
 import DoctorForm from './components/DoctorForm'
 // API
 import APIdoctors from '../../utils/APIdoctor'
-// Local style
-import './Doctor.css'
+import APIsession from '../../utils/APIsession'
 
 const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    overflow: 'hidden',
+    padding: `0 ${theme.spacing.unit * 3}px`,
+  },
   avatar: {
-    margin: ' 10px 0px 0px 50px'
+    margin: ' 10px 0px 7px 40px',
+  },
+  fab: {
+    margin: theme.spacing.unit,
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+  },
+  pageHeadContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center' ,
+    color: 'white',
+    margin: '7px 0px 7px 20px',
+    // backgroundColor: 'rgb(11, 71, 201)',
+    borderRadius: '10px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
   },
   pageHead: {
     color: 'white',
-    margin: '7px 0px 0px 20px'
+    margin: '7px 50px 7px 20px',
   },
-  fab: {
-    margin: theme.spacing.unit
-  }
+  pageHeadDelete: {
+    color: 'red',
+    fontWeight: 'bold',
+    margin: '7px 0px 0px 20px',
+    backgroundColor: 'white',
+    maxWidth: 220,
+    borderRadius: '10px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+    padding: '0px 0px 0px 10px' 
+  },
+  pageHeadUpdate: {
+    color: 'blue',
+    fontWeight: 'bold',
+    margin: '7px 0px 0px 20px',
+    backgroundColor: 'white',
+    maxWidth: 350,
+    borderRadius: '10px',
+    boxShadow: '5px 5px 5px 5px rgb(82, 82, 100)',
+    padding: '0px 0px 0px 10px' 
+  },
 })
 
 class Doctor extends Component {
    
   state = {
+    sessionUser: '',
     doctors: [],
     screenMode: 'list',
     targetDoctor: ''
   }
   
   componentDidMount() {
-    this.loadDoctors()
+    this.loadData()    
+  }
+
+  loadData = () => {    
+    // have user logged-in
+    APIsession.getSessionUser()
+      .then(r => {  
+        let sessionUser = r.data
+        this.setState({ sessionUser : sessionUser }) 
+        this.loadDoctors()
+      })
+      .catch(err => console.log(err))
   }
 
   loadDoctors = () => {
@@ -113,9 +161,11 @@ class Doctor extends Component {
         
       return(
         <>
-          <h1 className={classes.pageHead}>
-            Add new a Doctor
-          </h1>
+         <div className={classes.pageHeadUpdate}>
+            <h2 >
+            Add new a doctor
+            </h2>
+          </div>
           <DoctorForm 
             mode={this.state.screenMode}
             doctor=''
@@ -134,9 +184,11 @@ class Doctor extends Component {
 
       return(
         <>
-          <h1 className={classes.pageHead}>
-            Update doctor information
-          </h1>
+          <div className={classes.pageHeadUpdate}>
+              <h2>
+              Update doctor information
+              </h2>
+          </div>
           <DoctorForm 
             mode={this.state.screenMode}
             doctor={this.state.targetDoctor}
@@ -156,19 +208,22 @@ class Doctor extends Component {
       return(
         <>
           <div>
-            <h1 className={classes.pageHead}>
-              Do you want to remove this Doctor?
-            </h1>
+          <div className={classes.pageHeadDelete}>
+              <h2>
+                Delete this doctor?
+              </h2>
+            </div>
             <DoctorCard 
-                   doctor={this.state.targetDoctor}
-                   leftbuttonColor='secondary'
-                   leftButtonLabel='Delete'
-                   handleLeftButtonSelection={this.handleDeleteDoctor}
-                   rightbuttonColor='default'
-                   rightButtonLabel='Cancel'
-                  isDisabled={false}
-                  handleRightButtonSelection={this.handleCancel}
-                 />   
+              doctor={this.state.targetDoctor}
+              userSession={this.state.sessionUser}
+              leftbuttonColor='secondary'
+              leftButtonLabel='Delete'
+              handleLeftButtonSelection={this.handleDeleteDoctor}
+              rightbuttonColor='default'
+              rightButtonLabel='Cancel'
+              isDisabled={false}
+              handleRightButtonSelection={this.handleCancel}
+            />   
           </div>
         </>
       ) // return
@@ -178,42 +233,52 @@ class Doctor extends Component {
       return(
         <>
             <Grid container spacing={0}>
+            <div className={classes.pageHeadContainer}>
             <Grid item>
               <Avatar className={classes.avatar}>
-              <FaceIcon /> 
+                <FaceIcon /> 
               </Avatar>
             </Grid>
             <Grid item>
-              <h1 className={classes.pageHead}>Doctors</h1>
+             <h2 className={classes.pageHead}>
+                Doctors
+             </h2>
             </Grid>
+            </div>  
             <Grid item>
-              <Fab color="secondary" aria-label="Add" 
-                   className={classes.fab}
-                   onClick={() => this.handleDoctorAddSelection()}>
+              <Fab 
+                aria-label="Add" 
+                color="secondary"  
+                className={classes.fab}
+                disabled = {this.state.sessionUser.isAdmin ? false : true}                     
+                onClick={() => this.handleDoctorAddSelection()}>
                 <AddIcon />
               </Fab>
             </Grid>
           </Grid>
-        
-          <Grid alignContent='center'
-            style={{ margin: 'auto',marginLeft: '5%' }}
-            container spacing={32}>
+          
+          <div className={classes.root}> 
+          <Grid container spacing={8}
+                alignContent='center'
+                style={{ margin: 'auto'}}>
             {
               this.state.doctors.map((doctor, index) => (
                  <DoctorCard 
                    key={index}
                    doctor={doctor}
+                   userSession={this.state.sessionUser}
                    leftbuttonColor='primary'
                    leftButtonLabel='Update'
                    handleLeftButtonSelection={this.handleDoctorUpdateSelection}
                    rightbuttonColor='secondary'
-                   rightButtonLabel='Remove'
-                  isDisabled={false}
-                  handleRightButtonSelection={this.handleDoctorDeleteSelection}
+                   rightButtonLabel='Delete'
+                   isDisabled={this.state.sessionUser.isAdmin ? false : true} 
+                   handleRightButtonSelection={this.handleDoctorDeleteSelection}
                  />
               ))
             }
           </Grid>
+          </div>
             
         </>
       ) // return()
