@@ -13,24 +13,42 @@
 }
 
 .menuBlock {
-  min-width: 250px;
-  min-height: 250px;
-  margin: 50px 10px 0px 20px;
-  /* color: rgb(27, 233, 8) */
+  min-width: 500px;
+  min-height: 380px;
+  margin: 20px 0px 0px 20px;
 }
 
-@media screen and (max-width: 770px) {
+@media screen and (max-width: 1830px) and (min-width: 1280px) {
   .menuBlock {
-    margin: 5px 10px 0px 20px;
+    min-width: 350px;
+    min-height: 380px;
+    margin: 20px 0px 0px 20px;
   }
 }
 
-@media screen and (max-width: 985px) and (min-width: 771px) {
+@media screen and (max-width: 1280px) and (min-width: 960px) {
   .menuBlock {
+    min-width: 350px;
+    min-height: 310px;
+    margin: 20px 0px 0px 20px;
+  }
+}
+
+@media screen and (max-width: 960px) and (min-width: 765px) {
+  .menuBlock {
+    min-width: 250px;
+    min-height: 230px;
     margin: 20px 10px 0px 20px;
   }
 }
 
+@media screen and (max-width: 765px) {
+  .menuBlock {
+    min-width: 250px;
+    min-height: 230px;
+    margin: 5px 10px 0px 20px;
+  }
+}
 
 .patients {
   background-color: rgb(4, 138, 4);

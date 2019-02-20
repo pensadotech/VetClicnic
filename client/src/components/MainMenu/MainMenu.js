@@ -9,7 +9,6 @@ import PetsIcon from '@material-ui/icons/Pets'
 import FaceIcon from '@material-ui/icons/Face'
 import ColorizeIcon from '@material-ui/icons/Colorize'
 import EventIcon from '@material-ui/icons/Event'
-import AssignmentIcon from '@material-ui/icons/Assignment'
 import GradientIcon from '@material-ui/icons/Gradient'
 
 // Local styles
@@ -20,6 +19,13 @@ const styles = theme => ({
     flexGrow: 1,
     overflow: 'hidden',
     padding: `0 ${theme.spacing.unit * 3}px`,
+    minHeight: '680px', 
+  },
+  mainContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center' 
   },
   imageHolder: {
     display: 'flex',
@@ -28,17 +34,55 @@ const styles = theme => ({
     alignItems: 'center' 
   },
   cardImage : {
-    width: '230px',
-    margin: '20px 0px 20px 0px',
     borderRadius: '30px',
     border:'5px solid lightgray',
+    [theme.breakpoints.down('sm')]: {
+      width: '250px',
+      margin: '10px 5px 10px 5px',
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '360px',
+      margin: '30px 10px 20px 10px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '420px',
+      margin: '30px 10px 0px 10px',
+    }
   },
-  cardImage1 : {
-    width: '230px',
-    margin: '10px 5px 20px 0px',
+  cardImage1 : {  
     borderRadius: '30px',
     border:'5px solid lightgray',
-  } 
+    [theme.breakpoints.down('sm')]: {
+      width: '230px', 
+      margin: '0px 5px 10px 5px',
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '320px', 
+      margin: '15px 10px 10px 10px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '400px', 
+      margin: '10px 10px 0px 10px',
+    }
+  },
+  title: {
+    color: 'white',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 20,
+      margin: '0px 0px 2px 5px',
+      // fontWeight: 'bold',
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: 30,
+      margin: '0px 0px 2px 10px',
+      fontWeight: 'bold',
+    },
+    [theme.breakpoints.up('lg')]: {
+      fontSize: 35,
+      margin: '0px 0px 2px 10px',
+      fontWeight: 'bold',
+    }
+  },
 })
 
 class MainMenu extends Component {
@@ -48,18 +92,18 @@ class MainMenu extends Component {
     return (
       <>
          <div className={classes.root}>      
-          <Grid container spacing={8}
-                alignContent='center'
-                style={{ margin: 'auto'}}>
+          <Grid container spacing={8}          
+                className={classes.mainContainer}
+                >
              
             <Grid item >           
                 <Link to='/patients' style={{ color: 'white', textDecoration: 'none' }} >
                   <div className='menuBlock block30 blockShadow patients'>
                     <IconButton color='inherit'>
                       <PetsIcon />
-                        <Typography variant='h5' color='inherit' >
-                              Patients
-                        </Typography>                     
+                      <Typography className={classes.title}>
+                        Patients
+                      </Typography>                     
                     </IconButton>
                     <div className={classes.imageHolder}>
                       <img className={classes.cardImage1}
@@ -74,8 +118,8 @@ class MainMenu extends Component {
                   <div className='menuBlock block30 blockShadow doctors'>
                     <IconButton color='inherit'>
                       <FaceIcon />
-                      <Typography variant='h5' color='inherit' >
-                            Doctors
+                      <Typography className={classes.title}>
+                        Doctors
                       </Typography>
                     </IconButton>
                     <div className={classes.imageHolder}>
@@ -91,8 +135,8 @@ class MainMenu extends Component {
                   <div className='menuBlock block30 blockShadow medicines'>
                     <IconButton color='inherit'>
                       <ColorizeIcon />
-                      <Typography variant='h5' color='inherit' >
-                            Medicines
+                      <Typography className={classes.title} >
+                        Medicines
                       </Typography>
                     </IconButton>
                     <div className={classes.imageHolder}>
@@ -108,8 +152,8 @@ class MainMenu extends Component {
                 <div className='menuBlock block30 blockShadow appointments'>
                   <IconButton color='inherit'>
                     <EventIcon />
-                    <Typography variant='h5' color='inherit' >
-                              Appointments
+                    <Typography className={classes.title} >
+                      Appointments
                     </Typography>
                   </IconButton>
                   <div className={classes.imageHolder}>
@@ -125,8 +169,8 @@ class MainMenu extends Component {
                 <div className='menuBlock block30 blockShadow dosage'>
                   <IconButton color='inherit'>
                     <GradientIcon />
-                    <Typography variant='h5' color='inherit' >
-                           Dosage Calculator
+                    <Typography className={classes.title} >
+                      Dosage Calculator
                     </Typography>
                   </IconButton>
                   <div className={classes.imageHolder}>
